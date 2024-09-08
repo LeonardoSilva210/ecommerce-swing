@@ -45,44 +45,38 @@ public class AdministradorDao {
         
     }
     
-    public AdministradorBean verificarLogin(){
+    public AdministradorBean verificarLogin(String cpf, String senha){
         AdministradorBean bean = new AdministradorBean();
         
         try{
                 Connection conexao = Conexao.conectar();
                 PreparedStatement stmt = null;
-                boolean verificaLogin = false;
+                ResultSet rs = null;
                 
                 stmt = conexao.prepareStatement("SELECT * FROM administrador WHERE cpf = ? AND senha = ?");
                 
-                    stmt.setString(1, bean.getCpf());
-                    stmt.setString(2, bean.getSenha());
+                stmt.setString(1, cpf);
+                stmt.setString(2, senha);
                     
-                 stmt.executeQuery();
-                
-                 if(bean.getCpf().trim().equals("") || bean.getSenha().trim().equals("")){
-                        verificaLogin = false;
-                     JOptionPane.showMessageDialog(null, "INTRODUZA ALGO NOS CAMPOS");
-                     
-                 } else {
-                     
-                     verificaLogin = true;
-                      if(verificaLogin == true){
-                     
-                     JOptionPane.showMessageDialog(null, "LOGIN EFETUADO COM SUCESSO");
-                     
-                     } else {
-                     
-                     JOptionPane.showMessageDialog(null, "CPF OU SENHA DO ADMINISTRADOR, INVÁLIDA");
-                     
-                    }
-                     
-                 }
+                rs = stmt.executeQuery();
                  
-                
+                if (rs.next()) {
+                    
+                    bean.setCpf(rs.getString("cpf"));
+                    bean.setId_administrador(rs.getInt("id_administrador"));
+                    bean.setNome(rs.getString("nome"));
+                    bean.setSobrenome(rs.getString("sobrenome"));
+                    bean.setSenha(rs.getString("senha"));
+                    
+                } else {
+                    
+                    JOptionPane.showMessageDialog(null, "Cpf/Senha incorretos!");
+                    
+                }
                  
-                 stmt.close();
-                 conexao.close();
+                rs.close();
+                stmt.close();
+                conexao.close();
                  
             }catch(SQLException e){
               e.printStackTrace();
