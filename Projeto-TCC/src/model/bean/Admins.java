@@ -2,17 +2,17 @@
 package model.bean;
 
 
-public class AdministradorBean {
+public class Admins {
     private int id_administrador;
     private String nome;
     private String sobrenome;
     private String cpf;
     private String senha;
 
-    public AdministradorBean() {
+    public Admins() {
     }
 
-    public AdministradorBean(int id_administrador, String nome, String sobrenome, String cpf, String senha) {
+    public Admins(int id_administrador, String nome, String sobrenome, String cpf, String senha) {
         this.id_administrador = id_administrador;
         this.nome = nome;
         this.sobrenome = sobrenome;

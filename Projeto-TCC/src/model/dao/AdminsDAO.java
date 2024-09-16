@@ -7,25 +7,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.bean.AdministradorBean;
+import model.bean.Admins;
 
 
-public class AdministradorDao {
+public class AdminsDAO {
     
-    public void InserirAdministrador(AdministradorBean bean){
+    public void InserirAdministrador(Admins bean){
         
         try{
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             
-            stmt = conexao.prepareStatement("INSERT INTO usuarios(email,senha) VALUES(?,?)");
+            stmt = conexao.prepareStatement("INSERT INTO admins(nome,sobrenome,cpf,senha) VALUES(?,?,?,?)");
             stmt.setString(1, bean.getNome());
-            stmt.setString(2, bean.getSenha());
+            stmt.setString(2, bean.getSobrenome());
+            stmt.setString(3, bean.getCpf());
+            stmt.setString(4, bean.getSenha());
             
             stmt.execute();
             
             stmt.close();
             conexao.close();
+            
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -33,15 +36,15 @@ public class AdministradorDao {
         
     }
     
-    public AdministradorBean verificarLogin(String cpf, String senha){
-        AdministradorBean bean = new AdministradorBean();
+    public Admins verificarLogin(String cpf, String senha){
+        Admins bean = new Admins();
         
         try{
                 Connection conexao = Conexao.conectar();
                 PreparedStatement stmt = null;
                 ResultSet rs = null;
                 
-                stmt = conexao.prepareStatement("SELECT * FROM administrador WHERE cpf = ? AND senha = ?");
+                stmt = conexao.prepareStatement("SELECT * FROM admins WHERE cpf = ? AND senha = ?");
                 
                 stmt.setString(1, cpf);
                 stmt.setString(2, senha);
@@ -50,8 +53,8 @@ public class AdministradorDao {
                  
                 if (rs.next()) {
                     
+                    bean.setId_administrador(rs.getInt("id_admin"));
                     bean.setCpf(rs.getString("cpf"));
-                    bean.setId_administrador(rs.getInt("id_administrador"));
                     bean.setNome(rs.getString("nome"));
                     bean.setSobrenome(rs.getString("sobrenome"));
                     bean.setSenha(rs.getString("senha"));
