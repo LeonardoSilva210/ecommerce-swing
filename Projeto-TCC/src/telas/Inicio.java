@@ -5,15 +5,47 @@ import com.raven.chart.ModelChart;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import model.bean.ProdutosBean;
+import model.dao.ProdutosDAO;
 
 
 public class Inicio extends javax.swing.JFrame {
+    private DefaultTableModel tableModel;
+    ProdutosBean produtosAtual = new ProdutosBean();
     
     public Inicio() {
         initComponents();
         inicia();
+        
+        
+        preencherTabela();
+        
+        tableDark1.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            
+            public void valueChanged(ListSelectionEvent event){
+                if(!event.getValueIsAdjusting()){
+                   int linhaSelecionada = tableDark1.getSelectedRow();
+                   if(linhaSelecionada != -1){
+                       produtosAtual.setId_produto((int) tableDark1.getValueAt(linhaSelecionada,0));
+                        produtosAtual.setNome_produto(
+                               (String) tableDark1.getValueAt(linhaSelecionada, 1)       
+                       );
+                        
+                        produtosAtual.setDescricao_produto(
+                               (String) tableDark1.getValueAt(linhaSelecionada, 2)   
+                       );
+                        
+                        
+                   }
+                }
+            }
+        });
     }
 
 
@@ -50,7 +82,10 @@ public class Inicio extends javax.swing.JFrame {
         tabInicio = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         grafInicio = new com.raven.chart.Chart();
-        jPanel3 = new javax.swing.JPanel();
+        panelFundoTable = new javax.swing.JPanel();
+        panelBorder6 = new telas.formatos.PanelBorder();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableDark1 = new tabledark.TableDark();
         panelBorder2 = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -91,7 +126,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(506, Short.MAX_VALUE))
         );
 
-        panelBorder4.add(panelNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 50, 280, 550));
+        panelBorder4.add(panelNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 50, 260, 550));
 
         panelFundoNoti.setBackground(new java.awt.Color(0, 0, 0, 100));
         panelFundoNoti.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,14 +139,14 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoNoti.setLayout(panelFundoNotiLayout);
         panelFundoNotiLayout.setHorizontalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1020, Short.MAX_VALUE)
+            .addGap(0, 1040, Short.MAX_VALUE)
         );
         panelFundoNotiLayout.setVerticalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1020, 550));
+        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1040, 550));
 
         imageAvatar2.setBackground(new java.awt.Color(255, 255, 255));
         imageAvatar2.setForeground(new java.awt.Color(255, 255, 255));
@@ -432,25 +467,77 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(grafInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab1", jPanel2);
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        panelFundoTable.setBackground(new java.awt.Color(51, 51, 51));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 997, Short.MAX_VALUE)
+        panelBorder6.setForeground(new java.awt.Color(153, 153, 153));
+
+        javax.swing.GroupLayout panelBorder6Layout = new javax.swing.GroupLayout(panelBorder6);
+        panelBorder6.setLayout(panelBorder6Layout);
+        panelBorder6Layout.setHorizontalGroup(
+            panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 585, Short.MAX_VALUE)
+        panelBorder6Layout.setVerticalGroup(
+            panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        tabInicio.addTab("tab2", jPanel3);
+        tableDark1.setBackground(new java.awt.Color(204, 204, 204));
+        tableDark1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código Produto", "Nome Produto", "Descrição Produto", "Valor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableDark1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tableDark1);
+
+        javax.swing.GroupLayout panelFundoTableLayout = new javax.swing.GroupLayout(panelFundoTable);
+        panelFundoTable.setLayout(panelFundoTableLayout);
+        panelFundoTableLayout.setHorizontalGroup(
+            panelFundoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFundoTableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelFundoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 967, Short.MAX_VALUE)
+                    .addComponent(panelBorder6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        panelFundoTableLayout.setVerticalGroup(
+            panelFundoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFundoTableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(panelBorder6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(207, Short.MAX_VALUE))
+        );
+
+        tabInicio.addTab("tab2", panelFundoTable);
 
         jPanel1.add(tabInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, -1));
 
@@ -774,8 +861,28 @@ public class Inicio extends javax.swing.JFrame {
         
         timer.start();
         
+      }
+    
+    public void preencherTabela(){
+        tableModel = (DefaultTableModel) tableDark1.getModel();
+        tableModel.setNumRows(0);
+        ProdutosDAO funcoesProdutos = new ProdutosDAO();
+        List<ProdutosBean> produtos = funcoesProdutos.lerItens();
+    
+        for(ProdutosBean objProdutos: produtos){
+            Object[ ] rowData= {
+                
+                objProdutos.getId_produto(), 
+                objProdutos.getNome_produto(), 
+                objProdutos.getDescricao_produto(), 
+                objProdutos.getValor(), 
+                
+                
+                
+                };
+            tableModel.addRow(rowData); /////ADICIONA UMA LINHA NA TABELA
+        }
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCloseNoti;
@@ -790,19 +897,22 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private telas.formatos.PanelBorder panelBorder1;
     private telas.formatos.PanelBorder panelBorder2;
     private telas.formatos.PanelBorder panelBorder3;
     private telas.formatos.PanelBorder panelBorder4;
     private telas.formatos.PanelBorder panelBorder5;
+    private telas.formatos.PanelBorder panelBorder6;
     private javax.swing.JPanel panelClose;
     private javax.swing.JPanel panelFundoNoti;
+    private javax.swing.JPanel panelFundoTable;
     private javax.swing.JPanel panelLogo;
     private javax.swing.JPanel panelMax;
     private javax.swing.JPanel panelMin;
     private javax.swing.JPanel panelNoti;
     private javax.swing.JTabbedPane tabInicio;
+    private tabledark.TableDark tableDark1;
     private javax.swing.JLabel txtClose;
     private javax.swing.JLabel txtEstoque;
     private javax.swing.JLabel txtInicio;
