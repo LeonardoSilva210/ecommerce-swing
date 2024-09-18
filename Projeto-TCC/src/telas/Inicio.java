@@ -6,7 +6,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.AbstractButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,23 +24,41 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         initComponents();
         inicia();
+
         
+        radio1.addActionListener(e -> {
+            
+            System.out.println("Teste 1");
+            
+        });
+        
+        radio2.addActionListener(e -> {
+            
+            System.out.println("Teste 2");
+            
+        });
+        
+        radio3.addActionListener(e -> {
+            
+            System.out.println("Teste 3");
+            
+        });
         
         preencherTabela();
         
-        tableDark1.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        tblEstoque.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             
             public void valueChanged(ListSelectionEvent event){
                 if(!event.getValueIsAdjusting()){
-                   int linhaSelecionada = tableDark1.getSelectedRow();
+                   int linhaSelecionada = tblEstoque.getSelectedRow();
                    if(linhaSelecionada != -1){
-                       produtosAtual.setId_produto((int) tableDark1.getValueAt(linhaSelecionada,0));
+                       produtosAtual.setId_produto((int) tblEstoque.getValueAt(linhaSelecionada,0));
                         produtosAtual.setNome_produto(
-                               (String) tableDark1.getValueAt(linhaSelecionada, 1)       
+                               (String) tblEstoque.getValueAt(linhaSelecionada, 1)       
                        );
                         
                         produtosAtual.setDescricao_produto(
-                               (String) tableDark1.getValueAt(linhaSelecionada, 2)   
+                               (String) tblEstoque.getValueAt(linhaSelecionada, 2)   
                        );
                         
                         
@@ -53,6 +73,7 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panelBorder4 = new telas.formatos.PanelBorder();
         panelNoti = new javax.swing.JPanel();
         btnCloseNoti = new javax.swing.JLabel();
@@ -84,8 +105,12 @@ public class Inicio extends javax.swing.JFrame {
         grafInicio = new com.raven.chart.Chart();
         panelFundoTable = new javax.swing.JPanel();
         panelBorder6 = new telas.formatos.PanelBorder();
+        myButton1 = new button.MyButton();
+        radio1 = new javax.swing.JRadioButton();
+        radio2 = new javax.swing.JRadioButton();
+        radio3 = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableDark1 = new tabledark.TableDark();
+        tblEstoque = new tabledark.TableDark();
         panelBorder2 = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -100,6 +125,11 @@ public class Inicio extends javax.swing.JFrame {
         panelBorder4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelNoti.setBackground(new java.awt.Color(102, 102, 102));
+        panelNoti.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelNotiMouseClicked(evt);
+            }
+        });
 
         btnCloseNoti.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 24)); // NOI18N
         btnCloseNoti.setText("X");
@@ -115,15 +145,13 @@ public class Inicio extends javax.swing.JFrame {
             panelNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNotiLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(btnCloseNoti)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCloseNoti))
         );
         panelNotiLayout.setVerticalGroup(
             panelNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNotiLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnCloseNoti)
-                .addContainerGap(506, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(btnCloseNoti))
         );
 
         panelBorder4.add(panelNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 50, 260, 550));
@@ -139,14 +167,14 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoNoti.setLayout(panelFundoNotiLayout);
         panelFundoNotiLayout.setHorizontalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGap(0, 1300, Short.MAX_VALUE)
         );
         panelFundoNotiLayout.setVerticalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1040, 550));
+        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
 
         imageAvatar2.setBackground(new java.awt.Color(255, 255, 255));
         imageAvatar2.setForeground(new java.awt.Color(255, 255, 255));
@@ -408,7 +436,7 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         txtMax.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        txtMax.setForeground(new java.awt.Color(153, 153, 153));
+        txtMax.setForeground(new java.awt.Color(255, 255, 255));
         txtMax.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtMax.setText("□");
         txtMax.setToolTipText("");
@@ -467,7 +495,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(grafInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab1", jPanel2);
@@ -476,45 +504,83 @@ public class Inicio extends javax.swing.JFrame {
 
         panelBorder6.setForeground(new java.awt.Color(153, 153, 153));
 
+        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lixo.png"))); // NOI18N
+        myButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radio1);
+        radio1.setText("jRadioButton1");
+
+        buttonGroup1.add(radio2);
+        radio2.setText("jRadioButton2");
+
+        buttonGroup1.add(radio3);
+        radio3.setText("jRadioButton3");
+
         javax.swing.GroupLayout panelBorder6Layout = new javax.swing.GroupLayout(panelBorder6);
         panelBorder6.setLayout(panelBorder6Layout);
         panelBorder6Layout.setHorizontalGroup(
             panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelBorder6Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(radio1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(radio2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(radio3)
+                .addGap(65, 65, 65))
         );
         panelBorder6Layout.setVerticalGroup(
             panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(radio1)
+                        .addComponent(radio2)
+                        .addComponent(radio3))
+                    .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        tableDark1.setBackground(new java.awt.Color(204, 204, 204));
-        tableDark1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEstoque.setBackground(new java.awt.Color(204, 204, 204));
+        tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Código Produto", "Nome Produto", "Descrição Produto", "Valor"
+                "Nome do Produto", "Descrição Produto", "Valor", "Categoria", "Quantidade", "IDentificador"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tableDark1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tableDark1);
+        tblEstoque.getTableHeader().setReorderingAllowed(false);
+        tblEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblEstoqueMouseEntered(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblEstoque);
 
         javax.swing.GroupLayout panelFundoTableLayout = new javax.swing.GroupLayout(panelFundoTable);
         panelFundoTable.setLayout(panelFundoTableLayout);
@@ -525,7 +591,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelFundoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 967, Short.MAX_VALUE)
                     .addComponent(panelBorder6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         panelFundoTableLayout.setVerticalGroup(
             panelFundoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -534,7 +600,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addComponent(panelBorder6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab2", panelFundoTable);
@@ -653,15 +719,23 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutMouseExited
 
     private void txtMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseClicked
-        // TODO add your handling code here:
+      boolean telaCheia = false;
+        int MAXIMIZED_BOTH1 = JFrame.MAXIMIZED_BOTH;
+        
     }//GEN-LAST:event_txtMaxMouseClicked
 
     private void txtMaxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseEntered
-        // TODO add your handling code here:
+           
+        panelMax.setBackground(Color.white);
+        txtMax.setForeground(Color.black);
+        
     }//GEN-LAST:event_txtMaxMouseEntered
 
     private void txtMaxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseExited
-        // TODO add your handling code here:
+ 
+        panelMax.setBackground(new Color(51, 51, 51));
+        txtMax.setForeground(Color.white);
+
     }//GEN-LAST:event_txtMaxMouseExited
 
     private void panelMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMaxMouseClicked
@@ -728,6 +802,18 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoNoti.setVisible(false);
         
     }//GEN-LAST:event_panelFundoNotiMouseClicked
+
+    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myButton1ActionPerformed
+
+    private void tblEstoqueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstoqueMouseEntered
+       
+    }//GEN-LAST:event_tblEstoqueMouseEntered
+
+    private void panelNotiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNotiMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelNotiMouseClicked
 
 
     public static void main(String args[]) {
@@ -864,7 +950,7 @@ public class Inicio extends javax.swing.JFrame {
       }
     
     public void preencherTabela(){
-        tableModel = (DefaultTableModel) tableDark1.getModel();
+        tableModel = (DefaultTableModel) tblEstoque.getModel();
         tableModel.setNumRows(0);
         ProdutosDAO funcoesProdutos = new ProdutosDAO();
         List<ProdutosBean> produtos = funcoesProdutos.lerItens();
@@ -890,6 +976,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel btnInicio;
     private javax.swing.JPanel btnLogout;
     private com.raven.swing.ButtonBadges btnNoti;
+    private javax.swing.ButtonGroup buttonGroup1;
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imageAvatar2;
     private javax.swing.JLabel jLabel1;
@@ -898,6 +985,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private button.MyButton myButton1;
     private telas.formatos.PanelBorder panelBorder1;
     private telas.formatos.PanelBorder panelBorder2;
     private telas.formatos.PanelBorder panelBorder3;
@@ -911,8 +999,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelMax;
     private javax.swing.JPanel panelMin;
     private javax.swing.JPanel panelNoti;
+    private javax.swing.JRadioButton radio1;
+    private javax.swing.JRadioButton radio2;
+    private javax.swing.JRadioButton radio3;
     private javax.swing.JTabbedPane tabInicio;
-    private tabledark.TableDark tableDark1;
+    private tabledark.TableDark tblEstoque;
     private javax.swing.JLabel txtClose;
     private javax.swing.JLabel txtEstoque;
     private javax.swing.JLabel txtInicio;
