@@ -13,7 +13,9 @@ import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import model.bean.EstoqueBean;
 import model.bean.ProdutosBean;
+import model.dao.EstoqueDAO;
 import model.dao.ProdutosDAO;
 
 
@@ -167,14 +169,14 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoNoti.setLayout(panelFundoNotiLayout);
         panelFundoNotiLayout.setHorizontalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
         panelFundoNotiLayout.setVerticalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
+        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 300, 550));
 
         imageAvatar2.setBackground(new java.awt.Color(255, 255, 255));
         imageAvatar2.setForeground(new java.awt.Color(255, 255, 255));
@@ -901,7 +903,7 @@ public class Inicio extends javax.swing.JFrame {
     
     private void graficoInicio() {
         
-        grafInicio.addLegend("Lucro", Color.green, Color.green);
+        grafInicio.addLegend("Lucro", Color.magenta, Color.magenta);
         grafInicio.addLegend("Perda", Color.red, Color.red);
         
         grafInicio.addData(new ModelChart("Janeiro", new double[]{200, 150, 50, 50}));
@@ -952,17 +954,18 @@ public class Inicio extends javax.swing.JFrame {
     public void preencherTabela(){
         tableModel = (DefaultTableModel) tblEstoque.getModel();
         tableModel.setNumRows(0);
-        ProdutosDAO funcoesProdutos = new ProdutosDAO();
-        List<ProdutosBean> produtos = funcoesProdutos.lerItens();
+        EstoqueDAO funcoesEstoque = new EstoqueDAO();
+        List<EstoqueBean> estoque = funcoesEstoque.ListarEstoque();
     
-        for(ProdutosBean objProdutos: produtos){
+        for(EstoqueBean objEstoque: estoque){
             Object[ ] rowData= {
                 
-                objProdutos.getId_produto(), 
-                objProdutos.getNome_produto(), 
-                objProdutos.getDescricao_produto(), 
-                objProdutos.getValor(), 
-                
+                objEstoque.getNome_produto(),
+                objEstoque.getDescricao_produto(),
+                objEstoque.getValor(),
+                objEstoque.getFk_id_categoria(),
+                objEstoque.getQuantidade(),
+                objEstoque.getId_produto()
                 
                 
                 };
