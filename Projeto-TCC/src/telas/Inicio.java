@@ -5,6 +5,7 @@ import com.raven.chart.ModelChart;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
@@ -21,32 +22,34 @@ import model.dao.ProdutosDAO;
 
 public class Inicio extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
-    ProdutosBean produtosAtual = new ProdutosBean();
+    EstoqueBean produtosAtual = new EstoqueBean();
+    
     
     public Inicio() {
         initComponents();
         inicia();
 
+      
         
+        radio1.setSelected(true);
+        preencherTabela(1);
         radio1.addActionListener(e -> {
             
-            System.out.println("Teste 1");
+            preencherTabela(1);
             
         });
         
         radio2.addActionListener(e -> {
             
-            System.out.println("Teste 2");
+            preencherTabela(2);
             
         });
         
         radio3.addActionListener(e -> {
             
-            System.out.println("Teste 3");
+            preencherTabela(3);
             
         });
-        
-        preencherTabela();
         
         tblEstoque.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             
@@ -54,13 +57,13 @@ public class Inicio extends javax.swing.JFrame {
                 if(!event.getValueIsAdjusting()){
                    int linhaSelecionada = tblEstoque.getSelectedRow();
                    if(linhaSelecionada != -1){
-                       produtosAtual.setId_produto((int) tblEstoque.getValueAt(linhaSelecionada,0));
+                       produtosAtual.setId_produto((int) tblEstoque.getValueAt(linhaSelecionada,5));
                         produtosAtual.setNome_produto(
-                               (String) tblEstoque.getValueAt(linhaSelecionada, 1)       
+                               (String) tblEstoque.getValueAt(linhaSelecionada, 0)       
                        );
                         
                         produtosAtual.setDescricao_produto(
-                               (String) tblEstoque.getValueAt(linhaSelecionada, 2)   
+                               (String) tblEstoque.getValueAt(linhaSelecionada, 1)   
                        );
                         
                         
@@ -111,6 +114,9 @@ public class Inicio extends javax.swing.JFrame {
         radio1 = new javax.swing.JRadioButton();
         radio2 = new javax.swing.JRadioButton();
         radio3 = new javax.swing.JRadioButton();
+        buttonEditar1 = new button.ButtonEditar();
+        btn_disp = new button.ButtonVerde();
+        btn_ind = new button.MyButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEstoque = new tabledark.TableDark();
         panelBorder2 = new telas.formatos.PanelBorder();
@@ -169,14 +175,14 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoNoti.setLayout(panelFundoNotiLayout);
         panelFundoNotiLayout.setHorizontalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 1300, Short.MAX_VALUE)
         );
         panelFundoNotiLayout.setVerticalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 300, 550));
+        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
 
         imageAvatar2.setBackground(new java.awt.Color(255, 255, 255));
         imageAvatar2.setForeground(new java.awt.Color(255, 255, 255));
@@ -514,13 +520,37 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(radio1);
-        radio1.setText("jRadioButton1");
+        radio1.setText("Todos Produtos");
+        radio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(radio2);
-        radio2.setText("jRadioButton2");
+        radio2.setText("Disponíveis");
+        radio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(radio3);
-        radio3.setText("jRadioButton3");
+        radio3.setText("Indisponíveis");
+
+        btn_disp.setText("TORNAR DISPONÍVEL");
+        btn_disp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dispActionPerformed(evt);
+            }
+        });
+
+        btn_ind.setText("TORNAR INDISPONÍVEL");
+        btn_ind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_indActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBorder6Layout = new javax.swing.GroupLayout(panelBorder6);
         panelBorder6.setLayout(panelBorder6Layout);
@@ -529,7 +559,13 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelBorder6Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buttonEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btn_disp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(radio1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(radio2)
@@ -538,15 +574,19 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(65, 65, 65))
         );
         panelBorder6Layout.setVerticalGroup(
-            panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder6Layout.createSequentialGroup()
+            panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(panelBorder6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(radio1)
-                        .addComponent(radio2)
-                        .addComponent(radio3))
-                    .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(radio1)
+                            .addComponent(radio2)
+                            .addComponent(radio3))
+                        .addComponent(myButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEditar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_disp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_ind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -583,6 +623,12 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tblEstoque);
+        if (tblEstoque.getColumnModel().getColumnCount() > 0) {
+            tblEstoque.getColumnModel().getColumn(0).setResizable(false);
+            tblEstoque.getColumnModel().getColumn(2).setResizable(false);
+            tblEstoque.getColumnModel().getColumn(3).setResizable(false);
+            tblEstoque.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout panelFundoTableLayout = new javax.swing.GroupLayout(panelFundoTable);
         panelFundoTable.setLayout(panelFundoTableLayout);
@@ -806,7 +852,14 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_panelFundoNotiMouseClicked
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-        // TODO add your handling code here:
+      EstoqueBean estoque = new EstoqueBean();
+      EstoqueDAO funcaoEstoque = new EstoqueDAO();
+    
+      funcaoEstoque.deletarProduto(produtosAtual);
+      
+        preencherTabela(1);
+    
+      
     }//GEN-LAST:event_myButton1ActionPerformed
 
     private void tblEstoqueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstoqueMouseEntered
@@ -814,8 +867,35 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_tblEstoqueMouseEntered
 
     private void panelNotiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNotiMouseClicked
-        // TODO add your handling code here:
+     
+        
     }//GEN-LAST:event_panelNotiMouseClicked
+
+    private void radio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio1ActionPerformed
+        
+        
+    }//GEN-LAST:event_radio1ActionPerformed
+
+    private void radio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio2ActionPerformed
+       
+        
+    }//GEN-LAST:event_radio2ActionPerformed
+
+    private void btn_dispActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dispActionPerformed
+          EstoqueBean estoque = new EstoqueBean();
+      EstoqueDAO funcaoEstoque = new EstoqueDAO();
+        
+      funcaoEstoque.produtoDisponível(produtosAtual, true);
+        preencherTabela(3);
+    }//GEN-LAST:event_btn_dispActionPerformed
+
+    private void btn_indActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_indActionPerformed
+         EstoqueBean estoque = new EstoqueBean();
+      EstoqueDAO funcaoEstoque = new EstoqueDAO();
+        
+      funcaoEstoque.produtoDisponível(produtosAtual, false);
+        preencherTabela(2);
+    }//GEN-LAST:event_btn_indActionPerformed
 
 
     public static void main(String args[]) {
@@ -903,7 +983,7 @@ public class Inicio extends javax.swing.JFrame {
     
     private void graficoInicio() {
         
-        grafInicio.addLegend("Lucro", Color.magenta, Color.magenta);
+        grafInicio.addLegend("Lucro", Color.green, Color.green);
         grafInicio.addLegend("Perda", Color.red, Color.red);
         
         grafInicio.addData(new ModelChart("Janeiro", new double[]{200, 150, 50, 50}));
@@ -951,11 +1031,42 @@ public class Inicio extends javax.swing.JFrame {
         
       }
     
-    public void preencherTabela(){
+    public void preencherTabela(int table){
         tableModel = (DefaultTableModel) tblEstoque.getModel();
         tableModel.setNumRows(0);
         EstoqueDAO funcoesEstoque = new EstoqueDAO();
-        List<EstoqueBean> estoque = funcoesEstoque.ListarEstoque();
+        List<EstoqueBean> estoque = new ArrayList<>();
+        
+        switch(table) {
+            
+            case 1:
+                
+                estoque = funcoesEstoque.ListarEstoque(1);
+                btn_disp.setVisible(false);
+                btn_ind.setVisible(false);
+
+                
+                break;
+                
+            case 2:
+                
+                estoque = funcoesEstoque.ListarEstoque(2);
+                btn_ind.setVisible(true);
+                btn_disp.setVisible(false);
+                break;
+            
+            case 3:
+                
+                estoque = funcoesEstoque.ListarEstoque(3);
+                 btn_ind.setVisible(false);
+                 btn_disp.setVisible(true);
+                 
+                  
+                break;
+            
+        }
+        
+        
     
         for(EstoqueBean objEstoque: estoque){
             Object[ ] rowData= {
@@ -973,12 +1084,17 @@ public class Inicio extends javax.swing.JFrame {
         }
     }
 
+   
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCloseNoti;
     private javax.swing.JPanel btnEstoque;
     private javax.swing.JPanel btnInicio;
     private javax.swing.JPanel btnLogout;
     private com.raven.swing.ButtonBadges btnNoti;
+    private button.ButtonVerde btn_disp;
+    private button.MyButton btn_ind;
+    private button.ButtonEditar buttonEditar1;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imageAvatar2;

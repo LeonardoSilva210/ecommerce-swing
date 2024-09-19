@@ -119,14 +119,14 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="50" width="300" height="550"/>
+              <AbsoluteConstraints x="0" y="50" width="1300" height="550"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1300" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -719,7 +719,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Component id="myButton1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="buttonEditar1" min="-2" pref="52" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btn_ind" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="btn_disp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                   <Component id="radio1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="radio2" min="-2" max="-2" attributes="0"/>
@@ -730,16 +736,21 @@
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="radio1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="radio2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="radio3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                              <Component id="radio1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="radio2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="radio3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="myButton1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="buttonEditar1" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
+                                          <Component id="btn_disp" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="myButton1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_ind" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -762,24 +773,48 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroup1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="jRadioButton1"/>
+                            <Property name="text" type="java.lang.String" value="Todos Produtos"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radio1ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="radio2">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroup1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="jRadioButton2"/>
+                            <Property name="text" type="java.lang.String" value="Dispon&#xed;veis"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radio2ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="radio3">
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="buttonGroup1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="jRadioButton3"/>
+                            <Property name="text" type="java.lang.String" value="Indispon&#xed;veis"/>
                           </Properties>
+                        </Component>
+                        <Component class="button.ButtonEditar" name="buttonEditar1">
+                        </Component>
+                        <Component class="button.ButtonVerde" name="btn_disp">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="TORNAR DISPON&#xcd;VEL"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dispActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="button.MyButton" name="btn_ind">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="TORNAR INDISPON&#xcd;VEL"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_indActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -807,7 +842,7 @@
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                                   <Title/>
                                   <Editor/>
                                   <Renderer/>
@@ -817,17 +852,17 @@
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                                   <Title/>
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                                   <Title/>
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                                   <Title/>
                                   <Editor/>
                                   <Renderer/>

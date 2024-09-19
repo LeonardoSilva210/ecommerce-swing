@@ -20,6 +20,7 @@ public class EstoqueBean {
     private int quantidade;
     private String nome_categoria;
     private String descricao_categoria;
+    
 
     public EstoqueBean() {
     }
