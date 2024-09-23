@@ -1,6 +1,7 @@
 
 package model.dao;
 
+import Globals.GlobalAdmin;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,7 +59,7 @@ public class AdminsDAO {
                     bean.setNome(rs.getString("nome"));
                     bean.setSobrenome(rs.getString("sobrenome"));
                     bean.setSenha(rs.getString("senha"));
-                    
+
                 } else {
                     
                     JOptionPane.showMessageDialog(null, "Cpf/Senha incorretos!");

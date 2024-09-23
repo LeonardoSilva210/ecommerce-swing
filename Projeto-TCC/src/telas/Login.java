@@ -1,6 +1,7 @@
 
 package telas;
 
+import Globals.GlobalAdmin;
 import javax.swing.JOptionPane;
 import model.bean.Admins;
 import model.dao.AdminsDAO;
@@ -146,6 +147,12 @@ public class Login extends javax.swing.JFrame {
            bean = dao.verificarLogin(cpfLogin, senhaLogin);
            
            if (bean.getId_administrador() != 0) {
+               
+               GlobalAdmin.setId_admin(bean.getId_administrador());
+               GlobalAdmin.setNome(bean.getNome());
+               GlobalAdmin.setSobrenome(bean.getSobrenome());
+               GlobalAdmin.setCpf(bean.getCpf());
+               GlobalAdmin.setSenha(bean.getSenha());
                
                java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {

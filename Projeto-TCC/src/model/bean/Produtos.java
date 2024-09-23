@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model.bean;
 
-/**
- *
- * @author Senai
- */
-public class ProdutosBean {
+
+public class Produtos {
     
     private int id_produto;
     private String nome_produto;
@@ -18,10 +11,10 @@ public class ProdutosBean {
     private float valor;
     private int fk_id_categoria;
 
-    public ProdutosBean() {
+    public Produtos() {
     }
 
-    public ProdutosBean(int id_produto, String nome_produto, String descricao_produto, int disponivel, float valor, int fk_id_categoria) {
+    public Produtos(int id_produto, String nome_produto, String descricao_produto, int disponivel, float valor, int fk_id_categoria) {
         this.id_produto = id_produto;
         this.nome_produto = nome_produto;
         this.descricao_produto = descricao_produto;

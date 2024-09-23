@@ -1,38 +1,52 @@
 
 package telas;
 
+import Globals.GlobalAdmin;
 import com.raven.chart.ModelChart;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.AbstractButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import model.bean.EstoqueBean;
-import model.bean.ProdutosBean;
+import model.bean.Notificacoes;
+import model.bean.Produtos;
+import model.bean.Relatorios;
 import model.dao.EstoqueDAO;
+import model.dao.NotificacoesDAO;
 import model.dao.ProdutosDAO;
+import model.dao.RelatoriosDAO;
+import telas.formatos.ItemNotificacao;
+import telas.formatos.ItemRelatorio;
 
 
 public class Inicio extends javax.swing.JFrame {
-    private DefaultTableModel tableModel;
-    EstoqueBean produtosAtual = new EstoqueBean();
     
+    private final JFrame frame = this;
+    private DefaultTableModel tableModel;
+    private final NotificacoesDAO daoNotificacao = new NotificacoesDAO();
+    private final RelatoriosDAO daoRelatorio = new RelatoriosDAO();
+    private final ProdutosDAO daoProduto = new ProdutosDAO();
+    private final EstoqueBean produtosAtual = new EstoqueBean();
+    private List<Produtos> listaProdutos = new ArrayList();
+    private List<EstoqueBean> estoqueTabela = new ArrayList();
+    private List<Notificacoes> listaNotificacoes = new ArrayList();
+    private List<Relatorios> listaRelatorios = new ArrayList();
+    private boolean telaCheia = false;
+    private float produtosTotal = 0, produtosDisponiveis = 0, produtosIndisponiveis = 0, calcPorcent = 0;
+    private Dimension tamanhoOriginal;
+    private Point localizacaoOriginal;
     
     public Inicio() {
         initComponents();
         inicia();
 
-      
-        
-        radio1.setSelected(true);
-        preencherTabela(1);
         radio1.addActionListener(e -> {
             
             preencherTabela(1);
@@ -50,53 +64,50 @@ public class Inicio extends javax.swing.JFrame {
             preencherTabela(3);
             
         });
-        
-        tblEstoque.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            
-            public void valueChanged(ListSelectionEvent event){
-                if(!event.getValueIsAdjusting()){
-                   int linhaSelecionada = tblEstoque.getSelectedRow();
-                   if(linhaSelecionada != -1){
-                       produtosAtual.setId_produto((int) tblEstoque.getValueAt(linhaSelecionada,5));
-                        produtosAtual.setNome_produto(
-                               (String) tblEstoque.getValueAt(linhaSelecionada, 0)       
-                       );
-                        
-                        produtosAtual.setDescricao_produto(
-                               (String) tblEstoque.getValueAt(linhaSelecionada, 1)   
-                       );
-                        
-                        
-                   }
-                }
-            }
-        });
-    }
 
+        tblEstoque.getSelectionModel().addListSelectionListener(e -> {
+            
+            if (!e.getValueIsAdjusting()) {
+                
+                int linhaSelecionada = tblEstoque.getSelectedRow();
+                
+                tabelaLinhaSelecionada(linhaSelecionada);
+                
+            }
+            
+        });
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        panelBorder4 = new telas.formatos.PanelBorder();
+        panelAcimaFrame = new telas.formatos.PanelBorder();
         panelNoti = new javax.swing.JPanel();
+        panelFundoCloseNoti = new javax.swing.JPanel();
         btnCloseNoti = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelNotificacoes = new telas.formatos.PanelItem();
         panelFundoNoti = new javax.swing.JPanel();
-        panelBorder1 = new telas.formatos.PanelBorder();
+        panelPerfil = new telas.formatos.PanelBorder();
         imageAvatar2 = new com.raven.avatar.ImageAvatar();
-        jLabel1 = new javax.swing.JLabel();
+        txtBemVindo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        panelBorder3 = new telas.formatos.PanelBorder();
+        panelButtons = new telas.formatos.PanelBorder();
         btnInicio = new javax.swing.JPanel();
         txtInicio = new javax.swing.JLabel();
         btnEstoque = new javax.swing.JPanel();
         txtEstoque = new javax.swing.JLabel();
         btnLogout = new javax.swing.JPanel();
         txtLogout = new javax.swing.JLabel();
-        panelBorder5 = new telas.formatos.PanelBorder();
+        btnRelatorios = new javax.swing.JPanel();
+        txtRelatorios = new javax.swing.JLabel();
+        panelNav = new telas.formatos.PanelBorder();
         panelLogo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         panelClose = new javax.swing.JPanel();
         txtClose = new javax.swing.JLabel();
         panelMin = new javax.swing.JPanel();
@@ -106,9 +117,13 @@ public class Inicio extends javax.swing.JFrame {
         txtLogo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         tabInicio = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        panelInicio = new javax.swing.JPanel();
         grafInicio = new com.raven.chart.Chart();
-        panelFundoTable = new javax.swing.JPanel();
+        progressDisponivel = new com.raven.swing.progress.Progress();
+        jLabel12 = new javax.swing.JLabel();
+        progressIndisponivel = new com.raven.swing.progress.Progress();
+        jLabel13 = new javax.swing.JLabel();
+        panelEstoque = new javax.swing.JPanel();
         panelBorder6 = new telas.formatos.PanelBorder();
         myButton1 = new button.MyButton();
         radio1 = new javax.swing.JRadioButton();
@@ -119,7 +134,18 @@ public class Inicio extends javax.swing.JFrame {
         btn_ind = new button.MyButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEstoque = new tabledark.TableDark();
-        panelBorder2 = new telas.formatos.PanelBorder();
+        panelRelatorios = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        panelListRelatorios = new telas.formatos.PanelItem();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -127,10 +153,10 @@ public class Inicio extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        panelBorder4.setBackground(new java.awt.Color(0, 0, 0));
-        panelBorder4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 2, true));
-        panelBorder4.setForeground(new java.awt.Color(0, 0, 0));
-        panelBorder4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelAcimaFrame.setBackground(new java.awt.Color(0, 0, 0));
+        panelAcimaFrame.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 2, true));
+        panelAcimaFrame.setForeground(new java.awt.Color(0, 0, 0));
+        panelAcimaFrame.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelNoti.setBackground(new java.awt.Color(102, 102, 102));
         panelNoti.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,31 +164,48 @@ public class Inicio extends javax.swing.JFrame {
                 panelNotiMouseClicked(evt);
             }
         });
+        panelNoti.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelFundoCloseNoti.setBackground(new java.awt.Color(102, 102, 102));
 
         btnCloseNoti.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 24)); // NOI18N
+        btnCloseNoti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCloseNoti.setText("X");
         btnCloseNoti.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCloseNotiMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCloseNotiMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCloseNotiMouseExited(evt);
+            }
         });
 
-        javax.swing.GroupLayout panelNotiLayout = new javax.swing.GroupLayout(panelNoti);
-        panelNoti.setLayout(panelNotiLayout);
-        panelNotiLayout.setHorizontalGroup(
-            panelNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNotiLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnCloseNoti))
+        javax.swing.GroupLayout panelFundoCloseNotiLayout = new javax.swing.GroupLayout(panelFundoCloseNoti);
+        panelFundoCloseNoti.setLayout(panelFundoCloseNotiLayout);
+        panelFundoCloseNotiLayout.setHorizontalGroup(
+            panelFundoCloseNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFundoCloseNotiLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCloseNoti, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        panelNotiLayout.setVerticalGroup(
-            panelNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNotiLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(btnCloseNoti))
+        panelFundoCloseNotiLayout.setVerticalGroup(
+            panelFundoCloseNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnCloseNoti, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
         );
 
-        panelBorder4.add(panelNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 50, 260, 550));
+        panelNoti.add(panelFundoCloseNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+
+        jScrollPane1.setBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setViewportView(panelNotificacoes);
+
+        panelNoti.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 260, 500));
+
+        panelAcimaFrame.add(panelNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 50, 260, 550));
 
         panelFundoNoti.setBackground(new java.awt.Color(0, 0, 0, 100));
         panelFundoNoti.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -182,51 +225,51 @@ public class Inicio extends javax.swing.JFrame {
             .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        panelBorder4.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
+        panelAcimaFrame.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
 
         imageAvatar2.setBackground(new java.awt.Color(255, 255, 255));
         imageAvatar2.setForeground(new java.awt.Color(255, 255, 255));
         imageAvatar2.setBorderSize(2);
         imageAvatar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconPerfil.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Bem vindo, User");
+        txtBemVindo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtBemVindo.setForeground(new java.awt.Color(255, 255, 255));
+        txtBemVindo.setText("Bem vindo, User");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Admin");
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelPerfilLayout = new javax.swing.GroupLayout(panelPerfil);
+        panelPerfil.setLayout(panelPerfilLayout);
+        panelPerfilLayout.setHorizontalGroup(
+            panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPerfilLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(imageAvatar2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                .addGroup(panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBemVindo)
                     .addComponent(jLabel2))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
+        panelPerfilLayout.setVerticalGroup(
+            panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPerfilLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(imageAvatar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(panelBorder1Layout.createSequentialGroup()
+            .addGroup(panelPerfilLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addComponent(txtBemVindo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        panelBorder4.add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 290, 100));
+        panelAcimaFrame.add(panelPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 290, 100));
 
-        panelBorder3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelButtons.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnInicio.setBackground(new java.awt.Color(102, 102, 102));
         btnInicio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -253,7 +296,7 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(txtInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        panelBorder3.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 27, 290, 40));
+        panelButtons.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 27, 290, 40));
 
         btnEstoque.setBackground(new java.awt.Color(51, 51, 51));
         btnEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,17 +313,19 @@ public class Inicio extends javax.swing.JFrame {
         btnEstoque.setLayout(btnEstoqueLayout);
         btnEstoqueLayout.setHorizontalGroup(
             btnEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEstoqueLayout.createSequentialGroup()
+            .addGroup(btnEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnEstoqueLayout.setVerticalGroup(
             btnEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEstoqueLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panelBorder3.add(btnEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 290, 40));
+        panelButtons.add(btnEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 290, 40));
 
         btnLogout.setBackground(new java.awt.Color(51, 51, 51));
         btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -313,11 +358,38 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(txtLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        panelBorder3.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 290, 30));
+        panelButtons.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 290, 30));
 
-        panelBorder4.add(panelBorder3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 420));
+        btnRelatorios.setBackground(new java.awt.Color(51, 51, 51));
+        btnRelatorios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRelatoriosMouseClicked(evt);
+            }
+        });
 
-        panelBorder5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        txtRelatorios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtRelatorios.setForeground(new java.awt.Color(255, 255, 255));
+        txtRelatorios.setText("Relatórios");
+
+        javax.swing.GroupLayout btnRelatoriosLayout = new javax.swing.GroupLayout(btnRelatorios);
+        btnRelatorios.setLayout(btnRelatoriosLayout);
+        btnRelatoriosLayout.setHorizontalGroup(
+            btnRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnRelatoriosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtRelatorios, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnRelatoriosLayout.setVerticalGroup(
+            btnRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtRelatorios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panelButtons.add(btnRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 290, 40));
+
+        panelAcimaFrame.add(panelButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 420));
+
+        panelNav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelLogo.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -325,22 +397,29 @@ public class Inicio extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("|");
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconLogo.png"))); // NOI18N
+
         javax.swing.GroupLayout panelLogoLayout = new javax.swing.GroupLayout(panelLogo);
         panelLogo.setLayout(panelLogoLayout);
         panelLogoLayout.setHorizontalGroup(
             panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLogoLayout.createSequentialGroup()
-                .addGap(0, 55, Short.MAX_VALUE)
+                .addGap(0, 19, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3))
         );
         panelLogoLayout.setVerticalGroup(
             panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLogoLayout.createSequentialGroup()
-                .addComponent(jLabel3)
+            .addGroup(panelLogoLayout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        panelBorder5.add(panelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 70, -1));
+        panelNav.add(panelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 70, -1));
 
         panelClose.setBackground(new java.awt.Color(51, 51, 51));
         panelClose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -384,7 +463,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(txtClose))
         );
 
-        panelBorder5.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 10, 40, 30));
+        panelNav.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 10, 40, 30));
 
         panelMin.setBackground(new java.awt.Color(51, 51, 51));
         panelMin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -423,12 +502,10 @@ public class Inicio extends javax.swing.JFrame {
         );
         panelMinLayout.setVerticalGroup(
             panelMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMinLayout.createSequentialGroup()
-                .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
         );
 
-        panelBorder5.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, 40, 30));
+        panelNav.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, 40, 30));
 
         panelMax.setBackground(new java.awt.Color(51, 51, 51));
         panelMax.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -472,14 +549,14 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(txtMax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        panelBorder5.add(panelMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, 40, 30));
+        panelNav.add(panelMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, 40, 30));
 
         txtLogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtLogo.setForeground(new java.awt.Color(255, 255, 255));
         txtLogo.setText("E-commerce");
-        panelBorder5.add(txtLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 12, 100, 30));
+        panelNav.add(txtLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 12, 100, 30));
 
-        panelBorder4.add(panelBorder5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 50));
+        panelAcimaFrame.add(panelNav, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 50));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -487,28 +564,65 @@ public class Inicio extends javax.swing.JFrame {
         tabInicio.setBackground(new java.awt.Color(51, 51, 51));
         tabInicio.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        panelInicio.setBackground(new java.awt.Color(51, 51, 51));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        progressDisponivel.setBackground(new java.awt.Color(0, 255, 0));
+        progressDisponivel.setBorder(null);
+        progressDisponivel.setForeground(new java.awt.Color(0, 255, 0));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Produtos Disponíveis");
+
+        progressIndisponivel.setBackground(new java.awt.Color(255, 0, 0));
+        progressIndisponivel.setBorder(null);
+        progressIndisponivel.setForeground(new java.awt.Color(255, 0, 0));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Produtos Indisponíveis");
+
+        javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
+        panelInicio.setLayout(panelInicioLayout);
+        panelInicioLayout.setHorizontalGroup(
+            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInicioLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(progressDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(progressIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(grafInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 956, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(grafInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelInicioLayout.setVerticalGroup(
+            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInicioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(grafInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInicioLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progressDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelInicioLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progressIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(grafInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
-        tabInicio.addTab("tab1", jPanel2);
+        tabInicio.addTab("tab1", panelInicio);
 
-        panelFundoTable.setBackground(new java.awt.Color(51, 51, 51));
+        panelEstoque.setBackground(new java.awt.Color(51, 51, 51));
 
         panelBorder6.setForeground(new java.awt.Color(153, 153, 153));
 
@@ -593,23 +707,23 @@ public class Inicio extends javax.swing.JFrame {
         tblEstoque.setBackground(new java.awt.Color(204, 204, 204));
         tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nome do Produto", "Descrição Produto", "Valor", "Categoria", "Quantidade", "IDentificador"
+                "Nome do Produto", "Descrição Produto", "Valor", "Categoria", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -625,37 +739,104 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblEstoque);
         if (tblEstoque.getColumnModel().getColumnCount() > 0) {
             tblEstoque.getColumnModel().getColumn(0).setResizable(false);
+            tblEstoque.getColumnModel().getColumn(1).setResizable(false);
             tblEstoque.getColumnModel().getColumn(2).setResizable(false);
             tblEstoque.getColumnModel().getColumn(3).setResizable(false);
             tblEstoque.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        javax.swing.GroupLayout panelFundoTableLayout = new javax.swing.GroupLayout(panelFundoTable);
-        panelFundoTable.setLayout(panelFundoTableLayout);
-        panelFundoTableLayout.setHorizontalGroup(
-            panelFundoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFundoTableLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelEstoqueLayout = new javax.swing.GroupLayout(panelEstoque);
+        panelEstoque.setLayout(panelEstoqueLayout);
+        panelEstoqueLayout.setHorizontalGroup(
+            panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelFundoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 967, Short.MAX_VALUE)
                     .addComponent(panelBorder6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        panelFundoTableLayout.setVerticalGroup(
-            panelFundoTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFundoTableLayout.createSequentialGroup()
+        panelEstoqueLayout.setVerticalGroup(
+            panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(panelBorder6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
 
-        tabInicio.addTab("tab2", panelFundoTable);
+        tabInicio.addTab("tab2", panelEstoque);
+
+        panelRelatorios.setBackground(new java.awt.Color(51, 51, 51));
+
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setViewportView(panelListRelatorios);
+
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
+
+        jLabel6.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Produto");
+        jPanel2.add(jLabel6);
+
+        jLabel7.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Horário");
+        jPanel2.add(jLabel7);
+
+        jLabel9.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Data");
+        jPanel2.add(jLabel9);
+
+        jLabel10.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Quantidade");
+        jPanel2.add(jLabel10);
+
+        jLabel11.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Valor Unitário");
+        jPanel2.add(jLabel11);
+
+        jLabel8.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Valor Total");
+        jPanel2.add(jLabel8);
+
+        jLabel5.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Pessoa");
+        jPanel2.add(jLabel5);
+
+        javax.swing.GroupLayout panelRelatoriosLayout = new javax.swing.GroupLayout(panelRelatorios);
+        panelRelatorios.setLayout(panelRelatoriosLayout);
+        panelRelatoriosLayout.setHorizontalGroup(
+            panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRelatoriosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        panelRelatoriosLayout.setVerticalGroup(
+            panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRelatoriosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(301, Short.MAX_VALUE))
+        );
+
+        tabInicio.addTab("tab3", panelRelatorios);
 
         jPanel1.add(tabInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, -1));
 
-        panelBorder4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 980, 470));
+        panelAcimaFrame.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 980, 470));
 
         btnNoti.setBackground(new java.awt.Color(102, 102, 102));
         btnNoti.setBorder(null);
@@ -668,31 +849,31 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
-        panelBorder2.setLayout(panelBorder2Layout);
-        panelBorder2Layout.setHorizontalGroup(
-            panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelSubNavLayout = new javax.swing.GroupLayout(panelSubNav);
+        panelSubNav.setLayout(panelSubNavLayout);
+        panelSubNavLayout.setHorizontalGroup(
+            panelSubNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSubNavLayout.createSequentialGroup()
                 .addContainerGap(913, Short.MAX_VALUE)
                 .addComponent(btnNoti, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
-        panelBorder2Layout.setVerticalGroup(
-            panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelSubNavLayout.setVerticalGroup(
+            panelSubNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnNoti, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        panelBorder4.add(panelBorder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 980, 50));
+        panelAcimaFrame.add(panelSubNav, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 980, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelAcimaFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder4, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelAcimaFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -719,62 +900,46 @@ public class Inicio extends javax.swing.JFrame {
 
     private void txtCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCloseMouseEntered
         
-        panelClose.setBackground(Color.white);
-        txtClose.setForeground(Color.black);
+        panelClose.setBackground(new Color(204, 0, 0));
         
     }//GEN-LAST:event_txtCloseMouseEntered
 
     private void txtCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCloseMouseExited
         
         panelClose.setBackground(new Color(51, 51, 51));
-        txtClose.setForeground(Color.white);
         
     }//GEN-LAST:event_txtCloseMouseExited
 
-    private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
-        
-        trocaTab(1);
-        
-    }//GEN-LAST:event_btnInicioMouseClicked
-
-    private void btnEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstoqueMouseClicked
-        
-        trocaTab(2);
-        
-    }//GEN-LAST:event_btnEstoqueMouseClicked
-
-    private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                dispose();
-                new Login().setVisible(true);
-            }
-        });
-        
-    }//GEN-LAST:event_btnLogoutMouseClicked
-
-    private void btnLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseEntered
-        
-        btnLogout.setBackground(Color.red);
-        
-    }//GEN-LAST:event_btnLogoutMouseEntered
-
-    private void btnLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseExited
-        
-        btnLogout.setBackground(new Color(51, 51, 51));
-        
-    }//GEN-LAST:event_btnLogoutMouseExited
-
     private void txtMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseClicked
-      boolean telaCheia = false;
-        int MAXIMIZED_BOTH1 = JFrame.MAXIMIZED_BOTH;
+      
+        if (telaCheia) {
+            
+            telaCheia = false;
+            
+            frame.setSize(tamanhoOriginal);
+            frame.setLocation(localizacaoOriginal);
+            
+            redimensiona(false);
+            
+        } else {
+            
+            telaCheia = true;
+            
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int width = screenSize.width;
+            int height = screenSize.height;
+            
+            frame.setBounds(0, 0, width, height - 30);
+            
+            redimensiona(true);
+       
+        }
         
     }//GEN-LAST:event_txtMaxMouseClicked
 
     private void txtMaxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseEntered
            
-        panelMax.setBackground(Color.white);
+        panelMax.setBackground(new Color(204, 204, 204));
         txtMax.setForeground(Color.black);
         
     }//GEN-LAST:event_txtMaxMouseEntered
@@ -806,7 +971,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void txtMinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMinMouseEntered
         
-        panelMin.setBackground(Color.white);
+        panelMin.setBackground(new Color(204, 204, 204));
         txtMin.setForeground(Color.black);
         
     }//GEN-LAST:event_txtMinMouseEntered
@@ -841,6 +1006,8 @@ public class Inicio extends javax.swing.JFrame {
         
         panelNoti.setVisible(true);
         panelFundoNoti.setVisible(true);
+        btnNoti.setBadges(0);
+        daoNotificacao.atualizar(listaNotificacoes);
         
     }//GEN-LAST:event_btnNotiMouseClicked
 
@@ -897,6 +1064,59 @@ public class Inicio extends javax.swing.JFrame {
         preencherTabela(2);
     }//GEN-LAST:event_btn_indActionPerformed
 
+    private void btnCloseNotiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseNotiMouseEntered
+        
+        panelFundoCloseNoti.setBackground(Color.white);
+        
+    }//GEN-LAST:event_btnCloseNotiMouseEntered
+
+    private void btnCloseNotiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseNotiMouseExited
+        
+        panelFundoCloseNoti.setBackground(new Color(102, 102, 102));
+        
+    }//GEN-LAST:event_btnCloseNotiMouseExited
+
+    private void btnLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseExited
+
+        btnLogout.setBackground(new Color(51, 51, 51));
+
+    }//GEN-LAST:event_btnLogoutMouseExited
+
+    private void btnLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseEntered
+
+        btnLogout.setBackground(new Color(204, 0, 0));
+
+    }//GEN-LAST:event_btnLogoutMouseEntered
+
+    private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                dispose();
+                new Login().setVisible(true);
+            }
+        });
+
+    }//GEN-LAST:event_btnLogoutMouseClicked
+
+    private void btnEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstoqueMouseClicked
+
+        trocaTab(2);
+
+    }//GEN-LAST:event_btnEstoqueMouseClicked
+
+    private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
+
+        trocaTab(1);
+
+    }//GEN-LAST:event_btnInicioMouseClicked
+
+    private void btnRelatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatoriosMouseClicked
+        
+        trocaTab(3);
+        
+    }//GEN-LAST:event_btnRelatoriosMouseClicked
+
 
     public static void main(String args[]) {
 
@@ -936,6 +1156,7 @@ public class Inicio extends javax.swing.JFrame {
                 
                 btnInicio.setBackground(new Color(102, 102, 102));
                 btnEstoque.setBackground(new Color(51, 51, 51));
+                btnRelatorios.setBackground(new Color(51, 51, 51));
                 
                 break;
                 
@@ -946,6 +1167,18 @@ public class Inicio extends javax.swing.JFrame {
                 
                 btnInicio.setBackground(new Color(51, 51, 51));
                 btnEstoque.setBackground(new Color(102, 102, 102));
+                btnRelatorios.setBackground(new Color(51, 51, 51));
+                
+                break;
+            
+            case 3:
+                
+                tabInicio.setSelectedIndex(2);
+                atualiza(3);
+                
+                btnInicio.setBackground(new Color(51, 51, 51));
+                btnEstoque.setBackground(new Color(51, 51, 51));
+                btnRelatorios.setBackground(new Color(102, 102, 102));
                 
                 break;
             
@@ -955,10 +1188,23 @@ public class Inicio extends javax.swing.JFrame {
     
     private void inicia() {
         
-        graficoInicio();
         animationLogo();
+        graficoInicio();
+        preencherTabela(1);
+        listaRelatorios();
+        listaNotificacoes();
+        progressInicio();
         panelNoti.setVisible(false);
         panelFundoNoti.setVisible(false);
+        radio1.setSelected(true);
+        tamanhoOriginal = frame.getSize();
+        localizacaoOriginal = frame.getLocation();
+        
+        if (GlobalAdmin.getNome() != null) {
+            
+            txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
+            
+        }
         
     }
     
@@ -969,11 +1215,15 @@ public class Inicio extends javax.swing.JFrame {
             case 1:
                 
                 grafInicio.start();
+                progressInicio();
                 
                 break;
             
             case 2:
                 
+                break;
+                
+            case 3:
                 
                 break;
                 
@@ -1031,60 +1281,219 @@ public class Inicio extends javax.swing.JFrame {
         
       }
     
-    public void preencherTabela(int table){
+    private void preencherTabela(int table){
+        
         tableModel = (DefaultTableModel) tblEstoque.getModel();
         tableModel.setNumRows(0);
+        
         EstoqueDAO funcoesEstoque = new EstoqueDAO();
-        List<EstoqueBean> estoque = new ArrayList<>();
         
         switch(table) {
             
             case 1:
                 
-                estoque = funcoesEstoque.ListarEstoque(1);
+                estoqueTabela = funcoesEstoque.ListarEstoque(1);
                 btn_disp.setVisible(false);
                 btn_ind.setVisible(false);
-
-                
                 break;
                 
             case 2:
                 
-                estoque = funcoesEstoque.ListarEstoque(2);
+                estoqueTabela = funcoesEstoque.ListarEstoque(2);
                 btn_ind.setVisible(true);
                 btn_disp.setVisible(false);
                 break;
             
             case 3:
                 
-                estoque = funcoesEstoque.ListarEstoque(3);
-                 btn_ind.setVisible(false);
-                 btn_disp.setVisible(true);
-                 
-                  
+                estoqueTabela = funcoesEstoque.ListarEstoque(3);
+                btn_ind.setVisible(false);
+                btn_disp.setVisible(true);
                 break;
             
         }
-        
-        
-    
-        for(EstoqueBean objEstoque: estoque){
-            Object[ ] rowData= {
+
+        for(EstoqueBean objEstoque: estoqueTabela){
+            Object[] rowData= {
                 
                 objEstoque.getNome_produto(),
                 objEstoque.getDescricao_produto(),
                 objEstoque.getValor(),
-                objEstoque.getFk_id_categoria(),
-                objEstoque.getQuantidade(),
-                objEstoque.getId_produto()
-                
-                
+                objEstoque.getNome_categoria(),
+                objEstoque.getQuantidade()
+
                 };
-            tableModel.addRow(rowData); /////ADICIONA UMA LINHA NA TABELA
+            
+            tableModel.addRow(rowData);
         }
     }
 
-   
+    private void tabelaLinhaSelecionada(int linha) {
+        
+        if (linha != -1) {
+            
+            produtosAtual.setId_produto(estoqueTabela.get(linha).getId_produto());
+            produtosAtual.setNome_produto(estoqueTabela.get(linha).getNome_produto());
+            produtosAtual.setDescricao_produto(estoqueTabela.get(linha).getDescricao_produto());
+            produtosAtual.setNome_categoria(estoqueTabela.get(linha).getNome_categoria());
+            produtosAtual.setDescricao_categoria(estoqueTabela.get(linha).getDescricao_categoria());
+            produtosAtual.setQuantidade(estoqueTabela.get(linha).getQuantidade());
+            produtosAtual.setValor(estoqueTabela.get(linha).getValor());
+            produtosAtual.setDisponivel(estoqueTabela.get(linha).getDisponivel());
+            produtosAtual.setFk_id_categoria(estoqueTabela.get(linha).getFk_id_categoria());
+            
+        }
+        
+    }
+    
+    private void redimensiona(boolean verifica) {
+        
+    }
+    
+    private void listaNotificacoes() {
+       
+       panelNotificacoes.removeAll();
+        
+       listaNotificacoes = daoNotificacao.listar();
+       
+       int cont = 0;
+       
+       for (int i = 0; i < listaNotificacoes.size(); i++) {
+           
+           panelNotificacoes.add(new ItemNotificacao(listaNotificacoes.get(i)));
+           
+           if (!listaNotificacoes.get(i).isVisto()) {
+               
+               cont++;
+               
+           }
+           
+       }
+       
+       btnNoti.setBadges(cont);
+        
+    }
+    
+    private void listaRelatorios() {
+        
+        listaRelatorios = daoRelatorio.listar();
+        
+        for (int i = 0; i < listaRelatorios.size(); i++) {
+            
+            panelListRelatorios.add(new ItemRelatorio(listaRelatorios.get(i)));
+            
+        }
+        
+    }
+    
+    private void progressInicio() {
+        
+        listaProdutos = daoProduto.listar();
+
+        produtosTotal = listaProdutos.size();
+        produtosDisponiveis = 0;
+        produtosIndisponiveis = 0;
+        
+        for (int i = 0; i < produtosTotal; i++) {
+            
+            if (listaProdutos.get(i).getDisponivel() == 1) {
+                
+                produtosDisponiveis++;
+                
+            } else {
+                
+                produtosIndisponiveis++;
+                
+            }
+            
+        }
+
+        calcPorcent = (produtosDisponiveis / produtosTotal) * 100;
+        int porcent = convertePorcent(calcPorcent);
+        
+        if (porcent != 100 && porcent != 0) {
+            porcent++;
+        }
+        
+        verificaNivel(1, porcent);
+        progressDisponivel.setValue(porcent);
+
+        calcPorcent = (produtosIndisponiveis / produtosTotal) * 100;
+        porcent = convertePorcent(calcPorcent);
+        verificaNivel(2, porcent);
+        progressIndisponivel.setValue(porcent);
+        
+        calcPorcent = 0;
+        
+        progressDisponivel.start();
+        progressIndisponivel.start();
+        
+    }
+    
+    private int convertePorcent(float valor) {
+        
+        String resultado = String.valueOf(calcPorcent);
+        String[] passaInt = resultado.split("\\.");
+        
+        int valorFinal = Integer.parseInt(passaInt[0]);
+        
+        return valorFinal;
+        
+    }
+    
+    private void verificaNivel(int vez, int porcent) {
+        
+        switch(vez) {
+            
+            case 1:
+                
+                Color backfore = Color.darkGray;
+                
+                if (porcent < 20) {
+                    
+                    backfore = Color.red;
+                    
+                } else if (porcent >= 20 && porcent < 40) {
+                    
+                    backfore = Color.orange;
+                    
+                } else if (porcent >= 40 && porcent < 50) {
+                    
+                    backfore = Color.yellow;
+                    
+                } else if (porcent >= 50) {
+                    
+                    backfore = Color.green;
+                    
+                }
+                
+                progressDisponivel.setBackground(backfore);
+                progressDisponivel.setForeground(backfore);
+                
+                break;
+                
+            case 2: 
+                
+                Color backfore2 = Color.darkGray;
+                
+                if (porcent < 50) {
+                    
+                    backfore2 = Color.orange;
+                    
+                } else if (porcent >= 50) {
+                    
+                    backfore2 = Color.red;
+                    
+                }
+                
+                progressIndisponivel.setBackground(backfore2);
+                progressIndisponivel.setForeground(backfore2);
+                
+                break;
+            
+        }
+        
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCloseNoti;
@@ -1092,37 +1501,57 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel btnInicio;
     private javax.swing.JPanel btnLogout;
     private com.raven.swing.ButtonBadges btnNoti;
+    private javax.swing.JPanel btnRelatorios;
     private button.ButtonVerde btn_disp;
     private button.MyButton btn_ind;
     private button.ButtonEditar buttonEditar1;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imageAvatar2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private button.MyButton myButton1;
-    private telas.formatos.PanelBorder panelBorder1;
-    private telas.formatos.PanelBorder panelBorder2;
-    private telas.formatos.PanelBorder panelBorder3;
-    private telas.formatos.PanelBorder panelBorder4;
-    private telas.formatos.PanelBorder panelBorder5;
+    private telas.formatos.PanelBorder panelAcimaFrame;
     private telas.formatos.PanelBorder panelBorder6;
+    private telas.formatos.PanelBorder panelButtons;
     private javax.swing.JPanel panelClose;
+    private javax.swing.JPanel panelEstoque;
+    private javax.swing.JPanel panelFundoCloseNoti;
     private javax.swing.JPanel panelFundoNoti;
-    private javax.swing.JPanel panelFundoTable;
+    private javax.swing.JPanel panelInicio;
+    private telas.formatos.PanelItem panelListRelatorios;
     private javax.swing.JPanel panelLogo;
     private javax.swing.JPanel panelMax;
     private javax.swing.JPanel panelMin;
+    private telas.formatos.PanelBorder panelNav;
     private javax.swing.JPanel panelNoti;
+    private telas.formatos.PanelItem panelNotificacoes;
+    private telas.formatos.PanelBorder panelPerfil;
+    private javax.swing.JPanel panelRelatorios;
+    private telas.formatos.PanelBorder panelSubNav;
+    private com.raven.swing.progress.Progress progressDisponivel;
+    private com.raven.swing.progress.Progress progressIndisponivel;
     private javax.swing.JRadioButton radio1;
     private javax.swing.JRadioButton radio2;
     private javax.swing.JRadioButton radio3;
     private javax.swing.JTabbedPane tabInicio;
     private tabledark.TableDark tblEstoque;
+    private javax.swing.JLabel txtBemVindo;
     private javax.swing.JLabel txtClose;
     private javax.swing.JLabel txtEstoque;
     private javax.swing.JLabel txtInicio;
@@ -1130,5 +1559,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtLogout;
     private javax.swing.JLabel txtMax;
     private javax.swing.JLabel txtMin;
+    private javax.swing.JLabel txtRelatorios;
     // End of variables declaration//GEN-END:variables
+
+
 }
