@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model.bean;
 
-/**
- *
- * @author LEONARDO
- */
+
 public class EstoqueBean {
     
     private int id_produto;
@@ -16,7 +9,7 @@ public class EstoqueBean {
     private String descricao_produto;
     private int disponivel;
     private int fk_id_categoria;
-    private float valor;
+    private float valor, valor_custo;
     private int quantidade;
     private String nome_categoria;
     private String descricao_categoria;
@@ -25,17 +18,28 @@ public class EstoqueBean {
     public EstoqueBean() {
     }
 
-    public EstoqueBean(int id_produto, String nome_produto, String descricao_produto, int disponivel, int fk_id_categoria, float valor, int quantidade, String nome_categoria, String descricao_categoria) {
+    public EstoqueBean(int id_produto, String nome_produto, String descricao_produto, int disponivel, int fk_id_categoria, float valor, float valor_custo, int quantidade, String nome_categoria, String descricao_categoria) {
         this.id_produto = id_produto;
         this.nome_produto = nome_produto;
         this.descricao_produto = descricao_produto;
         this.disponivel = disponivel;
         this.fk_id_categoria = fk_id_categoria;
         this.valor = valor;
+        this.valor_custo = valor_custo;
         this.quantidade = quantidade;
         this.nome_categoria = nome_categoria;
         this.descricao_categoria = descricao_categoria;
     }
+
+    public float getValor_custo() {
+        return valor_custo;
+    }
+
+    public void setValor_custo(float valor_custo) {
+        this.valor_custo = valor_custo;
+    }
+
+    
 
     public int getId_produto() {
         return id_produto;

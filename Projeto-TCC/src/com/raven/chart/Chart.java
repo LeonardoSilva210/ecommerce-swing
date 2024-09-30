@@ -151,6 +151,12 @@ public class Chart extends javax.swing.JPanel {
         showLabel = null;
         blankPlotChart.setLabelCount(0);
         model.clear();
+        
+        legends.clear();
+        panelLegend.removeAll();
+        panelLegend.revalidate();
+        panelLegend.repaint();
+        
         repaint();
     }
 

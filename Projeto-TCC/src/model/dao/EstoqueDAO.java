@@ -28,7 +28,7 @@ public class EstoqueDAO {
                     
                     stmt = conexao.prepareStatement("select produtos.nome_produto as produto,"
                             + "produtos.disponivel, produtos.id_produto, produtos.quantidade,"
-                            + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, categorias.nome as categoria, categorias.descricao "
+                            + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria");
             
                     break;
@@ -37,7 +37,7 @@ public class EstoqueDAO {
                     
                     stmt = conexao.prepareStatement("select produtos.nome_produto as produto," 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
-                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, categorias.nome as categoria, categorias.descricao "
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.disponivel = 1");
                     
                     break;
@@ -45,7 +45,7 @@ public class EstoqueDAO {
                 case 3:
                     
                     stmt = conexao.prepareStatement("select produtos.nome_produto as produto,produtos.descricao_produto, produtos.disponivel, "
-                            + "produtos.fk_id_categoria, produtos.valor, categorias.nome as categoria, categorias.descricao, produtos.id_produto, produtos.quantidade "
+                            + "produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao, produtos.id_produto, produtos.quantidade "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.disponivel = 0");
                     
                     break;
@@ -59,7 +59,8 @@ public class EstoqueDAO {
                 
                 estoque.setNome_produto(rs.getString("produto"));
                 estoque.setDescricao_produto(rs.getString("descricao_produto"));
-                estoque.setValor(rs.getInt("valor"));
+                estoque.setValor(rs.getFloat("valor"));
+                estoque.setValor_custo(rs.getFloat("valor_custo"));
                 estoque.setNome_categoria(rs.getString("categoria"));
                 estoque.setFk_id_categoria(rs.getInt("fk_id_categoria"));
                 estoque.setQuantidade(rs.getInt("quantidade"));
@@ -117,6 +118,32 @@ public class EstoqueDAO {
             stmt.close();
             conexao.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void atualizar(EstoqueBean estoque) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE produtos set nome_produto = ?, descricao_produto = ?, valor = ?, valor_custo = ?, quantidade = ?, fk_id_categoria = ? WHERE id_produto = ?");
+            
+            stmt.setString(1, estoque.getNome_produto());
+            stmt.setString(2, estoque.getDescricao_produto());
+            stmt.setFloat(3, estoque.getValor());
+            stmt.setFloat(4, estoque.getValor_custo());
+            stmt.setInt(5, estoque.getQuantidade());
+            stmt.setInt(6, estoque.getFk_id_categoria());
+            stmt.setInt(7, estoque.getId_produto());
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
             e.printStackTrace();
         }
         

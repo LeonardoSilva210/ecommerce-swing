@@ -27,12 +27,14 @@ public class ItemRelatorio extends javax.swing.JPanel {
                
                 setBorder(new LineBorder(Color.white, 1));
                 
+                
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 
                 setBorder(null);
+                
                 
             }
 
