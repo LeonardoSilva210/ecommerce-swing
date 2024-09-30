@@ -24,7 +24,7 @@ public class NotificacoesDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conexao.prepareStatement("SELECT * FROM notificacoes WHERE fk_id_admin = ?");
+            stmt = conexao.prepareStatement("SELECT * FROM notificacoes WHERE fk_id_admin = ? ORDER BY id_notificacao DESC");
             stmt.setInt(1, GlobalAdmin.getId_admin());
             
             rs = stmt.executeQuery();
