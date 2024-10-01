@@ -5,7 +5,7 @@ package Globals;
 public class GlobalAdmin {
     
     private static int id_admin;
-    private static String nome, sobrenome, cpf, senha;
+    private static String nome, email, senha;
 
     public static int getId_admin() {
         return id_admin;
@@ -23,20 +23,12 @@ public class GlobalAdmin {
         GlobalAdmin.nome = nome;
     }
 
-    public static String getSobrenome() {
-        return sobrenome;
+    public static String getEmail() {
+        return email;
     }
 
-    public static void setSobrenome(String sobrenome) {
-        GlobalAdmin.sobrenome = sobrenome;
-    }
-
-    public static String getCpf() {
-        return cpf;
-    }
-
-    public static void setCpf(String cpf) {
-        GlobalAdmin.cpf = cpf;
+    public static void setEmail(String email) {
+        GlobalAdmin.email = email;
     }
 
     public static String getSenha() {
@@ -46,7 +38,5 @@ public class GlobalAdmin {
     public static void setSenha(String senha) {
         GlobalAdmin.senha = senha;
     }
-    
-    
-    
+ 
 }

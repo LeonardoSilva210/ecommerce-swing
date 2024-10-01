@@ -66,7 +66,6 @@ public class Inicio extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         panelAcimaFrame = new telas.formatos.PanelBorder();
-        panelFundoAdicionarProduto = new javax.swing.JPanel();
         panelAdicionarProduto = new javax.swing.JPanel();
         inputValorCusto = new javax.swing.JTextField();
         inputNomeProduto = new javax.swing.JTextField();
@@ -78,19 +77,22 @@ public class Inicio extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        buttonSalvar = new javax.swing.JButton();
         comboAdicionarProdutoCategoria = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        radioDisponivel = new javax.swing.JRadioButton();
+        radioIndisponivel = new javax.swing.JRadioButton();
+        buttonClosePanelAdicionarProduto = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        panelFundoAdicionarProduto = new javax.swing.JPanel();
         panelInformacoesPerfil = new javax.swing.JPanel();
         imageAvatar1 = new com.raven.avatar.ImageAvatar();
         inputNome = new javax.swing.JTextField();
-        inputSobrenome = new javax.swing.JTextField();
         inputSenha = new javax.swing.JPasswordField();
-        inputCPF = new javax.swing.JFormattedTextField();
         btnFechaInformacoesPerfil = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        buttonSalvarPerfil = new javax.swing.JButton();
+        inputEmail = new javax.swing.JTextField();
         panelFundoPerfil = new javax.swing.JPanel();
         panelNoti = new javax.swing.JPanel();
         panelFundoCloseNoti = new javax.swing.JPanel();
@@ -185,9 +187,12 @@ public class Inicio extends javax.swing.JFrame {
         panelAcimaFrame.setForeground(new java.awt.Color(0, 0, 0));
         panelAcimaFrame.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelFundoAdicionarProduto.setBackground(new java.awt.Color(0, 0, 0, 100));
-
         panelAdicionarProduto.setBackground(new java.awt.Color(0, 153, 204));
+        panelAdicionarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAdicionarProdutoMouseClicked(evt);
+            }
+        });
         panelAdicionarProduto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelAdicionarProduto.add(inputValorCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 169, 34));
         panelAdicionarProduto.add(inputNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 169, 34));
@@ -215,13 +220,13 @@ public class Inicio extends javax.swing.JFrame {
         jLabel18.setText("Categoria");
         panelAdicionarProduto.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
 
-        jButton2.setText("Salvar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalvar.setText("Salvar");
+        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonSalvarActionPerformed(evt);
             }
         });
-        panelAdicionarProduto.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 170, 30));
+        panelAdicionarProduto.add(buttonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 170, 30));
 
         panelAdicionarProduto.add(comboAdicionarProdutoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 170, 34));
 
@@ -229,29 +234,64 @@ public class Inicio extends javax.swing.JFrame {
         jLabel19.setText("Quantidade");
         panelAdicionarProduto.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
 
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("Disponível");
-        panelAdicionarProduto.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 90, -1));
+        buttonGroup2.add(radioDisponivel);
+        radioDisponivel.setText("Disponível");
+        panelAdicionarProduto.add(radioDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 90, -1));
 
-        buttonGroup2.add(jRadioButton1);
-        jRadioButton1.setText("Indisponível");
-        panelAdicionarProduto.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 90, -1));
+        buttonGroup2.add(radioIndisponivel);
+        radioIndisponivel.setText("Indisponível");
+        panelAdicionarProduto.add(radioIndisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 90, -1));
+
+        buttonClosePanelAdicionarProduto.setBackground(new java.awt.Color(0, 153, 204));
+        buttonClosePanelAdicionarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonClosePanelAdicionarProdutoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonClosePanelAdicionarProdutoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonClosePanelAdicionarProdutoMouseExited(evt);
+            }
+        });
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("X");
+
+        javax.swing.GroupLayout buttonClosePanelAdicionarProdutoLayout = new javax.swing.GroupLayout(buttonClosePanelAdicionarProduto);
+        buttonClosePanelAdicionarProduto.setLayout(buttonClosePanelAdicionarProdutoLayout);
+        buttonClosePanelAdicionarProdutoLayout.setHorizontalGroup(
+            buttonClosePanelAdicionarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+        buttonClosePanelAdicionarProdutoLayout.setVerticalGroup(
+            buttonClosePanelAdicionarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonClosePanelAdicionarProdutoLayout.createSequentialGroup()
+                .addComponent(jLabel20)
+                .addGap(0, 1, Short.MAX_VALUE))
+        );
+
+        panelAdicionarProduto.add(buttonClosePanelAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+
+        panelAcimaFrame.add(panelAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 800, 390));
+
+        panelFundoAdicionarProduto.setBackground(new java.awt.Color(0, 0, 0, 100));
+        panelFundoAdicionarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelFundoAdicionarProdutoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelFundoAdicionarProdutoLayout = new javax.swing.GroupLayout(panelFundoAdicionarProduto);
         panelFundoAdicionarProduto.setLayout(panelFundoAdicionarProdutoLayout);
         panelFundoAdicionarProdutoLayout.setHorizontalGroup(
             panelFundoAdicionarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFundoAdicionarProdutoLayout.createSequentialGroup()
-                .addGap(302, 302, 302)
-                .addComponent(panelAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+            .addGap(0, 1300, Short.MAX_VALUE)
         );
         panelFundoAdicionarProdutoLayout.setVerticalGroup(
             panelFundoAdicionarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFundoAdicionarProdutoLayout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
-                .addComponent(panelAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+            .addGap(0, 550, Short.MAX_VALUE)
         );
 
         panelAcimaFrame.add(panelFundoAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
@@ -272,23 +312,11 @@ public class Inicio extends javax.swing.JFrame {
 
         inputNome.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelInformacoesPerfil.add(inputNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 270, 40));
-
-        inputSobrenome.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
-        inputSobrenome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelInformacoesPerfil.add(inputSobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 270, 40));
+        panelInformacoesPerfil.add(inputNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 270, 40));
 
         inputSenha.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelInformacoesPerfil.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 270, 40));
-
-        try {
-            inputCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        inputCPF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelInformacoesPerfil.add(inputCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 270, 40));
+        panelInformacoesPerfil.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 270, 40));
 
         btnFechaInformacoesPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -319,7 +347,18 @@ public class Inicio extends javax.swing.JFrame {
 
         panelInformacoesPerfil.add(btnFechaInformacoesPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 20));
 
-        panelAcimaFrame.add(panelInformacoesPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 210, 550));
+        buttonSalvarPerfil.setText("Salvar");
+        buttonSalvarPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSalvarPerfilActionPerformed(evt);
+            }
+        });
+        panelInformacoesPerfil.add(buttonSalvarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 210, 40));
+
+        inputEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        panelInformacoesPerfil.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 270, 40));
+
+        panelAcimaFrame.add(panelInformacoesPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 310, 550));
 
         panelFundoPerfil.setBackground(new java.awt.Color(0, 0, 0, 100));
         panelFundoPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -336,10 +375,10 @@ public class Inicio extends javax.swing.JFrame {
         );
         panelFundoPerfilLayout.setVerticalGroup(
             panelFundoPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        panelAcimaFrame.add(panelFundoPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 30));
+        panelAcimaFrame.add(panelFundoPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
 
         panelNoti.setBackground(new java.awt.Color(102, 102, 102));
         panelNoti.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -405,10 +444,10 @@ public class Inicio extends javax.swing.JFrame {
         );
         panelFundoNotiLayout.setVerticalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        panelAcimaFrame.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 50));
+        panelAcimaFrame.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
 
         panelPopProduto.setBackground(new java.awt.Color(204, 204, 204));
         panelPopProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -469,6 +508,11 @@ public class Inicio extends javax.swing.JFrame {
 
         edtQuantidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         edtQuantidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtQuantidadeKeyTyped(evt);
+            }
+        });
         panelPopProduto.add(edtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 50, 30));
 
         jButton1.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
@@ -505,7 +549,7 @@ public class Inicio extends javax.swing.JFrame {
         panelPopProduto.add(txtNomeProduto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
         panelPopProduto.add(edtValorCustoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 170, 30));
 
-        panelAcimaFrame.add(panelPopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 960, 40));
+        panelAcimaFrame.add(panelPopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 960, 420));
 
         panelFundoPopProdutoSelecionado.setBackground(new java.awt.Color(0, 0, 0, 100));
         panelFundoPopProdutoSelecionado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -522,10 +566,10 @@ public class Inicio extends javax.swing.JFrame {
         );
         panelFundoPopProdutoSelecionadoLayout.setVerticalGroup(
             panelFundoPopProdutoSelecionadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
 
-        panelAcimaFrame.add(panelFundoPopProdutoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 140));
+        panelAcimaFrame.add(panelFundoPopProdutoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
 
         panelPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1683,9 +1727,15 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnFechaInformacoesPerfilMouseExited
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         
-        if (inputNomeProduto.getText().isEmpty() || inputDescricaoProduto.getText().isEmpty() || inputValor.getText().isEmpty() || inputValorCusto.getText().isEmpty()) {
+        String nome = inputNomeProduto.getText().trim();
+        String descricao = inputDescricaoProduto.getText().trim();
+        String valor = inputValor.getText().trim();
+        String quantidade = inputQuantidade.getText().trim();
+        String valorCusto = inputValorCusto.getText().trim();
+        
+        if (nome.isEmpty() || descricao.isEmpty() || valor.isEmpty() || quantidade.isEmpty() || valorCusto.isEmpty() || !radioDisponivel.isSelected() && !radioIndisponivel.isSelected()) {
             
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             
@@ -1693,19 +1743,99 @@ public class Inicio extends javax.swing.JFrame {
             
             Produtos produto = new Produtos();
         
-            produto.setNome_produto(inputNomeProduto.getText());
-            produto.setDescricao_produto(inputDescricaoProduto.getText());
+            produto.setNome_produto(nome);
+            produto.setDescricao_produto(descricao);
+            produto.setValor(Float.parseFloat(valor));
+            produto.setValor_custo(Float.parseFloat(valorCusto));
+            produto.setQuantidade(Integer.parseInt(quantidade));
+            
+            int disponibilidade = 0;
+            
+            if (radioDisponivel.isSelected()) {
+                
+                disponibilidade = 1;
+                
+            } else {
+                
+                disponibilidade = 0;
+                
+            }
+            
+            produto.setDisponivel(disponibilidade);
+            produto.setFk_id_categoria(listaCategorias.get(comboAdicionarProdutoCategoria.getSelectedIndex()).getId_categoria());
 
             daoProduto.cadastrar(produto);
+            resetaCamposAdicionarProduto();
             
+            JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
+ 
         }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
 
-        panelFundoAdicionarProduto.setVisible(true);
+        abrePopAdicionarProduto();
+        
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
+
+    private void panelFundoAdicionarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFundoAdicionarProdutoMouseClicked
+        
+        fechaPopAdicionarProduto();
+        
+    }//GEN-LAST:event_panelFundoAdicionarProdutoMouseClicked
+
+    private void buttonClosePanelAdicionarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonClosePanelAdicionarProdutoMouseClicked
+        
+        fechaPopAdicionarProduto();
+        
+    }//GEN-LAST:event_buttonClosePanelAdicionarProdutoMouseClicked
+
+    private void buttonClosePanelAdicionarProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonClosePanelAdicionarProdutoMouseEntered
+        
+        buttonClosePanelAdicionarProduto.setBackground(new Color(240, 240, 240));
+        
+    }//GEN-LAST:event_buttonClosePanelAdicionarProdutoMouseEntered
+
+    private void buttonClosePanelAdicionarProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonClosePanelAdicionarProdutoMouseExited
+        
+        buttonClosePanelAdicionarProduto.setBackground(new Color(0,153,204));
+        
+    }//GEN-LAST:event_buttonClosePanelAdicionarProdutoMouseExited
+
+    private void panelAdicionarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAdicionarProdutoMouseClicked
+        
+    }//GEN-LAST:event_panelAdicionarProdutoMouseClicked
+
+    private void buttonSalvarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarPerfilActionPerformed
+        
+        String nome = inputNome.getText().trim();
+        String email = inputEmail.getText().trim();
+        String senha = inputSenha.getText().trim();
+        
+        if (nome.equals(GlobalAdmin.getNome()) && email.equals(GlobalAdmin.getEmail()) && senha.equals(GlobalAdmin.getSenha())) {
+  
+            JOptionPane.showMessageDialog(null, "Nenhuma alteração feita!");
+            
+        } else {
+   
+            //atualizar perfil
+            
+        }
+        
+    }//GEN-LAST:event_buttonSalvarPerfilActionPerformed
+
+    private void edtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtQuantidadeKeyTyped
+
+        String regex = "1234567890";
+
+        if (edtQuantidade.getText().matches(regex)) {
+
+            System.out.println("TESTE");
+
+        }
+
+    }//GEN-LAST:event_edtQuantidadeKeyTyped
 
     public static void main(String args[]) {
 
@@ -1791,6 +1921,7 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoNoti.setVisible(false);
         radio1.setSelected(true);
         panelFundoAdicionarProduto.setVisible(false);
+        panelAdicionarProduto.setVisible(false);
         panelPopProduto.setVisible(false);
         panelFundoPopProdutoSelecionado.setVisible(false);
         panelInformacoesPerfil.setVisible(false);
@@ -2478,9 +2609,52 @@ public class Inicio extends javax.swing.JFrame {
     private void preenchePerfil() {
         
         inputNome.setText(GlobalAdmin.getNome());
-        inputSobrenome.setText(GlobalAdmin.getSobrenome());
-        inputCPF.setText(GlobalAdmin.getCpf());
+        inputEmail.setText(GlobalAdmin.getEmail());
         inputSenha.setText(GlobalAdmin.getSenha());
+        
+    }
+    
+    private void resetaCamposAdicionarProduto() {
+        
+        inputNomeProduto.setText("");
+        inputDescricaoProduto.setText("");
+        inputValor.setText("");
+        inputQuantidade.setText("");
+        inputValorCusto.setText(""); 
+        radioDisponivel.setSelected(false);
+        radioIndisponivel.setSelected(false);
+        
+    }
+    
+    private void fechaPopAdicionarProduto() {
+        
+        panelFundoAdicionarProduto.setVisible(false);
+        panelAdicionarProduto.setVisible(false);
+        resetaCamposAdicionarProduto();
+        btnAdicionarProduto.setVisible(true);
+        
+    }
+    
+    private void listaComboCategoriasAdicionarProduto() {
+        
+       comboAdicionarProdutoCategoria.removeAllItems();
+        
+       listaCategorias = daoCategoria.listar();
+       
+       for (int i = 0; i < listaCategorias.size(); i++) {
+           
+           comboAdicionarProdutoCategoria.addItem(listaCategorias.get(i).getNome());
+           
+       }
+        
+    }
+    
+    private void abrePopAdicionarProduto() {
+        
+        panelFundoAdicionarProduto.setVisible(true);
+        panelAdicionarProduto.setVisible(true);
+        listaComboCategoriasAdicionarProduto();
+        btnAdicionarProduto.setVisible(false);
         
     }
 
@@ -2499,8 +2673,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel btnRelatorios;
     private button.ButtonVerde btn_disp;
     private button.MyButton btn_ind;
+    private javax.swing.JPanel buttonClosePanelAdicionarProduto;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton buttonSalvar;
+    private javax.swing.JButton buttonSalvarPerfil;
     private javax.swing.JComboBox<String> comboAdicionarProdutoCategoria;
     private javax.swing.JComboBox<String> comboCategorias;
     private javax.swing.JComboBox<String> comboGrafico;
@@ -2512,17 +2689,15 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imageAvatar1;
     private com.raven.avatar.ImageAvatar imageAvatar2;
-    private javax.swing.JFormattedTextField inputCPF;
     private javax.swing.JTextField inputDescricaoProduto;
+    private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputNome;
     private javax.swing.JTextField inputNomeProduto;
     private javax.swing.JTextField inputQuantidade;
     private javax.swing.JPasswordField inputSenha;
-    private javax.swing.JTextField inputSobrenome;
     private javax.swing.JTextField inputValor;
     private javax.swing.JTextField inputValorCusto;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2535,6 +2710,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2542,8 +2718,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private button.MyButton myButton1;
@@ -2579,6 +2753,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JRadioButton radio1;
     private javax.swing.JRadioButton radio2;
     private javax.swing.JRadioButton radio3;
+    private javax.swing.JRadioButton radioDisponivel;
+    private javax.swing.JRadioButton radioIndisponivel;
     private javax.swing.JScrollPane scrollRelatorios;
     private javax.swing.JTabbedPane tabInicio;
     private tabledark.TableDark tblEstoque;

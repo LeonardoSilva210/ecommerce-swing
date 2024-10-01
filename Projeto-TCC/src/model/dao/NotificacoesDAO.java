@@ -24,7 +24,7 @@ public class NotificacoesDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conexao.prepareStatement("SELECT * FROM notificacoes WHERE fk_id_admin = ? ORDER BY id_notificacao DESC");
+            stmt = conexao.prepareStatement("SELECT * FROM notificacoes WHERE fk_id_usuario = ? ORDER BY id_notificacao DESC");
             stmt.setInt(1, GlobalAdmin.getId_admin());
             
             rs = stmt.executeQuery();
@@ -38,7 +38,7 @@ public class NotificacoesDAO {
                 noti.setDescricao(rs.getString("descricao"));
                 noti.setTipo(rs.getInt("tipo"));
                 noti.setVisto(rs.getBoolean("visto"));
-                noti.setFk_id_admin(rs.getInt("fk_id_admin"));
+                noti.setFk_id_admin(rs.getInt("fk_id_usuario"));
                 
                 list.add(noti);
                 

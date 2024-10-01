@@ -1,31 +1,30 @@
 
 package model.dao;
 
-import Globals.GlobalAdmin;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.bean.Admins;
+import model.bean.Usuarios;
 
 
 public class AdminsDAO {
     
-    public void InserirAdministrador(Admins bean){
+    public void InserirAdministrador(Usuarios usuario){
         
         try{
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             
-            stmt = conexao.prepareStatement("INSERT INTO admins(nome,sobrenome,cpf,senha) VALUES(?,?,?,?)");
-            stmt.setString(1, bean.getNome());
-            stmt.setString(2, bean.getSobrenome());
-            stmt.setString(3, bean.getCpf());
-            stmt.setString(4, bean.getSenha());
+            stmt = conexao.prepareStatement("INSERT INTO admins(nome,email,senha,adm) VALUES(?,?,?,?)");
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setBoolean(4, true);
             
-            stmt.execute();
+            stmt.executeUpdate();
             
             stmt.close();
             conexao.close();
@@ -37,32 +36,32 @@ public class AdminsDAO {
         
     }
     
-    public Admins verificarLogin(String cpf, String senha){
-        Admins bean = new Admins();
+    public Usuarios verificarLogin(String email, String senha){
+        Usuarios bean = new Usuarios();
         
         try{
                 Connection conexao = Conexao.conectar();
                 PreparedStatement stmt = null;
                 ResultSet rs = null;
                 
-                stmt = conexao.prepareStatement("SELECT * FROM admins WHERE cpf = ? AND senha = ?");
+                stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ? AND adm = true");
                 
-                stmt.setString(1, cpf);
+                stmt.setString(1, email);
                 stmt.setString(2, senha);
                     
                 rs = stmt.executeQuery();
                  
                 if (rs.next()) {
                     
-                    bean.setId_administrador(rs.getInt("id_admin"));
-                    bean.setCpf(rs.getString("cpf"));
+                    bean.setId_usuario(rs.getInt("id_usuario"));
+                    bean.setEmail(rs.getString("email"));
                     bean.setNome(rs.getString("nome"));
-                    bean.setSobrenome(rs.getString("sobrenome"));
                     bean.setSenha(rs.getString("senha"));
+                    bean.setAdm(rs.getInt("adm"));
 
                 } else {
                     
-                    JOptionPane.showMessageDialog(null, "Cpf/Senha incorretos!");
+                    JOptionPane.showMessageDialog(null, "Email/Senha incorretos!");
                     
                 }
                  
@@ -78,6 +77,17 @@ public class AdminsDAO {
         
     }
     
-   
-    
+    public void atualizarPerfil() {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE");
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+
 }

@@ -1,15 +1,15 @@
-CREATE DATABASE  IF NOT EXISTS `tcc` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
+CREATE DATABASE  IF NOT EXISTS `tcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `tcc`;
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tcc
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
+-- Server version	5.5.5-10.4.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -18,39 +18,12 @@ USE `tcc`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admins`
---
-
-DROP TABLE IF EXISTS `admins`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `admins` (
-  `id_admin` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) DEFAULT NULL,
-  `sobrenome` varchar(50) DEFAULT NULL,
-  `cpf` varchar(11) DEFAULT NULL,
-  `senha` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_admin`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `admins`
---
-
-LOCK TABLES `admins` WRITE;
-/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'admin','2','00000000000','321');
-/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `carrinho`
 --
 
 DROP TABLE IF EXISTS `carrinho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carrinho` (
   `id_carrinho` int(11) NOT NULL AUTO_INCREMENT,
   `quantidade` int(11) DEFAULT NULL,
@@ -62,7 +35,7 @@ CREATE TABLE `carrinho` (
   KEY `fk_id_produto` (`fk_id_produto`),
   CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   CONSTRAINT `carrinho_ibfk_2` FOREIGN KEY (`fk_id_produto`) REFERENCES `produtos` (`id_produto`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,13 +54,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `categorias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) DEFAULT NULL,
   `descricao` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +79,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `compras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `compras` (
   `id_compra` int(11) NOT NULL AUTO_INCREMENT,
   `horario` time DEFAULT NULL,
@@ -114,6 +87,7 @@ CREATE TABLE `compras` (
   `fk_id_usuario` int(11) DEFAULT NULL,
   `fk_id_produto` int(11) DEFAULT NULL,
   `fk_id_carrinho` int(11) DEFAULT NULL,
+  `codigo` text DEFAULT NULL,
   PRIMARY KEY (`id_compra`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
   KEY `fk_id_produto` (`fk_id_produto`),
@@ -121,7 +95,7 @@ CREATE TABLE `compras` (
   CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`fk_id_produto`) REFERENCES `produtos` (`id_produto`),
   CONSTRAINT `compras_ibfk_3` FOREIGN KEY (`fk_id_carrinho`) REFERENCES `carrinho` (`id_carrinho`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +104,6 @@ CREATE TABLE `compras` (
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
-INSERT INTO `compras` VALUES (2,'14:30:00','2024-09-21',4,2,8),(3,'15:00:00','2024-09-21',5,3,9),(4,'16:00:00','2024-09-21',4,2,8),(5,'17:30:00','2024-09-21',5,3,9),(6,'18:15:00','2024-09-21',4,2,8),(7,'19:45:00','2024-09-21',5,3,9),(8,'20:00:00','2024-09-21',4,2,8),(12,'21:00:00','2024-09-21',5,2,8),(13,'22:00:00','2024-11-10',5,3,9);
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,18 +113,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `notificacoes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notificacoes` (
   `id_notificacao` int(11) NOT NULL AUTO_INCREMENT,
   `notificacao` varchar(100) DEFAULT NULL,
   `descricao` varchar(100) DEFAULT NULL,
   `tipo` int(3) DEFAULT NULL,
-  `fk_id_admin` int(11) DEFAULT NULL,
   `visto` tinyint(1) DEFAULT NULL,
+  `fk_id_usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_notificacao`),
-  KEY `fk_id_admin` (`fk_id_admin`),
-  CONSTRAINT `notificacoes_ibfk_1` FOREIGN KEY (`fk_id_admin`) REFERENCES `admins` (`id_admin`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  KEY `fk_id_usuario` (`fk_id_usuario`),
+  CONSTRAINT `notificacoes_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +133,7 @@ CREATE TABLE `notificacoes` (
 
 LOCK TABLES `notificacoes` WRITE;
 /*!40000 ALTER TABLE `notificacoes` DISABLE KEYS */;
-INSERT INTO `notificacoes` VALUES (1,'Vendas','10 vendas realizadas!',3,1,1),(2,'Vendas','20 vendas realizadas!',3,1,1),(3,'Perdas','Alguns produtos nÆo estÆo vendendo',2,1,1),(4,'Novidades','Novos funcion rios',1,1,1);
+INSERT INTO `notificacoes` VALUES (1,'Vendas','10 vendas realizadas!',3,1,11),(2,'Vendas','20 vendas realizadas!',3,1,11),(3,'Perdas','Alguns produtos nÆo estÆo vendendo',2,1,11),(4,'Novidades','Novos funcion rios',1,1,11);
 /*!40000 ALTER TABLE `notificacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +143,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `produtos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `produtos` (
   `id_produto` int(11) NOT NULL AUTO_INCREMENT,
   `nome_produto` varchar(45) DEFAULT NULL,
@@ -183,7 +156,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`id_produto`),
   KEY `fk_id_categoria` (`fk_id_categoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorias` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +165,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (2,'Casquinha','Sorvete de chocolate',0,1,2.00,6,1),(3,'Brigadeiro','sabor moranho',0,1,3.00,7,2),(5,'Produto teste','produto para fazer teste',1,3,5.00,2,3),(7,'Camiseta','Camiseta de algodão',1,2,29.90,100,15),(8,'Calça Jeans','Calça jeans unissex',1,3,99.90,50,50),(9,'Tênis Esportivo','Tênis ideal para corrida',0,1,199.90,30,120),(10,'Teste','SOCIAL',1,2,111.00,6,12.9),(12,'Fone de Ouvido','Fone de ouvido sem fio',0,1,89.90,40,40),(13,'Sofa','Sofá de três lugares',1,2,899.90,5,300),(14,'Mesa de Jantar','Mesa de jantar de madeira',1,3,499.90,15,200),(16,'Lampada LED','Lâmpada LED 10W',1,2,19.90,200,10),(17,'Cafeteira','Cafeteira elétrica com jarra',1,3,199.90,15,100),(18,'Microondas','Microondas 20L',1,1,399.90,10,250),(19,'Xbox Series X','Console de videogame',1,2,4999.90,8,4500),(20,'Camiseta Esportiva','Camiseta de corrida',1,3,59.90,60,30);
+INSERT INTO `produtos` VALUES (2,'Casquinha','Sorvete de chocolate',0,1,2.00,6,1),(3,'Brigadeiro','sabor moranho',0,1,3.00,7,2),(5,'Produto teste','produto para fazer teste',1,3,5.00,2,3),(7,'Camiseta','Camiseta de algodão',1,2,29.90,100,15),(8,'Calça Jeans','Calça jeans unissex',1,3,99.90,50,50),(9,'Tênis Esportivo','Tênis ideal para corrida',0,1,199.90,30,120),(10,'Teste','SOCIAL',1,2,111.00,6,12.9),(12,'Fone de Ouvido','Fone de ouvido sem fio',0,1,89.90,40,40),(13,'Sofa','Sofá de três lugares',1,2,899.90,5,300),(14,'Mesa de Jantar','Mesa de jantar de madeira',1,3,499.90,15,200),(16,'Lampada LED','Lâmpada LED 10W',1,2,19.90,200,10),(17,'Cafeteira','Cafeteira elétrica com jarra',1,3,199.90,15,100),(18,'Microondas','Microondas 20L',1,1,399.90,10,250),(19,'Xbox Series X','Console de videogame',1,2,4999.90,8,4500),(20,'Camiseta Esportiva','Camiseta de corrida',1,3,59.90,60,30),(21,'Balinha','docinha',1,1,12.80,100,15),(22,'ko','koko',2,3,80.00,80,97),(23,'okk','jjjjjj',0,3,979.00,868,868);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +175,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
@@ -211,7 +184,7 @@ CREATE TABLE `usuarios` (
   `data_nascimento` date NOT NULL,
   `adm` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-30 13:51:38
+-- Dump completed on 2024-10-01 16:25:57

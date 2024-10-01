@@ -8,7 +8,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import model.bean.Admins;
+import model.bean.Usuarios;
 import model.dao.AdminsDAO;
 
 
@@ -26,19 +26,18 @@ public class Login extends javax.swing.JFrame {
         
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         panelLogin = new javax.swing.JPanel();
-        senhaLog = new javax.swing.JPasswordField();
+        inputSenha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cpfLog = new javax.swing.JFormattedTextField();
+        inputEmail = new javax.swing.JTextField();
         panelMin = new javax.swing.JPanel();
         txtMin = new javax.swing.JLabel();
         panelMax = new javax.swing.JPanel();
@@ -56,7 +55,7 @@ public class Login extends javax.swing.JFrame {
 
         panelLogin.setBackground(new java.awt.Color(51, 51, 51, 100));
         panelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelLogin.add(senhaLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 260, 30));
+        panelLogin.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 260, 30));
 
         jButton1.setText("Logar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -76,20 +75,14 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("CPF");
+        jLabel1.setText("Email");
         panelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha");
         panelLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
-
-        try {
-            cpfLog.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        panelLogin.add(cpfLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 260, 30));
+        panelLogin.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 260, 30));
 
         jPanel1.add(panelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 520, 440));
 
@@ -244,27 +237,26 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
-       Admins bean = new Admins();
+       Usuarios bean = new Usuarios();
        AdminsDAO dao = new AdminsDAO();
         
-       String cpfLogin = cpfLog.getText();
-       String senhaLogin = senhaLog.getText(); 
+       String email = inputEmail.getText();
+       String senha = inputSenha.getText(); 
 
-       if (cpfLogin.isEmpty() || senhaLogin.isEmpty()) {
+       if (email.isEmpty() || senha.isEmpty()) {
            
            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
            
        } else {
            
-           bean = dao.verificarLogin(cpfLogin, senhaLogin);
+           bean = dao.verificarLogin(email, senha);
            
-           if (bean.getId_administrador() != 0) {
+           if (bean.getId_usuario() != 0) {
                
-               GlobalAdmin.setId_admin(bean.getId_administrador());
+               GlobalAdmin.setId_admin(bean.getId_usuario());
                GlobalAdmin.setNome(bean.getNome());
-               GlobalAdmin.setSobrenome(bean.getSobrenome());
-               GlobalAdmin.setCpf(bean.getCpf());
                GlobalAdmin.setSenha(bean.getSenha());
+               GlobalAdmin.setEmail(bean.getEmail());
                
                java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
@@ -437,7 +429,8 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField cpfLog;
+    private javax.swing.JTextField inputEmail;
+    private javax.swing.JPasswordField inputSenha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -447,7 +440,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel panelLogin;
     private javax.swing.JPanel panelMax;
     private javax.swing.JPanel panelMin;
-    private javax.swing.JPasswordField senhaLog;
     private javax.swing.JLabel txtClose;
     private javax.swing.JLabel txtMax;
     private javax.swing.JLabel txtMin;
