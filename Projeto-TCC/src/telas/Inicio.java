@@ -23,6 +23,8 @@ import model.bean.EstoqueBean;
 import model.bean.Notificacoes;
 import model.bean.Produtos;
 import model.bean.Relatorios;
+import model.bean.Usuarios;
+import model.dao.AdminsDAO;
 import model.dao.CategoriasDAO;
 import model.dao.ComprasDAO;
 import model.dao.EstoqueDAO;
@@ -42,6 +44,7 @@ public class Inicio extends javax.swing.JFrame {
     private final CategoriasDAO daoCategoria = new CategoriasDAO();
     private final EstoqueDAO daoEstoque = new EstoqueDAO();
     private final ComprasDAO daoCompra = new ComprasDAO();
+    private final AdminsDAO daoAdmin = new AdminsDAO();
     private final EstoqueBean produtosAtual = new EstoqueBean();
     private List<Produtos> listaProdutos = new ArrayList();
     private List<EstoqueBean> estoqueTabela = new ArrayList();
@@ -67,6 +70,14 @@ public class Inicio extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         panelAcimaFrame = new telas.formatos.PanelBorder();
         panelAdicionarProduto = new javax.swing.JPanel();
+        panelAdicionarCategoria = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        inputNomeCategoria = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        inputDescricaoCategoria = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         inputValorCusto = new javax.swing.JTextField();
         inputNomeProduto = new javax.swing.JTextField();
         inputDescricaoProduto = new javax.swing.JTextField();
@@ -84,6 +95,8 @@ public class Inicio extends javax.swing.JFrame {
         radioIndisponivel = new javax.swing.JRadioButton();
         buttonClosePanelAdicionarProduto = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
+        buttonAdicionarCategoria = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
         panelFundoAdicionarProduto = new javax.swing.JPanel();
         panelInformacoesPerfil = new javax.swing.JPanel();
         imageAvatar1 = new com.raven.avatar.ImageAvatar();
@@ -194,31 +207,72 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelAdicionarProduto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelAdicionarProduto.add(inputValorCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 169, 34));
-        panelAdicionarProduto.add(inputNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 169, 34));
-        panelAdicionarProduto.add(inputDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 168, 169, 34));
-        panelAdicionarProduto.add(inputValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 169, 34));
-        panelAdicionarProduto.add(inputQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 169, 34));
+
+        panelAdicionarCategoria.setBackground(new java.awt.Color(0, 153, 204));
+        panelAdicionarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAdicionarCategoriaMouseClicked(evt);
+            }
+        });
+        panelAdicionarCategoria.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Adicionar Categoria");
+        panelAdicionarCategoria.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        jButton2.setText("Salvar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        panelAdicionarCategoria.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 170, 30));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setText("Nome");
+        panelAdicionarCategoria.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
+        panelAdicionarCategoria.add(inputNomeCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 230, 30));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel24.setText("Descrição");
+        panelAdicionarCategoria.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        panelAdicionarCategoria.add(inputDescricaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 230, 30));
+
+        jButton3.setText("Adicionar Produto");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        panelAdicionarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 313, -1, 30));
+
+        panelAdicionarProduto.add(panelAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 720, 360));
+        panelAdicionarProduto.add(inputValorCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 169, 34));
+        panelAdicionarProduto.add(inputNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 169, 34));
+        panelAdicionarProduto.add(inputDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 169, 34));
+        panelAdicionarProduto.add(inputValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 169, 34));
+        panelAdicionarProduto.add(inputQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 169, 34));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Valor de Custo");
-        panelAdicionarProduto.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, -1, -1));
+        panelAdicionarProduto.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Valor");
-        panelAdicionarProduto.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
+        panelAdicionarProduto.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Descrição do Produto");
-        panelAdicionarProduto.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
+        panelAdicionarProduto.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Nome do Produto");
-        panelAdicionarProduto.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
+        panelAdicionarProduto.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("Categoria");
-        panelAdicionarProduto.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
+        panelAdicionarProduto.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
 
         buttonSalvar.setText("Salvar");
         buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -226,21 +280,21 @@ public class Inicio extends javax.swing.JFrame {
                 buttonSalvarActionPerformed(evt);
             }
         });
-        panelAdicionarProduto.add(buttonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 170, 30));
+        panelAdicionarProduto.add(buttonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 170, 30));
 
-        panelAdicionarProduto.add(comboAdicionarProdutoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 170, 34));
+        panelAdicionarProduto.add(comboAdicionarProdutoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 170, 34));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setText("Quantidade");
-        panelAdicionarProduto.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
+        panelAdicionarProduto.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
 
         buttonGroup2.add(radioDisponivel);
         radioDisponivel.setText("Disponível");
-        panelAdicionarProduto.add(radioDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 90, -1));
+        panelAdicionarProduto.add(radioDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 90, -1));
 
         buttonGroup2.add(radioIndisponivel);
         radioIndisponivel.setText("Indisponível");
-        panelAdicionarProduto.add(radioIndisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 90, -1));
+        panelAdicionarProduto.add(radioIndisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 90, -1));
 
         buttonClosePanelAdicionarProduto.setBackground(new java.awt.Color(0, 153, 204));
         buttonClosePanelAdicionarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,6 +327,19 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         panelAdicionarProduto.add(buttonClosePanelAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
+
+        buttonAdicionarCategoria.setText("Adicionar Categoria");
+        buttonAdicionarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAdicionarCategoriaActionPerformed(evt);
+            }
+        });
+        panelAdicionarProduto.add(buttonAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, 160, 30));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Adicionar Produto");
+        panelAdicionarProduto.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
 
         panelAcimaFrame.add(panelAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 800, 390));
 
@@ -1052,7 +1119,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        btnAdicionarProduto.setText("Adicionar Produto");
+        btnAdicionarProduto.setText("Adicionar Produto/Categoria");
         btnAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarProdutoActionPerformed(evt);
@@ -1070,7 +1137,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(btnEditarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdicionarProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_ind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(btn_disp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1804,7 +1871,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonClosePanelAdicionarProdutoMouseExited
 
     private void panelAdicionarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAdicionarProdutoMouseClicked
-        
+
     }//GEN-LAST:event_panelAdicionarProdutoMouseClicked
 
     private void buttonSalvarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarPerfilActionPerformed
@@ -1819,7 +1886,15 @@ public class Inicio extends javax.swing.JFrame {
             
         } else {
    
-            //atualizar perfil
+            Usuarios usuario = new Usuarios(0, nome, email, senha, null, 0);
+            
+            daoAdmin.atualizarPerfil(usuario);
+            
+            GlobalAdmin.setEmail(email);
+            GlobalAdmin.setNome(nome);
+            GlobalAdmin.setSenha(senha);
+            
+            JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
             
         }
         
@@ -1836,6 +1911,48 @@ public class Inicio extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_edtQuantidadeKeyTyped
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        String nome = inputNomeCategoria.getText().trim();
+        String descricao = inputDescricaoCategoria.getText().trim();
+        
+        if (nome.isEmpty() || descricao.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            
+        } else {
+            
+            Categorias categoria = new Categorias(nome, descricao, 0);
+            
+            daoCategoria.adicionar(categoria);
+           
+            inputNomeCategoria.setText("");
+            inputDescricaoCategoria.setText("");
+            
+            JOptionPane.showMessageDialog(null, "Categoria adicionada com sucesso!");
+
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void panelAdicionarCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAdicionarCategoriaMouseClicked
+        
+    }//GEN-LAST:event_panelAdicionarCategoriaMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        listaComboCategoriasAdicionarProduto();
+        panelAdicionarCategoria.setVisible(false);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void buttonAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarCategoriaActionPerformed
+        
+        resetaCamposAdicionarCategoria();
+        panelAdicionarCategoria.setVisible(true);
+        
+    }//GEN-LAST:event_buttonAdicionarCategoriaActionPerformed
 
     public static void main(String args[]) {
 
@@ -1926,6 +2043,7 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoPopProdutoSelecionado.setVisible(false);
         panelInformacoesPerfil.setVisible(false);
         panelFundoPerfil.setVisible(false);
+        panelAdicionarCategoria.setVisible(false);
         tamanhoOriginal = frame.getSize();
         localizacaoOriginal = frame.getLocation();
 
@@ -2630,6 +2748,7 @@ public class Inicio extends javax.swing.JFrame {
         
         panelFundoAdicionarProduto.setVisible(false);
         panelAdicionarProduto.setVisible(false);
+        panelAdicionarCategoria.setVisible(false);
         resetaCamposAdicionarProduto();
         btnAdicionarProduto.setVisible(true);
         
@@ -2657,6 +2776,13 @@ public class Inicio extends javax.swing.JFrame {
         btnAdicionarProduto.setVisible(false);
         
     }
+    
+    private void resetaCamposAdicionarCategoria() {
+        
+        inputNomeCategoria.setText("");
+        inputDescricaoCategoria.setText("");
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarProduto;
@@ -2673,6 +2799,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel btnRelatorios;
     private button.ButtonVerde btn_disp;
     private button.MyButton btn_ind;
+    private javax.swing.JButton buttonAdicionarCategoria;
     private javax.swing.JPanel buttonClosePanelAdicionarProduto;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -2689,15 +2816,19 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imageAvatar1;
     private com.raven.avatar.ImageAvatar imageAvatar2;
+    private javax.swing.JTextField inputDescricaoCategoria;
     private javax.swing.JTextField inputDescricaoProduto;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputNome;
+    private javax.swing.JTextField inputNomeCategoria;
     private javax.swing.JTextField inputNomeProduto;
     private javax.swing.JTextField inputQuantidade;
     private javax.swing.JPasswordField inputSenha;
     private javax.swing.JTextField inputValor;
     private javax.swing.JTextField inputValorCusto;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2711,6 +2842,10 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2722,6 +2857,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private button.MyButton myButton1;
     private telas.formatos.PanelBorder panelAcimaFrame;
+    private javax.swing.JPanel panelAdicionarCategoria;
     private javax.swing.JPanel panelAdicionarProduto;
     private telas.formatos.PanelBorder panelBorder6;
     private javax.swing.JPanel panelBtnClosePopProduto;

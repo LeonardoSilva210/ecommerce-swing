@@ -126,7 +126,7 @@ public class Login extends javax.swing.JFrame {
             .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, 40, 30));
+        jPanel1.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 40, 30));
 
         panelMax.setBackground(new java.awt.Color(0, 102, 102));
         panelMax.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,7 +170,7 @@ public class Login extends javax.swing.JFrame {
             .addComponent(txtMax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, 40, 30));
+        jPanel1.add(panelMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 0, 40, 30));
 
         panelClose.setBackground(new java.awt.Color(0, 102, 102));
         panelClose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,7 +214,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(txtClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 10, 40, 30));
+        jPanel1.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 0, 40, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

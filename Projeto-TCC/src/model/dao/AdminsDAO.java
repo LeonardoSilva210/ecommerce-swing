@@ -1,6 +1,7 @@
 
 package model.dao;
 
+import Globals.GlobalAdmin;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,12 +78,22 @@ public class AdminsDAO {
         
     }
     
-    public void atualizarPerfil() {
+    public void atualizarPerfil(Usuarios usuario) {
         
         try{
             
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement("UPDATE");
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE usuarios set nome = ?, email = ?, senha = ? WHERE id_usuario = ?");
+            
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setInt(4, GlobalAdmin.getId_admin());
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
             
         }catch(SQLException e){
             e.printStackTrace();

@@ -47,4 +47,25 @@ public class CategoriasDAO {
         
     }
     
+    public void adicionar(Categorias categoria) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO categorias(nome,descricao) VALUES(?,?)");
+            
+            stmt.setString(1, categoria.getNome());
+            stmt.setString(2, categoria.getDescricao());
+            
+            stmt.execute();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
 }
