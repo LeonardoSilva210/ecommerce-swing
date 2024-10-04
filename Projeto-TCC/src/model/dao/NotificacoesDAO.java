@@ -35,7 +35,6 @@ public class NotificacoesDAO {
                 
                 noti.setId_notificacao(rs.getInt("id_notificacao"));
                 noti.setNotificacao(rs.getString("notificacao"));
-                noti.setDescricao(rs.getString("descricao"));
                 noti.setTipo(rs.getInt("tipo"));
                 noti.setVisto(rs.getBoolean("visto"));
                 noti.setFk_id_admin(rs.getInt("fk_id_usuario"));

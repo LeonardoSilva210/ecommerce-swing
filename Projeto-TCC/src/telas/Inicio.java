@@ -2072,6 +2072,8 @@ public class Inicio extends javax.swing.JFrame {
 
             case 3:
 
+                listaRelatorios();
+                
                 break;
 
         }
@@ -2119,7 +2121,7 @@ public class Inicio extends javax.swing.JFrame {
                 grafInicio.addData(new ModelChart("Março", new double[]{200, 0, 100, 190}));
                 grafInicio.addData(new ModelChart("Abril", new double[]{200, 0, 100, 190}));
                 grafInicio.addData(new ModelChart("Maio", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Junho", new double[]{200, 0, 100, 190}));
+                grafInicio.addData(new ModelChart("Junho", new double[]{300, 0, 100, 190}));
                 grafInicio.addData(new ModelChart("Julho", new double[]{200, 0, 100, 190}));
                 grafInicio.addData(new ModelChart("Agosto", new double[]{200, 0, 100, 190}));
                 grafInicio.addData(new ModelChart("Setembro", new double[]{200, 0, 100, 190}));
@@ -2450,6 +2452,8 @@ public class Inicio extends javax.swing.JFrame {
 
     private void listaRelatorios() {
 
+        panelListRelatorios.removeAll();
+        
         listaRelatorios = daoRelatorio.listar();
 
         for (int i = 0; i < listaRelatorios.size(); i++) {

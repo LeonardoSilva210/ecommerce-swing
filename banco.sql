@@ -95,7 +95,7 @@ CREATE TABLE `compras` (
   CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`fk_id_produto`) REFERENCES `produtos` (`id_produto`),
   CONSTRAINT `compras_ibfk_3` FOREIGN KEY (`fk_id_carrinho`) REFERENCES `carrinho` (`id_carrinho`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,6 +104,7 @@ CREATE TABLE `compras` (
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
+INSERT INTO `compras` VALUES (51,'14:30:00','2024-10-04',11,7,8,'COD123ABC'),(52,'09:00:00','2024-10-03',11,3,9,'COD456XYZ'),(53,'17:45:00','2024-09-30',11,5,8,'COD789DEF'),(54,'12:15:00','2024-10-01',11,2,9,'COD111GHI'),(55,'19:00:00','2024-10-02',11,9,8,'COD222JKL'),(56,'19:00:00','2024-10-02',11,9,8,'COD222JKL'),(57,'19:00:00','2024-10-02',11,9,8,'COD222JKL'),(58,'19:00:00','2024-10-02',11,9,8,'COD222JKL'),(59,'19:30:00','2024-12-02',11,9,8,'COD222JOL');
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,11 +117,10 @@ DROP TABLE IF EXISTS `notificacoes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notificacoes` (
   `id_notificacao` int(11) NOT NULL AUTO_INCREMENT,
-  `notificacao` varchar(100) DEFAULT NULL,
-  `descricao` varchar(100) DEFAULT NULL,
   `tipo` int(3) DEFAULT NULL,
   `visto` tinyint(1) DEFAULT NULL,
   `fk_id_usuario` int(11) DEFAULT NULL,
+  `notificacao` text DEFAULT NULL,
   PRIMARY KEY (`id_notificacao`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
   CONSTRAINT `notificacoes_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
@@ -133,7 +133,7 @@ CREATE TABLE `notificacoes` (
 
 LOCK TABLES `notificacoes` WRITE;
 /*!40000 ALTER TABLE `notificacoes` DISABLE KEYS */;
-INSERT INTO `notificacoes` VALUES (1,'Vendas','10 vendas realizadas!',3,1,11),(2,'Vendas','20 vendas realizadas!',3,1,11),(3,'Perdas','Alguns produtos nÆo estÆo vendendo',2,1,11),(4,'Novidades','Novos funcion rios',1,1,11);
+INSERT INTO `notificacoes` VALUES (1,3,1,11,'Noti 1'),(2,3,1,11,'Noti 2'),(3,2,1,11,'Noti 1'),(4,1,1,11,'Noti 1');
 /*!40000 ALTER TABLE `notificacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +165,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (2,'Casquinha','Sorvete de chocolate',0,1,2.00,6,1),(3,'Brigadeiro','sabor moranho',0,1,3.00,7,2),(5,'Produto teste','produto para fazer teste',1,3,5.00,2,3),(7,'Camiseta','Camiseta de algodão',1,2,29.90,100,15),(8,'Calça Jeans','Calça jeans unissex',1,3,99.90,50,50),(9,'Tênis Esportivo','Tênis ideal para corrida',0,1,199.90,30,120),(10,'Teste','SOCIAL',1,2,111.00,6,12.9),(12,'Fone de Ouvido','Fone de ouvido sem fio',0,1,89.90,40,40),(13,'Sofa','Sofá de três lugares',1,2,899.90,5,300),(14,'Mesa de Jantar','Mesa de jantar de madeira',1,3,499.90,15,200),(16,'Lampada LED','Lâmpada LED 10W',1,2,19.90,200,10),(17,'Cafeteira','Cafeteira elétrica com jarra',1,3,199.90,15,100),(18,'Microondas','Microondas 20L',1,1,399.90,10,250),(19,'Xbox Series X','Console de videogame',1,2,4999.90,8,4500),(20,'Camiseta Esportiva','Camiseta de corrida',1,3,59.90,60,30),(21,'Balinha','docinha',1,1,12.80,100,15),(22,'ko','koko',2,3,80.00,80,97),(23,'okk','jjjjjj',0,3,979.00,868,868);
+INSERT INTO `produtos` VALUES (2,'Casquinha','Sorvete de chocolate',0,1,2.00,6,1),(3,'Brigadeiro','sabor moranho',0,1,3.00,7,2),(5,'Produto teste','produto para fazer teste',1,3,5.00,2,3),(7,'Camiseta','Camiseta de algodão',1,2,29.90,100,15),(8,'Calça Jeans','Calça jeans unissex',1,3,99.90,50,50),(9,'Tênis Esportivo','Tênis ideal para corrida',0,1,199.90,30,120),(10,'Teste','SOCIAL',1,2,111.00,6,12.9),(12,'Fone de Ouvido','Fone de ouvido sem fio',0,1,89.90,40,40),(13,'Sofa','Sofá de três lugares',1,2,899.90,5,300),(14,'Mesa de Jantar','Mesa de jantar de madeira',1,3,499.90,15,200),(16,'Lampada LED','Lâmpada LED 10W',1,2,19.90,200,10),(17,'Cafeteira','Cafeteira elétrica com jarra',1,3,199.90,15,100),(18,'Microondas','Microondas 20L',1,1,399.90,10,250),(19,'Xbox Series X','Console de videogame',1,2,4999.90,8,4500),(20,'Camiseta Esportiva','Camiseta de corrida',1,3,59.90,60,30),(21,'Balinha','docinha',1,1,12.80,100,15),(22,'ko','koko',2,3,80.00,80,97);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +193,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (4,'Rober','bertin@gmail.com','123','0000-00-00',NULL),(5,'Junin','junin@gmail.com','123','0000-00-00',NULL),(7,'VInicius','vini@gmail.com','123','0000-00-00',NULL),(10,'teste','teste@teste','123','2010-03-24',NULL),(11,'Leozinh','leo@gmail.com','123','2007-06-21',1);
+INSERT INTO `usuarios` VALUES (4,'Rober','bertin@gmail.com','123','0000-00-00',NULL),(5,'Junin','junin@gmail.com','123','0000-00-00',NULL),(7,'VInicius','vini@gmail.com','123','0000-00-00',NULL),(10,'teste','teste@teste','123','2010-03-24',NULL),(11,'Leozinh','leo','123','2007-06-21',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-01 16:25:57
+-- Dump completed on 2024-10-04 15:34:07

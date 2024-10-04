@@ -45,7 +45,7 @@ public class RelatoriosDAO {
             rs = stmt.executeQuery();
             
             while (rs.next()) {
-                
+
                 Relatorios rela = new Relatorios();
                 
                 rela.setId_compra(rs.getInt("id_compra"));
