@@ -23,23 +23,18 @@ public class RelatoriosDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conexao.prepareStatement("select produtos.nome_produto AS Produto,\n" +
-            "compras.horario AS Horario,\n" +
+            stmt = conexao.prepareStatement("select compras.horario AS Horario,\n" +
             "compras.data AS Data,\n" +
             "carrinho.quantidade AS Quantidade,\n" +
-            "produtos.valor as ValorUnitario,\n" +
-            "SUM(produtos.valor * carrinho.quantidade) AS ValorTotal,\n" +
             "usuarios.nome AS Pessoa,\n" +
-            "compras.id_compra,\n" +
+            "compras.id_compra, compras.produtos,\n" +
             "compras.fk_id_usuario,\n" +
-            "compras.fk_id_produto,\n" +
             "compras.fk_id_carrinho\n" +
             "from compras\n" +
-            "inner join produtos on compras.fk_id_produto = produtos.id_produto\n" +
             "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario\n" +
             "inner join carrinho on compras.fk_id_carrinho = carrinho.id_carrinho\n" +
             "GROUP BY \n" +
-            "produtos.nome_produto, compras.horario, compras.data, usuarios.nome "
+            "compras.id_compra "
             + "ORDER BY data DESC, horario DESC;");
             
             rs = stmt.executeQuery();
@@ -50,15 +45,12 @@ public class RelatoriosDAO {
                 
                 rela.setId_compra(rs.getInt("id_compra"));
                 rela.setFk_id_carrinho(rs.getInt("fk_id_carrinho"));
-                rela.setFk_id_produto(rs.getInt("fk_id_produto"));
                 rela.setFk_id_usuario(rs.getInt("fk_id_usuario"));
-                rela.setProduto(rs.getString("produto"));
                 rela.setHorario(rs.getTime("horario"));
                 rela.setData(rs.getDate("data"));
                 rela.setPessoa(rs.getString("pessoa"));
                 rela.setQuantidade(rs.getInt("quantidade"));
-                rela.setValorUnitario(rs.getFloat("valorUnitario"));
-                rela.setValorTotal(rs.getFloat("valorTotal"));
+                rela.setProduto(rs.getString("produtos"));
                 
                 list.add(rela);
                 

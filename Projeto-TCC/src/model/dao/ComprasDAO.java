@@ -34,7 +34,8 @@ public class ComprasDAO {
                 compra.setData(rs.getDate("data"));
                 compra.setFk_id_carrinho(rs.getInt("fk_id_carrinho"));
                 compra.setFk_id_usuario(rs.getInt("fk_id_usuario"));
-                compra.setFk_id_produto(rs.getInt("fk_id_produto"));
+                compra.setCodigo(rs.getString("codigo"));
+                compra.setObs(rs.getString("obs"));
                 
                 String data = compra.getData().toString();
                 
@@ -71,5 +72,7 @@ public class ComprasDAO {
         
         return valores; 
     }
+    
+    
     
 }

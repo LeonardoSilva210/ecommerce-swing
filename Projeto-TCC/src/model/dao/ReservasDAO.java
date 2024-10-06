@@ -1,0 +1,117 @@
+
+package model.dao;
+
+import conexao.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import model.bean.Reservas;
+
+
+public class ReservasDAO {
+    
+    public List<Reservas> listar(int tipo, String pesquisa) {
+        
+        List<Reservas> list = new ArrayList();
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            
+            switch(tipo) {
+                
+                case 1:
+
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.fk_id_usuario, compras.fk_id_carrinho, \n" +
+                    "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
+                    "usuarios.nome, carrinho.quantidade, carrinho.valor_total \n" +
+                    "from compras\n" +
+                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
+                    "inner join carrinho on compras.fk_id_carrinho = carrinho.id_carrinho \n" +
+                    "where compras.ativo = 1 \n" +
+                    "group by compras.id_compra ORDER BY compras.data DESC;");
+                    
+                    break;
+                
+                case 2:
+
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.fk_id_usuario, compras.fk_id_carrinho, \n" +
+                    "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
+                    "usuarios.nome, carrinho.quantidade, carrinho.valor_total \n" +
+                    "from compras\n" +
+                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
+                    "inner join carrinho on compras.fk_id_carrinho = carrinho.id_carrinho \n" +
+                    "where compras.ativo = 1 AND compras.codigo = ?\n" +
+                    "group by compras.id_compra ORDER BY compras.data DESC;");
+                    
+                    stmt.setString(1, pesquisa);
+                    
+                    break;
+                
+                case 3:
+
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.fk_id_usuario, compras.fk_id_carrinho, \n" +
+                    "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
+                    "usuarios.nome, carrinho.quantidade, carrinho.valor_total \n" +
+                    "from compras\n" +
+                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
+                    "inner join carrinho on compras.fk_id_carrinho = carrinho.id_carrinho \n" +
+                    "where compras.ativo = 1 AND usuarios.nome LIKE ?\n" +
+                    "group by compras.id_compra ORDER BY compras.data DESC;");
+                    
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;
+                
+            }
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                
+                Reservas reserva = new Reservas();
+                
+                reserva.setId_compra(rs.getInt("id_compra"));
+                reserva.setAtivo(1);
+                reserva.setCodigo(rs.getString("codigo"));
+                reserva.setPessoa(rs.getString("nome"));
+                reserva.setData(rs.getDate("data"));
+                reserva.setHorario(rs.getTime("horario"));
+                reserva.setObs(rs.getString("obs"));
+                reserva.setFk_id_carrinho(rs.getInt("fk_id_carrinho"));
+                reserva.setFk_id_usuario(rs.getInt("fk_id_usuario"));
+                reserva.setValor_total(rs.getFloat("valor_total"));
+                
+                String produtos = rs.getString("produtos");
+                
+                String[] divideProdutos = produtos.split("\\,");
+                List<String> listProduto = new ArrayList();
+                
+                for (int i = 0; i < divideProdutos.length; i++) {
+
+                    listProduto.add(divideProdutos[i]);    
+                    
+                }
+                
+                reserva.setProdutos(listProduto);
+                
+                list.add(reserva);
+                
+            }
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return list;
+    }
+    
+}

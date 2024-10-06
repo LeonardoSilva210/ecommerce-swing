@@ -7,7 +7,7 @@ public class EstoqueBean {
     private int id_produto;
     private String nome_produto;
     private String descricao_produto;
-    private int disponivel;
+    private int disponivel, arquivado;
     private int fk_id_categoria;
     private float valor, valor_custo;
     private int quantidade;
@@ -18,11 +18,12 @@ public class EstoqueBean {
     public EstoqueBean() {
     }
 
-    public EstoqueBean(int id_produto, String nome_produto, String descricao_produto, int disponivel, int fk_id_categoria, float valor, float valor_custo, int quantidade, String nome_categoria, String descricao_categoria) {
+    public EstoqueBean(int id_produto, String nome_produto, String descricao_produto, int disponivel, int arquivado, int fk_id_categoria, float valor, float valor_custo, int quantidade, String nome_categoria, String descricao_categoria) {
         this.id_produto = id_produto;
         this.nome_produto = nome_produto;
         this.descricao_produto = descricao_produto;
         this.disponivel = disponivel;
+        this.arquivado = arquivado;
         this.fk_id_categoria = fk_id_categoria;
         this.valor = valor;
         this.valor_custo = valor_custo;
@@ -30,6 +31,16 @@ public class EstoqueBean {
         this.nome_categoria = nome_categoria;
         this.descricao_categoria = descricao_categoria;
     }
+
+    public int getArquivado() {
+        return arquivado;
+    }
+
+    public void setArquivado(int arquivado) {
+        this.arquivado = arquivado;
+    }
+
+    
 
     public float getValor_custo() {
         return valor_custo;

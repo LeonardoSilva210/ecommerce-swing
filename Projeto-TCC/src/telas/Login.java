@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.bean.Usuarios;
@@ -33,7 +34,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         panelLogin = new javax.swing.JPanel();
         inputSenha = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        buttonEntrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -55,15 +56,21 @@ public class Login extends javax.swing.JFrame {
 
         panelLogin.setBackground(new java.awt.Color(51, 51, 51, 100));
         panelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelLogin.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 260, 30));
 
-        jButton1.setText("Logar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        inputSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputSenhaKeyPressed(evt);
             }
         });
-        panelLogin.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 160, 40));
+        panelLogin.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 260, 30));
+
+        buttonEntrar.setText("Logar");
+        buttonEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEntrarActionPerformed(evt);
+            }
+        });
+        panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 160, 40));
 
         jButton2.setText("Cadastre-se");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +89,12 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha");
         panelLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
+
+        inputEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputEmailKeyPressed(evt);
+            }
+        });
         panelLogin.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 260, 30));
 
         jPanel1.add(panelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 520, 440));
@@ -235,7 +248,7 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntrarActionPerformed
        
        Usuarios bean = new Usuarios();
        AdminsDAO dao = new AdminsDAO();
@@ -272,7 +285,7 @@ public class Login extends javax.swing.JFrame {
        
        
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonEntrarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
@@ -389,6 +402,26 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_panelCloseMouseExited
 
+    private void inputEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputEmailKeyPressed
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            
+            buttonEntrar.doClick();
+            
+        }
+        
+    }//GEN-LAST:event_inputEmailKeyPressed
+
+    private void inputSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSenhaKeyPressed
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            
+            buttonEntrar.doClick();
+            
+        }
+        
+    }//GEN-LAST:event_inputSenhaKeyPressed
+
     private void inicia() {
         
         tamanhoOriginal = frame.getSize();
@@ -429,9 +462,9 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonEntrar;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputSenha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

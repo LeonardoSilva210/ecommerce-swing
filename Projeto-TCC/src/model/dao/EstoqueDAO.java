@@ -14,7 +14,7 @@ import model.bean.EstoqueBean;
 public class EstoqueDAO {
     
     
-    public List<EstoqueBean> ListarEstoque(int table){
+    public List<EstoqueBean> ListarEstoque(int table, String produto){
         List<EstoqueBean> conjEstoque = new ArrayList();
         
         try{
@@ -26,29 +26,87 @@ public class EstoqueDAO {
                 
                 case 1:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto,"
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado,"
                             + "produtos.disponivel, produtos.id_produto, produtos.quantidade,"
                             + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
-                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria");
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria WHERE produtos.arquivado = 0");
             
                     break;
                 
                 case 2: 
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto," 
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
-                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.disponivel = 1");
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 1");
                     
                     break;
                     
                 case 3:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto,produtos.descricao_produto, produtos.disponivel, "
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto,produtos.descricao_produto, produtos.disponivel, produtos.arquivado,"
                             + "produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao, produtos.id_produto, produtos.quantidade "
-                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.disponivel = 0");
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 0");
                     
                     break;
+                    
+                case 4:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado,"
+                            + "produtos.disponivel, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.nome_produto "
+                            + "LIKE ?");
+                    
+                    stmt.setString(1, "%" + produto + "%");
+                    
+                    break;
+                    
+                case 5:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                            + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 1 "
+                            + "AND produtos.nome_produto LIKE ?");
+                    
+                    stmt.setString(1, "%" + produto + "%");
+                    
+                    break;
+                    
+                case 6:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                            + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 0 "
+                            + "AND produtos.nome_produto LIKE ?");
+                    
+                    stmt.setString(1, "%" + produto + "%");
+                    
+                    break;
+                
+                case 7:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                            + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1");
+                    
+                    break;
+                    
+                case 8:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                            + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1 "
+                            + "AND produtos.nome_produto LIKE ?");
+                    
+                    stmt.setString(1, "%" + produto + "%");
+                    
+                    break;
+                    
             }
             
             
@@ -66,6 +124,7 @@ public class EstoqueDAO {
                 estoque.setQuantidade(rs.getInt("quantidade"));
                 estoque.setDisponivel(rs.getInt("disponivel"));
                 estoque.setId_produto(rs.getInt("id_produto"));
+                estoque.setArquivado(rs.getInt("arquivado"));
                                             
                 conjEstoque.add(estoque);
             
@@ -104,20 +163,40 @@ public class EstoqueDAO {
     }
     
     
-    public void deletarProduto(EstoqueBean estoque){
+    public void arquivarProduto(EstoqueBean estoque){
         
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             
-            stmt = conexao.prepareStatement("DELETE FROM produtos WHERE id_produto = ?");
-                stmt.setInt(1, estoque.getId_produto());
+            stmt = conexao.prepareStatement("UPDATE produtos SET arquivado = 1, disponivel = 0 WHERE id_produto = ?");
+            stmt.setInt(1, estoque.getId_produto());
                 
             stmt.executeUpdate();
             
             stmt.close();
             conexao.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void reativarProduto(EstoqueBean estoque) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE produtos SET arquivado = 0, disponivel = 1 WHERE id_produto = ?");
+            
+            stmt.setInt(1, estoque.getId_produto());
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
             e.printStackTrace();
         }
         

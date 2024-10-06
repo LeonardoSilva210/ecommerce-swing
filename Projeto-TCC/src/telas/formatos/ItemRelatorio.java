@@ -4,6 +4,7 @@ package telas.formatos;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import model.bean.Relatorios;
 
@@ -38,6 +39,13 @@ public class ItemRelatorio extends javax.swing.JPanel {
                 
             }
 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+                JOptionPane.showMessageDialog(null, relatorio.getProduto(), relatorio.getPessoa(), JOptionPane.INFORMATION_MESSAGE);
+                
+            }
+  
         });
         
     }
@@ -56,9 +64,9 @@ public class ItemRelatorio extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(51, 51, 51));
         setForeground(new java.awt.Color(102, 102, 102));
-        setMinimumSize(new java.awt.Dimension(940, 50));
-        setPreferredSize(new java.awt.Dimension(960, 50));
-        setLayout(new java.awt.GridLayout());
+        setMinimumSize(new java.awt.Dimension(940, 40));
+        setPreferredSize(new java.awt.Dimension(960, 40));
+        setLayout(new java.awt.GridLayout(1, 0));
 
         txtProduto.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtProduto.setForeground(new java.awt.Color(255, 255, 255));

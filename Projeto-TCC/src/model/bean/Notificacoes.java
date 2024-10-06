@@ -1,24 +1,47 @@
 
 package model.bean;
 
+import java.sql.Date;
+import java.sql.Time;
+
 
 public class Notificacoes {
     
-    private int id_notificacao, tipo, fk_id_admin;
-    private String notificacao, descricao;
+    private int id_notificacao, tipo;
+    private String notificacao;
     private boolean visto;
+    private Date data;
+    private Time horario;
 
     public Notificacoes() {
     }
 
-    public Notificacoes(int id_notificacao, int tipo, int fk_id_admin, String notificacao, String descricao, boolean visto) {
+    public Notificacoes(int id_notificacao, int tipo, String notificacao, boolean visto, Date data, Time horario) {
         this.id_notificacao = id_notificacao;
         this.tipo = tipo;
-        this.fk_id_admin = fk_id_admin;
         this.notificacao = notificacao;
-        this.descricao = descricao;
         this.visto = visto;
+        this.data = data;
+        this.horario = horario;
     }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Time getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Time horario) {
+        this.horario = horario;
+    }
+
+    
 
     public boolean isVisto() {
         return visto;
@@ -44,14 +67,6 @@ public class Notificacoes {
         this.tipo = tipo;
     }
 
-    public int getFk_id_admin() {
-        return fk_id_admin;
-    }
-
-    public void setFk_id_admin(int fk_id_admin) {
-        this.fk_id_admin = fk_id_admin;
-    }
-
     public String getNotificacao() {
         return notificacao;
     }
@@ -60,14 +75,6 @@ public class Notificacoes {
         this.notificacao = notificacao;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
+    
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    
-    
-    
 }

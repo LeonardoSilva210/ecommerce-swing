@@ -10,14 +10,14 @@ public class Conexao {
     
     private static final String url = "jdbc:mysql://localhost:3306/tcc";
     private static final String user = "root";
-    private static final String pass = "";
+    private static final String password = "";
     
     public static Connection conectar(){
         Connection conexao = null; 
         
         try{
             
-            conexao = DriverManager.getConnection(url, user, pass);
+            conexao = DriverManager.getConnection(url, user, password);
             
         }catch(SQLException e){
             e.printStackTrace();

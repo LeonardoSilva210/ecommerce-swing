@@ -13,6 +13,8 @@ import model.bean.Notificacoes;
 public class ItemNotificacao extends javax.swing.JPanel{
 
     private ImageIcon icon;
+    private String data, dataBr;
+    private String[] divideData;
 
     public ItemNotificacao(Notificacoes noti) {
         initComponents();
@@ -22,7 +24,31 @@ public class ItemNotificacao extends javax.swing.JPanel{
         @Override
         public void mouseClicked(MouseEvent e) {
             
-            JOptionPane.showMessageDialog(null, noti.getNotificacao()+ " - " + noti.getDescricao());
+            String notificacao = "";
+            
+            switch(noti.getTipo()) {
+                
+                case 1:
+                    
+                    notificacao = noti.getNotificacao();
+                    
+                    break;
+                    
+                case 2:
+                    
+                    notificacao = noti.getNotificacao();
+                    
+                    break;
+                    
+                case 3:
+                    
+                    notificacao = noti.getNotificacao() + " - Valor total: R$";
+                    
+                    break;
+                
+            }
+            
+            JOptionPane.showMessageDialog(null, notificacao);
 
         }
 
@@ -47,36 +73,36 @@ public class ItemNotificacao extends javax.swing.JPanel{
             case 1:
                 
                 setBackground(new Color(153, 153, 153));
-                txtNotificacao.setText(noti.getNotificacao());
-                txtDescricao.setText(noti.getDescricao());
                 icon = new ImageIcon(getClass().getResource("/imagens/iconInfo.png"));
-                imgIcon.setIcon(icon);
+                
                 
                 break;
                 
             case 2:
                 
                 setBackground(new Color(204, 0, 0));
-                txtNotificacao.setText(noti.getNotificacao());
-                txtDescricao.setText(noti.getDescricao());
                 icon = new ImageIcon(getClass().getResource("/imagens/iconRuim.png"));
-                imgIcon.setIcon(icon);
                 
                 break;
             
             case 3:
                 
                 setBackground(new Color(0, 153, 0));
-                txtNotificacao.setText(noti.getNotificacao());
-                txtDescricao.setText(noti.getDescricao());
                 icon = new ImageIcon(getClass().getResource("/imagens/iconBom.png"));
-                imgIcon.setIcon(icon);
                 
                 break;
             
         }
         
+        txtNotificacao.setText(noti.getNotificacao());
         
+        data = String.valueOf(noti.getData());
+        divideData = data.split("\\-");
+        dataBr = divideData[2] + "/" + divideData[1] + "/"+ divideData[0];
+        
+        txtData.setText(dataBr);
+        txtHorario.setText(String.valueOf(noti.getHorario()));
+        imgIcon.setIcon(icon);
 
     }
 
@@ -85,8 +111,9 @@ public class ItemNotificacao extends javax.swing.JPanel{
     private void initComponents() {
 
         txtNotificacao = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JLabel();
         imgIcon = new javax.swing.JLabel();
+        txtData = new javax.swing.JLabel();
+        txtHorario = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(235, 50));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,22 +121,30 @@ public class ItemNotificacao extends javax.swing.JPanel{
         txtNotificacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNotificacao.setForeground(new java.awt.Color(255, 255, 255));
         txtNotificacao.setText("Texto");
-        add(txtNotificacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 0, 180, 30));
-
-        txtDescricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtDescricao.setForeground(new java.awt.Color(255, 255, 255));
-        txtDescricao.setText("Descrição");
-        add(txtDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 20, 180, 30));
+        add(txtNotificacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 0, 110, 50));
 
         imgIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconInfo.png"))); // NOI18N
         add(imgIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 40, 30));
+
+        txtData.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtData.setForeground(new java.awt.Color(255, 255, 255));
+        txtData.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtData.setText("20/10/2024");
+        add(txtData, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 80, 20));
+
+        txtHorario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtHorario.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtHorario.setText("22:10:10");
+        add(txtHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 80, 20));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imgIcon;
-    private javax.swing.JLabel txtDescricao;
+    private javax.swing.JLabel txtData;
+    private javax.swing.JLabel txtHorario;
     private javax.swing.JLabel txtNotificacao;
     // End of variables declaration//GEN-END:variables
 }

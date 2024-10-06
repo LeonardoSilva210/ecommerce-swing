@@ -9,6 +9,8 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -23,6 +25,7 @@ import model.bean.EstoqueBean;
 import model.bean.Notificacoes;
 import model.bean.Produtos;
 import model.bean.Relatorios;
+import model.bean.Reservas;
 import model.bean.Usuarios;
 import model.dao.AdminsDAO;
 import model.dao.CategoriasDAO;
@@ -31,8 +34,10 @@ import model.dao.EstoqueDAO;
 import model.dao.NotificacoesDAO;
 import model.dao.ProdutosDAO;
 import model.dao.RelatoriosDAO;
+import model.dao.ReservasDAO;
 import telas.formatos.ItemNotificacao;
 import telas.formatos.ItemRelatorio;
+import telas.formatos.ItemReserva;
 
 public class Inicio extends javax.swing.JFrame {
 
@@ -45,6 +50,7 @@ public class Inicio extends javax.swing.JFrame {
     private final EstoqueDAO daoEstoque = new EstoqueDAO();
     private final ComprasDAO daoCompra = new ComprasDAO();
     private final AdminsDAO daoAdmin = new AdminsDAO();
+    private final ReservasDAO daoReserva = new ReservasDAO();
     private final EstoqueBean produtosAtual = new EstoqueBean();
     private List<Produtos> listaProdutos = new ArrayList();
     private List<EstoqueBean> estoqueTabela = new ArrayList();
@@ -52,6 +58,7 @@ public class Inicio extends javax.swing.JFrame {
     private List<Relatorios> listaRelatorios = new ArrayList();
     private List<Categorias> listaCategorias = new ArrayList();
     private List<Compras> listaCompras = new ArrayList();
+    private List<Reservas> listaReservas = new ArrayList();
     private boolean telaCheia = false, animacao = false;
     private float produtosTotal = 0, produtosDisponiveis = 0, produtosIndisponiveis = 0, calcPorcent = 0;
     private Dimension tamanhoOriginal;
@@ -69,6 +76,7 @@ public class Inicio extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         panelAcimaFrame = new telas.formatos.PanelBorder();
+        panelFundoAdicionarProduto = new javax.swing.JPanel();
         panelAdicionarProduto = new javax.swing.JPanel();
         panelAdicionarCategoria = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
@@ -97,7 +105,6 @@ public class Inicio extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         buttonAdicionarCategoria = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
-        panelFundoAdicionarProduto = new javax.swing.JPanel();
         panelInformacoesPerfil = new javax.swing.JPanel();
         imageAvatar1 = new com.raven.avatar.ImageAvatar();
         inputNome = new javax.swing.JTextField();
@@ -106,6 +113,10 @@ public class Inicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         buttonSalvarPerfil = new javax.swing.JButton();
         inputEmail = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        checkEdicao = new javax.swing.JCheckBox();
         panelFundoPerfil = new javax.swing.JPanel();
         panelNoti = new javax.swing.JPanel();
         panelFundoCloseNoti = new javax.swing.JPanel();
@@ -144,6 +155,8 @@ public class Inicio extends javax.swing.JFrame {
         txtLogout = new javax.swing.JLabel();
         btnRelatorios = new javax.swing.JPanel();
         txtRelatorios = new javax.swing.JLabel();
+        btnReservas = new javax.swing.JPanel();
+        txtReservas = new javax.swing.JLabel();
         panelNav = new telas.formatos.PanelBorder();
         panelLogo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -163,19 +176,21 @@ public class Inicio extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         progressIndisponivel = new com.raven.swing.progress.Progress();
         jLabel13 = new javax.swing.JLabel();
-        comboGrafico = new javax.swing.JComboBox<>();
         panelEstoque = new javax.swing.JPanel();
-        panelBorder6 = new telas.formatos.PanelBorder();
-        myButton1 = new button.MyButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblEstoque = new tabledark.TableDark();
+        btnAdicionarProduto = new javax.swing.JButton();
+        buttonIndisponivel = new button.MyButton();
+        buttonDisponivel = new button.ButtonVerde();
         radio1 = new javax.swing.JRadioButton();
         radio2 = new javax.swing.JRadioButton();
         radio3 = new javax.swing.JRadioButton();
-        btnEditarProduto = new button.ButtonEditar();
-        btn_disp = new button.ButtonVerde();
-        btn_ind = new button.MyButton();
-        btnAdicionarProduto = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblEstoque = new tabledark.TableDark();
+        inputPesquisarProduto = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        radio4 = new javax.swing.JRadioButton();
+        buttonReativar = new javax.swing.JButton();
+        buttonArquivar = new javax.swing.JButton();
+        buttonEditarProduto = new javax.swing.JButton();
         panelRelatorios = new javax.swing.JPanel();
         scrollRelatorios = new javax.swing.JScrollPane();
         panelListRelatorios = new telas.formatos.PanelItem();
@@ -187,6 +202,22 @@ public class Inicio extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        panelReservas = new javax.swing.JPanel();
+        panelTitulosRelatorios1 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        buttonPesquisarReserva = new javax.swing.JButton();
+        inputPesquisaReserva = new javax.swing.JTextField();
+        txtPesquisaReservas = new javax.swing.JLabel();
+        comboMetodoPesquisa = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        panelItemReservas = new telas.formatos.PanelItem();
+        buttonAtualizar = new javax.swing.JButton();
         panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -200,7 +231,15 @@ public class Inicio extends javax.swing.JFrame {
         panelAcimaFrame.setForeground(new java.awt.Color(0, 0, 0));
         panelAcimaFrame.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelAdicionarProduto.setBackground(new java.awt.Color(0, 153, 204));
+        panelFundoAdicionarProduto.setBackground(new java.awt.Color(0, 0, 0, 100));
+        panelFundoAdicionarProduto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelFundoAdicionarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelFundoAdicionarProdutoMouseClicked(evt);
+            }
+        });
+
+        panelAdicionarProduto.setBackground(new java.awt.Color(102, 102, 102));
         panelAdicionarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelAdicionarProdutoMouseClicked(evt);
@@ -208,7 +247,7 @@ public class Inicio extends javax.swing.JFrame {
         });
         panelAdicionarProduto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelAdicionarCategoria.setBackground(new java.awt.Color(0, 153, 204));
+        panelAdicionarCategoria.setBackground(new java.awt.Color(102, 102, 102));
         panelAdicionarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelAdicionarCategoriaMouseClicked(evt);
@@ -219,7 +258,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Adicionar Categoria");
-        panelAdicionarCategoria.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+        panelAdicionarCategoria.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
 
         jButton2.setText("Salvar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -227,17 +266,19 @@ public class Inicio extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        panelAdicionarCategoria.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 170, 30));
+        panelAdicionarCategoria.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 170, 30));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Nome");
-        panelAdicionarCategoria.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
-        panelAdicionarCategoria.add(inputNomeCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 230, 30));
+        panelAdicionarCategoria.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+        panelAdicionarCategoria.add(inputNomeCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 230, 30));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Descrição");
-        panelAdicionarCategoria.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
-        panelAdicionarCategoria.add(inputDescricaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 230, 30));
+        panelAdicionarCategoria.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+        panelAdicionarCategoria.add(inputDescricaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 230, 30));
 
         jButton3.setText("Adicionar Produto");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -245,34 +286,39 @@ public class Inicio extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        panelAdicionarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 313, -1, 30));
+        panelAdicionarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, 30));
 
-        panelAdicionarProduto.add(panelAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 720, 360));
-        panelAdicionarProduto.add(inputValorCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 169, 34));
-        panelAdicionarProduto.add(inputNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 169, 34));
-        panelAdicionarProduto.add(inputDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 169, 34));
-        panelAdicionarProduto.add(inputValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 169, 34));
-        panelAdicionarProduto.add(inputQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 169, 34));
+        panelAdicionarProduto.add(panelAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 880, 400));
+        panelAdicionarProduto.add(inputValorCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 169, 34));
+        panelAdicionarProduto.add(inputNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 169, 34));
+        panelAdicionarProduto.add(inputDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 169, 34));
+        panelAdicionarProduto.add(inputValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 169, 34));
+        panelAdicionarProduto.add(inputQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 169, 34));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Valor de Custo");
-        panelAdicionarProduto.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+        panelAdicionarProduto.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Valor");
-        panelAdicionarProduto.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
+        panelAdicionarProduto.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Descrição do Produto");
-        panelAdicionarProduto.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
+        panelAdicionarProduto.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Nome do Produto");
-        panelAdicionarProduto.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+        panelAdicionarProduto.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Categoria");
-        panelAdicionarProduto.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
+        panelAdicionarProduto.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, -1, -1));
 
         buttonSalvar.setText("Salvar");
         buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -280,23 +326,26 @@ public class Inicio extends javax.swing.JFrame {
                 buttonSalvarActionPerformed(evt);
             }
         });
-        panelAdicionarProduto.add(buttonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 170, 30));
+        panelAdicionarProduto.add(buttonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 170, 30));
 
-        panelAdicionarProduto.add(comboAdicionarProdutoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 170, 34));
+        panelAdicionarProduto.add(comboAdicionarProdutoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 170, 34));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Quantidade");
-        panelAdicionarProduto.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+        panelAdicionarProduto.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, -1, -1));
 
         buttonGroup2.add(radioDisponivel);
+        radioDisponivel.setForeground(new java.awt.Color(255, 255, 255));
         radioDisponivel.setText("Disponível");
-        panelAdicionarProduto.add(radioDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 90, -1));
+        panelAdicionarProduto.add(radioDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 90, -1));
 
         buttonGroup2.add(radioIndisponivel);
+        radioIndisponivel.setForeground(new java.awt.Color(255, 255, 255));
         radioIndisponivel.setText("Indisponível");
-        panelAdicionarProduto.add(radioIndisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 90, -1));
+        panelAdicionarProduto.add(radioIndisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 90, -1));
 
-        buttonClosePanelAdicionarProduto.setBackground(new java.awt.Color(0, 153, 204));
+        buttonClosePanelAdicionarProduto.setBackground(new java.awt.Color(102, 102, 102));
         buttonClosePanelAdicionarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonClosePanelAdicionarProdutoMouseClicked(evt);
@@ -311,7 +360,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("X");
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconClose.png"))); // NOI18N
 
         javax.swing.GroupLayout buttonClosePanelAdicionarProdutoLayout = new javax.swing.GroupLayout(buttonClosePanelAdicionarProduto);
         buttonClosePanelAdicionarProduto.setLayout(buttonClosePanelAdicionarProdutoLayout);
@@ -321,9 +370,7 @@ public class Inicio extends javax.swing.JFrame {
         );
         buttonClosePanelAdicionarProdutoLayout.setVerticalGroup(
             buttonClosePanelAdicionarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttonClosePanelAdicionarProdutoLayout.createSequentialGroup()
-                .addComponent(jLabel20)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         panelAdicionarProduto.add(buttonClosePanelAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
@@ -334,31 +381,28 @@ public class Inicio extends javax.swing.JFrame {
                 buttonAdicionarCategoriaActionPerformed(evt);
             }
         });
-        panelAdicionarProduto.add(buttonAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, 160, 30));
+        panelAdicionarProduto.add(buttonAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 160, 30));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Adicionar Produto");
-        panelAdicionarProduto.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
-
-        panelAcimaFrame.add(panelAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 800, 390));
-
-        panelFundoAdicionarProduto.setBackground(new java.awt.Color(0, 0, 0, 100));
-        panelFundoAdicionarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelFundoAdicionarProdutoMouseClicked(evt);
-            }
-        });
+        panelAdicionarProduto.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
 
         javax.swing.GroupLayout panelFundoAdicionarProdutoLayout = new javax.swing.GroupLayout(panelFundoAdicionarProduto);
         panelFundoAdicionarProduto.setLayout(panelFundoAdicionarProdutoLayout);
         panelFundoAdicionarProdutoLayout.setHorizontalGroup(
             panelFundoAdicionarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFundoAdicionarProdutoLayout.createSequentialGroup()
+                .addContainerGap(316, Short.MAX_VALUE)
+                .addComponent(panelAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 963, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         panelFundoAdicionarProdutoLayout.setVerticalGroup(
             panelFundoAdicionarProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFundoAdicionarProdutoLayout.createSequentialGroup()
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(panelAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         panelAcimaFrame.add(panelFundoAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
@@ -379,11 +423,13 @@ public class Inicio extends javax.swing.JFrame {
 
         inputNome.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelInformacoesPerfil.add(inputNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 270, 40));
+        inputNome.setEnabled(false);
+        panelInformacoesPerfil.add(inputNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 270, 40));
 
         inputSenha.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelInformacoesPerfil.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 270, 40));
+        inputSenha.setEnabled(false);
+        panelInformacoesPerfil.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 270, 40));
 
         btnFechaInformacoesPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -399,7 +445,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("<-");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconArrowBack.png"))); // NOI18N
 
         javax.swing.GroupLayout btnFechaInformacoesPerfilLayout = new javax.swing.GroupLayout(btnFechaInformacoesPerfil);
         btnFechaInformacoesPerfil.setLayout(btnFechaInformacoesPerfilLayout);
@@ -409,25 +455,47 @@ public class Inicio extends javax.swing.JFrame {
         );
         btnFechaInformacoesPerfilLayout.setVerticalGroup(
             btnFechaInformacoesPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        panelInformacoesPerfil.add(btnFechaInformacoesPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 20));
+        panelInformacoesPerfil.add(btnFechaInformacoesPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, 30));
 
+        buttonSalvarPerfil.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         buttonSalvarPerfil.setText("Salvar");
+        buttonSalvarPerfil.setEnabled(false);
         buttonSalvarPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSalvarPerfilActionPerformed(evt);
             }
         });
-        panelInformacoesPerfil.add(buttonSalvarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 210, 40));
+        panelInformacoesPerfil.add(buttonSalvarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 210, 40));
 
         inputEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelInformacoesPerfil.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 270, 40));
+        inputEmail.setEnabled(false);
+        panelInformacoesPerfil.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 270, 40));
+
+        jLabel25.setFont(new java.awt.Font("Microsoft YaHei", 0, 16)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("E-mail");
+        panelInformacoesPerfil.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
+        jLabel26.setFont(new java.awt.Font("Microsoft YaHei", 0, 16)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Nome");
+        panelInformacoesPerfil.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Microsoft YaHei", 0, 16)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Senha");
+        panelInformacoesPerfil.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+
+        checkEdicao.setText("Edição");
+        panelInformacoesPerfil.add(checkEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 150, 70, -1));
 
         panelAcimaFrame.add(panelInformacoesPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 310, 550));
 
         panelFundoPerfil.setBackground(new java.awt.Color(0, 0, 0, 100));
+        panelFundoPerfil.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelFundoPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelFundoPerfilMouseClicked(evt);
@@ -438,11 +506,11 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoPerfil.setLayout(panelFundoPerfilLayout);
         panelFundoPerfilLayout.setHorizontalGroup(
             panelFundoPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
+            .addGap(0, 1298, Short.MAX_VALUE)
         );
         panelFundoPerfilLayout.setVerticalGroup(
             panelFundoPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
 
         panelAcimaFrame.add(panelFundoPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
@@ -492,11 +560,12 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setViewportView(panelNotificacoes);
 
-        panelNoti.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 260, 500));
+        panelNoti.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 270, 500));
 
-        panelAcimaFrame.add(panelNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 50, -1, 550));
+        panelAcimaFrame.add(panelNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 50, 280, 550));
 
         panelFundoNoti.setBackground(new java.awt.Color(0, 0, 0, 100));
+        panelFundoNoti.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelFundoNoti.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelFundoNotiMouseClicked(evt);
@@ -507,11 +576,11 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoNoti.setLayout(panelFundoNotiLayout);
         panelFundoNotiLayout.setHorizontalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
+            .addGap(0, 1298, Short.MAX_VALUE)
         );
         panelFundoNotiLayout.setVerticalGroup(
             panelFundoNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
 
         panelAcimaFrame.add(panelFundoNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
@@ -532,7 +601,7 @@ public class Inicio extends javax.swing.JFrame {
 
         btnClosePopProduto.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 24)); // NOI18N
         btnClosePopProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnClosePopProduto.setText("X");
+        btnClosePopProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconClose.png"))); // NOI18N
         btnClosePopProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnClosePopProdutoMouseClicked(evt);
@@ -567,6 +636,12 @@ public class Inicio extends javax.swing.JFrame {
         txtNomeProduto2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto2.setText("Valor de venda");
         panelPopProduto.add(txtNomeProduto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
+
+        edtValorProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtValorProdutoKeyTyped(evt);
+            }
+        });
         panelPopProduto.add(edtValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 170, 30));
 
         txtNomeProduto3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -614,11 +689,18 @@ public class Inicio extends javax.swing.JFrame {
         txtNomeProduto4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto4.setText("Valor de custo");
         panelPopProduto.add(txtNomeProduto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
+
+        edtValorCustoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtValorCustoProdutoKeyTyped(evt);
+            }
+        });
         panelPopProduto.add(edtValorCustoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 170, 30));
 
-        panelAcimaFrame.add(panelPopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 960, 420));
+        panelAcimaFrame.add(panelPopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 970, 420));
 
         panelFundoPopProdutoSelecionado.setBackground(new java.awt.Color(0, 0, 0, 100));
+        panelFundoPopProdutoSelecionado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelFundoPopProdutoSelecionado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelFundoPopProdutoSelecionadoMouseClicked(evt);
@@ -629,11 +711,11 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoPopProdutoSelecionado.setLayout(panelFundoPopProdutoSelecionadoLayout);
         panelFundoPopProdutoSelecionadoLayout.setHorizontalGroup(
             panelFundoPopProdutoSelecionadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
+            .addGap(0, 1298, Short.MAX_VALUE)
         );
         panelFundoPopProdutoSelecionadoLayout.setVerticalGroup(
             panelFundoPopProdutoSelecionadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
 
         panelAcimaFrame.add(panelFundoPopProdutoSelecionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1300, 550));
@@ -827,6 +909,39 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         panelButtons.add(btnRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 290, 40));
+
+        btnReservas.setBackground(new java.awt.Color(51, 51, 51));
+        btnReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReservasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReservasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReservasMouseExited(evt);
+            }
+        });
+
+        txtReservas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtReservas.setForeground(new java.awt.Color(255, 255, 255));
+        txtReservas.setText("Reservas");
+
+        javax.swing.GroupLayout btnReservasLayout = new javax.swing.GroupLayout(btnReservas);
+        btnReservas.setLayout(btnReservasLayout);
+        btnReservasLayout.setHorizontalGroup(
+            btnReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnReservasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtReservas, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnReservasLayout.setVerticalGroup(
+            btnReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtReservas, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panelButtons.add(btnReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 290, 40));
 
         panelAcimaFrame.add(panelButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 420));
 
@@ -1025,14 +1140,15 @@ public class Inicio extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Produtos Indisponíveis");
 
-        comboGrafico.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
-
         javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
         panelInicio.setLayout(panelInicioLayout);
         panelInicioLayout.setHorizontalGroup(
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(grafInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))
             .addGroup(panelInicioLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(340, 340, 340)
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(progressDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1040,131 +1156,29 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(progressIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(451, 451, 451)
-                .addComponent(comboGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(grafInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelInicioLayout.setVerticalGroup(
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInicioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(comboGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelInicioLayout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(progressDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelInicioLayout.createSequentialGroup()
-                            .addComponent(jLabel13)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(progressIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(16, 16, 16)
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInicioLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progressDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelInicioLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progressIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(grafInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(357, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab1", panelInicio);
 
         panelEstoque.setBackground(new java.awt.Color(51, 51, 51));
-
-        panelBorder6.setForeground(new java.awt.Color(153, 153, 153));
-
-        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lixo.png"))); // NOI18N
-        myButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton1ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(radio1);
-        radio1.setText("Todos Produtos");
-        radio1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radio1ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(radio2);
-        radio2.setText("Disponíveis");
-        radio2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radio2ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(radio3);
-        radio3.setText("Indisponíveis");
-
-        btnEditarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarProdutoActionPerformed(evt);
-            }
-        });
-
-        btn_disp.setText("TORNAR DISPONÍVEL");
-        btn_disp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_dispActionPerformed(evt);
-            }
-        });
-
-        btn_ind.setText("TORNAR INDISPONÍVEL");
-        btn_ind.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_indActionPerformed(evt);
-            }
-        });
-
-        btnAdicionarProduto.setText("Adicionar Produto/Categoria");
-        btnAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarProdutoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelBorder6Layout = new javax.swing.GroupLayout(panelBorder6);
-        panelBorder6.setLayout(panelBorder6Layout);
-        panelBorder6Layout.setHorizontalGroup(
-            panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder6Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEditarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAdicionarProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_ind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btn_disp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(radio1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(radio2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(radio3)
-                .addGap(65, 65, 65))
-        );
-        panelBorder6Layout.setVerticalGroup(
-            panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(panelBorder6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(radio1)
-                        .addComponent(radio2)
-                        .addComponent(radio3))
-                    .addComponent(myButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_disp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_ind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
 
         tblEstoque.setBackground(new java.awt.Color(204, 204, 204));
         tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
@@ -1208,25 +1222,179 @@ public class Inicio extends javax.swing.JFrame {
             tblEstoque.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        btnAdicionarProduto.setText("Adicionar Produto/Categoria");
+        btnAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarProdutoActionPerformed(evt);
+            }
+        });
+
+        buttonIndisponivel.setText("Tornar Indisponível");
+        buttonIndisponivel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonIndisponivel.setPreferredSize(new java.awt.Dimension(170, 50));
+        buttonIndisponivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonIndisponivelActionPerformed(evt);
+            }
+        });
+
+        buttonDisponivel.setText("Tornar Disponível");
+        buttonDisponivel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonDisponivel.setPreferredSize(new java.awt.Dimension(170, 50));
+        buttonDisponivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDisponivelActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radio1);
+        radio1.setForeground(new java.awt.Color(255, 255, 255));
+        radio1.setText("Todos Produtos");
+        radio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radio2);
+        radio2.setForeground(new java.awt.Color(255, 255, 255));
+        radio2.setText("Disponíveis");
+        radio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radio3);
+        radio3.setForeground(new java.awt.Color(255, 255, 255));
+        radio3.setText("Indisponíveis");
+
+        inputPesquisarProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputPesquisarProdutoKeyTyped(evt);
+            }
+        });
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel28.setText("Pesquisar produto");
+
+        buttonGroup1.add(radio4);
+        radio4.setForeground(new java.awt.Color(255, 255, 255));
+        radio4.setText("Arquivados");
+
+        buttonReativar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRestore.png"))); // NOI18N
+        buttonReativar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonReativarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonReativarMouseExited(evt);
+            }
+        });
+        buttonReativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReativarActionPerformed(evt);
+            }
+        });
+
+        buttonArquivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconArchive.png"))); // NOI18N
+        buttonArquivar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonArquivarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonArquivarMouseExited(evt);
+            }
+        });
+        buttonArquivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonArquivarActionPerformed(evt);
+            }
+        });
+
+        buttonEditarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconEdit.png"))); // NOI18N
+        buttonEditarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonEditarProdutoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonEditarProdutoMouseExited(evt);
+            }
+        });
+        buttonEditarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditarProdutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelEstoqueLayout = new javax.swing.GroupLayout(panelEstoque);
         panelEstoque.setLayout(panelEstoqueLayout);
         panelEstoqueLayout.setHorizontalGroup(
             panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(panelBorder6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelEstoqueLayout.createSequentialGroup()
+                        .addComponent(radio1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radio2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radio3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radio4))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEstoqueLayout.createSequentialGroup()
+                        .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputPesquisarProduto)
+                            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonArquivar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonReativar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonEditarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAdicionarProduto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         panelEstoqueLayout.setVerticalGroup(
             panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(buttonArquivar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panelEstoqueLayout.createSequentialGroup()
+                                    .addComponent(buttonReativar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(1, 1, 1))
+                                .addComponent(buttonEditarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEstoqueLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonIndisponivel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelEstoqueLayout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputPesquisarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(panelBorder6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(303, 303, 303))
+                .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radio1)
+                    .addComponent(radio2)
+                    .addComponent(radio3)
+                    .addComponent(radio4))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab2", panelEstoque);
@@ -1283,7 +1451,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelTitulosRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scrollRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRelatoriosLayout.setVerticalGroup(
             panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1292,10 +1460,100 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(panelTitulosRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab3", panelRelatorios);
+
+        panelReservas.setBackground(new java.awt.Color(51, 51, 51));
+        panelReservas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelTitulosRelatorios1.setLayout(new java.awt.GridLayout(1, 0));
+
+        jLabel29.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("Pessoa");
+        panelTitulosRelatorios1.add(jLabel29);
+
+        jLabel30.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("Obs");
+        panelTitulosRelatorios1.add(jLabel30);
+
+        jLabel31.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setText("Data");
+        panelTitulosRelatorios1.add(jLabel31);
+
+        jLabel32.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("Horário");
+        panelTitulosRelatorios1.add(jLabel32);
+
+        jLabel33.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel33.setText("Quantidade");
+        panelTitulosRelatorios1.add(jLabel33);
+
+        jLabel34.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("Valor Total");
+        panelTitulosRelatorios1.add(jLabel34);
+
+        jLabel35.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel35.setText("Produtos");
+        panelTitulosRelatorios1.add(jLabel35);
+
+        panelReservas.add(panelTitulosRelatorios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 960, 50));
+
+        buttonPesquisarReserva.setBackground(new java.awt.Color(204, 204, 204));
+        buttonPesquisarReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconSearch.png"))); // NOI18N
+        buttonPesquisarReserva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonPesquisarReservaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonPesquisarReservaMouseExited(evt);
+            }
+        });
+        buttonPesquisarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPesquisarReservaActionPerformed(evt);
+            }
+        });
+        panelReservas.add(buttonPesquisarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 40, 40));
+
+        inputPesquisaReserva.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        inputPesquisaReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputPesquisaReservaKeyTyped(evt);
+            }
+        });
+        panelReservas.add(inputPesquisaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 400, 40));
+
+        txtPesquisaReservas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPesquisaReservas.setForeground(new java.awt.Color(255, 255, 255));
+        txtPesquisaReservas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtPesquisaReservas.setText("Pesquisar código");
+        panelReservas.add(txtPesquisaReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 600, 20));
+
+        panelReservas.add(comboMetodoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 140, 40));
+
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setViewportView(panelItemReservas);
+
+        panelReservas.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 960, 300));
+
+        buttonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRefresh.png"))); // NOI18N
+        buttonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarActionPerformed(evt);
+            }
+        });
+        panelReservas.add(buttonAtualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 40, 40));
+
+        tabInicio.addTab("tab4", panelReservas);
 
         panelFundoTab.add(tabInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, -1));
 
@@ -1375,28 +1633,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void txtMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseClicked
 
-        if (telaCheia) {
-
-            telaCheia = false;
-
-            frame.setSize(tamanhoOriginal);
-            frame.setLocation(localizacaoOriginal);
-
-            redimensiona(false);
-
-        } else {
-
-            telaCheia = true;
-
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int width = screenSize.width;
-            int height = screenSize.height;
-
-            frame.setBounds(0, 0, width, height - 30);
-
-            redimensiona(true);
-
-        }
+        tamanhoFrame();
 
     }//GEN-LAST:event_txtMaxMouseClicked
 
@@ -1488,16 +1725,6 @@ public class Inicio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_panelFundoNotiMouseClicked
 
-    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-        EstoqueBean estoque = new EstoqueBean();
-        EstoqueDAO funcaoEstoque = new EstoqueDAO();
-
-        funcaoEstoque.deletarProduto(produtosAtual);
-
-        verificaRadio();
-
-    }//GEN-LAST:event_myButton1ActionPerformed
-
     private void tblEstoqueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstoqueMouseEntered
 
     }//GEN-LAST:event_tblEstoqueMouseEntered
@@ -1517,21 +1744,40 @@ public class Inicio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_radio2ActionPerformed
 
-    private void btn_dispActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dispActionPerformed
-        EstoqueBean estoque = new EstoqueBean();
-        EstoqueDAO funcaoEstoque = new EstoqueDAO();
+    private void buttonDisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDisponivelActionPerformed
 
-        funcaoEstoque.produtoDisponível(produtosAtual, true);
-        preencherTabela(3);
-    }//GEN-LAST:event_btn_dispActionPerformed
+        if (produtosAtual.getId_produto() > 0) {
 
-    private void btn_indActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_indActionPerformed
-        EstoqueBean estoque = new EstoqueBean();
-        EstoqueDAO funcaoEstoque = new EstoqueDAO();
+            int escolha = JOptionPane.showConfirmDialog(null, "Disponibilizar produto: " + produtosAtual.getNome_produto(), "Confirmação", JOptionPane.YES_NO_OPTION);
+            
+            if (escolha == JOptionPane.YES_OPTION) {
+                
+                daoEstoque.produtoDisponível(produtosAtual, true);
+                preencherTabela(3, null);
+                resetaProdutoAtual();
+                
+            }
+            
+        }
+        
+    }//GEN-LAST:event_buttonDisponivelActionPerformed
 
-        funcaoEstoque.produtoDisponível(produtosAtual, false);
-        preencherTabela(2);
-    }//GEN-LAST:event_btn_indActionPerformed
+    private void buttonIndisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIndisponivelActionPerformed
+
+        if (produtosAtual.getId_produto() > 0) {
+
+            int escolha = JOptionPane.showConfirmDialog(null, "Indisponibilizar produto: " + produtosAtual.getNome_produto(), "Confirmação", JOptionPane.YES_NO_OPTION);
+            
+            if(escolha == JOptionPane.YES_OPTION) {
+                
+                daoEstoque.produtoDisponível(produtosAtual, false);
+                preencherTabela(2, null);
+                
+            }
+            
+        }     
+        
+    }//GEN-LAST:event_buttonIndisponivelActionPerformed
 
     private void btnCloseNotiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseNotiMouseEntered
 
@@ -1586,44 +1832,6 @@ public class Inicio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRelatoriosMouseClicked
 
-    private void btnEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdutoActionPerformed
-
-        if (produtosAtual.getId_produto() > 0) {
-
-            btnEditarProduto.setVisible(false);
-            panelFundoPopProdutoSelecionado.setVisible(true);
-            panelPopProduto.setVisible(true);
-
-            edtNomeProduto.setText(produtosAtual.getNome_produto());
-            edtDescricaoProduto.setText(produtosAtual.getDescricao_produto());
-            edtQuantidade.setText(String.valueOf(produtosAtual.getQuantidade()));
-            edtValorProduto.setText(String.valueOf(produtosAtual.getValor()));
-            edtValorCustoProduto.setText(String.valueOf(produtosAtual.getValor_custo()));
-
-            listaCategorias = daoCategoria.listar();
-
-            comboCategorias.removeAllItems();
-
-            for (int i = 0; i < listaCategorias.size(); i++) {
-
-                comboCategorias.addItem(listaCategorias.get(i).getNome());
-
-                if (listaCategorias.get(i).getNome().equals(produtosAtual.getNome_categoria())) {
-
-                    comboCategorias.setSelectedIndex(i);
-
-                }
-
-            }
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, "Nenhum produto selecionado!");
-
-        }
-
-    }//GEN-LAST:event_btnEditarProdutoActionPerformed
-
     private void btnClosePopProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClosePopProdutoMouseClicked
 
         fechaPopProduto();
@@ -1668,19 +1876,25 @@ public class Inicio extends javax.swing.JFrame {
 
         if (Integer.parseInt(edtQuantidade.getText()) >= 0) {
             
-            EstoqueBean estoque = new EstoqueBean();
+            int escolha = JOptionPane.showConfirmDialog(null, "Confirmar edição?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            
+            if (escolha == JOptionPane.YES_OPTION) {
+                
+                EstoqueBean estoque = new EstoqueBean();
 
-            estoque.setId_produto(produtosAtual.getId_produto());
-            estoque.setNome_produto(edtNomeProduto.getText());
-            estoque.setDescricao_produto(edtDescricaoProduto.getText());
-            estoque.setValor(Float.parseFloat(edtValorProduto.getText()));
-            estoque.setValor_custo(Float.parseFloat(edtValorCustoProduto.getText()));
-            estoque.setQuantidade(Integer.parseInt(edtQuantidade.getText()));
-            estoque.setFk_id_categoria(listaCategorias.get(comboCategorias.getSelectedIndex()).getId_categoria());
+                estoque.setId_produto(produtosAtual.getId_produto());
+                estoque.setNome_produto(edtNomeProduto.getText());
+                estoque.setDescricao_produto(edtDescricaoProduto.getText());
+                estoque.setValor(Float.parseFloat(edtValorProduto.getText()));
+                estoque.setValor_custo(Float.parseFloat(edtValorCustoProduto.getText()));
+                estoque.setQuantidade(Integer.parseInt(edtQuantidade.getText()));
+                estoque.setFk_id_categoria(listaCategorias.get(comboCategorias.getSelectedIndex()).getId_categoria());
 
-            daoEstoque.atualizar(estoque);
+                daoEstoque.atualizar(estoque);
 
-            JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+                JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+                
+            }
             
         } else {
             
@@ -1866,7 +2080,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void buttonClosePanelAdicionarProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonClosePanelAdicionarProdutoMouseExited
         
-        buttonClosePanelAdicionarProduto.setBackground(new Color(0,153,204));
+        buttonClosePanelAdicionarProduto.setBackground(new Color(102,102,102));
         
     }//GEN-LAST:event_buttonClosePanelAdicionarProdutoMouseExited
 
@@ -1885,29 +2099,61 @@ public class Inicio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nenhuma alteração feita!");
             
         } else {
-   
-            Usuarios usuario = new Usuarios(0, nome, email, senha, null, 0);
+ 
+                if (!senha.equals(GlobalAdmin.getSenha())) {
+                    
+                    String confirma;
+                    
+                    confirma = JOptionPane.showInputDialog("Confirme a senha atual");
+                    
+                    if (confirma == null) {
+                        
+                        inputNome.setText(GlobalAdmin.getNome());
+                        inputEmail.setText(GlobalAdmin.getEmail());
+                        inputSenha.setText(GlobalAdmin.getSenha());
+                        
+                    } else {
+                        
+                        if (confirma.equals(GlobalAdmin.getSenha())) {  
+                        
+                            int resposta = JOptionPane.showConfirmDialog(null, "Salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+                            if (resposta == JOptionPane.YES_OPTION) {
             
-            daoAdmin.atualizarPerfil(usuario);
+                                Usuarios usuario = new Usuarios(0, nome, email, senha, null, 0);
             
-            GlobalAdmin.setEmail(email);
-            GlobalAdmin.setNome(nome);
-            GlobalAdmin.setSenha(senha);
+                                daoAdmin.atualizarPerfil(usuario);
             
-            JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+                                GlobalAdmin.setEmail(email);
+                                GlobalAdmin.setNome(nome);
+                                GlobalAdmin.setSenha(senha);
             
-        }
+                                txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
+            
+                                    JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+            
+                                }   
+                        
+                        } else {
+                        
+                            JOptionPane.showMessageDialog(null, "Senha incorreta!");
+                        
+                        }
+                        
+                    }
+ 
+                }
+            
+            }
         
     }//GEN-LAST:event_buttonSalvarPerfilActionPerformed
 
     private void edtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtQuantidadeKeyTyped
 
-        String regex = "1234567890";
-
-        if (edtQuantidade.getText().matches(regex)) {
-
-            System.out.println("TESTE");
-
+        char letra = evt.getKeyChar();
+        
+        if (!Character.isDigit(letra)) {
+            evt.consume();
         }
 
     }//GEN-LAST:event_edtQuantidadeKeyTyped
@@ -1954,6 +2200,203 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonAdicionarCategoriaActionPerformed
 
+    private void edtValorCustoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtValorCustoProdutoKeyTyped
+        
+        char letra = evt.getKeyChar();
+
+        if (!Character.isDigit(letra) && letra != '.') {
+            evt.consume(); 
+        }
+        
+    }//GEN-LAST:event_edtValorCustoProdutoKeyTyped
+
+    private void edtValorProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtValorProdutoKeyTyped
+        
+        char letra = evt.getKeyChar();
+
+        if (!Character.isDigit(letra) && letra != '.') {
+            evt.consume(); 
+        }
+        
+    }//GEN-LAST:event_edtValorProdutoKeyTyped
+
+    private void inputPesquisarProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisarProdutoKeyTyped
+        
+        String produto = inputPesquisarProduto.getText().trim();
+        
+        if (radio1.isSelected()) {
+            
+            preencherTabela(4, produto);
+            
+        }
+        
+        if (radio2.isSelected()) {
+            
+            preencherTabela(5, produto);
+            
+        }
+        
+        if (radio3.isSelected()) {
+            
+            preencherTabela(6, produto);
+            
+        }
+        
+        if (radio4.isSelected()) {
+            
+            preencherTabela(8, produto);
+            
+        }
+        
+    }//GEN-LAST:event_inputPesquisarProdutoKeyTyped
+
+    private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
+        
+        trocaTab(4);
+        
+    }//GEN-LAST:event_btnReservasMouseClicked
+
+    private void btnReservasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseEntered
+        
+        btnReservas.setBorder(new LineBorder(Color.white, 1));
+        
+    }//GEN-LAST:event_btnReservasMouseEntered
+
+    private void btnReservasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseExited
+        
+        btnReservas.setBorder(null);
+        
+    }//GEN-LAST:event_btnReservasMouseExited
+
+    private void buttonReativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReativarActionPerformed
+        
+        int escolha = JOptionPane.showConfirmDialog(null, "Reativar produto: " + produtosAtual.getNome_produto(), "Confirmação", JOptionPane.YES_NO_OPTION);
+        
+        if (escolha == JOptionPane.YES_OPTION) {
+            
+            daoEstoque.reativarProduto(produtosAtual);
+            verificaRadio();
+            resetaProdutoAtual();
+            
+        }
+        
+    }//GEN-LAST:event_buttonReativarActionPerformed
+
+    private void buttonReativarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonReativarMouseEntered
+        
+        buttonReativar.setBackground(new Color(51, 204, 0));
+        
+    }//GEN-LAST:event_buttonReativarMouseEntered
+
+    private void buttonReativarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonReativarMouseExited
+        
+        buttonReativar.setBackground(new Color(240, 240, 240));
+        
+    }//GEN-LAST:event_buttonReativarMouseExited
+
+    private void buttonArquivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonArquivarActionPerformed
+        
+        int escolha = JOptionPane.showConfirmDialog(null, "Arquivar este produto: " + produtosAtual.getNome_produto(), "Confirmação", JOptionPane.YES_NO_OPTION);
+
+        if (escolha == JOptionPane.YES_OPTION) {
+            
+            daoEstoque.arquivarProduto(produtosAtual);
+            verificaRadio();
+            resetaProdutoAtual();
+            
+        }
+        
+    }//GEN-LAST:event_buttonArquivarActionPerformed
+
+    private void buttonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarProdutoActionPerformed
+        
+        if (produtosAtual.getId_produto() > 0) {
+
+            buttonEditarProduto.setVisible(false);
+            buttonArquivar.setVisible(false);
+            buttonReativar.setVisible(false);
+            inputPesquisarProduto.setVisible(false);
+            panelFundoPopProdutoSelecionado.setVisible(true);
+            panelPopProduto.setVisible(true);
+
+            edtNomeProduto.setText(produtosAtual.getNome_produto());
+            edtDescricaoProduto.setText(produtosAtual.getDescricao_produto());
+            edtQuantidade.setText(String.valueOf(produtosAtual.getQuantidade()));
+            edtValorProduto.setText(String.valueOf(produtosAtual.getValor()));
+            edtValorCustoProduto.setText(String.valueOf(produtosAtual.getValor_custo()));
+
+            listaCategorias = daoCategoria.listar();
+
+            comboCategorias.removeAllItems();
+
+            for (int i = 0; i < listaCategorias.size(); i++) {
+
+                comboCategorias.addItem(listaCategorias.get(i).getNome());
+
+                if (listaCategorias.get(i).getNome().equals(produtosAtual.getNome_categoria())) {
+
+                    comboCategorias.setSelectedIndex(i);
+
+                }
+
+            }
+
+        }
+        
+    }//GEN-LAST:event_buttonEditarProdutoActionPerformed
+
+    private void buttonArquivarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonArquivarMouseEntered
+        
+        buttonArquivar.setBackground(new Color(255, 0, 0));
+        
+    }//GEN-LAST:event_buttonArquivarMouseEntered
+
+    private void buttonArquivarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonArquivarMouseExited
+        
+        buttonArquivar.setBackground(new Color(240, 240, 240));
+        
+    }//GEN-LAST:event_buttonArquivarMouseExited
+
+    private void buttonEditarProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEditarProdutoMouseEntered
+        
+        buttonEditarProduto.setBackground(new Color(255, 153, 0));
+        
+    }//GEN-LAST:event_buttonEditarProdutoMouseEntered
+
+    private void buttonEditarProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEditarProdutoMouseExited
+        
+        buttonEditarProduto.setBackground(new Color(240, 240, 240));
+        
+    }//GEN-LAST:event_buttonEditarProdutoMouseExited
+
+    private void inputPesquisaReservaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaReservaKeyTyped
+      
+        pesquisaReserva();
+        
+    }//GEN-LAST:event_inputPesquisaReservaKeyTyped
+
+    private void buttonPesquisarReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarReservaMouseEntered
+
+    }//GEN-LAST:event_buttonPesquisarReservaMouseEntered
+
+    private void buttonPesquisarReservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarReservaMouseExited
+
+    }//GEN-LAST:event_buttonPesquisarReservaMouseExited
+
+    private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
+        
+        
+        inputPesquisaReserva.setText("");
+        listarReservas(1, null);
+        
+    }//GEN-LAST:event_buttonAtualizarActionPerformed
+
+    private void buttonPesquisarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarReservaActionPerformed
+        
+        pesquisaReserva();
+        
+    }//GEN-LAST:event_buttonPesquisarReservaActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -1992,6 +2435,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnInicio.setBackground(new Color(102, 102, 102));
                 btnEstoque.setBackground(new Color(51, 51, 51));
                 btnRelatorios.setBackground(new Color(51, 51, 51));
+                btnReservas.setBackground(new Color(51, 51, 51));
 
                 break;
 
@@ -2003,6 +2447,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnInicio.setBackground(new Color(51, 51, 51));
                 btnEstoque.setBackground(new Color(102, 102, 102));
                 btnRelatorios.setBackground(new Color(51, 51, 51));
+                btnReservas.setBackground(new Color(51, 51, 51));
 
                 break;
 
@@ -2014,6 +2459,19 @@ public class Inicio extends javax.swing.JFrame {
                 btnInicio.setBackground(new Color(51, 51, 51));
                 btnEstoque.setBackground(new Color(51, 51, 51));
                 btnRelatorios.setBackground(new Color(102, 102, 102));
+                btnReservas.setBackground(new Color(51, 51, 51));
+
+                break;
+            
+            case 4:
+
+                tabInicio.setSelectedIndex(3);
+                atualiza(4);
+
+                btnInicio.setBackground(new Color(51, 51, 51));
+                btnEstoque.setBackground(new Color(51, 51, 51));
+                btnRelatorios.setBackground(new Color(51, 51, 51));
+                btnReservas.setBackground(new Color(102, 102, 102));
 
                 break;
 
@@ -2022,18 +2480,20 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     private void inicia() {
-
+        
         animationLogo();
         atualizaGraficoInicio(1);
-        preencherTabela(1);
-        listaRelatorios();
-        listaNotificacoes();
+        preencherTabela(1, null);
+        listarRelatorios();
+        listarNotificacoes();
         progressInicio();
         radioSelecionado();
-        listaComboGrafico();
         eventTable();
-        eventCombo();
-        btnEditarProduto.setVisible(false);
+        eventCheck();
+        verificaComboReservas();
+        inserirMetodosComboReservas();
+        listarReservas(1, null);
+        buttonEditarProduto.setVisible(false);
         panelNoti.setVisible(false);
         panelFundoNoti.setVisible(false);
         radio1.setSelected(true);
@@ -2044,6 +2504,8 @@ public class Inicio extends javax.swing.JFrame {
         panelInformacoesPerfil.setVisible(false);
         panelFundoPerfil.setVisible(false);
         panelAdicionarCategoria.setVisible(false);
+        buttonArquivar.setVisible(false);
+        buttonReativar.setVisible(false);
         tamanhoOriginal = frame.getSize();
         localizacaoOriginal = frame.getLocation();
 
@@ -2061,7 +2523,6 @@ public class Inicio extends javax.swing.JFrame {
 
             case 1:
                 
-                verificaComboGrafico();
                 progressInicio();
 
                 break;
@@ -2072,11 +2533,19 @@ public class Inicio extends javax.swing.JFrame {
 
             case 3:
 
-                listaRelatorios();
+                listarRelatorios();
+                
+                break;
+                
+            case 4:
+                
+                
                 
                 break;
 
         }
+        
+        listarNotificacoes();
 
     }
 
@@ -2107,30 +2576,6 @@ public class Inicio extends javax.swing.JFrame {
 
                 grafInicio.start();
                 
-                break;
-
-            case 2:
-
-                grafInicio.clear();
-                
-                grafInicio.addLegend("Lucro", Color.green, Color.green);
-                grafInicio.addLegend("Perda", Color.red, Color.red);
-                
-                grafInicio.addData(new ModelChart("Janeiro", new double[]{200, 0, 50, 50}));
-                grafInicio.addData(new ModelChart("Fevereiro", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Março", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Abril", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Maio", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Junho", new double[]{300, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Julho", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Agosto", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Setembro", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Outubro", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Novembro", new double[]{200, 0, 100, 190}));
-                grafInicio.addData(new ModelChart("Dezembro", new double[]{200, 0, 100, 190}));
-                
-                grafInicio.start();
-
                 break;
 
         }
@@ -2354,7 +2799,7 @@ public class Inicio extends javax.swing.JFrame {
 
     }
 
-    private void preencherTabela(int table) {
+    private void preencherTabela(int table, String produto) {
 
         tableModel = (DefaultTableModel) tblEstoque.getModel();
         tableModel.setNumRows(0);
@@ -2365,23 +2810,68 @@ public class Inicio extends javax.swing.JFrame {
 
             case 1:
 
-                estoqueTabela = funcoesEstoque.ListarEstoque(1);
-                btn_disp.setVisible(false);
-                btn_ind.setVisible(false);
+                estoqueTabela = funcoesEstoque.ListarEstoque(1, null);
+                buttonDisponivel.setVisible(false);
+                buttonIndisponivel.setVisible(false);
+                
                 break;
 
             case 2:
 
-                estoqueTabela = funcoesEstoque.ListarEstoque(2);
-                btn_ind.setVisible(true);
-                btn_disp.setVisible(false);
+                estoqueTabela = funcoesEstoque.ListarEstoque(2, null);
+                buttonIndisponivel.setVisible(true);
+                buttonDisponivel.setVisible(false);
+                
                 break;
 
             case 3:
 
-                estoqueTabela = funcoesEstoque.ListarEstoque(3);
-                btn_ind.setVisible(false);
-                btn_disp.setVisible(true);
+                estoqueTabela = funcoesEstoque.ListarEstoque(3, null);
+                buttonIndisponivel.setVisible(false);
+                buttonDisponivel.setVisible(true);
+                
+                break;
+                
+            case 4:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(4, produto);
+                buttonDisponivel.setVisible(false);
+                buttonIndisponivel.setVisible(false);
+                
+                break;
+                
+            case 5:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(5, produto);
+                buttonIndisponivel.setVisible(true);
+                buttonDisponivel.setVisible(false);
+                
+                break;
+                
+            case 6:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(6, produto);
+                buttonIndisponivel.setVisible(false);
+                buttonDisponivel.setVisible(true);
+                
+                break;
+                
+            case 7:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(7, null);
+                buttonIndisponivel.setVisible(false);
+                buttonDisponivel.setVisible(false);
+                buttonArquivar.setVisible(false);
+                
+                break;
+            
+            case 8:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(8, produto);
+                buttonIndisponivel.setVisible(false);
+                buttonDisponivel.setVisible(false);
+                buttonArquivar.setVisible(false);
+                
                 break;
 
         }
@@ -2416,7 +2906,37 @@ public class Inicio extends javax.swing.JFrame {
             produtosAtual.setFk_id_categoria(estoqueTabela.get(linha).getFk_id_categoria());
             produtosAtual.setValor_custo(estoqueTabela.get(linha).getValor_custo());
 
-            btnEditarProduto.setVisible(true);
+            trocaVisibilidadeButtons(2);
+            
+            if (radio1.isSelected()) {
+                
+                buttonDisponivel.setVisible(false);
+                buttonIndisponivel.setVisible(false);
+                buttonReativar.setVisible(false);
+                
+            }
+            
+            if (radio2.isSelected()) {
+                
+                buttonDisponivel.setVisible(false);
+                buttonReativar.setVisible(false);
+                
+            }
+            
+            if (radio3.isSelected()) {
+                
+                buttonIndisponivel.setVisible(false);
+                buttonReativar.setVisible(false);
+                
+            }
+            
+            if (radio4.isSelected()) {
+                
+                buttonDisponivel.setVisible(false);
+                buttonIndisponivel.setVisible(false);
+                buttonArquivar.setVisible(false);
+                
+            }
 
         }
 
@@ -2424,9 +2944,17 @@ public class Inicio extends javax.swing.JFrame {
 
     private void redimensiona(boolean verifica) {
 
+        if (verifica) {
+            
+            panelNav.setBounds(0, 0, frame.getWidth(), panelNav.getHeight());
+            panelNav.revalidate();
+            panelNav.repaint();
+            
+        }
+        
     }
 
-    private void listaNotificacoes() {
+    private void listarNotificacoes() {
 
         panelNotificacoes.removeAll();
 
@@ -2447,10 +2975,11 @@ public class Inicio extends javax.swing.JFrame {
         }
 
         btnNoti.setBadges(cont);
+        btnNoti.repaint();
 
     }
 
-    private void listaRelatorios() {
+    private void listarRelatorios() {
 
         panelListRelatorios.removeAll();
         
@@ -2578,7 +3107,8 @@ public class Inicio extends javax.swing.JFrame {
         tblEstoque.clearSelection();
         panelPopProduto.setVisible(false);
         panelFundoPopProdutoSelecionado.setVisible(false);
-        btnEditarProduto.setVisible(false);
+        buttonEditarProduto.setVisible(false);
+        inputPesquisarProduto.setVisible(true);
         resetaProdutoAtual();
         verificaRadio();
 
@@ -2595,6 +3125,8 @@ public class Inicio extends javax.swing.JFrame {
         produtosAtual.setFk_id_categoria(0);
         produtosAtual.setId_produto(0);
         produtosAtual.setQuantidade(0);
+        
+        trocaVisibilidadeButtons(1);
 
     }
 
@@ -2602,20 +3134,30 @@ public class Inicio extends javax.swing.JFrame {
 
         radio1.addActionListener(e -> {
 
-            preencherTabela(1);
+            preencherTabela(1, null);
+            trocaVisibilidadeButtons(1);
 
         });
 
         radio2.addActionListener(e -> {
 
-            preencherTabela(2);
+            preencherTabela(2, null);
+            trocaVisibilidadeButtons(1);
 
         });
 
         radio3.addActionListener(e -> {
 
-            preencherTabela(3);
+            preencherTabela(3, null);
+            trocaVisibilidadeButtons(1);
 
+        });
+        
+        radio4.addActionListener(e -> {
+            
+            preencherTabela(7, null);
+            trocaVisibilidadeButtons(1);
+            
         });
 
     }
@@ -2624,22 +3166,58 @@ public class Inicio extends javax.swing.JFrame {
 
         if (radio1.isSelected()) {
 
-            preencherTabela(1);
+            preencherTabela(1, null);
 
         }
 
         if (radio2.isSelected()) {
 
-            preencherTabela(2);
+            preencherTabela(2, null);
 
         }
 
         if (radio3.isSelected()) {
 
-            preencherTabela(3);
+            preencherTabela(3, null);
 
         }
+        
+        if (radio4.isSelected()) {
+            
+            preencherTabela(7, null);
+            
+        }
+        
+        resetaProdutoAtual();
 
+    }
+    
+    private void trocaVisibilidadeButtons(int escolha) {
+        
+        switch(escolha) {
+            
+            case 1:
+                
+                buttonEditarProduto.setVisible(false);
+                buttonArquivar.setVisible(false);
+                buttonIndisponivel.setVisible(false);
+                buttonDisponivel.setVisible(false);
+                buttonReativar.setVisible(false);
+                
+                break;
+               
+            case 2:
+                
+                buttonEditarProduto.setVisible(true);
+                buttonArquivar.setVisible(true);
+                buttonIndisponivel.setVisible(true);
+                buttonDisponivel.setVisible(true);
+                buttonReativar.setVisible(true);
+                
+                break;
+            
+        }
+        
     }
 
     private void alteraQuantidade(int metodo) {
@@ -2669,49 +3247,7 @@ public class Inicio extends javax.swing.JFrame {
         edtQuantidade.setText(String.valueOf(valor));
 
     }
-    
-    private void listaComboGrafico() {
-        
-        comboGrafico.addItem("Produtos");
-        comboGrafico.addItem("Finanças");
-        
-        comboGrafico.setSelectedIndex(0);
-        
-    }
-    
-    private void verificaComboGrafico() {
-        
-        switch(comboGrafico.getSelectedIndex()) {
-            
-            case 0:
-                
-                atualizaGraficoInicio(1);
-                
-                break;
-                
-            case 1:
-                
-                atualizaGraficoInicio(2);
-                
-                break;
-  
-        }
-        
-    }
-    
-    private void eventCombo() {
-        
-        comboGrafico.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                verificaComboGrafico();
-           
-            }
-        });
-        
-    }
-    
+
     private void eventTable() {
         
         tblEstoque.getSelectionModel().addListSelectionListener(e -> {
@@ -2755,6 +3291,7 @@ public class Inicio extends javax.swing.JFrame {
         panelAdicionarCategoria.setVisible(false);
         resetaCamposAdicionarProduto();
         btnAdicionarProduto.setVisible(true);
+        inputPesquisarProduto.setVisible(true);
         
     }
     
@@ -2778,6 +3315,7 @@ public class Inicio extends javax.swing.JFrame {
         panelAdicionarProduto.setVisible(true);
         listaComboCategoriasAdicionarProduto();
         btnAdicionarProduto.setVisible(false);
+        inputPesquisarProduto.setVisible(false);
         
     }
     
@@ -2787,6 +3325,146 @@ public class Inicio extends javax.swing.JFrame {
         inputDescricaoCategoria.setText("");
         
     }
+    
+    private void eventCheck() {
+        
+        checkEdicao.addItemListener(new ItemListener() {
+            
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    
+                    inputNome.setEnabled(true);
+                    inputEmail.setEnabled(true);
+                    inputSenha.setEnabled(true);
+                    buttonSalvarPerfil.setEnabled(true);
+                    
+                } else {
+                    
+                    inputNome.setEnabled(false);
+                    inputEmail.setEnabled(false);
+                    inputSenha.setEnabled(false);
+                    buttonSalvarPerfil.setEnabled(false);
+                    
+                }
+                
+            }
+        });
+ 
+    }
+    
+    private void inserirMetodosComboReservas() {
+        
+        comboMetodoPesquisa.addItem("Código de reserva");
+        comboMetodoPesquisa.addItem("Nome da pessoa");
+        
+    }
+    
+    private void verificaComboReservas() {
+        
+        comboMetodoPesquisa.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                switch(comboMetodoPesquisa.getSelectedIndex()) {
+                    
+                    case 0:
+                        
+                        txtPesquisaReservas.setText("Pesquisar código");
+                        
+                        break;
+                        
+                    case 1:
+                        
+                        txtPesquisaReservas.setText("Pesquisar nome");
+                        
+                        break;
+                    
+                }
+                
+            }
+        });
+  
+    }
+    
+    private void listarReservas(int tipo, String produto) {
+        
+        panelItemReservas.removeAll();
+        
+        listaReservas = daoReserva.listar(tipo, produto);
+        
+        for (int i = 0; i < listaReservas.size(); i++) {
+  
+            panelItemReservas.add(new ItemReserva(listaReservas.get(i)));
+            
+        }
+        
+        panelItemReservas.revalidate();
+        panelItemReservas.repaint();
+        
+    }
+    
+    private void pesquisaReserva() {
+        
+        String produto = inputPesquisaReserva.getText().trim();
+        
+        int tipo = 0;
+        
+        switch(comboMetodoPesquisa.getSelectedIndex()) {
+            
+            case 0:
+                
+                tipo = 2;
+                
+                break;
+                
+            case 1:
+                
+                tipo = 3;
+                
+                break;
+            
+        }
+        
+        if (produto.isEmpty()) {
+            
+            tipo = 1;
+            produto = null;
+            
+        }
+        
+        listarReservas(tipo, produto);
+        
+    }
+    
+    private void tamanhoFrame() {
+        
+        if (telaCheia) {
+
+            telaCheia = false;
+
+            frame.setSize(tamanhoOriginal);
+            frame.setLocation(localizacaoOriginal);
+
+            redimensiona(false);
+
+        } else {
+
+            telaCheia = true;
+
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int width = screenSize.width;
+            int height = screenSize.height;
+
+            frame.setBounds(0, 0, width, height - 30);
+
+            redimensiona(true);
+
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarProduto;
@@ -2794,24 +3472,30 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel btnCloseNoti;
     private javax.swing.JLabel btnClosePopProduto;
     private javax.swing.JButton btnDiminuirQuantidade;
-    private button.ButtonEditar btnEditarProduto;
     private javax.swing.JPanel btnEstoque;
     private javax.swing.JPanel btnFechaInformacoesPerfil;
     private javax.swing.JPanel btnInicio;
     private javax.swing.JPanel btnLogout;
     private com.raven.swing.ButtonBadges btnNoti;
     private javax.swing.JPanel btnRelatorios;
-    private button.ButtonVerde btn_disp;
-    private button.MyButton btn_ind;
+    private javax.swing.JPanel btnReservas;
     private javax.swing.JButton buttonAdicionarCategoria;
+    private javax.swing.JButton buttonArquivar;
+    private javax.swing.JButton buttonAtualizar;
     private javax.swing.JPanel buttonClosePanelAdicionarProduto;
+    private button.ButtonVerde buttonDisponivel;
+    private javax.swing.JButton buttonEditarProduto;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private button.MyButton buttonIndisponivel;
+    private javax.swing.JButton buttonPesquisarReserva;
+    private javax.swing.JButton buttonReativar;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JButton buttonSalvarPerfil;
+    private javax.swing.JCheckBox checkEdicao;
     private javax.swing.JComboBox<String> comboAdicionarProdutoCategoria;
     private javax.swing.JComboBox<String> comboCategorias;
-    private javax.swing.JComboBox<String> comboGrafico;
+    private javax.swing.JComboBox<String> comboMetodoPesquisa;
     private javax.swing.JTextField edtDescricaoProduto;
     private javax.swing.JTextField edtNomeProduto;
     private javax.swing.JTextField edtQuantidade;
@@ -2826,6 +3510,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField inputNome;
     private javax.swing.JTextField inputNomeCategoria;
     private javax.swing.JTextField inputNomeProduto;
+    private javax.swing.JTextField inputPesquisaReserva;
+    private javax.swing.JTextField inputPesquisarProduto;
     private javax.swing.JTextField inputQuantidade;
     private javax.swing.JPasswordField inputSenha;
     private javax.swing.JTextField inputValor;
@@ -2850,7 +3536,18 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2859,11 +3556,10 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private button.MyButton myButton1;
+    private javax.swing.JScrollPane jScrollPane3;
     private telas.formatos.PanelBorder panelAcimaFrame;
     private javax.swing.JPanel panelAdicionarCategoria;
     private javax.swing.JPanel panelAdicionarProduto;
-    private telas.formatos.PanelBorder panelBorder6;
     private javax.swing.JPanel panelBtnClosePopProduto;
     private telas.formatos.PanelBorder panelButtons;
     private javax.swing.JPanel panelClose;
@@ -2876,6 +3572,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelFundoTab;
     private javax.swing.JPanel panelInformacoesPerfil;
     private javax.swing.JPanel panelInicio;
+    private telas.formatos.PanelItem panelItemReservas;
     private telas.formatos.PanelItem panelListRelatorios;
     private javax.swing.JPanel panelLogo;
     private javax.swing.JPanel panelMax;
@@ -2886,13 +3583,16 @@ public class Inicio extends javax.swing.JFrame {
     private telas.formatos.PanelBorder panelPerfil;
     private javax.swing.JPanel panelPopProduto;
     private javax.swing.JPanel panelRelatorios;
+    private javax.swing.JPanel panelReservas;
     private telas.formatos.PanelBorder panelSubNav;
     private javax.swing.JPanel panelTitulosRelatorios;
+    private javax.swing.JPanel panelTitulosRelatorios1;
     private com.raven.swing.progress.Progress progressDisponivel;
     private com.raven.swing.progress.Progress progressIndisponivel;
     private javax.swing.JRadioButton radio1;
     private javax.swing.JRadioButton radio2;
     private javax.swing.JRadioButton radio3;
+    private javax.swing.JRadioButton radio4;
     private javax.swing.JRadioButton radioDisponivel;
     private javax.swing.JRadioButton radioIndisponivel;
     private javax.swing.JScrollPane scrollRelatorios;
@@ -2911,7 +3611,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtNomeProduto2;
     private javax.swing.JLabel txtNomeProduto3;
     private javax.swing.JLabel txtNomeProduto4;
+    private javax.swing.JLabel txtPesquisaReservas;
     private javax.swing.JLabel txtRelatorios;
+    private javax.swing.JLabel txtReservas;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -34,6 +34,7 @@ public class ProdutosDAO {
                 produtos.setFk_id_categoria(rs.getInt("fk_id_categoria"));
                 produtos.setValor(rs.getFloat("valor"));
                 produtos.setDisponivel(rs.getInt("disponivel"));
+                produtos.setArquivado(rs.getInt("arquivado"));
                 
                 conjProdutos.add(produtos);
                 
