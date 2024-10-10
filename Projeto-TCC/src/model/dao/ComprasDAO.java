@@ -32,7 +32,6 @@ public class ComprasDAO {
                 compra.setId_compra(rs.getInt("id_compra"));
                 compra.setHorario(rs.getTime("horario"));
                 compra.setData(rs.getDate("data"));
-                compra.setFk_id_carrinho(rs.getInt("fk_id_carrinho"));
                 compra.setFk_id_usuario(rs.getInt("fk_id_usuario"));
                 compra.setCodigo(rs.getString("codigo"));
                 compra.setObs(rs.getString("obs"));

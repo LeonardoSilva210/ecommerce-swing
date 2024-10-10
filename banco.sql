@@ -1,15 +1,15 @@
 CREATE DATABASE  IF NOT EXISTS `tcc` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `tcc`;
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tcc
 -- ------------------------------------------------------
--- Server version	5.5.16
+-- Server version	5.5.5-10.4.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +23,7 @@ USE `tcc`;
 
 DROP TABLE IF EXISTS `carrinho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carrinho` (
   `id_carrinho` int(11) NOT NULL AUTO_INCREMENT,
   `quantidade` int(11) DEFAULT NULL,
@@ -54,7 +54,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `categorias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) DEFAULT NULL,
@@ -79,22 +79,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `compras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `compras` (
   `id_compra` int(11) NOT NULL AUTO_INCREMENT,
   `horario` time DEFAULT NULL,
   `data` date DEFAULT NULL,
   `fk_id_usuario` int(11) DEFAULT NULL,
-  `fk_id_carrinho` int(11) DEFAULT NULL,
   `obs` varchar(255) DEFAULT NULL,
   `ativo` tinyint(1) DEFAULT NULL,
   `codigo` varchar(255) NOT NULL,
-  `produtos` text,
+  `produtos` text DEFAULT NULL,
+  `valor_total` float DEFAULT NULL,
   PRIMARY KEY (`id_compra`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
-  KEY `fk_id_carrinho` (`fk_id_carrinho`),
-  CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`),
-  CONSTRAINT `compras_ibfk_3` FOREIGN KEY (`fk_id_carrinho`) REFERENCES `carrinho` (`id_carrinho`)
+  CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -104,7 +102,7 @@ CREATE TABLE `compras` (
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
-INSERT INTO `compras` VALUES (51,'14:30:00','2024-10-04',11,8,'Passarei por volta da tarde na loja',1,'C51','Brigadeiro,Suco'),(68,'10:00:00','2024-10-05',4,8,'Pedido para retirada.',1,'C61','Brigadeiro,Suco'),(69,'14:00:00','2024-10-06',5,9,'Favor entregar na portaria.',1,'C62','Bolo,Refrigerante'),(70,'16:30:00','2024-10-07',7,8,'Sem lactose, por favor.',1,'C63','Pizza,Salada'),(71,'19:00:00','2024-10-08',10,9,'Aguardo confirma‡Æo de entrega.',1,'C64','Coxinha,Sorvete');
+INSERT INTO `compras` VALUES (51,'14:30:00','2024-10-04',11,'Passarei por volta da tarde na loja',1,'C51','Brigadeiro,Suco',NULL),(68,'10:00:00','2024-10-05',4,'Pedido para retirada.',1,'C61','Brigadeiro,Suco',NULL),(69,'14:00:00','2024-10-06',5,'Favor entregar na portaria.',1,'C62','Bolo,Refrigerante',NULL),(70,'16:30:00','2024-10-07',7,'Sem lactose, por favor.',1,'C63','Pizza,Salada',NULL),(71,'19:00:00','2024-10-08',10,'Aguardo confirma‡Æo de entrega.',1,'C64','Coxinha,Sorvete',NULL);
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -135,16 +133,16 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `notificacoes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notificacoes` (
   `id_notificacao` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` int(3) DEFAULT NULL,
   `visto` tinyint(1) DEFAULT NULL,
-  `notificacao` text,
+  `notificacao` text DEFAULT NULL,
   `data` date DEFAULT NULL,
   `horario` time DEFAULT NULL,
   PRIMARY KEY (`id_notificacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +151,7 @@ CREATE TABLE `notificacoes` (
 
 LOCK TABLES `notificacoes` WRITE;
 /*!40000 ALTER TABLE `notificacoes` DISABLE KEYS */;
-INSERT INTO `notificacoes` VALUES (8,3,1,'1 Venda realizada','2024-10-05','22:02:45'),(9,1,1,'Perfil atualizado','2024-10-05','22:47:49'),(10,1,1,'Perfil atualizado','2024-10-05','23:36:11'),(11,1,1,'Perfil atualizado','2024-10-06','00:12:52'),(12,1,1,'Perfil atualizado','2024-10-06','00:13:14'),(13,3,1,'1 Venda realizada','2024-10-06','13:44:55'),(14,3,1,'1 Venda realizada','2024-10-06','16:50:52'),(15,3,1,'1 Venda realizada','2024-10-06','16:50:52'),(16,3,1,'1 Venda realizada','2024-10-06','16:50:52'),(17,3,1,'1 Venda realizada','2024-10-06','16:50:52');
+INSERT INTO `notificacoes` VALUES (8,3,1,'1 Venda realizada','2024-10-05','22:02:45'),(9,1,1,'Perfil atualizado','2024-10-05','22:47:49'),(10,1,1,'Perfil atualizado','2024-10-05','23:36:11'),(11,1,1,'Perfil atualizado','2024-10-06','00:12:52'),(12,1,1,'Perfil atualizado','2024-10-06','00:13:14'),(13,3,1,'1 Venda realizada','2024-10-06','13:44:55'),(14,3,1,'1 Venda realizada','2024-10-06','16:50:52'),(15,3,1,'1 Venda realizada','2024-10-06','16:50:52'),(16,3,1,'1 Venda realizada','2024-10-06','16:50:52'),(17,3,1,'1 Venda realizada','2024-10-06','16:50:52'),(18,1,1,'Perfil atualizado','2024-10-10','16:46:21'),(19,1,1,'Perfil atualizado','2024-10-10','17:01:00'),(20,1,1,'Perfil atualizado','2024-10-10','17:01:12'),(21,1,1,'Perfil atualizado','2024-10-10','17:02:39'),(22,1,1,'Perfil atualizado','2024-10-10','17:02:47'),(23,1,1,'Perfil atualizado','2024-10-10','17:02:53');
 /*!40000 ALTER TABLE `notificacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,17 +161,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `produtos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `produtos` (
   `id_produto` int(11) NOT NULL AUTO_INCREMENT,
   `nome_produto` varchar(45) DEFAULT NULL,
   `descricao_produto` varchar(100) DEFAULT NULL,
-  `disponivel` tinyint(1) DEFAULT '0',
+  `disponivel` tinyint(1) DEFAULT 0,
   `fk_id_categoria` int(11) DEFAULT NULL,
   `valor` float(10,2) DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL,
   `valor_custo` float DEFAULT NULL,
-  `arquivado` tinyint(1) DEFAULT '0',
+  `arquivado` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`id_produto`),
   KEY `fk_id_categoria` (`fk_id_categoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorias` (`id_categoria`)
@@ -196,7 +194,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
@@ -258,4 +256,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-06 20:00:42
+-- Dump completed on 2024-10-10 17:31:13

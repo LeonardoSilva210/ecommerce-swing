@@ -2130,8 +2130,10 @@ public class Inicio extends javax.swing.JFrame {
             
                                 txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
             
-                                    JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+                                JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
             
+                                listarNotificacoes();
+                                
                                 }   
                         
                         } else {
@@ -2142,6 +2144,26 @@ public class Inicio extends javax.swing.JFrame {
                         
                     }
  
+                } else {
+                    
+                    if(!nome.equals(GlobalAdmin.getNome()) || !email.equals(GlobalAdmin.getEmail())) {
+                        
+                        Usuarios usuario = new Usuarios(0, nome, email, GlobalAdmin.getSenha(), null, 0);
+            
+                        daoAdmin.atualizarPerfil(usuario);
+            
+                        GlobalAdmin.setEmail(email);
+                        GlobalAdmin.setNome(nome);
+                        GlobalAdmin.setSenha(senha);
+
+                        txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
+            
+                        JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+                        
+                        listarNotificacoes();
+                        
+                    }
+                    
                 }
             
             }

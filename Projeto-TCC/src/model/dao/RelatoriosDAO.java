@@ -25,14 +25,11 @@ public class RelatoriosDAO {
             
             stmt = conexao.prepareStatement("select compras.horario AS Horario,\n" +
             "compras.data AS Data,\n" +
-            "carrinho.quantidade AS Quantidade,\n" +
             "usuarios.nome AS Pessoa,\n" +
             "compras.id_compra, compras.produtos,\n" +
-            "compras.fk_id_usuario,\n" +
-            "compras.fk_id_carrinho\n" +
+            "compras.fk_id_usuario \n" +
             "from compras\n" +
             "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario\n" +
-            "inner join carrinho on compras.fk_id_carrinho = carrinho.id_carrinho\n" +
             "GROUP BY \n" +
             "compras.id_compra "
             + "ORDER BY data DESC, horario DESC;");
@@ -44,12 +41,10 @@ public class RelatoriosDAO {
                 Relatorios rela = new Relatorios();
                 
                 rela.setId_compra(rs.getInt("id_compra"));
-                rela.setFk_id_carrinho(rs.getInt("fk_id_carrinho"));
                 rela.setFk_id_usuario(rs.getInt("fk_id_usuario"));
                 rela.setHorario(rs.getTime("horario"));
                 rela.setData(rs.getDate("data"));
                 rela.setPessoa(rs.getString("pessoa"));
-                rela.setQuantidade(rs.getInt("quantidade"));
                 rela.setProduto(rs.getString("produtos"));
                 
                 list.add(rela);

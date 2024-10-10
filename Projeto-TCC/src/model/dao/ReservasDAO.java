@@ -26,12 +26,11 @@ public class ReservasDAO {
                 
                 case 1:
 
-                    stmt = conexao.prepareStatement("select compras.id_compra, compras.fk_id_usuario, compras.fk_id_carrinho, \n" +
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, \n" +
                     "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
-                    "usuarios.nome, carrinho.quantidade, carrinho.valor_total \n" +
+                    "usuarios.nome \n" +
                     "from compras\n" +
                     "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
-                    "inner join carrinho on compras.fk_id_carrinho = carrinho.id_carrinho \n" +
                     "where compras.ativo = 1 \n" +
                     "group by compras.id_compra ORDER BY compras.data DESC;");
                     
@@ -39,12 +38,11 @@ public class ReservasDAO {
                 
                 case 2:
 
-                    stmt = conexao.prepareStatement("select compras.id_compra, compras.fk_id_usuario, compras.fk_id_carrinho, \n" +
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, \n" +
                     "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
-                    "usuarios.nome, carrinho.quantidade, carrinho.valor_total \n" +
-                    "from compras\n" +
+                    "usuarios.nome \n" +
+                    "from compras \n" +
                     "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
-                    "inner join carrinho on compras.fk_id_carrinho = carrinho.id_carrinho \n" +
                     "where compras.ativo = 1 AND compras.codigo = ?\n" +
                     "group by compras.id_compra ORDER BY compras.data DESC;");
                     
@@ -54,12 +52,11 @@ public class ReservasDAO {
                 
                 case 3:
 
-                    stmt = conexao.prepareStatement("select compras.id_compra, compras.fk_id_usuario, compras.fk_id_carrinho, \n" +
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, \n" +
                     "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
-                    "usuarios.nome, carrinho.quantidade, carrinho.valor_total \n" +
-                    "from compras\n" +
+                    "usuarios.nome \n" +
+                    "from compras \n" +
                     "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
-                    "inner join carrinho on compras.fk_id_carrinho = carrinho.id_carrinho \n" +
                     "where compras.ativo = 1 AND usuarios.nome LIKE ?\n" +
                     "group by compras.id_compra ORDER BY compras.data DESC;");
                     
@@ -82,7 +79,6 @@ public class ReservasDAO {
                 reserva.setData(rs.getDate("data"));
                 reserva.setHorario(rs.getTime("horario"));
                 reserva.setObs(rs.getString("obs"));
-                reserva.setFk_id_carrinho(rs.getInt("fk_id_carrinho"));
                 reserva.setFk_id_usuario(rs.getInt("fk_id_usuario"));
                 reserva.setValor_total(rs.getFloat("valor_total"));
                 
