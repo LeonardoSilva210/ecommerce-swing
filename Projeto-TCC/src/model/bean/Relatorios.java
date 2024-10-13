@@ -3,12 +3,14 @@ package model.bean;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 
 public class Relatorios {
     
     private int id_compra, fk_id_usuario, fk_id_produto, fk_id_carrinho, quantidade;
-    private String produto, pessoa;
+    private String pessoa;
+    private List<Produtos> produtos;
     private Date data;
     private Time horario;
     private float valorUnitario, valorTotal;
@@ -16,19 +18,21 @@ public class Relatorios {
     public Relatorios() {
     }
 
-    public Relatorios(int id_compra, int fk_id_usuario, int fk_id_produto, int fk_id_carrinho, int quantidade, String produto, String pessoa, Date data, Time horario, float valorUnitario, float valorTotal) {
+    public Relatorios(int id_compra, int fk_id_usuario, int fk_id_produto, int fk_id_carrinho, int quantidade, String pessoa, List<Produtos> produtos, Date data, Time horario, float valorUnitario, float valorTotal) {
         this.id_compra = id_compra;
         this.fk_id_usuario = fk_id_usuario;
         this.fk_id_produto = fk_id_produto;
         this.fk_id_carrinho = fk_id_carrinho;
         this.quantidade = quantidade;
-        this.produto = produto;
         this.pessoa = pessoa;
+        this.produtos = produtos;
         this.data = data;
         this.horario = horario;
         this.valorUnitario = valorUnitario;
         this.valorTotal = valorTotal;
     }
+
+    
 
     public int getId_compra() {
         return id_compra;
@@ -70,14 +74,6 @@ public class Relatorios {
         this.quantidade = quantidade;
     }
 
-    public String getProduto() {
-        return produto;
-    }
-
-    public void setProduto(String produto) {
-        this.produto = produto;
-    }
-
     public String getPessoa() {
         return pessoa;
     }
@@ -117,7 +113,13 @@ public class Relatorios {
     public void setValorTotal(float valorTotal) {
         this.valorTotal = valorTotal;
     }
-    
-    
-    
+
+    public List<Produtos> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produtos> produtos) {
+        this.produtos = produtos;
+    }
+ 
 }

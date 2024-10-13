@@ -9,13 +9,16 @@ public class Reservas {
     
     private int id_compra, fk_id_usuario,fk_id_carrinho,ativo;
     private String pessoa, obs, codigo;
-    private List<String> produtos;
+    private List<Produtos> produtos;
     private List<Integer> quantidades;
     private float valor_total;
     private Date data;
     private Time horario;
 
-    public Reservas(int id_compra, int fk_id_usuario, int fk_id_carrinho, int ativo, String pessoa, String obs, String codigo, List<String> produtos, List<Integer> quantidades, float valor_total, Date data, Time horario) {
+    public Reservas() {
+    }
+
+    public Reservas(int id_compra, int fk_id_usuario, int fk_id_carrinho, int ativo, String pessoa, String obs, String codigo, List<Produtos> produtos, List<Integer> quantidades, float valor_total, Date data, Time horario) {
         this.id_compra = id_compra;
         this.fk_id_usuario = fk_id_usuario;
         this.fk_id_carrinho = fk_id_carrinho;
@@ -30,9 +33,8 @@ public class Reservas {
         this.horario = horario;
     }
 
-    public Reservas() {
-    }
-
+    
+    
     public int getId_compra() {
         return id_compra;
     }
@@ -89,14 +91,14 @@ public class Reservas {
         this.codigo = codigo;
     }
 
-    public List<String> getProdutos() {
+    public List<Produtos> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<String> produtos) {
+    public void setProdutos(List<Produtos> produtos) {
         this.produtos = produtos;
     }
-
+    
     public List<Integer> getQuantidades() {
         return quantidades;
     }
@@ -128,7 +130,7 @@ public class Reservas {
     public void setHorario(Time horario) {
         this.horario = horario;
     }
-    
+
     
     
 }

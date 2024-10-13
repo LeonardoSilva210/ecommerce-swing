@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.bean.Produtos;
 import model.bean.Reservas;
 
 
@@ -16,6 +17,7 @@ public class ReservasDAO {
     public List<Reservas> listar(int tipo, String pesquisa) {
         
         List<Reservas> list = new ArrayList();
+        ProdutosDAO daoProduto = new ProdutosDAO();
         
         try{
             
@@ -85,11 +87,14 @@ public class ReservasDAO {
                 String produtos = rs.getString("produtos");
                 
                 String[] divideProdutos = produtos.split("\\,");
-                List<String> listProduto = new ArrayList();
+                
+                List<Produtos> listProduto = new ArrayList();
+                Produtos produto;
                 
                 for (int i = 0; i < divideProdutos.length; i++) {
 
-                    listProduto.add(divideProdutos[i]);    
+                    produto = daoProduto.buscarProduto(Integer.parseInt(divideProdutos[i]));
+                    listProduto.add(produto);
                     
                 }
                 

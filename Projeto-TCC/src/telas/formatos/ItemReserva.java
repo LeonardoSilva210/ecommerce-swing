@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import model.bean.Produtos;
 import model.bean.Reservas;
 
 public class ItemReserva extends javax.swing.JPanel {
@@ -14,7 +15,7 @@ public class ItemReserva extends javax.swing.JPanel {
     private final Reservas reserva;
     private final String data, dataBr;
     private final String[] divideData;
-    private List<String> produtos = new ArrayList();
+    private List<Produtos> produtos = new ArrayList();
     String divideProduto;
     
     public ItemReserva(Reservas reserva) {
@@ -47,13 +48,13 @@ public class ItemReserva extends javax.swing.JPanel {
         
         txtQuantidade.setText(String.valueOf(quantidade));
         
-        txtValor.setText(String.valueOf(reserva.getValor_total()));
+        txtValor.setText("R$ " + String.valueOf(reserva.getValor_total()));
     
         divideProduto = "";
         
         for (int i = 0; i < produtos.size(); i++) {
             
-            divideProduto = divideProduto + produtos.get(i) + ",";
+            divideProduto = divideProduto + produtos.get(i).getNome_produto() + ",";
             
         }
         

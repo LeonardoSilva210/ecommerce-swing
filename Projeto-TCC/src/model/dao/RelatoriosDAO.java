@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.bean.Produtos;
 import model.bean.Relatorios;
 
 
@@ -16,6 +17,7 @@ public class RelatoriosDAO {
     public List<Relatorios> listar() {
         
         List<Relatorios> list = new ArrayList();
+        ProdutosDAO daoProduto = new ProdutosDAO();
         
         try{
             
@@ -25,6 +27,7 @@ public class RelatoriosDAO {
             
             stmt = conexao.prepareStatement("select compras.horario AS Horario,\n" +
             "compras.data AS Data,\n" +
+            "compras.valor_total,\n" +
             "usuarios.nome AS Pessoa,\n" +
             "compras.id_compra, compras.produtos,\n" +
             "compras.fk_id_usuario \n" +
@@ -45,7 +48,23 @@ public class RelatoriosDAO {
                 rela.setHorario(rs.getTime("horario"));
                 rela.setData(rs.getDate("data"));
                 rela.setPessoa(rs.getString("pessoa"));
-                rela.setProduto(rs.getString("produtos"));
+                rela.setValorTotal(rs.getFloat("valor_total"));
+                
+                String produtos = rs.getString("produtos");
+                
+                List<Produtos> listaProdutos = new ArrayList();
+                Produtos produto;
+                
+                String[] divideProdutos = produtos.split("\\,");
+                
+                for (int i = 0; i < divideProdutos.length; i++){
+                    
+                    produto = daoProduto.buscarProduto(Integer.parseInt(divideProdutos[i]));
+                    listaProdutos.add(produto);
+                    
+                }
+                
+                rela.setProdutos(listaProdutos);
                 
                 list.add(rela);
                 

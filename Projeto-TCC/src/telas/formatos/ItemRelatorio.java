@@ -4,20 +4,31 @@ package telas.formatos;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import model.bean.Produtos;
 import model.bean.Relatorios;
 
 public class ItemRelatorio extends javax.swing.JPanel {
 
+    String divideProduto = "";
+    
     public ItemRelatorio(Relatorios relatorio) {
         initComponents();
         
-        txtProduto.setText(relatorio.getProduto());
+        List<Produtos> produtos = relatorio.getProdutos();
+
+        for (int i = 0; i < produtos.size(); i++) {
+            
+            divideProduto = divideProduto + produtos.get(i).getNome_produto() + ",";
+           
+        }
+        
+        txtProduto.setText(divideProduto);
         txtHorario.setText(String.valueOf(relatorio.getHorario()));
         txtData.setText(String.valueOf(relatorio.getData()));
-        txtQuantidade.setText(String.valueOf(relatorio.getQuantidade()));
-        txtValorUni.setText("R$ " + String.valueOf(relatorio.getValorUnitario()));
+        txtQuantidade.setText(String.valueOf(produtos.size()));
         txtValorTotal.setText("R$ " + String.valueOf(relatorio.getValorTotal()));
         txtPessoa.setText(String.valueOf(relatorio.getPessoa()));
 
@@ -42,7 +53,7 @@ public class ItemRelatorio extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                JOptionPane.showMessageDialog(null, relatorio.getProduto(), relatorio.getPessoa(), JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, divideProduto, relatorio.getPessoa(), JOptionPane.INFORMATION_MESSAGE);
                 
             }
   
@@ -58,7 +69,6 @@ public class ItemRelatorio extends javax.swing.JPanel {
         txtHorario = new javax.swing.JLabel();
         txtData = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JLabel();
-        txtValorUni = new javax.swing.JLabel();
         txtValorTotal = new javax.swing.JLabel();
         txtPessoa = new javax.swing.JLabel();
 
@@ -92,12 +102,6 @@ public class ItemRelatorio extends javax.swing.JPanel {
         txtQuantidade.setText("Quantidade");
         add(txtQuantidade);
 
-        txtValorUni.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
-        txtValorUni.setForeground(new java.awt.Color(255, 255, 255));
-        txtValorUni.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtValorUni.setText("Valor Unitário");
-        add(txtValorUni);
-
         txtValorTotal.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtValorTotal.setForeground(new java.awt.Color(255, 255, 255));
         txtValorTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -119,6 +123,5 @@ public class ItemRelatorio extends javax.swing.JPanel {
     private javax.swing.JLabel txtProduto;
     private javax.swing.JLabel txtQuantidade;
     private javax.swing.JLabel txtValorTotal;
-    private javax.swing.JLabel txtValorUni;
     // End of variables declaration//GEN-END:variables
 }

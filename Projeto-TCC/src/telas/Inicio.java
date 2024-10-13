@@ -199,7 +199,6 @@ public class Inicio extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         panelReservas = new javax.swing.JPanel();
@@ -289,10 +288,28 @@ public class Inicio extends javax.swing.JFrame {
         panelAdicionarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, 30));
 
         panelAdicionarProduto.add(panelAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 880, 400));
+
+        inputValorCusto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputValorCustoKeyTyped(evt);
+            }
+        });
         panelAdicionarProduto.add(inputValorCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 169, 34));
         panelAdicionarProduto.add(inputNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 169, 34));
         panelAdicionarProduto.add(inputDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 169, 34));
+
+        inputValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputValorKeyTyped(evt);
+            }
+        });
         panelAdicionarProduto.add(inputValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 169, 34));
+
+        inputQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputQuantidadeKeyTyped(evt);
+            }
+        });
         panelAdicionarProduto.add(inputQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 169, 34));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1019,7 +1036,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(txtClose))
         );
 
-        panelNav.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 10, 40, 30));
+        panelNav.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 0, 40, 30));
 
         panelMin.setBackground(new java.awt.Color(51, 51, 51));
         panelMin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1061,7 +1078,7 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
         );
 
-        panelNav.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, 40, 30));
+        panelNav.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 40, 30));
 
         panelMax.setBackground(new java.awt.Color(51, 51, 51));
         panelMax.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1105,7 +1122,7 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(txtMax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        panelNav.add(panelMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, 40, 30));
+        panelNav.add(panelMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, 40, 30));
 
         txtLogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtLogo.setForeground(new java.awt.Color(255, 255, 255));
@@ -1426,11 +1443,6 @@ public class Inicio extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Quantidade");
         panelTitulosRelatorios.add(jLabel10);
-
-        jLabel11.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Valor Unitário");
-        panelTitulosRelatorios.add(jLabel11);
 
         jLabel8.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -2418,6 +2430,36 @@ public class Inicio extends javax.swing.JFrame {
         pesquisaReserva();
         
     }//GEN-LAST:event_buttonPesquisarReservaActionPerformed
+
+    private void inputValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputValorKeyTyped
+        
+        char letra = evt.getKeyChar();
+
+        if (!Character.isDigit(letra) && letra != '.') {
+            evt.consume(); 
+        }
+        
+    }//GEN-LAST:event_inputValorKeyTyped
+
+    private void inputValorCustoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputValorCustoKeyTyped
+       
+        char letra = evt.getKeyChar();
+
+        if (!Character.isDigit(letra) && letra != '.') {
+            evt.consume(); 
+        }
+        
+    }//GEN-LAST:event_inputValorCustoKeyTyped
+
+    private void inputQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputQuantidadeKeyTyped
+        
+        char letra = evt.getKeyChar();
+
+        if (!Character.isDigit(letra)) {
+            evt.consume(); 
+        }
+        
+    }//GEN-LAST:event_inputQuantidadeKeyTyped
 
     public static void main(String args[]) {
 
@@ -3543,7 +3585,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
