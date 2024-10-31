@@ -1,6 +1,7 @@
 package telas;
 
 import Globals.GlobalAdmin;
+import Globals.GlobalWhats;
 import com.raven.chart.ModelChart;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -35,6 +36,8 @@ import model.dao.NotificacoesDAO;
 import model.dao.ProdutosDAO;
 import model.dao.RelatoriosDAO;
 import model.dao.ReservasDAO;
+import model.dao.UsuariosDAO;
+import telas.formatos.ItemCliente;
 import telas.formatos.ItemNotificacao;
 import telas.formatos.ItemRelatorio;
 import telas.formatos.ItemReserva;
@@ -50,6 +53,7 @@ public class Inicio extends javax.swing.JFrame {
     private final EstoqueDAO daoEstoque = new EstoqueDAO();
     private final ComprasDAO daoCompra = new ComprasDAO();
     private final AdminsDAO daoAdmin = new AdminsDAO();
+    private final UsuariosDAO daoUsuario = new UsuariosDAO();
     private final ReservasDAO daoReserva = new ReservasDAO();
     private final EstoqueBean produtosAtual = new EstoqueBean();
     private List<Produtos> listaProdutos = new ArrayList();
@@ -57,6 +61,7 @@ public class Inicio extends javax.swing.JFrame {
     private List<Notificacoes> listaNotificacoes = new ArrayList();
     private List<Relatorios> listaRelatorios = new ArrayList();
     private List<Categorias> listaCategorias = new ArrayList();
+    private List<Usuarios> listaClientes = new ArrayList();
     private List<Compras> listaCompras = new ArrayList();
     private List<Reservas> listaReservas = new ArrayList();
     private boolean telaCheia = false, animacao = false;
@@ -157,6 +162,8 @@ public class Inicio extends javax.swing.JFrame {
         txtRelatorios = new javax.swing.JLabel();
         btnReservas = new javax.swing.JPanel();
         txtReservas = new javax.swing.JLabel();
+        btnClientes = new javax.swing.JPanel();
+        txtClientes = new javax.swing.JLabel();
         panelNav = new telas.formatos.PanelBorder();
         panelLogo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -202,7 +209,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         panelReservas = new javax.swing.JPanel();
-        panelTitulosRelatorios1 = new javax.swing.JPanel();
+        panelTitulosReservas = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -217,6 +224,27 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         panelItemReservas = new telas.formatos.PanelItem();
         buttonAtualizar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        panelClientes = new javax.swing.JPanel();
+        panelFundoPopCliente = new javax.swing.JPanel();
+        panelPopCliente = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        inputMensagem = new javax.swing.JTextArea();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
+        buttonPesquisarCliente = new javax.swing.JButton();
+        inputPesquisaCliente = new javax.swing.JTextField();
+        buttonAtualizarClientes = new javax.swing.JButton();
+        txtPesquisaCliente = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        panelListClientes = new telas.formatos.PanelItem();
+        panelTitulosClientes = new javax.swing.JPanel();
+        jLabele0 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        buttonAddMensagem = new javax.swing.JButton();
         panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -960,6 +988,39 @@ public class Inicio extends javax.swing.JFrame {
 
         panelButtons.add(btnReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 290, 40));
 
+        btnClientes.setBackground(new java.awt.Color(51, 51, 51));
+        btnClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClientesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnClientesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClientesMouseExited(evt);
+            }
+        });
+
+        txtClientes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtClientes.setForeground(new java.awt.Color(255, 255, 255));
+        txtClientes.setText("Clientes");
+
+        javax.swing.GroupLayout btnClientesLayout = new javax.swing.GroupLayout(btnClientes);
+        btnClientes.setLayout(btnClientesLayout);
+        btnClientesLayout.setHorizontalGroup(
+            btnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnClientesLayout.setVerticalGroup(
+            btnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panelButtons.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 40));
+
         panelAcimaFrame.add(panelButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 420));
 
         panelNav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1163,7 +1224,7 @@ public class Inicio extends javax.swing.JFrame {
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(grafInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))
+                .addComponent(grafInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE))
             .addGroup(panelInicioLayout.createSequentialGroup()
                 .addGap(340, 340, 340)
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1190,7 +1251,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(progressIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(grafInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab1", panelInicio);
@@ -1378,7 +1439,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(buttonIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         panelEstoqueLayout.setVerticalGroup(
             panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1411,7 +1472,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(radio2)
                     .addComponent(radio3)
                     .addComponent(radio4))
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab2", panelEstoque);
@@ -1472,7 +1533,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(panelTitulosRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(352, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
 
         tabInicio.addTab("tab3", panelRelatorios);
@@ -1480,44 +1541,44 @@ public class Inicio extends javax.swing.JFrame {
         panelReservas.setBackground(new java.awt.Color(51, 51, 51));
         panelReservas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelTitulosRelatorios1.setLayout(new java.awt.GridLayout(1, 0));
+        panelTitulosReservas.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel29.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("Pessoa");
-        panelTitulosRelatorios1.add(jLabel29);
+        panelTitulosReservas.add(jLabel29);
 
         jLabel30.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setText("Obs");
-        panelTitulosRelatorios1.add(jLabel30);
+        panelTitulosReservas.add(jLabel30);
 
         jLabel31.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("Data");
-        panelTitulosRelatorios1.add(jLabel31);
+        panelTitulosReservas.add(jLabel31);
 
         jLabel32.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setText("Horário");
-        panelTitulosRelatorios1.add(jLabel32);
+        panelTitulosReservas.add(jLabel32);
 
         jLabel33.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("Quantidade");
-        panelTitulosRelatorios1.add(jLabel33);
+        panelTitulosReservas.add(jLabel33);
 
         jLabel34.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setText("Valor Total");
-        panelTitulosRelatorios1.add(jLabel34);
+        panelTitulosReservas.add(jLabel34);
 
         jLabel35.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel35.setText("Produtos");
-        panelTitulosRelatorios1.add(jLabel35);
+        panelTitulosReservas.add(jLabel35);
 
-        panelReservas.add(panelTitulosRelatorios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 960, 50));
+        panelReservas.add(panelTitulosReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 960, 50));
 
         buttonPesquisarReserva.setBackground(new java.awt.Color(204, 204, 204));
         buttonPesquisarReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconSearch.png"))); // NOI18N
@@ -1548,7 +1609,7 @@ public class Inicio extends javax.swing.JFrame {
         txtPesquisaReservas.setForeground(new java.awt.Color(255, 255, 255));
         txtPesquisaReservas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtPesquisaReservas.setText("Pesquisar código");
-        panelReservas.add(txtPesquisaReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 600, 20));
+        panelReservas.add(txtPesquisaReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 970, 20));
 
         panelReservas.add(comboMetodoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 140, 40));
 
@@ -1566,6 +1627,195 @@ public class Inicio extends javax.swing.JFrame {
         panelReservas.add(buttonAtualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 40, 40));
 
         tabInicio.addTab("tab4", panelReservas);
+
+        panelClientes.setBackground(new java.awt.Color(51, 51, 51));
+        panelClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelFundoPopCliente.setOpaque(false);
+        panelFundoPopCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelFundoPopClienteMouseClicked(evt);
+            }
+        });
+
+        panelPopCliente.setBackground(new java.awt.Color(255, 255, 255));
+        panelPopCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelPopClienteMouseClicked(evt);
+            }
+        });
+
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        inputMensagem.setColumns(20);
+        inputMensagem.setRows(5);
+        inputMensagem.setText("Digite sua mensagem...");
+        inputMensagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        inputMensagem.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputMensagemFocusGained(evt);
+            }
+        });
+        jScrollPane5.setViewportView(inputMensagem);
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton5.setText("Salvar Mensagem");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconClose.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel38.setText("Aba WhatsApp");
+
+        javax.swing.GroupLayout panelPopClienteLayout = new javax.swing.GroupLayout(panelPopCliente);
+        panelPopCliente.setLayout(panelPopClienteLayout);
+        panelPopClienteLayout.setHorizontalGroup(
+            panelPopClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPopClienteLayout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addGroup(panelPopClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPopClienteLayout.createSequentialGroup()
+                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPopClienteLayout.createSequentialGroup()
+                        .addGroup(panelPopClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))))
+        );
+        panelPopClienteLayout.setVerticalGroup(
+            panelPopClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPopClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPopClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton6)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelFundoPopClienteLayout = new javax.swing.GroupLayout(panelFundoPopCliente);
+        panelFundoPopCliente.setLayout(panelFundoPopClienteLayout);
+        panelFundoPopClienteLayout.setHorizontalGroup(
+            panelFundoPopClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFundoPopClienteLayout.createSequentialGroup()
+                .addGap(202, 202, 202)
+                .addComponent(panelPopCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(284, Short.MAX_VALUE))
+        );
+        panelFundoPopClienteLayout.setVerticalGroup(
+            panelFundoPopClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFundoPopClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPopCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(398, Short.MAX_VALUE))
+        );
+
+        panelClientes.add(panelFundoPopCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 820));
+
+        buttonPesquisarCliente.setBackground(new java.awt.Color(204, 204, 204));
+        buttonPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconSearch.png"))); // NOI18N
+        buttonPesquisarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonPesquisarClienteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonPesquisarClienteMouseExited(evt);
+            }
+        });
+        buttonPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPesquisarClienteActionPerformed(evt);
+            }
+        });
+        panelClientes.add(buttonPesquisarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 40, 40));
+
+        inputPesquisaCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        inputPesquisaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputPesquisaClienteKeyTyped(evt);
+            }
+        });
+        panelClientes.add(inputPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 400, 40));
+
+        buttonAtualizarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRefresh.png"))); // NOI18N
+        buttonAtualizarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarClientesActionPerformed(evt);
+            }
+        });
+        panelClientes.add(buttonAtualizarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 40, 40));
+
+        txtPesquisaCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPesquisaCliente.setForeground(new java.awt.Color(255, 255, 255));
+        txtPesquisaCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtPesquisaCliente.setText("Pesquisar Cliente");
+        panelClientes.add(txtPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 970, 20));
+
+        jScrollPane4.setViewportView(panelListClientes);
+
+        panelClientes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 960, 300));
+
+        panelTitulosClientes.setLayout(new java.awt.GridLayout());
+
+        jLabele0.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabele0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabele0.setText("Nome");
+        panelTitulosClientes.add(jLabele0);
+
+        jLabel11.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("E-mail");
+        panelTitulosClientes.add(jLabel11);
+
+        jLabel36.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("WhatsApp");
+        panelTitulosClientes.add(jLabel36);
+
+        jLabel37.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("Ação");
+        panelTitulosClientes.add(jLabel37);
+
+        panelClientes.add(panelTitulosClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 960, 50));
+
+        buttonAddMensagem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonAddMensagem.setText("Adicionar Mensagem");
+        buttonAddMensagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddMensagemActionPerformed(evt);
+            }
+        });
+        panelClientes.add(buttonAddMensagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 250, 40));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        tabInicio.addTab("tab5", jPanel1);
 
         panelFundoTab.add(tabInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, -1));
 
@@ -2132,7 +2382,7 @@ public class Inicio extends javax.swing.JFrame {
 
                             if (resposta == JOptionPane.YES_OPTION) {
             
-                                Usuarios usuario = new Usuarios(0, nome, email, senha, null, 0);
+                                Usuarios usuario = new Usuarios(0, nome, email, senha, null, null, 0);
             
                                 daoAdmin.atualizarPerfil(usuario);
             
@@ -2160,7 +2410,7 @@ public class Inicio extends javax.swing.JFrame {
                     
                     if(!nome.equals(GlobalAdmin.getNome()) || !email.equals(GlobalAdmin.getEmail())) {
                         
-                        Usuarios usuario = new Usuarios(0, nome, email, GlobalAdmin.getSenha(), null, 0);
+                        Usuarios usuario = new Usuarios(0, nome, email, GlobalAdmin.getSenha(), null, null, 0);
             
                         daoAdmin.atualizarPerfil(usuario);
             
@@ -2461,6 +2711,123 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_inputQuantidadeKeyTyped
 
+    private void btnClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseClicked
+
+        trocaTab(5);
+        
+    }//GEN-LAST:event_btnClientesMouseClicked
+
+    private void btnClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseEntered
+
+        btnClientes.setBorder(new LineBorder(Color.white, 1));
+  
+    }//GEN-LAST:event_btnClientesMouseEntered
+
+    private void btnClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseExited
+
+        btnClientes.setBorder(null);
+
+    }//GEN-LAST:event_btnClientesMouseExited
+
+    private void buttonPesquisarClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarClienteMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPesquisarClienteMouseEntered
+
+    private void buttonPesquisarClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarClienteMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPesquisarClienteMouseExited
+
+    private void buttonPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarClienteActionPerformed
+        
+        String pesquisa = inputPesquisaCliente.getText().trim();
+        
+        listarClientes(3, pesquisa);
+        
+    }//GEN-LAST:event_buttonPesquisarClienteActionPerformed
+
+    private void inputPesquisaClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaClienteKeyTyped
+        
+        String pesquisa = inputPesquisaCliente.getText().trim();
+        
+        if (pesquisa.equals("")) {
+            
+            listarClientes(1, null);
+            
+        } else {
+            
+            listarClientes(2, pesquisa);
+            
+        }
+        
+    }//GEN-LAST:event_inputPesquisaClienteKeyTyped
+
+    private void buttonAtualizarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarClientesActionPerformed
+        
+        inputPesquisaCliente.setText("");
+        
+        listarClientes(1, null);
+        
+    }//GEN-LAST:event_buttonAtualizarClientesActionPerformed
+
+    private void buttonAddMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddMensagemActionPerformed
+        
+        panelFundoPopCliente.setVisible(true);
+        panelPopCliente.setVisible(true);
+        
+    }//GEN-LAST:event_buttonAddMensagemActionPerformed
+
+    private void inputMensagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputMensagemFocusGained
+        
+        if (inputMensagem.getText().trim().equals("Digite sua mensagem...")) {
+            
+            inputMensagem.setText("");
+            
+        }
+        
+    }//GEN-LAST:event_inputMensagemFocusGained
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+        if (inputMensagem.getText().trim().equals("")) {
+            
+            inputMensagem.setBorder(new LineBorder(Color.red, 1));
+            
+        } else {
+
+            GlobalWhats.setMensagem(inputMensagem.getText().trim());
+            JOptionPane.showMessageDialog(null, "Mensagem salva!");
+            
+            panelFundoPopCliente.setVisible(false);
+            panelPopCliente.setVisible(false);
+            
+        }
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        
+        panelFundoPopCliente.setVisible(false);
+        panelPopCliente.setVisible(false);
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void panelFundoPopClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFundoPopClienteMouseClicked
+        
+        panelFundoPopCliente.setVisible(false);
+        panelPopCliente.setVisible(false);
+        
+    }//GEN-LAST:event_panelFundoPopClienteMouseClicked
+
+    private void panelPopClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPopClienteMouseClicked
+
+        if (!inputMensagem.getText().trim().equals("")) {
+            
+            inputMensagem.setBorder(null);
+            
+        }
+        
+    }//GEN-LAST:event_panelPopClienteMouseClicked
+
     public static void main(String args[]) {
 
         try {
@@ -2500,6 +2867,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnEstoque.setBackground(new Color(51, 51, 51));
                 btnRelatorios.setBackground(new Color(51, 51, 51));
                 btnReservas.setBackground(new Color(51, 51, 51));
+                btnClientes.setBackground(new Color(51, 51, 51));
 
                 break;
 
@@ -2512,6 +2880,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnEstoque.setBackground(new Color(102, 102, 102));
                 btnRelatorios.setBackground(new Color(51, 51, 51));
                 btnReservas.setBackground(new Color(51, 51, 51));
+                btnClientes.setBackground(new Color(51, 51, 51));
 
                 break;
 
@@ -2524,6 +2893,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnEstoque.setBackground(new Color(51, 51, 51));
                 btnRelatorios.setBackground(new Color(102, 102, 102));
                 btnReservas.setBackground(new Color(51, 51, 51));
+                btnClientes.setBackground(new Color(51, 51, 51));
 
                 break;
             
@@ -2536,6 +2906,20 @@ public class Inicio extends javax.swing.JFrame {
                 btnEstoque.setBackground(new Color(51, 51, 51));
                 btnRelatorios.setBackground(new Color(51, 51, 51));
                 btnReservas.setBackground(new Color(102, 102, 102));
+                btnClientes.setBackground(new Color(51, 51, 51));
+
+                break;
+            
+            case 5:
+
+                tabInicio.setSelectedIndex(4);
+                atualiza(5);
+
+                btnInicio.setBackground(new Color(51, 51, 51));
+                btnEstoque.setBackground(new Color(51, 51, 51));
+                btnRelatorios.setBackground(new Color(51, 51, 51));
+                btnReservas.setBackground(new Color(51, 51, 51));
+                btnClientes.setBackground(new Color(102, 102, 102));
 
                 break;
 
@@ -2549,6 +2933,7 @@ public class Inicio extends javax.swing.JFrame {
         atualizaGraficoInicio(1);
         preencherTabela(1, null);
         listarRelatorios();
+        listarClientes(1, null);
         listarNotificacoes();
         progressInicio();
         radioSelecionado();
@@ -2570,6 +2955,8 @@ public class Inicio extends javax.swing.JFrame {
         panelAdicionarCategoria.setVisible(false);
         buttonArquivar.setVisible(false);
         buttonReativar.setVisible(false);
+        panelFundoPopCliente.setVisible(false);
+        panelPopCliente.setVisible(false);
         tamanhoOriginal = frame.getSize();
         localizacaoOriginal = frame.getLocation();
 
@@ -2578,6 +2965,8 @@ public class Inicio extends javax.swing.JFrame {
             txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
 
         }
+        
+        GlobalWhats.setMensagem("Digite sua mensagem...");
 
     }
 
@@ -2593,6 +2982,8 @@ public class Inicio extends javax.swing.JFrame {
 
             case 2:
 
+                
+                
                 break;
 
             case 3:
@@ -2604,6 +2995,12 @@ public class Inicio extends javax.swing.JFrame {
             case 4:
                 
                 
+                
+                break;
+            
+            case 5:
+                
+                listarClientes(1, null);
                 
                 break;
 
@@ -3055,6 +3452,43 @@ public class Inicio extends javax.swing.JFrame {
 
         }
 
+    }
+    
+    private void listarClientes(int tipo, String pesquisa) {
+        
+        panelListClientes.removeAll();
+        
+        switch(tipo) {
+            
+            case 1:
+                
+                listaClientes = daoUsuario.listar(1, null);
+                
+                break;
+                
+            case 2:
+                
+                listaClientes = daoUsuario.listar(2, pesquisa);
+                
+                break;
+            
+            case 3:
+                
+                listaClientes = daoUsuario.listar(3, pesquisa);
+                
+                break;
+            
+        }
+        
+        for (int i = 0; i < listaClientes.size(); i++) {
+            
+            panelListClientes.add(new ItemCliente(listaClientes.get(i)));
+            
+        }
+        
+        panelClientes.revalidate();
+        panelClientes.repaint();
+        
     }
 
     private void progressInicio() {
@@ -3533,6 +3967,7 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarProduto;
     private javax.swing.JButton btnAdicionarQuantidade;
+    private javax.swing.JPanel btnClientes;
     private javax.swing.JLabel btnCloseNoti;
     private javax.swing.JLabel btnClosePopProduto;
     private javax.swing.JButton btnDiminuirQuantidade;
@@ -3543,15 +3978,18 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.swing.ButtonBadges btnNoti;
     private javax.swing.JPanel btnRelatorios;
     private javax.swing.JPanel btnReservas;
+    private javax.swing.JButton buttonAddMensagem;
     private javax.swing.JButton buttonAdicionarCategoria;
     private javax.swing.JButton buttonArquivar;
     private javax.swing.JButton buttonAtualizar;
+    private javax.swing.JButton buttonAtualizarClientes;
     private javax.swing.JPanel buttonClosePanelAdicionarProduto;
     private button.ButtonVerde buttonDisponivel;
     private javax.swing.JButton buttonEditarProduto;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private button.MyButton buttonIndisponivel;
+    private javax.swing.JButton buttonPesquisarCliente;
     private javax.swing.JButton buttonPesquisarReserva;
     private javax.swing.JButton buttonReativar;
     private javax.swing.JButton buttonSalvar;
@@ -3571,9 +4009,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField inputDescricaoCategoria;
     private javax.swing.JTextField inputDescricaoProduto;
     private javax.swing.JTextField inputEmail;
+    private javax.swing.JTextArea inputMensagem;
     private javax.swing.JTextField inputNome;
     private javax.swing.JTextField inputNomeCategoria;
     private javax.swing.JTextField inputNomeProduto;
+    private javax.swing.JTextField inputPesquisaCliente;
     private javax.swing.JTextField inputPesquisaReserva;
     private javax.swing.JTextField inputPesquisarProduto;
     private javax.swing.JTextField inputQuantidade;
@@ -3583,8 +4023,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -3611,31 +4054,41 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabele0;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private telas.formatos.PanelBorder panelAcimaFrame;
     private javax.swing.JPanel panelAdicionarCategoria;
     private javax.swing.JPanel panelAdicionarProduto;
     private javax.swing.JPanel panelBtnClosePopProduto;
     private telas.formatos.PanelBorder panelButtons;
+    private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelClose;
     private javax.swing.JPanel panelEstoque;
     private javax.swing.JPanel panelFundoAdicionarProduto;
     private javax.swing.JPanel panelFundoCloseNoti;
     private javax.swing.JPanel panelFundoNoti;
     private javax.swing.JPanel panelFundoPerfil;
+    private javax.swing.JPanel panelFundoPopCliente;
     private javax.swing.JPanel panelFundoPopProdutoSelecionado;
     private javax.swing.JPanel panelFundoTab;
     private javax.swing.JPanel panelInformacoesPerfil;
     private javax.swing.JPanel panelInicio;
     private telas.formatos.PanelItem panelItemReservas;
+    private telas.formatos.PanelItem panelListClientes;
     private telas.formatos.PanelItem panelListRelatorios;
     private javax.swing.JPanel panelLogo;
     private javax.swing.JPanel panelMax;
@@ -3644,12 +4097,14 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelNoti;
     private telas.formatos.PanelItem panelNotificacoes;
     private telas.formatos.PanelBorder panelPerfil;
+    private javax.swing.JPanel panelPopCliente;
     private javax.swing.JPanel panelPopProduto;
     private javax.swing.JPanel panelRelatorios;
     private javax.swing.JPanel panelReservas;
     private telas.formatos.PanelBorder panelSubNav;
+    private javax.swing.JPanel panelTitulosClientes;
     private javax.swing.JPanel panelTitulosRelatorios;
-    private javax.swing.JPanel panelTitulosRelatorios1;
+    private javax.swing.JPanel panelTitulosReservas;
     private com.raven.swing.progress.Progress progressDisponivel;
     private com.raven.swing.progress.Progress progressIndisponivel;
     private javax.swing.JRadioButton radio1;
@@ -3662,6 +4117,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabInicio;
     private tabledark.TableDark tblEstoque;
     private javax.swing.JLabel txtBemVindo;
+    private javax.swing.JLabel txtClientes;
     private javax.swing.JLabel txtClose;
     private javax.swing.JLabel txtEstoque;
     private javax.swing.JLabel txtInicio;
@@ -3674,6 +4130,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtNomeProduto2;
     private javax.swing.JLabel txtNomeProduto3;
     private javax.swing.JLabel txtNomeProduto4;
+    private javax.swing.JLabel txtPesquisaCliente;
     private javax.swing.JLabel txtPesquisaReservas;
     private javax.swing.JLabel txtRelatorios;
     private javax.swing.JLabel txtReservas;

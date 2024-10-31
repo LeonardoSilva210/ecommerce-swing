@@ -93,7 +93,7 @@ CREATE TABLE `compras` (
   PRIMARY KEY (`id_compra`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
   CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`id_produto`),
   KEY `fk_id_categoria` (`fk_id_categoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorias` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +184,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (2,'Casquinha','Sorvete de chocolate',1,1,2.00,6,1,0),(3,'Brigadeiro','sabor moranho',1,1,3.00,7,2,0),(5,'Produto teste','produto para fazer teste',0,3,5.00,2,3,1),(7,'Camiseta','Camiseta de algodão',1,2,29.90,100,15,0),(8,'Calça Jeans','Calça jeans unissex',1,3,99.90,50,50,0),(9,'Tênis Esportivo','Tênis ideal para corrida',1,1,199.90,30,90.12,0),(10,'Teste','SOCIAL',0,2,111.00,6,12.9,1),(12,'Fone de Ouvido','Fone de ouvido sem fio',1,1,89.90,40,40,0),(13,'Sofa','Sofá de três lugares',1,2,899.90,5,300,0),(14,'Mesa de Jantar','Mesa de jantar de madeira',1,3,499.90,15,200,0),(16,'Lampada LED','Lâmpada LED 10W',0,2,19.90,200,10,0),(17,'Cafeteira','Cafeteira elétrica com jarra',1,3,199.90,15,100,0),(18,'Microondas','Microondas 20L',1,1,399.90,10,250,0),(19,'Xbox Series X','Console de videogame',1,2,4999.90,8,4500,0),(20,'Camiseta Esportiva','Camiseta de corrida',1,3,59.90,60,30,0),(21,'Balinha','docinha',1,1,12.80,100,15,0),(22,'ko','koko',0,3,80.00,80,97,1);
+INSERT INTO `produtos` VALUES (2,'Casquinha','Sorvete de chocolate',1,1,2.00,6,1,1),(3,'Brigadeiro','sabor moranho',1,1,3.00,7,2,0),(5,'Produto teste','produto para fazer teste',0,3,5.00,2,3,1),(7,'Camiseta','Camiseta de algodão',1,2,29.90,100,15,0),(8,'Calça Jeans','Calça jeans unissex',1,3,99.90,50,50,0),(9,'Tênis Esportivo','Tênis ideal para corrida',1,1,199.90,30,90.12,0),(10,'Teste','SOCIAL',0,2,111.00,6,12.9,1),(12,'Fone de Ouvido','Fone de ouvido sem fio',1,1,89.90,40,40,0),(13,'Sofa','Sofá de três lugares',1,2,899.90,5,300,0),(14,'Mesa de Jantar','Mesa de jantar de madeira',1,3,499.90,15,200,0),(16,'Lampada LED','Lâmpada LED 10W',0,2,19.90,200,10,0),(17,'Cafeteira','Cafeteira elétrica com jarra',1,3,199.90,15,100,0),(18,'Microondas','Microondas 20L',1,1,399.90,10,250,0),(19,'Xbox Series X','Console de videogame',1,2,4999.90,8,4500,0),(20,'Camiseta Esportiva','Camiseta de corrida',1,3,59.90,60,30,0),(21,'Balinha','docinha',1,1,12.80,100,15,0),(22,'ko','koko',0,3,80.00,80,97,1);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,8 +202,9 @@ CREATE TABLE `usuarios` (
   `senha` varchar(100) NOT NULL,
   `data_nascimento` date NOT NULL,
   `adm` tinyint(4) DEFAULT NULL,
+  `whatsapp` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +213,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (4,'Rober','bertin@gmail.com','123','2007-10-01',NULL),(5,'Junin','junin@gmail.com','123','2007-10-01',NULL),(7,'VInicius','vini@gmail.com','123','2007-10-01',NULL),(10,'teste','aninha@gmail.com','123','2007-10-01',NULL),(11,'Leozinho','leo@gmail.com','123','2007-10-01',1);
+INSERT INTO `usuarios` VALUES (4,'Rober','bertin@gmail.com','123','2007-10-01',NULL,'552796065709'),(5,'Junin','junin@gmail.com','123','2007-10-01',NULL,NULL),(7,'VInicius','vini@gmail.com','123','2007-10-01',NULL,'554384167577'),(10,'teste','aninha@gmail.com','123','2007-10-01',NULL,NULL),(11,'Leozinho','leo@gmail.com','123','2007-10-01',1,NULL),(12,'Junin','juninho@gmail.com','123','2003-11-03',NULL,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -256,4 +257,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-13 13:58:39
+-- Dump completed on 2024-10-30 23:24:08
