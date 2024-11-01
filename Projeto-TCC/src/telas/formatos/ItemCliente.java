@@ -16,6 +16,7 @@ import model.bean.Usuarios;
 public class ItemCliente extends javax.swing.JPanel {
 
     private final Usuarios usuario;
+    private final String formata;
 
     public ItemCliente(Usuarios usuario) {
         initComponents();
@@ -24,7 +25,20 @@ public class ItemCliente extends javax.swing.JPanel {
         
         txtNome.setText(usuario.getNome());
         txtEmail.setText(usuario.getEmail());
-        txtWhatsApp.setText(usuario.getWhatsapp());
+        
+        String whatts = usuario.getWhatsapp();
+        
+        String divide = "+" + whatts.substring(0, 2) + " ";
+
+        String ddd = whatts.substring(2, 4) + " ";
+        
+        String traco = whatts.substring(4, 8) + "-" + whatts.substring(8);
+        
+        String formatoFinal = divide + ddd + traco;
+
+        formata = formatoFinal;
+        
+        txtWhatsApp.setText(formata);
         
         this.addMouseListener(new MouseAdapter() {
             
@@ -47,7 +61,7 @@ public class ItemCliente extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                JOptionPane.showMessageDialog(null, usuario.getNome() + "\n" + usuario.getEmail() + "\n" + usuario.getWhatsapp());
+                JOptionPane.showMessageDialog(null, usuario.getNome() + "\n" + usuario.getEmail() + "\n" + formata);
                 
             }
   
@@ -84,7 +98,7 @@ public class ItemCliente extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(940, 40));
-        setLayout(new java.awt.GridLayout());
+        setLayout(new java.awt.GridLayout(1, 0));
 
         txtNome.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtNome.setForeground(new java.awt.Color(255, 255, 255));

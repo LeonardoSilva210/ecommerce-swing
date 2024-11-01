@@ -29,7 +29,7 @@ public class ItemRelatorio extends javax.swing.JPanel {
         txtHorario.setText(String.valueOf(relatorio.getHorario()));
         txtData.setText(String.valueOf(relatorio.getData()));
         txtQuantidade.setText(String.valueOf(produtos.size()));
-        txtValorTotal.setText("R$ " + String.valueOf(relatorio.getValorTotal()));
+        txtValorTotal.setText("R$ " + String.valueOf(relatorio.getValorTotal()).replace(".", ","));
         txtPessoa.setText(String.valueOf(relatorio.getPessoa()));
 
         this.addMouseListener(new MouseAdapter() {

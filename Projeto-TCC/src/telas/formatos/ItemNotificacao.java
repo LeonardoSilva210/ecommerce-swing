@@ -42,7 +42,7 @@ public class ItemNotificacao extends javax.swing.JPanel{
                     
                 case 3:
                     
-                    notificacao = noti.getNotificacao() + " - Valor total: R$";
+                    notificacao = noti.getNotificacao() + "\nValor total: R$ ";
                     
                     break;
                 

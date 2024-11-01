@@ -48,7 +48,7 @@ public class ItemReserva extends javax.swing.JPanel {
         
         txtQuantidade.setText(String.valueOf(quantidade));
         
-        txtValor.setText("R$ " + String.valueOf(reserva.getValor_total()));
+        txtValor.setText("R$ " + String.valueOf(reserva.getValor_total()).replace(".", ","));
     
         divideProduto = "";
         
@@ -81,7 +81,7 @@ public class ItemReserva extends javax.swing.JPanel {
                 
                 JOptionPane.showMessageDialog(null, "Nome: " + reserva.getPessoa() + "\n"
                         + "Produtos: " + divideProduto +"\n"
-                        + "Valor total: R$" + reserva.getValor_total() + "\n"
+                        + "Valor total: R$" + String.valueOf(reserva.getValor_total()).replace(".", ",") + "\n"
                         + "Obs: " + reserva.getObs() + "\n"
                         + "Cód: " + reserva.getCodigo()
                         , "Reserva", JOptionPane.INFORMATION_MESSAGE);
