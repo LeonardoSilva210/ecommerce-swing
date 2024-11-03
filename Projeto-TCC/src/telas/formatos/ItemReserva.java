@@ -24,16 +24,7 @@ public class ItemReserva extends javax.swing.JPanel {
         this.reserva = reserva;
 
         txtPessoa.setText(reserva.getPessoa());
-        
-        String obs = reserva.getObs();
-        
-        if (obs.equals("") || obs.equals("null")) {
-            
-            obs = "Sem obs";
-            
-        }
-        
-        txtObs.setText(obs);
+        txtObs.setText(reserva.getObs());
         
         data = String.valueOf(reserva.getData());
         divideData = data.split("\\-");

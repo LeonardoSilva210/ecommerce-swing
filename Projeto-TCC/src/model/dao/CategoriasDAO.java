@@ -13,14 +13,33 @@ import model.bean.Categorias;
 
 public class CategoriasDAO {
     
-    public List<Categorias> listar() {
+    public List<Categorias> listar(int tipo, String pesquisa) {
         
         List<Categorias> lista = new ArrayList();
         
         try{
            
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement("SELECT * FROM categorias");
+            
+            PreparedStatement stmt = null;
+            
+            switch(tipo) {
+                
+                case 1:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM categorias");
+                    
+                    break;
+                    
+                case 2:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM categorias WHERE nome LIKE ?");
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;
+                
+            }
+            
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()) {

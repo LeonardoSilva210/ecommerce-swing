@@ -37,6 +37,7 @@ import model.dao.ProdutosDAO;
 import model.dao.RelatoriosDAO;
 import model.dao.ReservasDAO;
 import model.dao.UsuariosDAO;
+import telas.formatos.ItemCategoria;
 import telas.formatos.ItemCliente;
 import telas.formatos.ItemNotificacao;
 import telas.formatos.ItemRelatorio;
@@ -61,6 +62,7 @@ public class Inicio extends javax.swing.JFrame {
     private List<Notificacoes> listaNotificacoes = new ArrayList();
     private List<Relatorios> listaRelatorios = new ArrayList();
     private List<Categorias> listaCategorias = new ArrayList();
+    private List<Categorias> listaCategorias2 = new ArrayList();
     private List<Usuarios> listaClientes = new ArrayList();
     private List<Compras> listaCompras = new ArrayList();
     private List<Reservas> listaReservas = new ArrayList();
@@ -164,6 +166,8 @@ public class Inicio extends javax.swing.JFrame {
         txtReservas = new javax.swing.JLabel();
         btnClientes = new javax.swing.JPanel();
         txtClientes = new javax.swing.JLabel();
+        btnCategorias = new javax.swing.JPanel();
+        txtCategorias = new javax.swing.JLabel();
         panelNav = new telas.formatos.PanelBorder();
         panelLogo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -224,7 +228,7 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         panelItemReservas = new telas.formatos.PanelItem();
         buttonAtualizar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        panelTabClientes = new javax.swing.JPanel();
         panelClientes = new javax.swing.JPanel();
         panelFundoPopCliente = new javax.swing.JPanel();
         panelPopCliente = new javax.swing.JPanel();
@@ -245,6 +249,18 @@ public class Inicio extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         buttonAddMensagem = new javax.swing.JButton();
+        panelCategorias = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        panelListCategorias = new telas.formatos.PanelItem();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        buttonAtualizarCategorias = new javax.swing.JButton();
+        buttonPesquisarCategorias = new javax.swing.JButton();
+        inputPesquisaCategorias = new javax.swing.JTextField();
+        btnAdicionarCategoria = new javax.swing.JButton();
         panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -1021,6 +1037,39 @@ public class Inicio extends javax.swing.JFrame {
 
         panelButtons.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 290, 40));
 
+        btnCategorias.setBackground(new java.awt.Color(51, 51, 51));
+        btnCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCategoriasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCategoriasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCategoriasMouseExited(evt);
+            }
+        });
+
+        txtCategorias.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtCategorias.setForeground(new java.awt.Color(255, 255, 255));
+        txtCategorias.setText("Categorias");
+
+        javax.swing.GroupLayout btnCategoriasLayout = new javax.swing.GroupLayout(btnCategorias);
+        btnCategorias.setLayout(btnCategoriasLayout);
+        btnCategoriasLayout.setHorizontalGroup(
+            btnCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnCategoriasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnCategoriasLayout.setVerticalGroup(
+            btnCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panelButtons.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 290, 40));
+
         panelAcimaFrame.add(panelButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 420));
 
         panelNav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1771,7 +1820,7 @@ public class Inicio extends javax.swing.JFrame {
 
         panelClientes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 960, 300));
 
-        panelTitulosClientes.setLayout(new java.awt.GridLayout());
+        panelTitulosClientes.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabele0.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabele0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1796,6 +1845,7 @@ public class Inicio extends javax.swing.JFrame {
         panelClientes.add(panelTitulosClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 960, 50));
 
         buttonAddMensagem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonAddMensagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconAdd.png"))); // NOI18N
         buttonAddMensagem.setText("Adicionar Mensagem");
         buttonAddMensagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1804,18 +1854,91 @@ public class Inicio extends javax.swing.JFrame {
         });
         panelClientes.add(buttonAddMensagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 250, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelTabClientesLayout = new javax.swing.GroupLayout(panelTabClientes);
+        panelTabClientes.setLayout(panelTabClientesLayout);
+        panelTabClientesLayout.setHorizontalGroup(
+            panelTabClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelTabClientesLayout.setVerticalGroup(
+            panelTabClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        tabInicio.addTab("tab5", jPanel1);
+        tabInicio.addTab("tab5", panelTabClientes);
+
+        panelCategorias.setBackground(new java.awt.Color(51, 51, 51));
+        panelCategorias.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane6.setBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane6.setViewportView(panelListCategorias);
+
+        panelCategorias.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 149, 960, 300));
+
+        jPanel3.setLayout(new java.awt.GridLayout());
+
+        jLabel39.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel39.setText("Nome");
+        jPanel3.add(jLabel39);
+
+        jLabel40.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel40.setText("Descrição");
+        jPanel3.add(jLabel40);
+
+        jLabel41.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setText("Ações");
+        jPanel3.add(jLabel41);
+
+        panelCategorias.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 960, 50));
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel42.setText("Categorias");
+        panelCategorias.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 440, -1));
+
+        buttonAtualizarCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRefresh.png"))); // NOI18N
+        buttonAtualizarCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarCategoriasActionPerformed(evt);
+            }
+        });
+        panelCategorias.add(buttonAtualizarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 40, 40));
+
+        buttonPesquisarCategorias.setBackground(new java.awt.Color(204, 204, 204));
+        buttonPesquisarCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconSearch.png"))); // NOI18N
+        buttonPesquisarCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonPesquisarCategoriasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonPesquisarCategoriasMouseExited(evt);
+            }
+        });
+        buttonPesquisarCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPesquisarCategoriasActionPerformed(evt);
+            }
+        });
+        panelCategorias.add(buttonPesquisarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 40, 40));
+
+        inputPesquisaCategorias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        inputPesquisaCategorias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputPesquisaCategoriasKeyTyped(evt);
+            }
+        });
+        panelCategorias.add(inputPesquisaCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 400, 40));
+
+        btnAdicionarCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAdicionarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconAdd.png"))); // NOI18N
+        btnAdicionarCategoria.setText("Adicionar Categoria");
+        panelCategorias.add(btnAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, 220, 40));
+
+        tabInicio.addTab("tab6", panelCategorias);
 
         panelFundoTab.add(tabInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, -1));
 
@@ -2609,7 +2732,7 @@ public class Inicio extends javax.swing.JFrame {
             edtValorProduto.setText(String.valueOf(produtosAtual.getValor()));
             edtValorCustoProduto.setText(String.valueOf(produtosAtual.getValor_custo()));
 
-            listaCategorias = daoCategoria.listar();
+            listaCategorias = daoCategoria.listar(1, null);
 
             comboCategorias.removeAllItems();
 
@@ -2828,6 +2951,54 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_panelPopClienteMouseClicked
 
+    private void btnCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoriasMouseClicked
+        
+        trocaTab(6);
+        
+    }//GEN-LAST:event_btnCategoriasMouseClicked
+
+    private void btnCategoriasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoriasMouseEntered
+        
+        btnCategorias.setBorder(new LineBorder(Color.white, 1));
+        
+    }//GEN-LAST:event_btnCategoriasMouseEntered
+
+    private void btnCategoriasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoriasMouseExited
+        
+        btnCategorias.setBorder(null);
+        
+    }//GEN-LAST:event_btnCategoriasMouseExited
+
+    private void buttonAtualizarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarCategoriasActionPerformed
+        
+        listarCategorias(1, null);
+        
+    }//GEN-LAST:event_buttonAtualizarCategoriasActionPerformed
+
+    private void inputPesquisaCategoriasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaCategoriasKeyTyped
+       
+        String pesquisa = inputPesquisaCategorias.getText().trim();
+        
+        listarCategorias(2, pesquisa);
+        
+    }//GEN-LAST:event_inputPesquisaCategoriasKeyTyped
+
+    private void buttonPesquisarCategoriasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarCategoriasMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPesquisarCategoriasMouseEntered
+
+    private void buttonPesquisarCategoriasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarCategoriasMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPesquisarCategoriasMouseExited
+
+    private void buttonPesquisarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarCategoriasActionPerformed
+        
+        String pesquisa = inputPesquisaCategorias.getText().trim();
+        
+        listarCategorias(2, pesquisa);
+        
+    }//GEN-LAST:event_buttonPesquisarCategoriasActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -2868,6 +3039,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnRelatorios.setBackground(new Color(51, 51, 51));
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(51, 51, 51));
+                btnCategorias.setBackground(new Color(51, 51, 51));
 
                 break;
 
@@ -2881,6 +3053,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnRelatorios.setBackground(new Color(51, 51, 51));
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(51, 51, 51));
+                btnCategorias.setBackground(new Color(51, 51, 51));
 
                 break;
 
@@ -2894,6 +3067,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnRelatorios.setBackground(new Color(102, 102, 102));
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(51, 51, 51));
+                btnCategorias.setBackground(new Color(51, 51, 51));
 
                 break;
             
@@ -2907,6 +3081,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnRelatorios.setBackground(new Color(51, 51, 51));
                 btnReservas.setBackground(new Color(102, 102, 102));
                 btnClientes.setBackground(new Color(51, 51, 51));
+                btnCategorias.setBackground(new Color(51, 51, 51));
 
                 break;
             
@@ -2920,6 +3095,21 @@ public class Inicio extends javax.swing.JFrame {
                 btnRelatorios.setBackground(new Color(51, 51, 51));
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(102, 102, 102));
+                btnCategorias.setBackground(new Color(51, 51, 51));
+
+                break;
+            
+            case 6:
+
+                tabInicio.setSelectedIndex(5);
+                atualiza(6);
+
+                btnInicio.setBackground(new Color(51, 51, 51));
+                btnEstoque.setBackground(new Color(51, 51, 51));
+                btnRelatorios.setBackground(new Color(51, 51, 51));
+                btnReservas.setBackground(new Color(51, 51, 51));
+                btnClientes.setBackground(new Color(51, 51, 51));
+                btnCategorias.setBackground(new Color(102, 102, 102));
 
                 break;
 
@@ -2934,6 +3124,7 @@ public class Inicio extends javax.swing.JFrame {
         preencherTabela(1, null);
         listarRelatorios();
         listarClientes(1, null);
+        listarCategorias(1, null);
         listarNotificacoes();
         progressInicio();
         radioSelecionado();
@@ -3001,6 +3192,12 @@ public class Inicio extends javax.swing.JFrame {
             case 5:
                 
                 listarClientes(1, null);
+                
+                break;
+            
+            case 6:
+                
+                listarCategorias(1, null);
                 
                 break;
 
@@ -3490,6 +3687,37 @@ public class Inicio extends javax.swing.JFrame {
         panelClientes.repaint();
         
     }
+    
+    private void listarCategorias(int tipo, String pesquisa) {
+        
+        panelListCategorias.removeAll();
+        
+        switch(tipo) {
+            
+            case 1:
+                
+                listaCategorias2 = daoCategoria.listar(1, null);
+                
+                break;
+            
+            case 2:
+                
+                listaCategorias2 = daoCategoria.listar(2, pesquisa);
+                
+                break;
+
+        }
+        
+        for (int i = 0; i < listaCategorias2.size(); i++) {
+            
+            panelListCategorias.add(new ItemCategoria(listaCategorias2.get(i)));
+            
+        }
+        
+        panelCategorias.revalidate();
+        panelCategorias.repaint();
+        
+    }
 
     private void progressInicio() {
 
@@ -3797,7 +4025,7 @@ public class Inicio extends javax.swing.JFrame {
         
        comboAdicionarProdutoCategoria.removeAllItems();
         
-       listaCategorias = daoCategoria.listar();
+       listaCategorias = daoCategoria.listar(1, null);
        
        for (int i = 0; i < listaCategorias.size(); i++) {
            
@@ -3965,8 +4193,10 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionarCategoria;
     private javax.swing.JButton btnAdicionarProduto;
     private javax.swing.JButton btnAdicionarQuantidade;
+    private javax.swing.JPanel btnCategorias;
     private javax.swing.JPanel btnClientes;
     private javax.swing.JLabel btnCloseNoti;
     private javax.swing.JLabel btnClosePopProduto;
@@ -3982,6 +4212,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton buttonAdicionarCategoria;
     private javax.swing.JButton buttonArquivar;
     private javax.swing.JButton buttonAtualizar;
+    private javax.swing.JButton buttonAtualizarCategorias;
     private javax.swing.JButton buttonAtualizarClientes;
     private javax.swing.JPanel buttonClosePanelAdicionarProduto;
     private button.ButtonVerde buttonDisponivel;
@@ -3989,6 +4220,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private button.MyButton buttonIndisponivel;
+    private javax.swing.JButton buttonPesquisarCategorias;
     private javax.swing.JButton buttonPesquisarCliente;
     private javax.swing.JButton buttonPesquisarReserva;
     private javax.swing.JButton buttonReativar;
@@ -4013,6 +4245,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField inputNome;
     private javax.swing.JTextField inputNomeCategoria;
     private javax.swing.JTextField inputNomeProduto;
+    private javax.swing.JTextField inputPesquisaCategorias;
     private javax.swing.JTextField inputPesquisaCliente;
     private javax.swing.JTextField inputPesquisaReserva;
     private javax.swing.JTextField inputPesquisarProduto;
@@ -4057,24 +4290,30 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabele0;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private telas.formatos.PanelBorder panelAcimaFrame;
     private javax.swing.JPanel panelAdicionarCategoria;
     private javax.swing.JPanel panelAdicionarProduto;
     private javax.swing.JPanel panelBtnClosePopProduto;
     private telas.formatos.PanelBorder panelButtons;
+    private javax.swing.JPanel panelCategorias;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelClose;
     private javax.swing.JPanel panelEstoque;
@@ -4088,6 +4327,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelInformacoesPerfil;
     private javax.swing.JPanel panelInicio;
     private telas.formatos.PanelItem panelItemReservas;
+    private telas.formatos.PanelItem panelListCategorias;
     private telas.formatos.PanelItem panelListClientes;
     private telas.formatos.PanelItem panelListRelatorios;
     private javax.swing.JPanel panelLogo;
@@ -4102,6 +4342,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelRelatorios;
     private javax.swing.JPanel panelReservas;
     private telas.formatos.PanelBorder panelSubNav;
+    private javax.swing.JPanel panelTabClientes;
     private javax.swing.JPanel panelTitulosClientes;
     private javax.swing.JPanel panelTitulosRelatorios;
     private javax.swing.JPanel panelTitulosReservas;
@@ -4117,6 +4358,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabInicio;
     private tabledark.TableDark tblEstoque;
     private javax.swing.JLabel txtBemVindo;
+    private javax.swing.JLabel txtCategorias;
     private javax.swing.JLabel txtClientes;
     private javax.swing.JLabel txtClose;
     private javax.swing.JLabel txtEstoque;

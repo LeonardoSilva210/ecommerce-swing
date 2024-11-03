@@ -24,31 +24,27 @@ public class ItemNotificacao extends javax.swing.JPanel{
         @Override
         public void mouseClicked(MouseEvent e) {
             
-            String notificacao = "";
-            
             switch(noti.getTipo()) {
                 
                 case 1:
                     
-                    notificacao = noti.getNotificacao();
+                    JOptionPane.showMessageDialog(null, noti.getNotificacao());
                     
                     break;
                     
                 case 2:
                     
-                    notificacao = noti.getNotificacao();
+                    JOptionPane.showMessageDialog(null, noti.getNotificacao());
                     
                     break;
                     
                 case 3:
                     
-                    notificacao = noti.getNotificacao() + "\nValor total: R$ ";
+                    JOptionPane.showMessageDialog(null, noti.getNotificacao());
                     
                     break;
                 
             }
-            
-            JOptionPane.showMessageDialog(null, notificacao);
 
         }
 
