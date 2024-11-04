@@ -16,7 +16,7 @@ import model.bean.Usuarios;
 public class ItemCliente extends javax.swing.JPanel {
 
     private final Usuarios usuario;
-    private final String formata;
+    private String formata;
 
     public ItemCliente(Usuarios usuario) {
         initComponents();
@@ -27,7 +27,7 @@ public class ItemCliente extends javax.swing.JPanel {
         txtEmail.setText(usuario.getEmail());
         
         String whatts = usuario.getWhatsapp();
-        
+            
         String divide = "+" + whatts.substring(0, 2) + " ";
 
         String ddd = whatts.substring(2, 4) + " ";
@@ -46,16 +46,14 @@ public class ItemCliente extends javax.swing.JPanel {
             public void mouseEntered(MouseEvent e) {
                
                 setBorder(new LineBorder(Color.white, 1));
-                
-                
+ 
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 
                 setBorder(null);
-                
-                
+     
             }
 
             @Override
@@ -97,7 +95,7 @@ public class ItemCliente extends javax.swing.JPanel {
         btnEnviar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
-        setPreferredSize(new java.awt.Dimension(940, 40));
+        setPreferredSize(new java.awt.Dimension(920, 40));
         setLayout(new java.awt.GridLayout(1, 0));
 
         txtNome.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N

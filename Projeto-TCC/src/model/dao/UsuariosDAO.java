@@ -34,15 +34,17 @@ public class UsuariosDAO {
                     
                 case 2:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE nome LIKE ?");
-                    stmt.setString(1, "%" + pesquisa + "%");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ? AND nome LIKE ?");
+                    stmt.setString(1, "");
+                    stmt.setString(2, "%" + pesquisa + "%");
                     
                     break;
                 
                 case 3:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE nome = ?");
-                    stmt.setString(1, pesquisa);
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ? AND nome = ?");
+                    stmt.setString(1, "");
+                    stmt.setString(2, pesquisa);
                     
                     break;
                 

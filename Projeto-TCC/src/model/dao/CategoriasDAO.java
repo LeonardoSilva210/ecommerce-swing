@@ -87,4 +87,23 @@ public class CategoriasDAO {
         
     }
     
+    public void arquivar(Categorias categoria) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE categorias set arquivado = 1 WHERE id_categoria = ?");
+            stmt.setInt(1, categoria.getId_categoria());
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
 }

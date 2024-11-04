@@ -250,6 +250,12 @@ public class Inicio extends javax.swing.JFrame {
         panelPopCategoria = new telas.formatos.PanelBorder();
         jButton2 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
+        btnCriarCategoria = new javax.swing.JButton();
+        inputNomeCategoria = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        inputDescricaoCategoria = new javax.swing.JTextArea();
+        jLabel44 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         panelListCategorias = new telas.formatos.PanelItem();
         jPanel3 = new javax.swing.JPanel();
@@ -478,7 +484,7 @@ public class Inicio extends javax.swing.JFrame {
                 buttonSalvarPerfilActionPerformed(evt);
             }
         });
-        panelInformacoesPerfil.add(buttonSalvarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 210, 40));
+        panelInformacoesPerfil.add(buttonSalvarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 270, 40));
 
         inputEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputEmail.setEnabled(false);
@@ -1868,6 +1874,30 @@ public class Inicio extends javax.swing.JFrame {
         jLabel24.setText("Adicionar Categoria");
         panelPopCategoria.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 640, -1));
 
+        btnCriarCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCriarCategoria.setText("Adicionar");
+        btnCriarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarCategoriaActionPerformed(evt);
+            }
+        });
+        panelPopCategoria.add(btnCriarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 310, 50));
+        panelPopCategoria.add(inputNomeCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 310, 40));
+
+        jLabel43.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel43.setText("Descrição");
+        panelPopCategoria.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
+
+        inputDescricaoCategoria.setColumns(20);
+        inputDescricaoCategoria.setRows(5);
+        jScrollPane7.setViewportView(inputDescricaoCategoria);
+
+        panelPopCategoria.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 310, 110));
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel44.setText("Nome");
+        panelPopCategoria.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
+
         javax.swing.GroupLayout panelFundoPopCategoriaLayout = new javax.swing.GroupLayout(panelFundoPopCategoria);
         panelFundoPopCategoria.setLayout(panelFundoPopCategoriaLayout);
         panelFundoPopCategoriaLayout.setHorizontalGroup(
@@ -2851,16 +2881,8 @@ public class Inicio extends javax.swing.JFrame {
     private void inputPesquisaClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaClienteKeyTyped
         
         String pesquisa = inputPesquisaCliente.getText().trim();
-        
-        if (pesquisa.equals("")) {
-            
-            listarClientes(1, null);
-            
-        } else {
-            
-            listarClientes(2, pesquisa);
-            
-        }
+   
+        listarClientes(2, pesquisa);
         
     }//GEN-LAST:event_inputPesquisaClienteKeyTyped
 
@@ -2951,6 +2973,8 @@ public class Inicio extends javax.swing.JFrame {
 
     private void buttonAtualizarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarCategoriasActionPerformed
         
+        inputPesquisaCategorias.setText("");
+        
         listarCategorias(1, null);
         
     }//GEN-LAST:event_buttonAtualizarCategoriasActionPerformed
@@ -3029,6 +3053,31 @@ public class Inicio extends javax.swing.JFrame {
         panelPopCategoria.setVisible(false);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnCriarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarCategoriaActionPerformed
+        
+        String nome = inputNomeCategoria.getText().trim();
+        String descricao = inputDescricaoCategoria.getText().trim();
+        
+        if (nome.isEmpty() || descricao.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            
+        } else {
+            
+            daoCategoria.adicionar(new Categorias(nome, descricao, 0));
+        
+            inputNomeCategoria.setText("");
+            inputDescricaoCategoria.setText("");
+        
+            JOptionPane.showMessageDialog(null, "Categoria criada com sucesso!");
+            inputPesquisaCategorias.setText("");
+            
+            listarCategorias(1, null);
+            
+        }
+        
+    }//GEN-LAST:event_btnCriarCategoriaActionPerformed
 
     public static void main(String args[]) {
 
@@ -3737,7 +3786,7 @@ public class Inicio extends javax.swing.JFrame {
         
     }
     
-    private void listarCategorias(int tipo, String pesquisa) {
+    public void listarCategorias(int tipo, String pesquisa) {
         
         panelListCategorias.removeAll();
         
@@ -4241,6 +4290,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel btnClientes;
     private javax.swing.JLabel btnCloseNoti;
     private javax.swing.JLabel btnClosePopProduto;
+    private javax.swing.JButton btnCriarCategoria;
     private javax.swing.JButton btnDiminuirQuantidade;
     private javax.swing.JPanel btnEstoque;
     private javax.swing.JPanel btnFechaInformacoesPerfil;
@@ -4280,10 +4330,12 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imageAvatar1;
     private com.raven.avatar.ImageAvatar imageAvatar2;
+    private javax.swing.JTextArea inputDescricaoCategoria;
     private javax.swing.JTextField inputDescricaoProduto;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextArea inputMensagem;
     private javax.swing.JTextField inputNome;
+    private javax.swing.JTextField inputNomeCategoria;
     private javax.swing.JTextField inputNomeProduto;
     private javax.swing.JTextField inputPesquisaCategorias;
     private javax.swing.JTextField inputPesquisaCliente;
@@ -4335,6 +4387,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4348,6 +4402,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private telas.formatos.PanelBorder panelAcimaFrame;
     private javax.swing.JPanel panelAdicionarProduto;
     private javax.swing.JPanel panelBtnClosePopProduto;
