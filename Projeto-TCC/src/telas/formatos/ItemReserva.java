@@ -99,7 +99,7 @@ public class ItemReserva extends javax.swing.JPanel {
         setBackground(new java.awt.Color(51, 51, 51));
         setMinimumSize(new java.awt.Dimension(690, 19));
         setPreferredSize(new java.awt.Dimension(940, 40));
-        setLayout(new java.awt.GridLayout());
+        setLayout(new java.awt.GridLayout(1, 0));
 
         txtPessoa.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtPessoa.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,7 +110,7 @@ public class ItemReserva extends javax.swing.JPanel {
         txtObs.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtObs.setForeground(new java.awt.Color(255, 255, 255));
         txtObs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtObs.setText("Obs");
+        txtObs.setText("Observação");
         add(txtObs);
 
         txtData.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N

@@ -14,7 +14,7 @@ import model.bean.Relatorios;
 
 public class RelatoriosDAO {
     
-    public List<Relatorios> listar() {
+    public List<Relatorios> listar(int tipo, String pesquisa) {
         
         List<Relatorios> list = new ArrayList();
         ProdutosDAO daoProduto = new ProdutosDAO();
@@ -25,17 +25,41 @@ public class RelatoriosDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conexao.prepareStatement("select compras.horario AS Horario,\n" +
-            "compras.data AS Data,\n" +
-            "compras.valor_total,\n" +
-            "usuarios.nome AS Pessoa,\n" +
-            "compras.id_compra, compras.produtos,\n" +
-            "compras.fk_id_usuario \n" +
-            "from compras\n" +
-            "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario\n" +
-            "GROUP BY \n" +
-            "compras.id_compra "
-            + "ORDER BY data DESC, horario DESC;");
+            switch(tipo) {
+                
+                case 1:
+                    
+                    stmt = conexao.prepareStatement("select compras.horario AS Horario,\n" +
+                    "compras.data AS Data,\n" +
+                    "compras.valor_total, compras.obs,\n" +
+                    "usuarios.nome AS Pessoa,\n" +
+                    "compras.id_compra, compras.produtos,\n" +
+                    "compras.fk_id_usuario \n" +
+                    "from compras\n" +
+                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario\n" +
+                    "GROUP BY compras.id_compra "
+                    + "ORDER BY data DESC, horario DESC");
+                    
+                    break;
+                    
+                case 2:
+                    
+                    stmt = conexao.prepareStatement("select compras.horario AS Horario,\n" +
+                    "compras.data AS Data,\n" +
+                    "compras.valor_total, compras.obs,\n" +
+                    "usuarios.nome AS Pessoa,\n" +
+                    "compras.id_compra, compras.produtos,\n" +
+                    "compras.fk_id_usuario \n" +
+                    "from compras\n" +
+                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario WHERE usuarios.nome LIKE ?\n" +
+                    "GROUP BY compras.id_compra "
+                    + "ORDER BY data DESC, horario DESC");
+                    
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;
+                
+            }
             
             rs = stmt.executeQuery();
             
@@ -47,6 +71,7 @@ public class RelatoriosDAO {
                 rela.setFk_id_usuario(rs.getInt("fk_id_usuario"));
                 rela.setHorario(rs.getTime("horario"));
                 rela.setData(rs.getDate("data"));
+                rela.setObs(rs.getString("obs"));
                 rela.setPessoa(rs.getString("pessoa"));
                 rela.setValorTotal(rs.getFloat("valor_total"));
                 

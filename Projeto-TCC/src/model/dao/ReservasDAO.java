@@ -34,7 +34,7 @@ public class ReservasDAO {
                     "from compras\n" +
                     "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
                     "where compras.ativo = 1 \n" +
-                    "group by compras.id_compra ORDER BY compras.data DESC;");
+                    "group by compras.id_compra ORDER BY compras.data DESC, compras.horario DESC");
                     
                     break;
                 
@@ -46,7 +46,7 @@ public class ReservasDAO {
                     "from compras \n" +
                     "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
                     "where compras.ativo = 1 AND compras.codigo = ?\n" +
-                    "group by compras.id_compra ORDER BY compras.data DESC;");
+                    "group by compras.id_compra ORDER BY compras.data DESC, compras.horario DESC");
                     
                     stmt.setString(1, pesquisa);
                     
@@ -60,7 +60,7 @@ public class ReservasDAO {
                     "from compras \n" +
                     "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario \n" +
                     "where compras.ativo = 1 AND usuarios.nome LIKE ?\n" +
-                    "group by compras.id_compra ORDER BY compras.data DESC;");
+                    "group by compras.id_compra ORDER BY compras.data DESC, compras.horario DESC");
                     
                     stmt.setString(1, "%" + pesquisa + "%");
                     

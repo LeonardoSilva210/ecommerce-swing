@@ -13,6 +13,8 @@ import model.bean.Relatorios;
 public class ItemRelatorio extends javax.swing.JPanel {
 
     String divideProduto = "";
+    private final String data, dataBr;
+    private final String[] divideData;
     
     public ItemRelatorio(Relatorios relatorio) {
         initComponents();
@@ -27,7 +29,13 @@ public class ItemRelatorio extends javax.swing.JPanel {
         
         txtProduto.setText(divideProduto);
         txtHorario.setText(String.valueOf(relatorio.getHorario()));
-        txtData.setText(String.valueOf(relatorio.getData()));
+        txtObs.setText(relatorio.getObs());
+        
+        data = String.valueOf(relatorio.getData());
+        divideData = data.split("\\-");
+        dataBr = divideData[2] + "/" + divideData[1] + "/"+ divideData[0];
+        
+        txtData.setText(dataBr);
         txtQuantidade.setText(String.valueOf(produtos.size()));
         txtValorTotal.setText("R$ " + String.valueOf(relatorio.getValorTotal()).replace(".", ","));
         txtPessoa.setText(String.valueOf(relatorio.getPessoa()));
@@ -65,12 +73,13 @@ public class ItemRelatorio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtProduto = new javax.swing.JLabel();
-        txtHorario = new javax.swing.JLabel();
+        txtPessoa = new javax.swing.JLabel();
+        txtObs = new javax.swing.JLabel();
         txtData = new javax.swing.JLabel();
+        txtHorario = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JLabel();
         txtValorTotal = new javax.swing.JLabel();
-        txtPessoa = new javax.swing.JLabel();
+        txtProduto = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setForeground(new java.awt.Color(102, 102, 102));
@@ -78,23 +87,29 @@ public class ItemRelatorio extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(960, 40));
         setLayout(new java.awt.GridLayout(1, 0));
 
-        txtProduto.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
-        txtProduto.setForeground(new java.awt.Color(255, 255, 255));
-        txtProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtProduto.setText("Produto");
-        add(txtProduto);
+        txtPessoa.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        txtPessoa.setForeground(new java.awt.Color(255, 255, 255));
+        txtPessoa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtPessoa.setText("Pessoa");
+        add(txtPessoa);
 
-        txtHorario.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
-        txtHorario.setForeground(new java.awt.Color(255, 255, 255));
-        txtHorario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtHorario.setText("Horário");
-        add(txtHorario);
+        txtObs.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        txtObs.setForeground(new java.awt.Color(255, 255, 255));
+        txtObs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtObs.setText("Observação");
+        add(txtObs);
 
         txtData.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtData.setForeground(new java.awt.Color(255, 255, 255));
         txtData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtData.setText("Data");
         add(txtData);
+
+        txtHorario.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        txtHorario.setForeground(new java.awt.Color(255, 255, 255));
+        txtHorario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtHorario.setText("Horário");
+        add(txtHorario);
 
         txtQuantidade.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtQuantidade.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,17 +123,18 @@ public class ItemRelatorio extends javax.swing.JPanel {
         txtValorTotal.setText("Valor Total");
         add(txtValorTotal);
 
-        txtPessoa.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
-        txtPessoa.setForeground(new java.awt.Color(255, 255, 255));
-        txtPessoa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtPessoa.setText("Pessoa");
-        add(txtPessoa);
+        txtProduto.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        txtProduto.setForeground(new java.awt.Color(255, 255, 255));
+        txtProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtProduto.setText("Produto");
+        add(txtProduto);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel txtData;
     private javax.swing.JLabel txtHorario;
+    private javax.swing.JLabel txtObs;
     private javax.swing.JLabel txtPessoa;
     private javax.swing.JLabel txtProduto;
     private javax.swing.JLabel txtQuantidade;

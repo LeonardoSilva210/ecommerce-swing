@@ -85,14 +85,6 @@ public class Inicio extends javax.swing.JFrame {
         panelAcimaFrame = new telas.formatos.PanelBorder();
         panelFundoAdicionarProduto = new javax.swing.JPanel();
         panelAdicionarProduto = new javax.swing.JPanel();
-        panelAdicionarCategoria = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
-        inputNomeCategoria = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
-        inputDescricaoCategoria = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
         inputValorCusto = new javax.swing.JTextField();
         inputNomeProduto = new javax.swing.JTextField();
         inputDescricaoProduto = new javax.swing.JTextField();
@@ -110,7 +102,6 @@ public class Inicio extends javax.swing.JFrame {
         radioIndisponivel = new javax.swing.JRadioButton();
         buttonClosePanelAdicionarProduto = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        buttonAdicionarCategoria = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         panelInformacoesPerfil = new javax.swing.JPanel();
         imageAvatar1 = new com.raven.avatar.ImageAvatar();
@@ -206,12 +197,17 @@ public class Inicio extends javax.swing.JFrame {
         scrollRelatorios = new javax.swing.JScrollPane();
         panelListRelatorios = new telas.formatos.PanelItem();
         panelTitulosRelatorios = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        buttonPesquisarReserva1 = new javax.swing.JButton();
+        buttonAtualizarRelatorios = new javax.swing.JButton();
+        inputPesquisaRelatorios = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
         panelReservas = new javax.swing.JPanel();
         panelTitulosReservas = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -250,6 +246,10 @@ public class Inicio extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         buttonAddMensagem = new javax.swing.JButton();
         panelCategorias = new javax.swing.JPanel();
+        panelFundoPopCategoria = new javax.swing.JPanel();
+        panelPopCategoria = new telas.formatos.PanelBorder();
+        jButton2 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         panelListCategorias = new telas.formatos.PanelItem();
         jPanel3 = new javax.swing.JPanel();
@@ -289,49 +289,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelAdicionarProduto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelAdicionarCategoria.setBackground(new java.awt.Color(102, 102, 102));
-        panelAdicionarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelAdicionarCategoriaMouseClicked(evt);
-            }
-        });
-        panelAdicionarCategoria.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("Adicionar Categoria");
-        panelAdicionarCategoria.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
-
-        jButton2.setText("Salvar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        panelAdicionarCategoria.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 170, 30));
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("Nome");
-        panelAdicionarCategoria.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
-        panelAdicionarCategoria.add(inputNomeCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 230, 30));
-
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Descrição");
-        panelAdicionarCategoria.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
-        panelAdicionarCategoria.add(inputDescricaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 230, 30));
-
-        jButton3.setText("Adicionar Produto");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        panelAdicionarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, 30));
-
-        panelAdicionarProduto.add(panelAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 880, 400));
 
         inputValorCusto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -387,7 +344,7 @@ public class Inicio extends javax.swing.JFrame {
                 buttonSalvarActionPerformed(evt);
             }
         });
-        panelAdicionarProduto.add(buttonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 170, 30));
+        panelAdicionarProduto.add(buttonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 170, 40));
 
         panelAdicionarProduto.add(comboAdicionarProdutoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 170, 34));
 
@@ -435,14 +392,6 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         panelAdicionarProduto.add(buttonClosePanelAdicionarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
-
-        buttonAdicionarCategoria.setText("Adicionar Categoria");
-        buttonAdicionarCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAdicionarCategoriaActionPerformed(evt);
-            }
-        });
-        panelAdicionarProduto.add(buttonAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 160, 30));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
@@ -1273,7 +1222,7 @@ public class Inicio extends javax.swing.JFrame {
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(grafInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE))
+                .addComponent(grafInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE))
             .addGroup(panelInicioLayout.createSequentialGroup()
                 .addGap(340, 340, 340)
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1349,7 +1298,9 @@ public class Inicio extends javax.swing.JFrame {
             tblEstoque.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        btnAdicionarProduto.setText("Adicionar Produto/Categoria");
+        btnAdicionarProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAdicionarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconAdd.png"))); // NOI18N
+        btnAdicionarProduto.setText("Adicionar Produto");
         btnAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarProdutoActionPerformed(evt);
@@ -1488,7 +1439,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(buttonIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         panelEstoqueLayout.setVerticalGroup(
             panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1497,22 +1448,17 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(buttonDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(buttonArquivar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(panelEstoqueLayout.createSequentialGroup()
-                                    .addComponent(buttonReativar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(1, 1, 1))
-                                .addComponent(buttonEditarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEstoqueLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelEstoqueLayout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(buttonIndisponivel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelEstoqueLayout.createSequentialGroup()
                         .addComponent(jLabel28)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputPesquisarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)))
+                        .addGap(8, 8, 8)
+                        .addComponent(inputPesquisarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonEditarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonReativar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonArquivar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1527,27 +1473,35 @@ public class Inicio extends javax.swing.JFrame {
         tabInicio.addTab("tab2", panelEstoque);
 
         panelRelatorios.setBackground(new java.awt.Color(51, 51, 51));
+        panelRelatorios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         scrollRelatorios.setBorder(null);
         scrollRelatorios.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollRelatorios.setViewportView(panelListRelatorios);
 
+        panelRelatorios.add(scrollRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 151, 960, 300));
+
         panelTitulosRelatorios.setLayout(new java.awt.GridLayout(1, 0));
 
-        jLabel6.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Produtos");
-        panelTitulosRelatorios.add(jLabel6);
+        jLabel5.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Pessoa");
+        panelTitulosRelatorios.add(jLabel5);
 
-        jLabel7.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Horário");
-        panelTitulosRelatorios.add(jLabel7);
+        jLabel23.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("Observação");
+        panelTitulosRelatorios.add(jLabel23);
 
         jLabel9.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Data");
         panelTitulosRelatorios.add(jLabel9);
+
+        jLabel7.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Horário");
+        panelTitulosRelatorios.add(jLabel7);
 
         jLabel10.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1559,31 +1513,51 @@ public class Inicio extends javax.swing.JFrame {
         jLabel8.setText("Valor Total");
         panelTitulosRelatorios.add(jLabel8);
 
-        jLabel5.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Pessoa");
-        panelTitulosRelatorios.add(jLabel5);
+        jLabel6.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Produtos");
+        panelTitulosRelatorios.add(jLabel6);
 
-        javax.swing.GroupLayout panelRelatoriosLayout = new javax.swing.GroupLayout(panelRelatorios);
-        panelRelatorios.setLayout(panelRelatoriosLayout);
-        panelRelatoriosLayout.setHorizontalGroup(
-            panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRelatoriosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelTitulosRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scrollRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelRelatoriosLayout.setVerticalGroup(
-            panelRelatoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRelatoriosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelTitulosRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(358, Short.MAX_VALUE))
-        );
+        panelRelatorios.add(panelTitulosRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 93, 960, 47));
+
+        buttonPesquisarReserva1.setBackground(new java.awt.Color(204, 204, 204));
+        buttonPesquisarReserva1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconSearch.png"))); // NOI18N
+        buttonPesquisarReserva1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonPesquisarReserva1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonPesquisarReserva1MouseExited(evt);
+            }
+        });
+        buttonPesquisarReserva1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPesquisarReserva1ActionPerformed(evt);
+            }
+        });
+        panelRelatorios.add(buttonPesquisarReserva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, 40, 40));
+
+        buttonAtualizarRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRefresh.png"))); // NOI18N
+        buttonAtualizarRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAtualizarRelatoriosActionPerformed(evt);
+            }
+        });
+        panelRelatorios.add(buttonAtualizarRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 40, 40));
+
+        inputPesquisaRelatorios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        inputPesquisaRelatorios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputPesquisaRelatoriosKeyTyped(evt);
+            }
+        });
+        panelRelatorios.add(inputPesquisaRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 910, 40));
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Relatórios");
+        panelRelatorios.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 12, 960, 20));
 
         tabInicio.addTab("tab3", panelRelatorios);
 
@@ -1599,7 +1573,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel30.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("Obs");
+        jLabel30.setText("Observação");
         panelTitulosReservas.add(jLabel30);
 
         jLabel31.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
@@ -1644,7 +1618,7 @@ public class Inicio extends javax.swing.JFrame {
                 buttonPesquisarReservaActionPerformed(evt);
             }
         });
-        panelReservas.add(buttonPesquisarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 40, 40));
+        panelReservas.add(buttonPesquisarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, 40, 40));
 
         inputPesquisaReserva.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         inputPesquisaReserva.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1652,15 +1626,15 @@ public class Inicio extends javax.swing.JFrame {
                 inputPesquisaReservaKeyTyped(evt);
             }
         });
-        panelReservas.add(inputPesquisaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 400, 40));
+        panelReservas.add(inputPesquisaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 760, 40));
 
         txtPesquisaReservas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPesquisaReservas.setForeground(new java.awt.Color(255, 255, 255));
         txtPesquisaReservas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtPesquisaReservas.setText("Pesquisar código");
-        panelReservas.add(txtPesquisaReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 970, 20));
+        panelReservas.add(txtPesquisaReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 960, 20));
 
-        panelReservas.add(comboMetodoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 140, 40));
+        panelReservas.add(comboMetodoPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 140, 40));
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setViewportView(panelItemReservas);
@@ -1673,7 +1647,7 @@ public class Inicio extends javax.swing.JFrame {
                 buttonAtualizarActionPerformed(evt);
             }
         });
-        panelReservas.add(buttonAtualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 40, 40));
+        panelReservas.add(buttonAtualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 40, 40));
 
         tabInicio.addTab("tab4", panelReservas);
 
@@ -1765,7 +1739,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelFundoPopClienteLayout.createSequentialGroup()
                 .addGap(202, 202, 202)
                 .addComponent(panelPopCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelFundoPopClienteLayout.setVerticalGroup(
             panelFundoPopClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1800,7 +1774,7 @@ public class Inicio extends javax.swing.JFrame {
                 inputPesquisaClienteKeyTyped(evt);
             }
         });
-        panelClientes.add(inputPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 400, 40));
+        panelClientes.add(inputPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 650, 40));
 
         buttonAtualizarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRefresh.png"))); // NOI18N
         buttonAtualizarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -1808,7 +1782,7 @@ public class Inicio extends javax.swing.JFrame {
                 buttonAtualizarClientesActionPerformed(evt);
             }
         });
-        panelClientes.add(buttonAtualizarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 40, 40));
+        panelClientes.add(buttonAtualizarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 40, 40));
 
         txtPesquisaCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPesquisaCliente.setForeground(new java.awt.Color(255, 255, 255));
@@ -1870,12 +1844,55 @@ public class Inicio extends javax.swing.JFrame {
         panelCategorias.setBackground(new java.awt.Color(51, 51, 51));
         panelCategorias.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelFundoPopCategoria.setOpaque(false);
+        panelFundoPopCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelFundoPopCategoriaMouseClicked(evt);
+            }
+        });
+
+        panelPopCategoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelPopCategoria.setForeground(new java.awt.Color(255, 255, 255));
+        panelPopCategoria.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconClose.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        panelPopCategoria.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 30, 30));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("Adicionar Categoria");
+        panelPopCategoria.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 640, -1));
+
+        javax.swing.GroupLayout panelFundoPopCategoriaLayout = new javax.swing.GroupLayout(panelFundoPopCategoria);
+        panelFundoPopCategoria.setLayout(panelFundoPopCategoriaLayout);
+        panelFundoPopCategoriaLayout.setHorizontalGroup(
+            panelFundoPopCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFundoPopCategoriaLayout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(panelPopCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE))
+        );
+        panelFundoPopCategoriaLayout.setVerticalGroup(
+            panelFundoPopCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFundoPopCategoriaLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(panelPopCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(407, Short.MAX_VALUE))
+        );
+
+        panelCategorias.add(panelFundoPopCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 820));
+
         jScrollPane6.setBackground(new java.awt.Color(102, 102, 102));
         jScrollPane6.setViewportView(panelListCategorias);
 
         panelCategorias.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 149, 960, 300));
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel39.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1898,7 +1915,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel42.setText("Categorias");
-        panelCategorias.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 440, -1));
+        panelCategorias.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 960, -1));
 
         buttonAtualizarCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRefresh.png"))); // NOI18N
         buttonAtualizarCategorias.addActionListener(new java.awt.event.ActionListener() {
@@ -1906,7 +1923,7 @@ public class Inicio extends javax.swing.JFrame {
                 buttonAtualizarCategoriasActionPerformed(evt);
             }
         });
-        panelCategorias.add(buttonAtualizarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 40, 40));
+        panelCategorias.add(buttonAtualizarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 40, 40));
 
         buttonPesquisarCategorias.setBackground(new java.awt.Color(204, 204, 204));
         buttonPesquisarCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconSearch.png"))); // NOI18N
@@ -1931,12 +1948,17 @@ public class Inicio extends javax.swing.JFrame {
                 inputPesquisaCategoriasKeyTyped(evt);
             }
         });
-        panelCategorias.add(inputPesquisaCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 400, 40));
+        panelCategorias.add(inputPesquisaCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 650, 40));
 
         btnAdicionarCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAdicionarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconAdd.png"))); // NOI18N
         btnAdicionarCategoria.setText("Adicionar Categoria");
-        panelCategorias.add(btnAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, 220, 40));
+        btnAdicionarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarCategoriaActionPerformed(evt);
+            }
+        });
+        panelCategorias.add(btnAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 250, 40));
 
         tabInicio.addTab("tab6", panelCategorias);
 
@@ -2565,48 +2587,6 @@ public class Inicio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_edtQuantidadeKeyTyped
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        String nome = inputNomeCategoria.getText().trim();
-        String descricao = inputDescricaoCategoria.getText().trim();
-        
-        if (nome.isEmpty() || descricao.isEmpty()) {
-            
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            
-        } else {
-            
-            Categorias categoria = new Categorias(nome, descricao, 0);
-            
-            daoCategoria.adicionar(categoria);
-           
-            inputNomeCategoria.setText("");
-            inputDescricaoCategoria.setText("");
-            
-            JOptionPane.showMessageDialog(null, "Categoria adicionada com sucesso!");
-
-        }
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void panelAdicionarCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAdicionarCategoriaMouseClicked
-        
-    }//GEN-LAST:event_panelAdicionarCategoriaMouseClicked
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-        listaComboCategoriasAdicionarProduto();
-        panelAdicionarCategoria.setVisible(false);
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void buttonAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarCategoriaActionPerformed
-        
-        resetaCamposAdicionarCategoria();
-        panelAdicionarCategoria.setVisible(true);
-        
-    }//GEN-LAST:event_buttonAdicionarCategoriaActionPerformed
-
     private void edtValorCustoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtValorCustoProdutoKeyTyped
         
         char letra = evt.getKeyChar();
@@ -2999,6 +2979,57 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonPesquisarCategoriasActionPerformed
 
+    private void buttonAtualizarRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarRelatoriosActionPerformed
+        
+        inputPesquisaRelatorios.setText("");
+        
+        listarRelatorios(1, null);
+        
+    }//GEN-LAST:event_buttonAtualizarRelatoriosActionPerformed
+
+    private void inputPesquisaRelatoriosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaRelatoriosKeyTyped
+        
+        String pesquisa = inputPesquisaRelatorios.getText().trim();
+        
+        listarRelatorios(2, pesquisa);
+        
+    }//GEN-LAST:event_inputPesquisaRelatoriosKeyTyped
+
+    private void buttonPesquisarReserva1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarReserva1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPesquisarReserva1MouseEntered
+
+    private void buttonPesquisarReserva1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarReserva1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPesquisarReserva1MouseExited
+
+    private void buttonPesquisarReserva1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarReserva1ActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_buttonPesquisarReserva1ActionPerformed
+
+    private void btnAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarCategoriaActionPerformed
+        
+        panelFundoPopCategoria.setVisible(true);
+        panelPopCategoria.setVisible(true);
+        
+    }//GEN-LAST:event_btnAdicionarCategoriaActionPerformed
+
+    private void panelFundoPopCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFundoPopCategoriaMouseClicked
+        
+        panelFundoPopCategoria.setVisible(false);
+        panelPopCategoria.setVisible(false);
+        
+    }//GEN-LAST:event_panelFundoPopCategoriaMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        panelFundoPopCategoria.setVisible(false);
+        panelPopCategoria.setVisible(false);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -3122,7 +3153,7 @@ public class Inicio extends javax.swing.JFrame {
         animationLogo();
         atualizaGraficoInicio(1);
         preencherTabela(1, null);
-        listarRelatorios();
+        listarRelatorios(1, null);
         listarClientes(1, null);
         listarCategorias(1, null);
         listarNotificacoes();
@@ -3137,13 +3168,14 @@ public class Inicio extends javax.swing.JFrame {
         panelNoti.setVisible(false);
         panelFundoNoti.setVisible(false);
         radio1.setSelected(true);
+        panelFundoPopCategoria.setVisible(false);
+        panelPopCategoria.setVisible(false);
         panelFundoAdicionarProduto.setVisible(false);
         panelAdicionarProduto.setVisible(false);
         panelPopProduto.setVisible(false);
         panelFundoPopProdutoSelecionado.setVisible(false);
         panelInformacoesPerfil.setVisible(false);
         panelFundoPerfil.setVisible(false);
-        panelAdicionarCategoria.setVisible(false);
         buttonArquivar.setVisible(false);
         buttonReativar.setVisible(false);
         panelFundoPopCliente.setVisible(false);
@@ -3179,7 +3211,7 @@ public class Inicio extends javax.swing.JFrame {
 
             case 3:
 
-                listarRelatorios();
+                listarRelatorios(1, null);
                 
                 break;
                 
@@ -3637,17 +3669,34 @@ public class Inicio extends javax.swing.JFrame {
 
     }
 
-    private void listarRelatorios() {
+    private void listarRelatorios(int tipo, String pesquisa) {
 
         panelListRelatorios.removeAll();
         
-        listaRelatorios = daoRelatorio.listar();
+        switch(tipo) {
+            
+            case 1:
+                
+                listaRelatorios = daoRelatorio.listar(1, null);
+                
+                break;
+                
+            case 2:
+                
+                listaRelatorios = daoRelatorio.listar(2, pesquisa);
+                
+                break;
+            
+        }
 
         for (int i = 0; i < listaRelatorios.size(); i++) {
 
             panelListRelatorios.add(new ItemRelatorio(listaRelatorios.get(i)));
 
         }
+        
+        panelListRelatorios.revalidate();
+        panelListRelatorios.repaint();
 
     }
     
@@ -4014,7 +4063,6 @@ public class Inicio extends javax.swing.JFrame {
         
         panelFundoAdicionarProduto.setVisible(false);
         panelAdicionarProduto.setVisible(false);
-        panelAdicionarCategoria.setVisible(false);
         resetaCamposAdicionarProduto();
         btnAdicionarProduto.setVisible(true);
         inputPesquisarProduto.setVisible(true);
@@ -4042,13 +4090,6 @@ public class Inicio extends javax.swing.JFrame {
         listaComboCategoriasAdicionarProduto();
         btnAdicionarProduto.setVisible(false);
         inputPesquisarProduto.setVisible(false);
-        
-    }
-    
-    private void resetaCamposAdicionarCategoria() {
-        
-        inputNomeCategoria.setText("");
-        inputDescricaoCategoria.setText("");
         
     }
     
@@ -4209,11 +4250,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel btnRelatorios;
     private javax.swing.JPanel btnReservas;
     private javax.swing.JButton buttonAddMensagem;
-    private javax.swing.JButton buttonAdicionarCategoria;
     private javax.swing.JButton buttonArquivar;
     private javax.swing.JButton buttonAtualizar;
     private javax.swing.JButton buttonAtualizarCategorias;
     private javax.swing.JButton buttonAtualizarClientes;
+    private javax.swing.JButton buttonAtualizarRelatorios;
     private javax.swing.JPanel buttonClosePanelAdicionarProduto;
     private button.ButtonVerde buttonDisponivel;
     private javax.swing.JButton buttonEditarProduto;
@@ -4223,6 +4264,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton buttonPesquisarCategorias;
     private javax.swing.JButton buttonPesquisarCliente;
     private javax.swing.JButton buttonPesquisarReserva;
+    private javax.swing.JButton buttonPesquisarReserva1;
     private javax.swing.JButton buttonReativar;
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JButton buttonSalvarPerfil;
@@ -4238,15 +4280,14 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imageAvatar1;
     private com.raven.avatar.ImageAvatar imageAvatar2;
-    private javax.swing.JTextField inputDescricaoCategoria;
     private javax.swing.JTextField inputDescricaoProduto;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextArea inputMensagem;
     private javax.swing.JTextField inputNome;
-    private javax.swing.JTextField inputNomeCategoria;
     private javax.swing.JTextField inputNomeProduto;
     private javax.swing.JTextField inputPesquisaCategorias;
     private javax.swing.JTextField inputPesquisaCliente;
+    private javax.swing.JTextField inputPesquisaRelatorios;
     private javax.swing.JTextField inputPesquisaReserva;
     private javax.swing.JTextField inputPesquisarProduto;
     private javax.swing.JTextField inputQuantidade;
@@ -4255,7 +4296,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField inputValorCusto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
@@ -4309,7 +4349,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private telas.formatos.PanelBorder panelAcimaFrame;
-    private javax.swing.JPanel panelAdicionarCategoria;
     private javax.swing.JPanel panelAdicionarProduto;
     private javax.swing.JPanel panelBtnClosePopProduto;
     private telas.formatos.PanelBorder panelButtons;
@@ -4321,6 +4360,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelFundoCloseNoti;
     private javax.swing.JPanel panelFundoNoti;
     private javax.swing.JPanel panelFundoPerfil;
+    private javax.swing.JPanel panelFundoPopCategoria;
     private javax.swing.JPanel panelFundoPopCliente;
     private javax.swing.JPanel panelFundoPopProdutoSelecionado;
     private javax.swing.JPanel panelFundoTab;
@@ -4337,6 +4377,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelNoti;
     private telas.formatos.PanelItem panelNotificacoes;
     private telas.formatos.PanelBorder panelPerfil;
+    private telas.formatos.PanelBorder panelPopCategoria;
     private javax.swing.JPanel panelPopCliente;
     private javax.swing.JPanel panelPopProduto;
     private javax.swing.JPanel panelRelatorios;

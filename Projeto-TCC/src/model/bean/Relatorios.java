@@ -9,7 +9,7 @@ import java.util.List;
 public class Relatorios {
     
     private int id_compra, fk_id_usuario, fk_id_produto, fk_id_carrinho, quantidade;
-    private String pessoa;
+    private String pessoa, obs;
     private List<Produtos> produtos;
     private Date data;
     private Time horario;
@@ -18,13 +18,14 @@ public class Relatorios {
     public Relatorios() {
     }
 
-    public Relatorios(int id_compra, int fk_id_usuario, int fk_id_produto, int fk_id_carrinho, int quantidade, String pessoa, List<Produtos> produtos, Date data, Time horario, float valorUnitario, float valorTotal) {
+    public Relatorios(int id_compra, int fk_id_usuario, int fk_id_produto, int fk_id_carrinho, int quantidade, String pessoa, String obs, List<Produtos> produtos, Date data, Time horario, float valorUnitario, float valorTotal) {
         this.id_compra = id_compra;
         this.fk_id_usuario = fk_id_usuario;
         this.fk_id_produto = fk_id_produto;
         this.fk_id_carrinho = fk_id_carrinho;
         this.quantidade = quantidade;
         this.pessoa = pessoa;
+        this.obs = obs;
         this.produtos = produtos;
         this.data = data;
         this.horario = horario;
@@ -32,8 +33,16 @@ public class Relatorios {
         this.valorTotal = valorTotal;
     }
 
-    
+    public String getObs() {
+        return obs;
+    }
 
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
+
+    
+    
     public int getId_compra() {
         return id_compra;
     }
