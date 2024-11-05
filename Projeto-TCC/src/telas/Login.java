@@ -35,7 +35,6 @@ public class Login extends javax.swing.JFrame {
         panelLogin = new javax.swing.JPanel();
         inputSenha = new javax.swing.JPasswordField();
         buttonEntrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         inputEmail = new javax.swing.JTextField();
@@ -71,14 +70,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
         panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 160, 40));
-
-        jButton2.setText("Cadastre-se");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        panelLogin.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 399, -1, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -281,22 +272,8 @@ public class Login extends javax.swing.JFrame {
            }
            
        }
-        
-       
-       
-        
+ 
     }//GEN-LAST:event_buttonEntrarActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                dispose();
-                new Cadastro().setVisible(true);
-            }
-        });
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMinMouseClicked
 
@@ -465,7 +442,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton buttonEntrar;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputSenha;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
