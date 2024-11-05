@@ -19,7 +19,7 @@ public class AdminsDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             
-            stmt = conexao.prepareStatement("INSERT INTO admins(nome,email,senha,adm) VALUES(?,?,?,?)");
+            stmt = conexao.prepareStatement("INSERT INTO usuarios(nome,email,senha,adm) VALUES(?,?,?,?)");
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());

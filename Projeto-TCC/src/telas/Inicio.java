@@ -3821,43 +3821,47 @@ public class Inicio extends javax.swing.JFrame {
 
         listaProdutos = daoProduto.listar();
 
-        produtosTotal = listaProdutos.size();
-        produtosDisponiveis = 0;
-        produtosIndisponiveis = 0;
+        if (!listaProdutos.isEmpty()) {
 
-        for (int i = 0; i < produtosTotal; i++) {
+            produtosTotal = listaProdutos.size();
+            produtosDisponiveis = 0;
+            produtosIndisponiveis = 0;
 
-            if (listaProdutos.get(i).getDisponivel() == 1) {
+            for (int i = 0; i < produtosTotal; i++) {
 
-                produtosDisponiveis++;
+                if (listaProdutos.get(i).getDisponivel() == 1) {
 
-            } else {
+                    produtosDisponiveis++;
 
-                produtosIndisponiveis++;
+                } else {
+
+                    produtosIndisponiveis++;
+
+                }
 
             }
 
+            calcPorcent = (produtosDisponiveis / produtosTotal) * 100;
+            int porcent = convertePorcent(calcPorcent);
+
+            if (porcent != 100 && porcent != 0) {
+                porcent++;
+            }
+
+            verificaNivel(1, porcent);
+            progressDisponivel.setValue(porcent);
+
+            calcPorcent = (produtosIndisponiveis / produtosTotal) * 100;
+            porcent = convertePorcent(calcPorcent);
+            verificaNivel(2, porcent);
+            progressIndisponivel.setValue(porcent);
+
+            calcPorcent = 0;
+
+            progressDisponivel.start();
+            progressIndisponivel.start();
+
         }
-
-        calcPorcent = (produtosDisponiveis / produtosTotal) * 100;
-        int porcent = convertePorcent(calcPorcent);
-
-        if (porcent != 100 && porcent != 0) {
-            porcent++;
-        }
-
-        verificaNivel(1, porcent);
-        progressDisponivel.setValue(porcent);
-
-        calcPorcent = (produtosIndisponiveis / produtosTotal) * 100;
-        porcent = convertePorcent(calcPorcent);
-        verificaNivel(2, porcent);
-        progressIndisponivel.setValue(porcent);
-
-        calcPorcent = 0;
-
-        progressDisponivel.start();
-        progressIndisponivel.start();
 
     }
 

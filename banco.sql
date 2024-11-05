@@ -26,8 +26,8 @@ DROP TABLE IF EXISTS `categorias`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `descricao` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nome` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `descricao` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `arquivado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_categoria`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -39,7 +39,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Doces','categorias de doces',NULL),(2,'Temperos','categoria de temperos',NULL),(3,'Teste',NULL,1);
+INSERT INTO `categorias` VALUES (1,'Doces','categorias de doces',NULL),(2,'Temperos','categoria de temperos',NULL),(3,'Teste','',1);
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,14 +52,14 @@ DROP TABLE IF EXISTS `compras`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `compras` (
   `id_compra` int(11) NOT NULL AUTO_INCREMENT,
-  `horario` time DEFAULT NULL,
-  `data` date DEFAULT NULL,
-  `fk_id_usuario` int(11) DEFAULT NULL,
-  `obs` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ativo` tinyint(1) DEFAULT NULL,
+  `horario` time NOT NULL,
+  `data` date NOT NULL,
+  `fk_id_usuario` int(11) NOT NULL,
+  `obs` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `ativo` tinyint(1) NOT NULL,
   `codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `produtos` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `valor_total` float(10,2) DEFAULT NULL,
+  `produtos` mediumtext CHARACTER SET utf8mb4 NOT NULL,
+  `valor_total` float(10,2) NOT NULL,
   PRIMARY KEY (`id_compra`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
   CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
@@ -75,7 +75,6 @@ LOCK TABLES `compras` WRITE;
 INSERT INTO `compras` VALUES (51,'14:30:00','2024-10-04',11,'Passarei por volta da tarde na loja',1,'C51','2,3,21',30.10),(68,'10:00:00','2024-10-05',4,'Pedido para retirada.',1,'C61','2,3,21',30.10),(69,'14:00:00','2024-10-06',5,'Favor entregar na portaria.',1,'C62','2,3,21',30.10),(70,'16:30:00','2024-10-07',7,'Sem lactose, por favor.',1,'C63','2,3,21',30.10),(71,'19:00:00','2024-10-08',10,'Aguardo confirma‡Æo de entrega.',1,'C64','2,3,21',30.10),(72,'21:00:23','2024-11-02',4,'',1,'C357','12,2',91.90);
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
-ALTER DATABASE `tcc` CHARACTER SET utf8 COLLATE utf8_general_ci ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -97,7 +96,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-ALTER DATABASE `tcc` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 --
 -- Table structure for table `notificacoes`
@@ -108,11 +106,11 @@ DROP TABLE IF EXISTS `notificacoes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notificacoes` (
   `id_notificacao` int(11) NOT NULL AUTO_INCREMENT,
-  `tipo` int(3) DEFAULT NULL,
-  `visto` tinyint(1) DEFAULT NULL,
-  `notificacao` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `data` date DEFAULT NULL,
-  `horario` time DEFAULT NULL,
+  `tipo` int(3) NOT NULL,
+  `visto` tinyint(1) NOT NULL,
+  `notificacao` mediumtext CHARACTER SET utf8mb4 NOT NULL,
+  `data` date NOT NULL,
+  `horario` time NOT NULL,
   PRIMARY KEY (`id_notificacao`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -136,14 +134,14 @@ DROP TABLE IF EXISTS `produtos`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `produtos` (
   `id_produto` int(11) NOT NULL AUTO_INCREMENT,
-  `nome_produto` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `descricao_produto` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `disponivel` tinyint(1) DEFAULT 0,
+  `nome_produto` varchar(45) CHARACTER SET utf8mb4 NOT NULL,
+  `descricao_produto` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `disponivel` tinyint(1) NOT NULL DEFAULT 0,
   `fk_id_categoria` int(11) DEFAULT NULL,
-  `valor` float(10,2) DEFAULT NULL,
-  `quantidade` int(11) DEFAULT NULL,
-  `valor_custo` float DEFAULT NULL,
-  `arquivado` tinyint(1) DEFAULT 0,
+  `valor` float(10,2) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `valor_custo` float NOT NULL,
+  `arquivado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_produto`),
   KEY `fk_id_categoria` (`fk_id_categoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorias` (`id_categoria`)
@@ -172,8 +170,8 @@ CREATE TABLE `usuarios` (
   `nome` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `senha` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data_nascimento` date NOT NULL,
-  `adm` tinyint(4) DEFAULT NULL,
+  `data_nascimento` date DEFAULT NULL,
+  `adm` tinyint(4) NOT NULL,
   `whatsapp` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -185,10 +183,9 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (4,'Rober','bertin@gmail.com','123','2007-10-01',NULL,'552796065709'),(5,'Junin','junin@gmail.com','123','2007-10-01',NULL,NULL),(7,'VInicius','vini@gmail.com','123','2007-10-01',NULL,'554384167577'),(10,'teste','aninha@gmail.com','123','2007-10-01',NULL,NULL),(11,'Leozinhoo','leo@gmail.com','123','2007-10-01',1,NULL),(18,'Kali','kalinka@gmail.com','123','2003-11-09',NULL,'5527996065709');
+INSERT INTO `usuarios` VALUES (4,'Rober','bertin@gmail.com','123','2007-10-01',0,'552796065709'),(5,'Junin','junin@gmail.com','123','2007-10-01',0,NULL),(7,'VInicius','vini@gmail.com','123','2007-10-01',0,'554384167577'),(10,'teste','aninha@gmail.com','123','2007-10-01',0,NULL),(11,'Leozinhoo','leo@gmail.com','123','2007-10-01',1,NULL),(18,'Kali','kalinka@gmail.com','123','2003-11-09',0,'5527996065709');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
-ALTER DATABASE `tcc` CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -212,7 +209,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-ALTER DATABASE `tcc` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 --
 -- Dumping events for database 'tcc'
@@ -231,4 +227,4 @@ ALTER DATABASE `tcc` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-04 17:21:43
+-- Dump completed on 2024-11-05 15:26:59
