@@ -159,6 +159,8 @@ public class Inicio extends javax.swing.JFrame {
         txtClientes = new javax.swing.JLabel();
         btnCategorias = new javax.swing.JPanel();
         txtCategorias = new javax.swing.JLabel();
+        btnAdicionarADM = new javax.swing.JPanel();
+        txtAdicionarADM = new javax.swing.JLabel();
         panelNav = new telas.formatos.PanelBorder();
         panelLogo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -267,6 +269,7 @@ public class Inicio extends javax.swing.JFrame {
         buttonPesquisarCategorias = new javax.swing.JButton();
         inputPesquisaCategorias = new javax.swing.JTextField();
         btnAdicionarCategoria = new javax.swing.JButton();
+        panelAdicionarADM = new javax.swing.JPanel();
         panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -1024,6 +1027,39 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         panelButtons.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 290, 40));
+
+        btnAdicionarADM.setBackground(new java.awt.Color(51, 51, 51));
+        btnAdicionarADM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdicionarADMMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAdicionarADMMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAdicionarADMMouseExited(evt);
+            }
+        });
+
+        txtAdicionarADM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtAdicionarADM.setForeground(new java.awt.Color(255, 255, 255));
+        txtAdicionarADM.setText("Adicionar ADM");
+
+        javax.swing.GroupLayout btnAdicionarADMLayout = new javax.swing.GroupLayout(btnAdicionarADM);
+        btnAdicionarADM.setLayout(btnAdicionarADMLayout);
+        btnAdicionarADMLayout.setHorizontalGroup(
+            btnAdicionarADMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnAdicionarADMLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtAdicionarADM, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnAdicionarADMLayout.setVerticalGroup(
+            btnAdicionarADMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtAdicionarADM, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panelButtons.add(btnAdicionarADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 290, 40));
 
         panelAcimaFrame.add(panelButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 420));
 
@@ -1991,6 +2027,21 @@ public class Inicio extends javax.swing.JFrame {
         panelCategorias.add(btnAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 250, 40));
 
         tabInicio.addTab("tab6", panelCategorias);
+
+        panelAdicionarADM.setBackground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout panelAdicionarADMLayout = new javax.swing.GroupLayout(panelAdicionarADM);
+        panelAdicionarADM.setLayout(panelAdicionarADMLayout);
+        panelAdicionarADMLayout.setHorizontalGroup(
+            panelAdicionarADMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1040, Short.MAX_VALUE)
+        );
+        panelAdicionarADMLayout.setVerticalGroup(
+            panelAdicionarADMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 820, Short.MAX_VALUE)
+        );
+
+        tabInicio.addTab("tab7", panelAdicionarADM);
 
         panelFundoTab.add(tabInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, -1));
 
@@ -3079,6 +3130,24 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCriarCategoriaActionPerformed
 
+    private void btnAdicionarADMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarADMMouseClicked
+        
+        trocaTab(7);
+        
+    }//GEN-LAST:event_btnAdicionarADMMouseClicked
+
+    private void btnAdicionarADMMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarADMMouseEntered
+        
+        btnAdicionarADM.setBorder(new LineBorder(Color.white, 1));
+        
+    }//GEN-LAST:event_btnAdicionarADMMouseEntered
+
+    private void btnAdicionarADMMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarADMMouseExited
+        
+        btnAdicionarADM.setBorder(null);
+        
+    }//GEN-LAST:event_btnAdicionarADMMouseExited
+
     public static void main(String args[]) {
 
         try {
@@ -3120,6 +3189,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(51, 51, 51));
                 btnCategorias.setBackground(new Color(51, 51, 51));
+                btnAdicionarADM.setBackground(new Color(51, 51, 51));
 
                 break;
 
@@ -3134,6 +3204,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(51, 51, 51));
                 btnCategorias.setBackground(new Color(51, 51, 51));
+                btnAdicionarADM.setBackground(new Color(51, 51, 51));
 
                 break;
 
@@ -3148,6 +3219,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(51, 51, 51));
                 btnCategorias.setBackground(new Color(51, 51, 51));
+                btnAdicionarADM.setBackground(new Color(51, 51, 51));
 
                 break;
             
@@ -3162,6 +3234,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnReservas.setBackground(new Color(102, 102, 102));
                 btnClientes.setBackground(new Color(51, 51, 51));
                 btnCategorias.setBackground(new Color(51, 51, 51));
+                btnAdicionarADM.setBackground(new Color(51, 51, 51));
 
                 break;
             
@@ -3176,6 +3249,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(102, 102, 102));
                 btnCategorias.setBackground(new Color(51, 51, 51));
+                btnAdicionarADM.setBackground(new Color(51, 51, 51));
 
                 break;
             
@@ -3189,7 +3263,23 @@ public class Inicio extends javax.swing.JFrame {
                 btnRelatorios.setBackground(new Color(51, 51, 51));
                 btnReservas.setBackground(new Color(51, 51, 51));
                 btnClientes.setBackground(new Color(51, 51, 51));
+                btnAdicionarADM.setBackground(new Color(51, 51, 51));
                 btnCategorias.setBackground(new Color(102, 102, 102));
+
+                break;
+            
+            case 7:
+
+                tabInicio.setSelectedIndex(6);
+                atualiza(7);
+
+                btnInicio.setBackground(new Color(51, 51, 51));
+                btnEstoque.setBackground(new Color(51, 51, 51));
+                btnRelatorios.setBackground(new Color(51, 51, 51));
+                btnReservas.setBackground(new Color(51, 51, 51));
+                btnClientes.setBackground(new Color(51, 51, 51));
+                btnCategorias.setBackground(new Color(51, 51, 51));
+                btnAdicionarADM.setBackground(new Color(102, 102, 102));
 
                 break;
 
@@ -4287,6 +4377,7 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnAdicionarADM;
     private javax.swing.JButton btnAdicionarCategoria;
     private javax.swing.JButton btnAdicionarProduto;
     private javax.swing.JButton btnAdicionarQuantidade;
@@ -4408,6 +4499,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private telas.formatos.PanelBorder panelAcimaFrame;
+    private javax.swing.JPanel panelAdicionarADM;
     private javax.swing.JPanel panelAdicionarProduto;
     private javax.swing.JPanel panelBtnClosePopProduto;
     private telas.formatos.PanelBorder panelButtons;
@@ -4457,6 +4549,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollRelatorios;
     private javax.swing.JTabbedPane tabInicio;
     private tabledark.TableDark tblEstoque;
+    private javax.swing.JLabel txtAdicionarADM;
     private javax.swing.JLabel txtBemVindo;
     private javax.swing.JLabel txtCategorias;
     private javax.swing.JLabel txtClientes;

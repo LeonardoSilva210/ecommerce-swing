@@ -28,9 +28,9 @@ CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
   `descricao` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `arquivado` tinyint(1) DEFAULT NULL,
+  `arquivado` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Doces','categorias de doces',NULL),(2,'Temperos','categoria de temperos',NULL),(3,'Teste','',1);
+INSERT INTO `categorias` VALUES (1,'Doces','categorias de doces',1),(2,'Temperos','categoria de temperos',1),(3,'Teste','',1),(10,'iji','jijij',NULL),(11,'okok','okok',0);
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,4 +227,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-05 15:26:59
+-- Dump completed on 2024-11-05 16:30:43
