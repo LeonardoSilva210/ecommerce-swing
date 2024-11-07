@@ -30,7 +30,7 @@ CREATE TABLE `categorias` (
   `descricao` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `arquivado` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Doces','categorias de doces',1),(2,'Temperos','categoria de temperos',1),(3,'Teste','',1),(10,'iji','jijij',NULL),(11,'okok','okok',0);
+INSERT INTO `categorias` VALUES (1,'Refrigerantes','Bebidas Doces',1),(2,'Temperos','categoria de temperos',1),(3,'Teste','',1),(10,'iji','jijij',NULL),(11,'okok','okok',0),(12,'Sucos','Delicias das Frutas',0);
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,15 +54,15 @@ CREATE TABLE `compras` (
   `id_compra` int(11) NOT NULL AUTO_INCREMENT,
   `horario` time NOT NULL,
   `data` date NOT NULL,
-  `fk_id_usuario` int(11) NOT NULL,
   `obs` text CHARACTER SET utf8mb4 DEFAULT NULL,
   `ativo` tinyint(1) NOT NULL,
   `codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `produtos` mediumtext CHARACTER SET utf8mb4 NOT NULL,
   `valor_total` float(10,2) NOT NULL,
+  `fk_id_usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_compra`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
-  CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+  CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -72,7 +72,6 @@ CREATE TABLE `compras` (
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
-INSERT INTO `compras` VALUES (51,'14:30:00','2024-10-04',11,'Passarei por volta da tarde na loja',1,'C51','2,3,21',30.10),(68,'10:00:00','2024-10-05',4,'Pedido para retirada.',1,'C61','2,3,21',30.10),(69,'14:00:00','2024-10-06',5,'Favor entregar na portaria.',1,'C62','2,3,21',30.10),(70,'16:30:00','2024-10-07',7,'Sem lactose, por favor.',1,'C63','2,3,21',30.10),(71,'19:00:00','2024-10-08',10,'Aguardo confirma‡Æo de entrega.',1,'C64','2,3,21',30.10),(72,'21:00:23','2024-11-02',4,'',1,'C357','12,2',91.90);
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -112,7 +111,7 @@ CREATE TABLE `notificacoes` (
   `data` date NOT NULL,
   `horario` time NOT NULL,
   PRIMARY KEY (`id_notificacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +120,7 @@ CREATE TABLE `notificacoes` (
 
 LOCK TABLES `notificacoes` WRITE;
 /*!40000 ALTER TABLE `notificacoes` DISABLE KEYS */;
-INSERT INTO `notificacoes` VALUES (9,1,1,'Perfil atualizado','2024-10-05','22:47:49'),(10,1,1,'Perfil atualizado','2024-10-05','23:36:11'),(11,1,1,'Perfil atualizado','2024-10-06','00:12:52'),(12,1,1,'Perfil atualizado','2024-10-06','00:13:14'),(18,1,1,'Perfil atualizado','2024-10-12','21:06:32'),(19,1,1,'Perfil atualizado','2024-10-12','21:08:03'),(20,1,1,'Perfil atualizado','2024-10-12','21:17:24'),(21,1,1,'Perfil atualizado','2024-10-13','10:49:11'),(22,1,1,'Perfil atualizado','2024-10-31','22:17:04'),(23,3,1,'1 Venda realizada Valor: R$91,90','2024-11-02','21:00:23');
+INSERT INTO `notificacoes` VALUES (9,1,1,'Perfil atualizado','2024-10-05','22:47:49'),(10,1,1,'Perfil atualizado','2024-10-05','23:36:11'),(11,1,1,'Perfil atualizado','2024-10-06','00:12:52'),(12,1,1,'Perfil atualizado','2024-10-06','00:13:14'),(18,1,1,'Perfil atualizado','2024-10-12','21:06:32'),(19,1,1,'Perfil atualizado','2024-10-12','21:08:03'),(20,1,1,'Perfil atualizado','2024-10-12','21:17:24'),(21,1,1,'Perfil atualizado','2024-10-13','10:49:11'),(22,1,1,'Perfil atualizado','2024-10-31','22:17:04'),(23,3,1,'1 Venda realizada Valor: R$91,90','2024-11-02','21:00:23'),(24,1,1,'Perfil atualizado','2024-11-07','17:29:37');
 /*!40000 ALTER TABLE `notificacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +144,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`id_produto`),
   KEY `fk_id_categoria` (`fk_id_categoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorias` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +153,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (2,'Casquinha','Sorvete de chocolate',1,1,2.00,6,1,1),(3,'Brigadeiro','sabor moranho',1,1,3.00,7,2,0),(5,'Produto teste','produto para fazer teste',0,3,5.00,2,3,1),(7,'Camiseta','Camiseta de algodão',1,2,29.90,100,15,0),(8,'Calça Jeans','Calça jeans unissex',1,3,99.90,50,50,0),(9,'Tênis Esportivo','Tênis ideal para corrida',1,1,199.90,30,90.12,0),(10,'Teste','SOCIAL',0,2,111.00,6,12.9,1),(12,'Fone de Ouvido','Fone de ouvido sem fio',1,1,89.90,40,40,0),(13,'Sofa','Sofá de três lugares',1,2,899.90,5,300,0),(14,'Mesa de Jantar','Mesa de jantar de madeira',1,3,499.90,15,200,0),(16,'Lampada LED','Lâmpada LED 10W',0,2,19.90,200,10,0),(17,'Cafeteira','Cafeteira elétrica com jarra',1,3,199.90,15,100,0),(18,'Microondas','Microondas 20L',1,1,399.90,10,250,0),(19,'Xbox Series X','Console de videogame',1,2,4999.90,8,4500,0),(20,'Camiseta Esportiva','Camiseta de corrida',1,3,59.90,60,30,0),(21,'Balinha','docinha',1,1,12.80,100,15,0),(22,'ko','koko',0,3,80.00,80,97,1);
+INSERT INTO `produtos` VALUES (23,'Coca-Cola 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(24,'Pepsi 350ml','Bebida Refrescante e Marcante',0,1,3.00,35,46.98,1),(25,'Fanta Laranja 350ml','Bebida Refrescante e Marcante',1,1,3.29,65,49.43,0),(26,'Guaraná Antarctica 350ml','Bebida Refrescante e Marcante',0,1,3.59,59,50,1),(27,'Sprite 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(28,'Suco de Laranja ','Bebida Refrescante e Marcante',1,12,3.99,59,50.28,0),(29,'Suco de Uva','Bebida Refrescante e Marcante',1,12,7.90,32,120,0),(30,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(31,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(32,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(33,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(34,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(35,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(36,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(37,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(38,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(39,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(40,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0),(41,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,10 +170,10 @@ CREATE TABLE `usuarios` (
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `senha` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `data_nascimento` date DEFAULT NULL,
-  `adm` tinyint(4) NOT NULL,
+  `adm` tinyint(4) DEFAULT 0,
   `whatsapp` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +182,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (4,'Rober','bertin@gmail.com','123','2007-10-01',0,'552796065709'),(5,'Junin','junin@gmail.com','123','2007-10-01',0,NULL),(7,'VInicius','vini@gmail.com','123','2007-10-01',0,'554384167577'),(10,'teste','aninha@gmail.com','123','2007-10-01',0,NULL),(11,'Leozinhoo','leo@gmail.com','123','2007-10-01',1,NULL),(18,'Kali','kalinka@gmail.com','123','2003-11-09',0,'5527996065709');
+INSERT INTO `usuarios` VALUES (4,'Rober','bertin@gmail.com','123','2007-10-01',0,'552796065709'),(7,'VInicius','vini@gmail.com','123','2007-10-01',0,'554384167577'),(10,'teste','aninha@gmail.com','123','2007-10-01',0,NULL),(11,'Leozinh','leo@gmail.com','123','2007-10-01',1,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -227,4 +226,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-05 16:30:43
+-- Dump completed on 2024-11-07 17:37:35
