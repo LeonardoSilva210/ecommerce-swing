@@ -8,14 +8,17 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import model.bean.Categorias;
 import model.dao.CategoriasDAO;
+import telas.Inicio;
 
 public class ItemCategoria extends javax.swing.JPanel {
 
     private final Categorias categoria;
+    private Inicio inicio;
 
-    public ItemCategoria(Categorias categoria) {
+    public ItemCategoria(Categorias categoria, Inicio ini) {
         initComponents();
         
+        this.inicio = ini;
         this.categoria = categoria;
         
         this.addMouseListener(new MouseAdapter() {
@@ -62,7 +65,7 @@ public class ItemCategoria extends javax.swing.JPanel {
         btnDeletar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
-        setPreferredSize(new java.awt.Dimension(940, 40));
+        setPreferredSize(new java.awt.Dimension(920, 40));
         setLayout(new java.awt.GridLayout(1, 0));
 
         txtNome.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
@@ -83,6 +86,11 @@ public class ItemCategoria extends javax.swing.JPanel {
         btnEditar.setBackground(new java.awt.Color(204, 153, 0));
         btnEditar.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnEditar);
 
         btnDeletar.setBackground(new java.awt.Color(255, 68, 65));
@@ -111,6 +119,12 @@ public class ItemCategoria extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+        inicio.visibilidadePanelEditarCategoria(categoria);
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

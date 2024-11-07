@@ -66,7 +66,7 @@ public class Inicio extends javax.swing.JFrame {
     private List<Usuarios> listaClientes = new ArrayList();
     private List<Compras> listaCompras = new ArrayList();
     private List<Reservas> listaReservas = new ArrayList();
-    private boolean telaCheia = false, animacao = false;
+    private boolean animacao = false;
     private float produtosTotal = 0, produtosDisponiveis = 0, produtosIndisponiveis = 0, calcPorcent = 0;
     private Dimension tamanhoOriginal;
     private Point localizacaoOriginal;
@@ -169,8 +169,6 @@ public class Inicio extends javax.swing.JFrame {
         txtClose = new javax.swing.JLabel();
         panelMin = new javax.swing.JPanel();
         txtMin = new javax.swing.JLabel();
-        panelMax = new javax.swing.JPanel();
-        txtMax = new javax.swing.JLabel();
         txtLogo = new javax.swing.JLabel();
         panelFundoTab = new javax.swing.JPanel();
         tabInicio = new javax.swing.JTabbedPane();
@@ -248,6 +246,11 @@ public class Inicio extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         buttonAddMensagem = new javax.swing.JButton();
         panelCategorias = new javax.swing.JPanel();
+        panelEditarCategoriaFundo = new javax.swing.JPanel();
+        panelEditarCategoria = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        inputNomeCategoriaEdit = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
         panelFundoPopCategoria = new javax.swing.JPanel();
         panelPopCategoria = new telas.formatos.PanelBorder();
         jButton2 = new javax.swing.JButton();
@@ -1172,58 +1175,18 @@ public class Inicio extends javax.swing.JFrame {
         panelMin.setLayout(panelMinLayout);
         panelMinLayout.setHorizontalGroup(
             panelMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelMinLayout.setVerticalGroup(
             panelMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panelNav.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 40, 30));
-
-        panelMax.setBackground(new java.awt.Color(51, 51, 51));
-        panelMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelMaxMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelMaxMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelMaxMouseExited(evt);
-            }
-        });
-
-        txtMax.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        txtMax.setForeground(new java.awt.Color(255, 255, 255));
-        txtMax.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtMax.setText("□");
-        txtMax.setToolTipText("");
-        txtMax.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        txtMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtMaxMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txtMaxMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtMaxMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelMaxLayout = new javax.swing.GroupLayout(panelMax);
-        panelMax.setLayout(panelMaxLayout);
-        panelMaxLayout.setHorizontalGroup(
-            panelMaxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMax, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-        panelMaxLayout.setVerticalGroup(
-            panelMaxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        panelNav.add(panelMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, 40, 30));
+        panelNav.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, 40, 30));
 
         txtLogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtLogo.setForeground(new java.awt.Color(255, 255, 255));
@@ -1886,6 +1849,46 @@ public class Inicio extends javax.swing.JFrame {
         panelCategorias.setBackground(new java.awt.Color(51, 51, 51));
         panelCategorias.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelEditarCategoriaFundo.setOpaque(false);
+        panelEditarCategoriaFundo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelEditarCategoriaFundoMouseClicked(evt);
+            }
+        });
+
+        panelEditarCategoria.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconClose.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        panelEditarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 0, 40, 30));
+        panelEditarCategoria.add(inputNomeCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 250, 40));
+
+        jLabel45.setText("Nome categoria");
+        panelEditarCategoria.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+
+        javax.swing.GroupLayout panelEditarCategoriaFundoLayout = new javax.swing.GroupLayout(panelEditarCategoriaFundo);
+        panelEditarCategoriaFundo.setLayout(panelEditarCategoriaFundoLayout);
+        panelEditarCategoriaFundoLayout.setHorizontalGroup(
+            panelEditarCategoriaFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarCategoriaFundoLayout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addComponent(panelEditarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(397, Short.MAX_VALUE))
+        );
+        panelEditarCategoriaFundoLayout.setVerticalGroup(
+            panelEditarCategoriaFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarCategoriaFundoLayout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(panelEditarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(388, Short.MAX_VALUE))
+        );
+
+        panelCategorias.add(panelEditarCategoriaFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, 1050, 850));
+
         panelFundoPopCategoria.setOpaque(false);
         panelFundoPopCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1941,7 +1944,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelFundoPopCategoriaLayout.createSequentialGroup()
                 .addGap(152, 152, 152)
                 .addComponent(panelPopCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelFundoPopCategoriaLayout.setVerticalGroup(
             panelFundoPopCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2118,38 +2121,6 @@ public class Inicio extends javax.swing.JFrame {
         panelClose.setBackground(new Color(51, 51, 51));
 
     }//GEN-LAST:event_txtCloseMouseExited
-
-    private void txtMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseClicked
-
-        tamanhoFrame();
-
-    }//GEN-LAST:event_txtMaxMouseClicked
-
-    private void txtMaxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseEntered
-
-        panelMax.setBackground(new Color(204, 204, 204));
-        txtMax.setForeground(Color.black);
-
-    }//GEN-LAST:event_txtMaxMouseEntered
-
-    private void txtMaxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseExited
-
-        panelMax.setBackground(new Color(51, 51, 51));
-        txtMax.setForeground(Color.white);
-
-    }//GEN-LAST:event_txtMaxMouseExited
-
-    private void panelMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMaxMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelMaxMouseClicked
-
-    private void panelMaxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMaxMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelMaxMouseEntered
-
-    private void panelMaxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMaxMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelMaxMouseExited
 
     private void txtMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMinMouseClicked
 
@@ -3148,6 +3119,18 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAdicionarADMMouseExited
 
+    private void panelEditarCategoriaFundoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEditarCategoriaFundoMouseClicked
+      
+        fecharPanelEditarCategoria();
+        
+    }//GEN-LAST:event_panelEditarCategoriaFundoMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        fecharPanelEditarCategoria();
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -3304,6 +3287,7 @@ public class Inicio extends javax.swing.JFrame {
         inserirMetodosComboReservas();
         listarReservas(1, null);
         buttonEditarProduto.setVisible(false);
+        panelEditarCategoriaFundo.setVisible(false);
         panelNoti.setVisible(false);
         panelFundoNoti.setVisible(false);
         radio1.setSelected(true);
@@ -3898,7 +3882,7 @@ public class Inicio extends javax.swing.JFrame {
         
         for (int i = 0; i < listaCategorias2.size(); i++) {
             
-            panelListCategorias.add(new ItemCategoria(listaCategorias2.get(i)));
+            panelListCategorias.add(new ItemCategoria(listaCategorias2.get(i), this));
             
         }
         
@@ -4349,32 +4333,20 @@ public class Inicio extends javax.swing.JFrame {
         
     }
     
-    private void tamanhoFrame() {
+    public void visibilidadePanelEditarCategoria(Categorias categoria) {
         
-        if (telaCheia) {
-
-            telaCheia = false;
-
-            frame.setSize(tamanhoOriginal);
-            frame.setLocation(localizacaoOriginal);
-
-            redimensiona(false);
-
-        } else {
-
-            telaCheia = true;
-
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int width = screenSize.width;
-            int height = screenSize.height;
-
-            frame.setBounds(0, 0, width, height - 30);
-
-            redimensiona(true);
-
-        }
+        panelEditarCategoriaFundo.setVisible(true);
+        
+        inputNomeCategoriaEdit.setText(categoria.getNome());
         
     }
+    
+    private void fecharPanelEditarCategoria() {
+        
+        panelEditarCategoriaFundo.setVisible(false);
+        
+    }
+        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAdicionarADM;
@@ -4431,6 +4403,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextArea inputMensagem;
     private javax.swing.JTextField inputNome;
     private javax.swing.JTextField inputNomeCategoria;
+    private javax.swing.JTextField inputNomeCategoriaEdit;
     private javax.swing.JTextField inputNomeProduto;
     private javax.swing.JTextField inputPesquisaCategorias;
     private javax.swing.JTextField inputPesquisaCliente;
@@ -4443,6 +4416,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField inputValorCusto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
@@ -4484,6 +4458,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4506,6 +4481,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelCategorias;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelClose;
+    private javax.swing.JPanel panelEditarCategoria;
+    private javax.swing.JPanel panelEditarCategoriaFundo;
     private javax.swing.JPanel panelEstoque;
     private javax.swing.JPanel panelFundoAdicionarProduto;
     private javax.swing.JPanel panelFundoCloseNoti;
@@ -4522,7 +4499,6 @@ public class Inicio extends javax.swing.JFrame {
     private telas.formatos.PanelItem panelListClientes;
     private telas.formatos.PanelItem panelListRelatorios;
     private javax.swing.JPanel panelLogo;
-    private javax.swing.JPanel panelMax;
     private javax.swing.JPanel panelMin;
     private telas.formatos.PanelBorder panelNav;
     private javax.swing.JPanel panelNoti;
@@ -4558,7 +4534,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtInicio;
     private javax.swing.JLabel txtLogo;
     private javax.swing.JLabel txtLogout;
-    private javax.swing.JLabel txtMax;
     private javax.swing.JLabel txtMin;
     private javax.swing.JLabel txtNomeProduto;
     private javax.swing.JLabel txtNomeProduto1;
