@@ -76,4 +76,23 @@ public class UsuariosDAO {
         return list;
     }
     
+    public void deletar(int id_usuario) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("DELETE FROM usuarios WHERE id_usuario = ?");
+            stmt.setInt(1, id_usuario);
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
 }

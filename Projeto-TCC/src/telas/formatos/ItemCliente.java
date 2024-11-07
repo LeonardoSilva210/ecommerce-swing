@@ -11,12 +11,14 @@ import java.net.URLEncoder;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import model.bean.Usuarios;
+import model.dao.UsuariosDAO;
 
 
 public class ItemCliente extends javax.swing.JPanel {
 
     private final Usuarios usuario;
     private String formata;
+   
 
     public ItemCliente(Usuarios usuario) {
         initComponents();
@@ -85,6 +87,7 @@ public class ItemCliente extends javax.swing.JPanel {
     }
 
 
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,6 +96,7 @@ public class ItemCliente extends javax.swing.JPanel {
         txtEmail = new javax.swing.JLabel();
         txtWhatsApp = new javax.swing.JLabel();
         btnEnviar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(920, 40));
@@ -125,6 +129,16 @@ public class ItemCliente extends javax.swing.JPanel {
             }
         });
         add(btnEnviar);
+
+        jButton1.setBackground(new java.awt.Color(211, 77, 92));
+        jButton1.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
+        jButton1.setText("Deletar Conta");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
@@ -145,9 +159,18 @@ public class ItemCliente extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnEnviarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+       UsuariosDAO daoUsuarios = new UsuariosDAO();
+       
+       daoUsuarios.deletar(usuario.getId_usuario());
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel txtEmail;
     private javax.swing.JLabel txtNome;
     private javax.swing.JLabel txtWhatsApp;

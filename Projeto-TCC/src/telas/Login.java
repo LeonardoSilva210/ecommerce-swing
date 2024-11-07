@@ -16,9 +16,6 @@ import model.dao.AdminsDAO;
 public class Login extends javax.swing.JFrame {
 
     private final JFrame frame = this;
-    private boolean telaCheia = false;
-    private Dimension tamanhoOriginal;
-    private Point localizacaoOriginal;
 
     public Login() {
         initComponents();
@@ -40,8 +37,6 @@ public class Login extends javax.swing.JFrame {
         inputEmail = new javax.swing.JTextField();
         panelMin = new javax.swing.JPanel();
         txtMin = new javax.swing.JLabel();
-        panelMax = new javax.swing.JPanel();
-        txtMax = new javax.swing.JLabel();
         panelClose = new javax.swing.JPanel();
         txtClose = new javax.swing.JLabel();
 
@@ -123,58 +118,18 @@ public class Login extends javax.swing.JFrame {
         panelMin.setLayout(panelMinLayout);
         panelMinLayout.setHorizontalGroup(
             panelMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelMinLayout.setVerticalGroup(
             panelMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 40, 30));
-
-        panelMax.setBackground(new java.awt.Color(0, 102, 102));
-        panelMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelMaxMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelMaxMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelMaxMouseExited(evt);
-            }
-        });
-
-        txtMax.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        txtMax.setForeground(new java.awt.Color(255, 255, 255));
-        txtMax.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtMax.setText("□");
-        txtMax.setToolTipText("");
-        txtMax.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        txtMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtMaxMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txtMaxMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtMaxMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelMaxLayout = new javax.swing.GroupLayout(panelMax);
-        panelMax.setLayout(panelMaxLayout);
-        panelMaxLayout.setHorizontalGroup(
-            panelMaxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMax, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-        panelMaxLayout.setVerticalGroup(
-            panelMaxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(panelMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 0, 40, 30));
+        jPanel1.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, 40, 30));
 
         panelClose.setBackground(new java.awt.Color(0, 102, 102));
         panelClose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -304,54 +259,6 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_panelMinMouseExited
 
-    private void txtMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseClicked
-
-        if (telaCheia) {
-
-            telaCheia = false;
-
-            frame.setSize(tamanhoOriginal);
-            frame.setLocation(localizacaoOriginal);
-
-        } else {
-
-            telaCheia = true;
-
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int width = screenSize.width;
-            int height = screenSize.height;
-            
-            
-
-            frame.setBounds(0, 0, width, height - 30);
-
-        }
-    }//GEN-LAST:event_txtMaxMouseClicked
-
-    private void txtMaxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseEntered
-
-        panelMax.setBackground(new Color(204, 204, 204));
-        txtMax.setForeground(Color.black);
-    }//GEN-LAST:event_txtMaxMouseEntered
-
-    private void txtMaxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaxMouseExited
-
-        panelMax.setBackground(new Color(0, 102, 102));
-        txtMax.setForeground(Color.white);
-    }//GEN-LAST:event_txtMaxMouseExited
-
-    private void panelMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMaxMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelMaxMouseClicked
-
-    private void panelMaxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMaxMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelMaxMouseEntered
-
-    private void panelMaxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMaxMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelMaxMouseExited
-
     private void txtCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCloseMouseClicked
 
         dispose();
@@ -401,9 +308,6 @@ public class Login extends javax.swing.JFrame {
 
     private void inicia() {
         
-        tamanhoOriginal = frame.getSize();
-        localizacaoOriginal = frame.getLocation();
-        
     }
 
     public static void main(String args[]) {
@@ -447,10 +351,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelClose;
     private javax.swing.JPanel panelLogin;
-    private javax.swing.JPanel panelMax;
     private javax.swing.JPanel panelMin;
     private javax.swing.JLabel txtClose;
-    private javax.swing.JLabel txtMax;
     private javax.swing.JLabel txtMin;
     // End of variables declaration//GEN-END:variables
 }
