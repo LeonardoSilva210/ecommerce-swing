@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -273,6 +274,18 @@ public class Inicio extends javax.swing.JFrame {
         inputPesquisaCategorias = new javax.swing.JTextField();
         btnAdicionarCategoria = new javax.swing.JButton();
         panelAdicionarADM = new javax.swing.JPanel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        edtNomeADM = new javax.swing.JTextField();
+        edtEmailADM = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        edtSenhaADM = new javax.swing.JTextField();
+        jLabel50 = new javax.swing.JLabel();
+        edtWhatsappADM = new javax.swing.JFormattedTextField();
+        jLabel51 = new javax.swing.JLabel();
+        edtDataNascimentoADM = new javax.swing.JFormattedTextField();
+        jButton4 = new javax.swing.JButton();
         panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -2032,17 +2045,69 @@ public class Inicio extends javax.swing.JFrame {
         tabInicio.addTab("tab6", panelCategorias);
 
         panelAdicionarADM.setBackground(new java.awt.Color(51, 51, 51));
+        panelAdicionarADM.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout panelAdicionarADMLayout = new javax.swing.GroupLayout(panelAdicionarADM);
-        panelAdicionarADM.setLayout(panelAdicionarADMLayout);
-        panelAdicionarADMLayout.setHorizontalGroup(
-            panelAdicionarADMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
-        );
-        panelAdicionarADMLayout.setVerticalGroup(
-            panelAdicionarADMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
-        );
+        jLabel46.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel46.setText("Adicionar ADM");
+        panelAdicionarADM.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1020, -1));
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel47.setText("Nome");
+        panelAdicionarADM.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 220, -1));
+        panelAdicionarADM.add(edtNomeADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 218, 32));
+        panelAdicionarADM.add(edtEmailADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 218, 32));
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel48.setText("E-mail");
+        panelAdicionarADM.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 220, -1));
+
+        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel49.setText("Senha");
+        panelAdicionarADM.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 220, -1));
+        panelAdicionarADM.add(edtSenhaADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 218, 32));
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel50.setText("Data Nascimento");
+        panelAdicionarADM.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 220, -1));
+
+        try {
+            edtWhatsappADM.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("+## ## ####-#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        panelAdicionarADM.add(edtWhatsappADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 218, 32));
+
+        jLabel51.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel51.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel51.setText("Whatsapp");
+        panelAdicionarADM.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 220, -1));
+
+        try {
+            edtDataNascimentoADM.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        panelAdicionarADM.add(edtDataNascimentoADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 218, 32));
+
+        jButton4.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
+        jButton4.setText("Salvar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        panelAdicionarADM.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 220, 40));
 
         tabInicio.addTab("tab7", panelAdicionarADM);
 
@@ -3130,6 +3195,48 @@ public class Inicio extends javax.swing.JFrame {
         fecharPanelEditarCategoria();
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        Usuarios usuario = new Usuarios();
+        
+        String nomeADM = edtNomeADM.getText();
+        String emailADM = edtEmailADM.getText();
+        String senhaADM = edtSenhaADM.getText();
+        
+        String[] divide = edtDataNascimentoADM.getText().split("\\/");
+        
+        String dia = "";
+        String mes = "";
+        String ano = "";
+        
+        if (divide.length > 0) {
+            
+            dia = divide[0];
+            mes = divide[1];
+            ano = divide[2];
+            
+        }
+        
+        String data = ano + "-" + mes + "-" + dia;
+        
+        Date dataNascimento = Date.valueOf(data);
+
+        String num = edtWhatsappADM.getText();
+
+        String whatsap = num.replaceAll("[^0-9]", "");
+   
+        usuario.setAdm(1);
+        usuario.setData_nascimento(dataNascimento);
+        usuario.setEmail(emailADM);
+        usuario.setWhatsapp(whatsap);
+        usuario.setSenha(senhaADM);
+        usuario.setId_usuario(0);
+        usuario.setNome(nomeADM);
+        
+        daoAdmin.InserirAdministrador(usuario);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
 
@@ -4389,11 +4496,16 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboAdicionarProdutoCategoria;
     private javax.swing.JComboBox<String> comboCategorias;
     private javax.swing.JComboBox<String> comboMetodoPesquisa;
+    private javax.swing.JFormattedTextField edtDataNascimentoADM;
     private javax.swing.JTextField edtDescricaoProduto;
+    private javax.swing.JTextField edtEmailADM;
+    private javax.swing.JTextField edtNomeADM;
     private javax.swing.JTextField edtNomeProduto;
     private javax.swing.JTextField edtQuantidade;
+    private javax.swing.JTextField edtSenhaADM;
     private javax.swing.JTextField edtValorCustoProduto;
     private javax.swing.JTextField edtValorProduto;
+    private javax.swing.JFormattedTextField edtWhatsappADM;
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imageAvatar1;
     private com.raven.avatar.ImageAvatar imageAvatar2;
@@ -4417,6 +4529,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
@@ -4459,7 +4572,13 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
