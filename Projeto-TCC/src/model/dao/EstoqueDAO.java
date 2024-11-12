@@ -26,7 +26,7 @@ public class EstoqueDAO {
                 
                 case 1:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado,"
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, "
                             + "produtos.disponivel, produtos.id_produto, produtos.quantidade,"
                             + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria WHERE produtos.arquivado = 0");
@@ -35,7 +35,7 @@ public class EstoqueDAO {
                 
                 case 2: 
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 1");
@@ -44,7 +44,7 @@ public class EstoqueDAO {
                     
                 case 3:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto,produtos.descricao_produto, produtos.disponivel, produtos.arquivado,"
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto,produtos.descricao_produto, produtos.disponivel, produtos.arquivado, produtos.imagem, "
                             + "produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao, produtos.id_produto, produtos.quantidade "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 0");
                     
@@ -52,7 +52,7 @@ public class EstoqueDAO {
                     
                 case 4:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado,"
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, "
                             + "produtos.disponivel, produtos.id_produto, produtos.quantidade,"
                             + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.nome_produto "
@@ -64,7 +64,7 @@ public class EstoqueDAO {
                     
                 case 5:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 1 "
@@ -76,7 +76,7 @@ public class EstoqueDAO {
                     
                 case 6:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 0 "
@@ -88,7 +88,7 @@ public class EstoqueDAO {
                 
                 case 7:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1");
@@ -97,7 +97,7 @@ public class EstoqueDAO {
                     
                 case 8:
                     
-                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado," 
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1 "
@@ -125,6 +125,7 @@ public class EstoqueDAO {
                 estoque.setDisponivel(rs.getInt("disponivel"));
                 estoque.setId_produto(rs.getInt("id_produto"));
                 estoque.setArquivado(rs.getInt("arquivado"));
+                estoque.setImagem(rs.getString("imagem"));
                                             
                 conjEstoque.add(estoque);
             

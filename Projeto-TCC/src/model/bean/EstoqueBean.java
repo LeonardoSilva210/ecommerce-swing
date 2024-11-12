@@ -13,12 +13,13 @@ public class EstoqueBean {
     private int quantidade;
     private String nome_categoria;
     private String descricao_categoria;
+    private String imagem;
     
 
     public EstoqueBean() {
     }
 
-    public EstoqueBean(int id_produto, String nome_produto, String descricao_produto, int disponivel, int arquivado, int fk_id_categoria, float valor, float valor_custo, int quantidade, String nome_categoria, String descricao_categoria) {
+    public EstoqueBean(int id_produto, String nome_produto, String descricao_produto, int disponivel, int arquivado, int fk_id_categoria, float valor, float valor_custo, int quantidade, String nome_categoria, String descricao_categoria, String imagem) {
         this.id_produto = id_produto;
         this.nome_produto = nome_produto;
         this.descricao_produto = descricao_produto;
@@ -30,7 +31,18 @@ public class EstoqueBean {
         this.quantidade = quantidade;
         this.nome_categoria = nome_categoria;
         this.descricao_categoria = descricao_categoria;
+        this.imagem = imagem;
     }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    
 
     public int getArquivado() {
         return arquivado;

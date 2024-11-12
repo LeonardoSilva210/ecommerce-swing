@@ -3,18 +3,34 @@ package telas;
 import Globals.GlobalAdmin;
 import Globals.GlobalWhats;
 import com.raven.chart.ModelChart;
+import icons.CriaIcon;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,6 +54,8 @@ import model.dao.ProdutosDAO;
 import model.dao.RelatoriosDAO;
 import model.dao.ReservasDAO;
 import model.dao.UsuariosDAO;
+import org.json.JSONException;
+import org.json.JSONObject;
 import telas.formatos.ItemCategoria;
 import telas.formatos.ItemCliente;
 import telas.formatos.ItemNotificacao;
@@ -67,7 +85,11 @@ public class Inicio extends javax.swing.JFrame {
     private List<Usuarios> listaClientes = new ArrayList();
     private List<Compras> listaCompras = new ArrayList();
     private List<Reservas> listaReservas = new ArrayList();
+    private File arquivoSelecionado;
+    private static final String CLOUD_NAME = "dh4zkueea";
+    private static final String UPLOAD_PRESET = "ml_default";
     private boolean animacao = false;
+    private String caminhoImagem = null;
     private float produtosTotal = 0, produtosDisponiveis = 0, produtosIndisponiveis = 0, calcPorcent = 0;
     private Dimension tamanhoOriginal;
     private Point localizacaoOriginal;
@@ -104,6 +126,9 @@ public class Inicio extends javax.swing.JFrame {
         buttonClosePanelAdicionarProduto = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        txtImagemSelecionada = new javax.swing.JLabel();
+        txtImagem = new javax.swing.JLabel();
         panelInformacoesPerfil = new javax.swing.JPanel();
         imageAvatar1 = new com.raven.avatar.ImageAvatar();
         inputNome = new javax.swing.JTextField();
@@ -140,6 +165,7 @@ public class Inicio extends javax.swing.JFrame {
         btnAdicionarQuantidade = new javax.swing.JButton();
         txtNomeProduto4 = new javax.swing.JLabel();
         edtValorCustoProduto = new javax.swing.JTextField();
+        txtImagemProduto = new javax.swing.JLabel();
         panelFundoPopProdutoSelecionado = new javax.swing.JPanel();
         panelPerfil = new telas.formatos.PanelBorder();
         imageAvatar2 = new com.raven.avatar.ImageAvatar();
@@ -422,6 +448,20 @@ public class Inicio extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Adicionar Produto");
         panelAdicionarProduto.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
+
+        jButton7.setText("Carregar Imagem");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        panelAdicionarProduto.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, 170, 30));
+
+        txtImagemSelecionada.setForeground(new java.awt.Color(255, 255, 255));
+        txtImagemSelecionada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtImagemSelecionada.setText("Nenhuma imagem selecionada");
+        panelAdicionarProduto.add(txtImagemSelecionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 170, 20));
+        panelAdicionarProduto.add(txtImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 230, 130, 100));
 
         javax.swing.GroupLayout panelFundoAdicionarProdutoLayout = new javax.swing.GroupLayout(panelFundoAdicionarProduto);
         panelFundoAdicionarProduto.setLayout(panelFundoAdicionarProdutoLayout);
@@ -731,6 +771,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelPopProduto.add(edtValorCustoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 170, 30));
+        panelPopProduto.add(txtImagemProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 110, 100));
 
         panelAcimaFrame.add(panelPopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 970, 420));
 
@@ -2548,12 +2589,28 @@ public class Inicio extends javax.swing.JFrame {
             
             Produtos produto = new Produtos();
         
+            if (arquivoSelecionado != null) {
+                
+                    try {
+                        enviarImagem(arquivoSelecionado);
+                    } catch (JSONException ex) {
+                        JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
+                    } catch (IOException ex) {
+                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                } else {
+                
+                    JOptionPane.showMessageDialog(null, "Por favor, selecione uma imagem.");
+                }
+            
             produto.setNome_produto(nome);
             produto.setDescricao_produto(descricao);
             produto.setValor(Float.parseFloat(valor));
             produto.setValor_custo(Float.parseFloat(valorCusto));
             produto.setQuantidade(Integer.parseInt(quantidade));
-            
+            produto.setImagem(caminhoImagem);
+            caminhoImagem = null;
+
             int disponibilidade = 0;
             
             if (radioDisponivel.isSelected()) {
@@ -2573,11 +2630,82 @@ public class Inicio extends javax.swing.JFrame {
             resetaCamposAdicionarProduto();
             
             JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
+            
+            txtImagem.setIcon(null);
+            txtImagemSelecionada.setText("Nenhuma imagem selecionada");
  
         }
         
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
+    private void enviarImagem(File imagem) throws IOException, JSONException {
+        
+        String url = "https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/image/upload";
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+
+        String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
+        connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+        DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
+        outputStream.writeBytes("--" + boundary + "\r\n");
+        outputStream.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + imagem.getName() + "\"\r\n");
+        outputStream.writeBytes("Content-Type: " + URLConnection.guessContentTypeFromName(imagem.getName()) + "\r\n");
+        outputStream.writeBytes("\r\n");
+
+        FileInputStream fileInputStream = new FileInputStream(imagem);
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+        
+        while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+            
+            outputStream.write(buffer, 0, bytesRead);
+        }
+        
+        outputStream.writeBytes("\r\n");
+
+        outputStream.writeBytes("--" + boundary + "\r\n");
+        outputStream.writeBytes("Content-Disposition: form-data; name=\"upload_preset\"\r\n\r\n");
+        outputStream.writeBytes(UPLOAD_PRESET + "\r\n");
+        outputStream.writeBytes("--" + boundary + "--\r\n");
+
+        fileInputStream.close();
+        outputStream.flush();
+        outputStream.close();
+
+        int responseCode = connection.getResponseCode();
+        
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = reader.readLine()) != null) {
+                response.append(inputLine);
+            }
+            reader.close();
+
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            String imageUrl = jsonResponse.getString("secure_url");
+            JOptionPane.showMessageDialog(null, "Imagem enviada com sucesso!\nURL: " + imageUrl);
+
+            caminhoImagem = imageUrl;
+            
+            mostrarImagem(imageUrl);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao enviar a imagem. Código de resposta: " + responseCode);
+        }
+    }
+    
+    private void mostrarImagem(String imageUrl) {
+        
+        ImageIcon icon = new CriaIcon().criaIcon(imageUrl);
+        txtImagem.setIcon(icon);
+        
+    }
+    
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
 
         abrePopAdicionarProduto();
@@ -2828,6 +2956,14 @@ public class Inicio extends javax.swing.JFrame {
             edtQuantidade.setText(String.valueOf(produtosAtual.getQuantidade()));
             edtValorProduto.setText(String.valueOf(produtosAtual.getValor()));
             edtValorCustoProduto.setText(String.valueOf(produtosAtual.getValor_custo()));
+            
+            String imagem = produtosAtual.getImagem();
+            
+            if (imagem != null && !imagem.isEmpty() && !imagem.equals("null")) {
+                
+                txtImagemProduto.setIcon(new CriaIcon().criaIcon(imagem));
+            
+            }
 
             listaCategorias = daoCategoria.listar(1, null);
 
@@ -3237,6 +3373,20 @@ public class Inicio extends javax.swing.JFrame {
         daoAdmin.InserirAdministrador(usuario);
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Selecione uma Imagem");
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagens", "jpg", "png", "gif"));
+        int result = chooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            arquivoSelecionado = chooser.getSelectedFile();
+            txtImagemSelecionada.setText("Imagem selecionada: " + arquivoSelecionado.getName());
+        }
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     public static void main(String args[]) {
 
@@ -3825,6 +3975,7 @@ public class Inicio extends javax.swing.JFrame {
             produtosAtual.setDisponivel(estoqueTabela.get(linha).getDisponivel());
             produtosAtual.setFk_id_categoria(estoqueTabela.get(linha).getFk_id_categoria());
             produtosAtual.setValor_custo(estoqueTabela.get(linha).getValor_custo());
+            produtosAtual.setImagem(estoqueTabela.get(linha).getImagem());
 
             trocaVisibilidadeButtons(2);
             
@@ -4134,6 +4285,8 @@ public class Inicio extends javax.swing.JFrame {
         produtosAtual.setFk_id_categoria(0);
         produtosAtual.setId_produto(0);
         produtosAtual.setQuantidade(0);
+        produtosAtual.setImagem(null);
+        txtImagemProduto.setIcon(null);
         
         trocaVisibilidadeButtons(1);
 
@@ -4300,6 +4453,7 @@ public class Inicio extends javax.swing.JFrame {
         resetaCamposAdicionarProduto();
         btnAdicionarProduto.setVisible(true);
         inputPesquisarProduto.setVisible(true);
+        txtImagemProduto.setIcon(null);
         
     }
     
@@ -4532,6 +4686,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -4650,6 +4805,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtClientes;
     private javax.swing.JLabel txtClose;
     private javax.swing.JLabel txtEstoque;
+    private javax.swing.JLabel txtImagem;
+    private javax.swing.JLabel txtImagemProduto;
+    private javax.swing.JLabel txtImagemSelecionada;
     private javax.swing.JLabel txtInicio;
     private javax.swing.JLabel txtLogo;
     private javax.swing.JLabel txtLogout;

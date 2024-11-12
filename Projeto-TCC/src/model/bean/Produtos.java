@@ -5,8 +5,7 @@ package model.bean;
 public class Produtos {
     
     private int id_produto;
-    private String nome_produto;
-    private String descricao_produto;
+    private String nome_produto, descricao_produto, imagem;
     private int disponivel, quantidade, arquivado;
     private float valor, valor_custo;
     private int fk_id_categoria;
@@ -14,16 +13,25 @@ public class Produtos {
     public Produtos() {
     }
 
-    public Produtos(int id_produto, String nome_produto, String descricao_produto, int disponivel, int quantidade, int arquivado, float valor, float valor_custo, int fk_id_categoria) {
+    public Produtos(int id_produto, String nome_produto, String descricao_produto, String imagem, int disponivel, int quantidade, int arquivado, float valor, float valor_custo, int fk_id_categoria) {
         this.id_produto = id_produto;
         this.nome_produto = nome_produto;
         this.descricao_produto = descricao_produto;
+        this.imagem = imagem;
         this.disponivel = disponivel;
         this.quantidade = quantidade;
         this.arquivado = arquivado;
         this.valor = valor;
         this.valor_custo = valor_custo;
         this.fk_id_categoria = fk_id_categoria;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public int getArquivado() {
