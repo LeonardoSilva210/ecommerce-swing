@@ -76,6 +76,7 @@ public class Inicio extends javax.swing.JFrame {
     private final UsuariosDAO daoUsuario = new UsuariosDAO();
     private final ReservasDAO daoReserva = new ReservasDAO();
     private final EstoqueBean produtosAtual = new EstoqueBean();
+    private Categorias categoriaAtual = new Categorias();
     private List<Produtos> listaProdutos = new ArrayList();
     private List<EstoqueBean> estoqueTabela = new ArrayList();
     private List<Notificacoes> listaNotificacoes = new ArrayList();
@@ -278,6 +279,9 @@ public class Inicio extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         inputNomeCategoriaEdit = new javax.swing.JTextField();
         jLabel45 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        inputDescricaoCategoriaEdit = new javax.swing.JTextField();
+        btnSalvarEdicaoCategoria = new javax.swing.JButton();
         panelFundoPopCategoria = new javax.swing.JPanel();
         panelPopCategoria = new telas.formatos.PanelBorder();
         jButton2 = new javax.swing.JButton();
@@ -461,7 +465,7 @@ public class Inicio extends javax.swing.JFrame {
         txtImagemSelecionada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtImagemSelecionada.setText("Nenhuma imagem selecionada");
         panelAdicionarProduto.add(txtImagemSelecionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 170, 20));
-        panelAdicionarProduto.add(txtImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 230, 130, 100));
+        panelAdicionarProduto.add(txtImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 140, 150, 190));
 
         javax.swing.GroupLayout panelFundoAdicionarProdutoLayout = new javax.swing.GroupLayout(panelFundoAdicionarProduto);
         panelFundoAdicionarProduto.setLayout(panelFundoAdicionarProdutoLayout);
@@ -771,7 +775,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelPopProduto.add(edtValorCustoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 170, 30));
-        panelPopProduto.add(txtImagemProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 110, 100));
+        panelPopProduto.add(txtImagemProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 310, 200));
 
         panelAcimaFrame.add(panelPopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 970, 420));
 
@@ -1921,8 +1925,22 @@ public class Inicio extends javax.swing.JFrame {
         panelEditarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 0, 40, 30));
         panelEditarCategoria.add(inputNomeCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 250, 40));
 
+        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel45.setText("Nome categoria");
         panelEditarCategoria.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+
+        jLabel52.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel52.setText("Descrição Categoria");
+        panelEditarCategoria.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+        panelEditarCategoria.add(inputDescricaoCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 250, 40));
+
+        btnSalvarEdicaoCategoria.setText("Salvar");
+        btnSalvarEdicaoCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarEdicaoCategoriaActionPerformed(evt);
+            }
+        });
+        panelEditarCategoria.add(btnSalvarEdicaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 250, 40));
 
         javax.swing.GroupLayout panelEditarCategoriaFundoLayout = new javax.swing.GroupLayout(panelEditarCategoriaFundo);
         panelEditarCategoriaFundo.setLayout(panelEditarCategoriaFundoLayout);
@@ -2439,34 +2457,41 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if (Integer.parseInt(edtQuantidade.getText()) >= 0) {
+        if (edtNomeProduto.getText().trim().isEmpty() || edtDescricaoProduto.getText().trim().isEmpty()) {
             
-            int escolha = JOptionPane.showConfirmDialog(null, "Confirmar edição?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            
-            if (escolha == JOptionPane.YES_OPTION) {
-                
-                EstoqueBean estoque = new EstoqueBean();
-
-                estoque.setId_produto(produtosAtual.getId_produto());
-                estoque.setNome_produto(edtNomeProduto.getText());
-                estoque.setDescricao_produto(edtDescricaoProduto.getText());
-                estoque.setValor(Float.parseFloat(edtValorProduto.getText()));
-                estoque.setValor_custo(Float.parseFloat(edtValorCustoProduto.getText()));
-                estoque.setQuantidade(Integer.parseInt(edtQuantidade.getText()));
-                estoque.setFk_id_categoria(listaCategorias.get(comboCategorias.getSelectedIndex()).getId_categoria());
-
-                daoEstoque.atualizar(estoque);
-
-                JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
-                
-            }
+            JOptionPane.showMessageDialog(null, "Campos Nome/Descrição, não podem estar vazio!");
             
         } else {
             
-            JOptionPane.showMessageDialog(null, "Quantidade não permitida!");
+            if (Integer.parseInt(edtQuantidade.getText()) >= 0) {
+            
+                int escolha = JOptionPane.showConfirmDialog(null, "Confirmar edição?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            
+                if (escolha == JOptionPane.YES_OPTION) {
+                
+                    EstoqueBean estoque = new EstoqueBean();
+
+                    estoque.setId_produto(produtosAtual.getId_produto());
+                    estoque.setNome_produto(edtNomeProduto.getText());
+                    estoque.setDescricao_produto(edtDescricaoProduto.getText());
+                    estoque.setValor(Float.parseFloat(edtValorProduto.getText()));
+                    estoque.setValor_custo(Float.parseFloat(edtValorCustoProduto.getText()));
+                    estoque.setQuantidade(Integer.parseInt(edtQuantidade.getText()));
+                    estoque.setFk_id_categoria(listaCategorias.get(comboCategorias.getSelectedIndex()).getId_categoria());
+
+                    daoEstoque.atualizar(estoque);
+
+                    JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+                
+                }
+            
+            } else {
+            
+                JOptionPane.showMessageDialog(null, "Quantidade não permitida!");
+            
+            }
             
         }
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2829,6 +2854,15 @@ public class Inicio extends javax.swing.JFrame {
         if (!Character.isDigit(letra)) {
             evt.consume();
         }
+        
+        String quantidadeTexto = edtQuantidade.getText().trim();
+
+        if (quantidadeTexto == null || quantidadeTexto.isEmpty()) {
+            
+            edtQuantidade.setText("0");
+            
+        }
+
 
     }//GEN-LAST:event_edtQuantidadeKeyTyped
 
@@ -2840,6 +2874,14 @@ public class Inicio extends javax.swing.JFrame {
             evt.consume(); 
         }
         
+        String quantidadeTexto = edtValorCustoProduto.getText().trim();
+
+        if (quantidadeTexto == null || quantidadeTexto.isEmpty()) {
+            
+            edtValorCustoProduto.setText("0");
+            
+        }
+        
     }//GEN-LAST:event_edtValorCustoProdutoKeyTyped
 
     private void edtValorProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtValorProdutoKeyTyped
@@ -2848,6 +2890,14 @@ public class Inicio extends javax.swing.JFrame {
 
         if (!Character.isDigit(letra) && letra != '.') {
             evt.consume(); 
+        }
+        
+        String quantidadeTexto = edtValorProduto.getText().trim();
+
+        if (quantidadeTexto == null || quantidadeTexto.isEmpty()) {
+            
+            edtValorProduto.setText("0");
+            
         }
         
     }//GEN-LAST:event_edtValorProdutoKeyTyped
@@ -3387,6 +3437,27 @@ public class Inicio extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnSalvarEdicaoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarEdicaoCategoriaActionPerformed
+        
+        String novoNomeCategoria = inputNomeCategoriaEdit.getText().trim();
+        String novaDescricaoCategoria = inputDescricaoCategoriaEdit.getText().trim();
+        
+        if (novoNomeCategoria.isEmpty() || novaDescricaoCategoria.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            
+        } else {
+            
+            daoCategoria.editar(novoNomeCategoria, novaDescricaoCategoria, categoriaAtual.getId_categoria());
+            
+            inputNomeCategoriaEdit.setText("");
+            inputDescricaoCategoriaEdit.setText("");
+            JOptionPane.showMessageDialog(null, "Edição realizada com sucesso!");
+ 
+        }
+        
+    }//GEN-LAST:event_btnSalvarEdicaoCategoriaActionPerformed
 
     public static void main(String args[]) {
 
@@ -4599,12 +4670,17 @@ public class Inicio extends javax.swing.JFrame {
         panelEditarCategoriaFundo.setVisible(true);
         
         inputNomeCategoriaEdit.setText(categoria.getNome());
+        inputDescricaoCategoriaEdit.setText(categoria.getDescricao());
+ 
+        categoriaAtual = categoria;
         
     }
     
     private void fecharPanelEditarCategoria() {
         
         panelEditarCategoriaFundo.setVisible(false);
+        
+        categoriaAtual = null;
         
     }
         
@@ -4627,6 +4703,7 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.swing.ButtonBadges btnNoti;
     private javax.swing.JPanel btnRelatorios;
     private javax.swing.JPanel btnReservas;
+    private javax.swing.JButton btnSalvarEdicaoCategoria;
     private javax.swing.JButton buttonAddMensagem;
     private javax.swing.JButton buttonArquivar;
     private javax.swing.JButton buttonAtualizar;
@@ -4664,6 +4741,7 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.avatar.ImageAvatar imageAvatar1;
     private com.raven.avatar.ImageAvatar imageAvatar2;
     private javax.swing.JTextArea inputDescricaoCategoria;
+    private javax.swing.JTextField inputDescricaoCategoriaEdit;
     private javax.swing.JTextField inputDescricaoProduto;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextArea inputMensagem;
@@ -4734,6 +4812,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

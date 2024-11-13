@@ -56,7 +56,7 @@ public class Login extends javax.swing.JFrame {
                 inputSenhaKeyPressed(evt);
             }
         });
-        panelLogin.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 260, 30));
+        panelLogin.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 260, 40));
 
         buttonEntrar.setText("Logar");
         buttonEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -64,24 +64,24 @@ public class Login extends javax.swing.JFrame {
                 buttonEntrarActionPerformed(evt);
             }
         });
-        panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 160, 40));
+        panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 260, 50));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Email");
-        panelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+        jLabel1.setText("E-mail");
+        panelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha");
-        panelLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
+        panelLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
 
         inputEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputEmailKeyPressed(evt);
             }
         });
-        panelLogin.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 260, 30));
+        panelLogin.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 260, 40));
 
         jPanel1.add(panelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 520, 440));
 

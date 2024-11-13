@@ -10,7 +10,7 @@ public class Conexao {
     
     private static final String url = "jdbc:mysql://localhost:3306/tcc";
     private static final String user = "root";
-    private static final String password = "";
+    private static final String password = "12345";
     
     public static Connection conectar(){
         Connection conexao = null; 

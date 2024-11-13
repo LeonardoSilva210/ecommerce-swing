@@ -106,4 +106,26 @@ public class CategoriasDAO {
         
     }
     
+    public void editar(String nome, String descricao, int id) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE categorias set nome = ?, descricao = ? WHERE id_categoria = ?");
+            
+            stmt.setString(1, nome);
+            stmt.setString(2, descricao);
+            stmt.setInt(3, id);
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
 }
