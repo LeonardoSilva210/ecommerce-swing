@@ -38,6 +38,32 @@ public class CategoriasDAO {
                     
                     break;
                 
+                case 3:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM categorias WHERE arquivado = 1");
+                    
+                    break;
+                
+                case 4:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM categorias WHERE arquivado = 0");
+                    
+                    break;
+                    
+                case 5:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM categorias WHERE arquivado = 0 AND nome LIKE ?");
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;
+                
+                case 6:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM categorias WHERE arquivado = 1 AND nome LIKE ?");
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;
+                
             }
             
             ResultSet rs = stmt.executeQuery();
@@ -49,6 +75,7 @@ public class CategoriasDAO {
                 categoria.setId_categoria(rs.getInt("id_categoria"));
                 categoria.setNome(rs.getString("nome"));
                 categoria.setDescricao(rs.getString("descricao"));
+                categoria.setArquivado(rs.getBoolean("arquivado"));
                 
                 lista.add(categoria);
                 
@@ -64,6 +91,37 @@ public class CategoriasDAO {
         
         return lista;
         
+    }
+    
+    public Categorias categoriaDisponivel(String nome) {
+        
+        Categorias categoria = new Categorias();
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("SELECT * FROM categorias WHERE nome = ?");
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                
+                categoria.setId_categoria(rs.getInt("id_categoria"));
+                categoria.setNome(rs.getString("nome"));
+                categoria.setDescricao(rs.getString("descricao"));
+                categoria.setArquivado(rs.getBoolean("arquivado"));
+                
+            }
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return categoria;
     }
     
     public void adicionar(Categorias categoria) {
@@ -93,6 +151,25 @@ public class CategoriasDAO {
             
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = conexao.prepareStatement("UPDATE categorias set arquivado = 1 WHERE id_categoria = ?");
+            stmt.setInt(1, categoria.getId_categoria());
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void reativar(Categorias categoria) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE categorias set arquivado = 0 WHERE id_categoria = ?");
             stmt.setInt(1, categoria.getId_categoria());
             
             stmt.executeUpdate();

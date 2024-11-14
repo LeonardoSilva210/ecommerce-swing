@@ -89,7 +89,7 @@ public class Inicio extends javax.swing.JFrame {
     private File arquivoSelecionado;
     private static final String CLOUD_NAME = "dh4zkueea";
     private static final String UPLOAD_PRESET = "ml_default";
-    private boolean animacao = false;
+    private boolean animacao = false, nomeCategoriaDisponivelAdd = false, nomeCategoriaDisponivelEdt = false;
     private String caminhoImagem = null;
     private float produtosTotal = 0, produtosDisponiveis = 0, produtosIndisponiveis = 0, calcPorcent = 0;
     private Dimension tamanhoOriginal;
@@ -106,6 +106,7 @@ public class Inicio extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         panelAcimaFrame = new telas.formatos.PanelBorder();
         panelFundoAdicionarProduto = new javax.swing.JPanel();
         panelAdicionarProduto = new javax.swing.JPanel();
@@ -201,7 +202,11 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoTab = new javax.swing.JPanel();
         tabInicio = new javax.swing.JTabbedPane();
         panelInicio = new javax.swing.JPanel();
+        popPorcentagemDisponiveis = new javax.swing.JPanel();
+        popPorcentagemIndisponiveis = new javax.swing.JPanel();
         grafInicio = new com.raven.chart.Chart();
+        areaClickPorcentagemDisponiveis = new javax.swing.JPanel();
+        areaClickPorcentagemIndisponiveis = new javax.swing.JPanel();
         progressDisponivel = new com.raven.swing.progress.Progress();
         jLabel12 = new javax.swing.JLabel();
         progressIndisponivel = new com.raven.swing.progress.Progress();
@@ -282,6 +287,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         inputDescricaoCategoriaEdit = new javax.swing.JTextField();
         btnSalvarEdicaoCategoria = new javax.swing.JButton();
+        txtDisponibilidade = new javax.swing.JLabel();
         panelFundoPopCategoria = new javax.swing.JPanel();
         panelPopCategoria = new telas.formatos.PanelBorder();
         jButton2 = new javax.swing.JButton();
@@ -292,6 +298,7 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         inputDescricaoCategoria = new javax.swing.JTextArea();
         jLabel44 = new javax.swing.JLabel();
+        txtDisponibilidadeCategoriaAdd = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         panelListCategorias = new telas.formatos.PanelItem();
         jPanel3 = new javax.swing.JPanel();
@@ -303,6 +310,9 @@ public class Inicio extends javax.swing.JFrame {
         buttonPesquisarCategorias = new javax.swing.JButton();
         inputPesquisaCategorias = new javax.swing.JTextField();
         btnAdicionarCategoria = new javax.swing.JButton();
+        radioCategoria1 = new javax.swing.JRadioButton();
+        radioCategoria3 = new javax.swing.JRadioButton();
+        radioCategoria2 = new javax.swing.JRadioButton();
         panelAdicionarADM = new javax.swing.JPanel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
@@ -1260,60 +1270,120 @@ public class Inicio extends javax.swing.JFrame {
         tabInicio.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
 
         panelInicio.setBackground(new java.awt.Color(51, 51, 51));
+        panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        popPorcentagemDisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                popPorcentagemDisponiveisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                popPorcentagemDisponiveisMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout popPorcentagemDisponiveisLayout = new javax.swing.GroupLayout(popPorcentagemDisponiveis);
+        popPorcentagemDisponiveis.setLayout(popPorcentagemDisponiveisLayout);
+        popPorcentagemDisponiveisLayout.setHorizontalGroup(
+            popPorcentagemDisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        popPorcentagemDisponiveisLayout.setVerticalGroup(
+            popPorcentagemDisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+
+        panelInicio.add(popPorcentagemDisponiveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 220, 110));
+
+        popPorcentagemIndisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                popPorcentagemIndisponiveisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                popPorcentagemIndisponiveisMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout popPorcentagemIndisponiveisLayout = new javax.swing.GroupLayout(popPorcentagemIndisponiveis);
+        popPorcentagemIndisponiveis.setLayout(popPorcentagemIndisponiveisLayout);
+        popPorcentagemIndisponiveisLayout.setHorizontalGroup(
+            popPorcentagemIndisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+        popPorcentagemIndisponiveisLayout.setVerticalGroup(
+            popPorcentagemIndisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+
+        panelInicio.add(popPorcentagemIndisponiveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 220, 110));
+        panelInicio.add(grafInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 137, 1030, 320));
+
+        areaClickPorcentagemDisponiveis.setOpaque(false);
+        areaClickPorcentagemDisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                areaClickPorcentagemDisponiveisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                areaClickPorcentagemDisponiveisMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout areaClickPorcentagemDisponiveisLayout = new javax.swing.GroupLayout(areaClickPorcentagemDisponiveis);
+        areaClickPorcentagemDisponiveis.setLayout(areaClickPorcentagemDisponiveisLayout);
+        areaClickPorcentagemDisponiveisLayout.setHorizontalGroup(
+            areaClickPorcentagemDisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        areaClickPorcentagemDisponiveisLayout.setVerticalGroup(
+            areaClickPorcentagemDisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelInicio.add(areaClickPorcentagemDisponiveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 60, 50));
+
+        areaClickPorcentagemIndisponiveis.setOpaque(false);
+        areaClickPorcentagemIndisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                areaClickPorcentagemIndisponiveisMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                areaClickPorcentagemIndisponiveisMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout areaClickPorcentagemIndisponiveisLayout = new javax.swing.GroupLayout(areaClickPorcentagemIndisponiveis);
+        areaClickPorcentagemIndisponiveis.setLayout(areaClickPorcentagemIndisponiveisLayout);
+        areaClickPorcentagemIndisponiveisLayout.setHorizontalGroup(
+            areaClickPorcentagemIndisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        areaClickPorcentagemIndisponiveisLayout.setVerticalGroup(
+            areaClickPorcentagemIndisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelInicio.add(areaClickPorcentagemIndisponiveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 60, 50));
 
         progressDisponivel.setBackground(new java.awt.Color(0, 255, 0));
         progressDisponivel.setBorder(null);
         progressDisponivel.setForeground(new java.awt.Color(0, 255, 0));
+        panelInicio.add(progressDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 39, 137, 92));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Produtos Disponíveis");
+        panelInicio.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 16, 137, -1));
 
         progressIndisponivel.setBackground(new java.awt.Color(255, 0, 0));
         progressIndisponivel.setBorder(null);
         progressIndisponivel.setForeground(new java.awt.Color(255, 0, 0));
+        panelInicio.add(progressIndisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 100, 92));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Produtos Indisponíveis");
-
-        javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
-        panelInicio.setLayout(panelInicioLayout);
-        panelInicioLayout.setHorizontalGroup(
-            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(grafInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE))
-            .addGroup(panelInicioLayout.createSequentialGroup()
-                .addGap(340, 340, 340)
-                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(progressDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(progressIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        panelInicioLayout.setVerticalGroup(
-            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInicioLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelInicioLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(progressDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelInicioLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(progressIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(grafInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(363, Short.MAX_VALUE))
-        );
+        panelInicio.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(495, 16, -1, -1));
 
         tabInicio.addTab("tab1", panelInicio);
 
@@ -1914,6 +1984,11 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        panelEditarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelEditarCategoriaMouseClicked(evt);
+            }
+        });
         panelEditarCategoria.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconClose.png"))); // NOI18N
@@ -1923,11 +1998,17 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelEditarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 0, 40, 30));
-        panelEditarCategoria.add(inputNomeCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 250, 40));
+
+        inputNomeCategoriaEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputNomeCategoriaEditKeyTyped(evt);
+            }
+        });
+        panelEditarCategoria.add(inputNomeCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 250, 40));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel45.setText("Nome categoria");
-        panelEditarCategoria.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+        panelEditarCategoria.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel52.setText("Descrição Categoria");
@@ -1941,6 +2022,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelEditarCategoria.add(btnSalvarEdicaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 250, 40));
+        panelEditarCategoria.add(txtDisponibilidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 250, 20));
 
         javax.swing.GroupLayout panelEditarCategoriaFundoLayout = new javax.swing.GroupLayout(panelEditarCategoriaFundo);
         panelEditarCategoriaFundo.setLayout(panelEditarCategoriaFundoLayout);
@@ -1949,7 +2031,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelEditarCategoriaFundoLayout.createSequentialGroup()
                 .addGap(226, 226, 226)
                 .addComponent(panelEditarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelEditarCategoriaFundoLayout.setVerticalGroup(
             panelEditarCategoriaFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1959,7 +2041,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(388, Short.MAX_VALUE))
         );
 
-        panelCategorias.add(panelEditarCategoriaFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, 1050, 850));
+        panelCategorias.add(panelEditarCategoriaFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1040, 850));
 
         panelFundoPopCategoria.setOpaque(false);
         panelFundoPopCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1970,6 +2052,11 @@ public class Inicio extends javax.swing.JFrame {
 
         panelPopCategoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelPopCategoria.setForeground(new java.awt.Color(255, 255, 255));
+        panelPopCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelPopCategoriaMouseClicked(evt);
+            }
+        });
         panelPopCategoria.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconClose.png"))); // NOI18N
@@ -1993,21 +2080,28 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelPopCategoria.add(btnCriarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 310, 50));
+
+        inputNomeCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputNomeCategoriaKeyTyped(evt);
+            }
+        });
         panelPopCategoria.add(inputNomeCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 310, 40));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel43.setText("Descrição");
-        panelPopCategoria.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
+        panelPopCategoria.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
 
         inputDescricaoCategoria.setColumns(20);
         inputDescricaoCategoria.setRows(5);
         jScrollPane7.setViewportView(inputDescricaoCategoria);
 
-        panelPopCategoria.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 310, 110));
+        panelPopCategoria.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 310, 100));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel44.setText("Nome");
         panelPopCategoria.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
+        panelPopCategoria.add(txtDisponibilidadeCategoriaAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 310, 20));
 
         javax.swing.GroupLayout panelFundoPopCategoriaLayout = new javax.swing.GroupLayout(panelFundoPopCategoria);
         panelFundoPopCategoria.setLayout(panelFundoPopCategoriaLayout);
@@ -2031,7 +2125,7 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane6.setBackground(new java.awt.Color(102, 102, 102));
         jScrollPane6.setViewportView(panelListCategorias);
 
-        panelCategorias.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 149, 960, 300));
+        panelCategorias.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 149, 960, 270));
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -2100,6 +2194,21 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelCategorias.add(btnAdicionarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 250, 40));
+
+        buttonGroup3.add(radioCategoria1);
+        radioCategoria1.setForeground(new java.awt.Color(255, 255, 255));
+        radioCategoria1.setText("Todas categorias");
+        panelCategorias.add(radioCategoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
+
+        buttonGroup3.add(radioCategoria3);
+        radioCategoria3.setForeground(new java.awt.Color(255, 255, 255));
+        radioCategoria3.setText("Arquivadas");
+        panelCategorias.add(radioCategoria3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, -1, -1));
+
+        buttonGroup3.add(radioCategoria2);
+        radioCategoria2.setForeground(new java.awt.Color(255, 255, 255));
+        radioCategoria2.setText("Não Arquivdas");
+        panelCategorias.add(radioCategoria2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, -1, -1));
 
         tabInicio.addTab("tab6", panelCategorias);
 
@@ -2713,12 +2822,12 @@ public class Inicio extends javax.swing.JFrame {
 
             JSONObject jsonResponse = new JSONObject(response.toString());
             String imageUrl = jsonResponse.getString("secure_url");
-            JOptionPane.showMessageDialog(null, "Imagem enviada com sucesso!\nURL: " + imageUrl);
-
-            caminhoImagem = imageUrl;
             
+            caminhoImagem = imageUrl;
             mostrarImagem(imageUrl);
             
+            JOptionPane.showMessageDialog(null, "Imagem salva com sucesso!");
+
         } else {
             JOptionPane.showMessageDialog(null, "Erro ao enviar a imagem. Código de resposta: " + responseCode);
         }
@@ -3248,7 +3357,7 @@ public class Inicio extends javax.swing.JFrame {
         
         inputPesquisaCategorias.setText("");
         
-        listarCategorias(1, null);
+        verificaRadioCategoria();
         
     }//GEN-LAST:event_buttonAtualizarCategoriasActionPerformed
 
@@ -3256,7 +3365,7 @@ public class Inicio extends javax.swing.JFrame {
        
         String pesquisa = inputPesquisaCategorias.getText().trim();
         
-        listarCategorias(2, pesquisa);
+        listaCategoriasPesquisa(pesquisa);
         
     }//GEN-LAST:event_inputPesquisaCategoriasKeyTyped
 
@@ -3272,7 +3381,7 @@ public class Inicio extends javax.swing.JFrame {
         
         String pesquisa = inputPesquisaCategorias.getText().trim();
         
-        listarCategorias(2, pesquisa);
+        listaCategoriasPesquisa(pesquisa);
         
     }//GEN-LAST:event_buttonPesquisarCategoriasActionPerformed
 
@@ -3336,17 +3445,21 @@ public class Inicio extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             
-        } else {
+        } else if (!nomeCategoriaDisponivelAdd){
             
-            daoCategoria.adicionar(new Categorias(nome, descricao, 0));
+            daoCategoria.adicionar(new Categorias(nome, descricao, false, 0));
         
             inputNomeCategoria.setText("");
             inputDescricaoCategoria.setText("");
-        
+            txtDisponibilidadeCategoriaAdd.setText("");
             JOptionPane.showMessageDialog(null, "Categoria criada com sucesso!");
             inputPesquisaCategorias.setText("");
             
             listarCategorias(1, null);
+            
+        } else {
+            
+            JOptionPane.showMessageDialog(null, "Nome indiponível!");
             
         }
         
@@ -3447,17 +3560,114 @@ public class Inicio extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             
-        } else {
+        } else if (!nomeCategoriaDisponivelEdt){
             
             daoCategoria.editar(novoNomeCategoria, novaDescricaoCategoria, categoriaAtual.getId_categoria());
             
             inputNomeCategoriaEdit.setText("");
             inputDescricaoCategoriaEdit.setText("");
+            txtDisponibilidade.setText("");
             JOptionPane.showMessageDialog(null, "Edição realizada com sucesso!");
  
         }
         
     }//GEN-LAST:event_btnSalvarEdicaoCategoriaActionPerformed
+
+    private void panelEditarCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEditarCategoriaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelEditarCategoriaMouseClicked
+
+    private void panelPopCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPopCategoriaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelPopCategoriaMouseClicked
+
+    private void inputNomeCategoriaEditKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNomeCategoriaEditKeyTyped
+        
+        String nome = inputNomeCategoriaEdit.getText().trim();
+        
+        nomeCategoriaDisponivelEdt = disponibilidadeNomeCategoria(nome, "edicao");
+        
+    }//GEN-LAST:event_inputNomeCategoriaEditKeyTyped
+
+    private void inputNomeCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNomeCategoriaKeyTyped
+        
+        String nome = inputNomeCategoria.getText().trim();
+
+        nomeCategoriaDisponivelAdd = disponibilidadeNomeCategoria(nome, "adicao");
+        
+    }//GEN-LAST:event_inputNomeCategoriaKeyTyped
+
+    private void areaClickPorcentagemDisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemDisponiveisMouseEntered
+        
+        popPorcentagemDisponiveis.setVisible(true);
+        
+    }//GEN-LAST:event_areaClickPorcentagemDisponiveisMouseEntered
+
+    private void areaClickPorcentagemDisponiveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemDisponiveisMouseExited
+        
+        if (popPorcentagemDisponiveis.isVisible()) {
+            
+            popPorcentagemDisponiveis.setVisible(false);
+            
+        }
+        
+    }//GEN-LAST:event_areaClickPorcentagemDisponiveisMouseExited
+
+    private void areaClickPorcentagemIndisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemIndisponiveisMouseEntered
+        
+        popPorcentagemIndisponiveis.setVisible(true);
+        
+    }//GEN-LAST:event_areaClickPorcentagemIndisponiveisMouseEntered
+
+    private void areaClickPorcentagemIndisponiveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemIndisponiveisMouseExited
+        
+        if (popPorcentagemIndisponiveis.isVisible()) {
+            
+            popPorcentagemIndisponiveis.setVisible(false);
+            
+        }
+        
+    }//GEN-LAST:event_areaClickPorcentagemIndisponiveisMouseExited
+
+    private void popPorcentagemDisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popPorcentagemDisponiveisMouseEntered
+        
+        if (popPorcentagemDisponiveis.isVisible()) {
+            
+            popPorcentagemDisponiveis.setVisible(true);
+            
+        }
+        
+    }//GEN-LAST:event_popPorcentagemDisponiveisMouseEntered
+
+    private void popPorcentagemIndisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popPorcentagemIndisponiveisMouseEntered
+        
+        if (popPorcentagemIndisponiveis.isVisible()) {
+            
+            popPorcentagemIndisponiveis.setVisible(true);
+            
+        }
+        
+    }//GEN-LAST:event_popPorcentagemIndisponiveisMouseEntered
+
+    private void popPorcentagemIndisponiveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popPorcentagemIndisponiveisMouseExited
+        
+        if (popPorcentagemIndisponiveis.isVisible()) {
+            
+            popPorcentagemIndisponiveis.setVisible(false);
+            
+        }
+        
+    }//GEN-LAST:event_popPorcentagemIndisponiveisMouseExited
+
+    private void popPorcentagemDisponiveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popPorcentagemDisponiveisMouseExited
+        
+        if (popPorcentagemDisponiveis.isVisible()) {
+            
+            popPorcentagemDisponiveis.setVisible(false);
+            
+        }
+        
+    }//GEN-LAST:event_popPorcentagemDisponiveisMouseExited
 
     public static void main(String args[]) {
 
@@ -3609,6 +3819,7 @@ public class Inicio extends javax.swing.JFrame {
         listarNotificacoes();
         progressInicio();
         radioSelecionado();
+        radioSelecionadoCategoria();
         eventTable();
         eventCheck();
         verificaComboReservas();
@@ -3619,8 +3830,11 @@ public class Inicio extends javax.swing.JFrame {
         panelNoti.setVisible(false);
         panelFundoNoti.setVisible(false);
         radio1.setSelected(true);
+        radioCategoria1.setSelected(true);
         panelFundoPopCategoria.setVisible(false);
         panelPopCategoria.setVisible(false);
+        popPorcentagemDisponiveis.setVisible(false);
+        popPorcentagemIndisponiveis.setVisible(false);
         panelFundoAdicionarProduto.setVisible(false);
         panelAdicionarProduto.setVisible(false);
         panelPopProduto.setVisible(false);
@@ -3680,7 +3894,7 @@ public class Inicio extends javax.swing.JFrame {
             
             case 6:
                 
-                listarCategorias(1, null);
+                verificaRadioCategoria();
                 
                 break;
 
@@ -4206,6 +4420,30 @@ public class Inicio extends javax.swing.JFrame {
                 listaCategorias2 = daoCategoria.listar(2, pesquisa);
                 
                 break;
+            
+            case 3:
+                
+                listaCategorias2 = daoCategoria.listar(3, null);
+                
+                break;
+            
+            case 4:
+                
+                listaCategorias2 = daoCategoria.listar(4, null);
+                
+                break;
+            
+            case 5:
+                
+                listaCategorias2 = daoCategoria.listar(5, pesquisa);
+                
+                break;
+            
+            case 6:
+                
+                listaCategorias2 = daoCategoria.listar(6, pesquisa);
+                
+                break;
 
         }
         
@@ -4452,6 +4690,121 @@ public class Inicio extends javax.swing.JFrame {
         }
         
     }
+    
+    private void radioSelecionadoCategoria() {
+        
+        radioCategoria1.addActionListener(e -> {
+            
+            listarCategorias(1, null);
+            
+        });
+        
+        radioCategoria2.addActionListener(e -> {
+            
+            listarCategorias(4, null);
+            
+        });
+        
+        radioCategoria3.addActionListener(e -> {
+            
+            listarCategorias(3, null);
+            
+        });
+        
+    }
+    
+    public void verificaRadioCategoria() {
+        
+        if (radioCategoria1.isSelected()) {
+            
+            listarCategorias(1, null);
+            
+        } 
+        
+        if (radioCategoria2.isSelected()) {
+            
+            listarCategorias(4, null);
+            
+        }
+        
+        if (radioCategoria3.isSelected()) {
+            
+            listarCategorias(3, null);
+            
+        }
+        
+    }
+    
+    private boolean disponibilidadeNomeCategoria(String nome, String tipo) {
+     
+        boolean disponivel = false;
+        
+        Categorias categoria = daoCategoria.categoriaDisponivel(nome);
+        
+        switch(tipo) {
+            
+            case "edicao":
+                
+                if (categoria.getId_categoria() > 0) {
+            
+                    txtDisponibilidade.setText("Nome indisponível!");
+                    txtDisponibilidade.setForeground(Color.red);
+                    disponivel = true;
+            
+                } else {
+            
+                    txtDisponibilidade.setText("Nome disponível.");
+                    txtDisponibilidade.setForeground(Color.green.darker());
+                    disponivel = false;
+            
+                }
+                
+            break;
+            
+            case "adicao":
+                
+                if (categoria.getId_categoria() > 0) {
+            
+                    txtDisponibilidadeCategoriaAdd.setText("Nome indisponível!");
+                    txtDisponibilidadeCategoriaAdd.setForeground(Color.red);
+                    disponivel = true;
+            
+                } else {
+            
+                    txtDisponibilidadeCategoriaAdd.setText("Nome disponível.");
+                    txtDisponibilidadeCategoriaAdd.setForeground(Color.green.darker());
+                    disponivel = false;
+            
+                }
+                
+            break;
+            
+        }
+        
+        return disponivel;
+    }
+    
+    private void listaCategoriasPesquisa(String pesquisa) {
+        
+        if (radioCategoria1.isSelected()) {
+            
+            listarCategorias(2, pesquisa);
+            
+        }
+        
+        if (radioCategoria2.isSelected()) {
+            
+            listarCategorias(5, pesquisa);
+            
+        }
+        
+        if (radioCategoria3.isSelected()) {
+            
+            listarCategorias(6, pesquisa);
+            
+        }
+        
+    }
 
     private void alteraQuantidade(int metodo) {
 
@@ -4686,6 +5039,8 @@ public class Inicio extends javax.swing.JFrame {
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel areaClickPorcentagemDisponiveis;
+    private javax.swing.JPanel areaClickPorcentagemIndisponiveis;
     private javax.swing.JPanel btnAdicionarADM;
     private javax.swing.JButton btnAdicionarCategoria;
     private javax.swing.JButton btnAdicionarProduto;
@@ -4715,6 +5070,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton buttonEditarProduto;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private button.MyButton buttonIndisponivel;
     private javax.swing.JButton buttonPesquisarCategorias;
     private javax.swing.JButton buttonPesquisarCliente;
@@ -4867,12 +5223,17 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelTitulosClientes;
     private javax.swing.JPanel panelTitulosRelatorios;
     private javax.swing.JPanel panelTitulosReservas;
+    private javax.swing.JPanel popPorcentagemDisponiveis;
+    private javax.swing.JPanel popPorcentagemIndisponiveis;
     private com.raven.swing.progress.Progress progressDisponivel;
     private com.raven.swing.progress.Progress progressIndisponivel;
     private javax.swing.JRadioButton radio1;
     private javax.swing.JRadioButton radio2;
     private javax.swing.JRadioButton radio3;
     private javax.swing.JRadioButton radio4;
+    private javax.swing.JRadioButton radioCategoria1;
+    private javax.swing.JRadioButton radioCategoria2;
+    private javax.swing.JRadioButton radioCategoria3;
     private javax.swing.JRadioButton radioDisponivel;
     private javax.swing.JRadioButton radioIndisponivel;
     private javax.swing.JScrollPane scrollRelatorios;
@@ -4883,6 +5244,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtCategorias;
     private javax.swing.JLabel txtClientes;
     private javax.swing.JLabel txtClose;
+    private javax.swing.JLabel txtDisponibilidade;
+    private javax.swing.JLabel txtDisponibilidadeCategoriaAdd;
     private javax.swing.JLabel txtEstoque;
     private javax.swing.JLabel txtImagem;
     private javax.swing.JLabel txtImagemProduto;

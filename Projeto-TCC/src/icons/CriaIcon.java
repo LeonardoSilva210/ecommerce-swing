@@ -22,7 +22,8 @@ public class CriaIcon {
             
                 URL novaUrl = new URL(url);
                 Image img = ImageIO.read(novaUrl);
-                icon = new ImageIcon(img);
+                Image resizedImg = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                icon = new ImageIcon(resizedImg);
             
             }catch(IOException e){
                 e.printStackTrace();

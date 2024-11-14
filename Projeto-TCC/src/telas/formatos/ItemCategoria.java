@@ -48,6 +48,18 @@ public class ItemCategoria extends javax.swing.JPanel {
   
         });
         
+        if (categoria.isArquivado()) {
+            
+            panelAcoes.remove(btnDeletar);
+            panelAcoes.add(btnReativar);
+            
+        } else {
+            
+            panelAcoes.add(btnDeletar);
+            panelAcoes.remove(btnReativar);
+            
+        }
+        
         txtNome.setText(categoria.getNome());
         txtDescricao.setText(categoria.getDescricao());
         
@@ -60,9 +72,10 @@ public class ItemCategoria extends javax.swing.JPanel {
 
         txtNome = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        panelAcoes = new javax.swing.JPanel();
         btnEditar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
+        btnReativar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(920, 40));
@@ -80,8 +93,8 @@ public class ItemCategoria extends javax.swing.JPanel {
         txtDescricao.setText("Descrição");
         add(txtDescricao);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+        panelAcoes.setBackground(new java.awt.Color(51, 51, 51));
+        panelAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
         btnEditar.setBackground(new java.awt.Color(204, 153, 0));
         btnEditar.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
@@ -91,9 +104,9 @@ public class ItemCategoria extends javax.swing.JPanel {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar);
+        panelAcoes.add(btnEditar);
 
-        btnDeletar.setBackground(new java.awt.Color(255, 68, 65));
+        btnDeletar.setBackground(new java.awt.Color(212, 48, 61));
         btnDeletar.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
         btnDeletar.setText("Arquivar");
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,9 +114,19 @@ public class ItemCategoria extends javax.swing.JPanel {
                 btnDeletarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDeletar);
+        panelAcoes.add(btnDeletar);
 
-        add(jPanel1);
+        btnReativar.setBackground(new java.awt.Color(102, 153, 0));
+        btnReativar.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
+        btnReativar.setText("Reativar");
+        btnReativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReativarActionPerformed(evt);
+            }
+        });
+        panelAcoes.add(btnReativar);
+
+        add(panelAcoes);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
@@ -116,6 +139,8 @@ public class ItemCategoria extends javax.swing.JPanel {
  
             JOptionPane.showMessageDialog(null, "Categoria arquivada com sucesso!");
             
+            inicio.verificaRadioCategoria();
+            
         }
         
     }//GEN-LAST:event_btnDeletarActionPerformed
@@ -126,11 +151,28 @@ public class ItemCategoria extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnReativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReativarActionPerformed
+        
+        int escolha = JOptionPane.showConfirmDialog(null, "Reativar esta categoria: " + categoria.getNome(), "Confirmação", JOptionPane.YES_NO_OPTION);
+        
+        if (escolha == JOptionPane.YES_OPTION) {
+            
+            new CategoriasDAO().reativar(categoria);
+ 
+            JOptionPane.showMessageDialog(null, "Categoria ativada com sucesso!");
+            
+            inicio.verificaRadioCategoria();
+            
+        }
+        
+    }//GEN-LAST:event_btnReativarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnReativar;
+    private javax.swing.JPanel panelAcoes;
     private javax.swing.JLabel txtDescricao;
     private javax.swing.JLabel txtNome;
     // End of variables declaration//GEN-END:variables

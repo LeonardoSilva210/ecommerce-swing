@@ -5,11 +5,13 @@ package model.bean;
 public class Categorias {
     
     private String nome, descricao;
+    private boolean arquivado;
     private int id_categoria;
 
-    public Categorias(String nome, String descricao, int id_categoria) {
+    public Categorias(String nome, String descricao, boolean arquivado, int id_categoria) {
         this.nome = nome;
         this.descricao = descricao;
+        this.arquivado = arquivado;
         this.id_categoria = id_categoria;
     }
 
@@ -39,7 +41,15 @@ public class Categorias {
     public void setId_categoria(int id_categoria) {
         this.id_categoria = id_categoria;
     }
+
+    public boolean isArquivado() {
+        return arquivado;
+    }
+
+    public void setArquivado(boolean arquivado) {
+        this.arquivado = arquivado;
+    }
     
     
-    
+ 
 }
