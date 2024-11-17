@@ -2,12 +2,14 @@
 package telas.formatos;
 
 import Globals.GlobalWhats;
+import icons.CriaIcon;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
 import java.net.URLEncoder;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import model.bean.Usuarios;
@@ -18,7 +20,7 @@ import telas.Inicio;
 public class ItemCliente extends javax.swing.JPanel {
 
     private final Usuarios usuario;
-    private String formata;
+    private String formata = "Sem Whatsapp";
     private final Inicio inicio;
 
     public ItemCliente(Usuarios usuario, Inicio inicio) {
@@ -29,6 +31,15 @@ public class ItemCliente extends javax.swing.JPanel {
         
         txtNome.setText(usuario.getNome());
         txtEmail.setText(usuario.getEmail());
+        
+        if (usuario.getFoto() != null && !usuario.getFoto().equals("")) {
+            
+            ImageIcon icon = new CriaIcon().criaIcon(usuario.getFoto());
+            imgPerfilUsuario.setIcon(icon);
+            imgPerfilUsuario.revalidate();
+            imgPerfilUsuario.repaint();
+            
+        }
         
         String whatts = usuario.getWhatsapp();
 
@@ -103,6 +114,9 @@ public class ItemCliente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        imgPerfilUsuario = new com.raven.avatar.ImageAvatar();
         txtNome = new javax.swing.JLabel();
         txtEmail = new javax.swing.JLabel();
         txtWhatsApp = new javax.swing.JLabel();
@@ -113,11 +127,26 @@ public class ItemCliente extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(920, 40));
         setLayout(new java.awt.GridLayout(1, 0));
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        imgPerfilUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        imgPerfilUsuario.setBorderSize(1);
+        imgPerfilUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconPerfil.png"))); // NOI18N
+        jPanel2.add(imgPerfilUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 40));
+
         txtNome.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtNome.setForeground(new java.awt.Color(255, 255, 255));
         txtNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtNome.setText("Nome");
-        add(txtNome);
+        jPanel2.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 100, 44));
+
+        jPanel1.add(jPanel2);
+
+        add(jPanel1);
 
         txtEmail.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtEmail.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,7 +217,10 @@ public class ItemCliente extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
+    private com.raven.avatar.ImageAvatar imgPerfilUsuario;
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel txtEmail;
     private javax.swing.JLabel txtNome;
     private javax.swing.JLabel txtWhatsApp;

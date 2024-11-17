@@ -61,6 +61,7 @@ public class AdminsDAO {
                     bean.setNome(rs.getString("nome"));
                     bean.setSenha(rs.getString("senha"));
                     bean.setAdm(rs.getInt("adm"));
+                    bean.setFoto(rs.getString("foto"));
 
                 } else {
                     

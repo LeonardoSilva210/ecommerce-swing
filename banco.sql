@@ -64,7 +64,7 @@ CREATE TABLE `compras` (
   PRIMARY KEY (`id_compra`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
   CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +115,7 @@ CREATE TABLE `notificacoes` (
   PRIMARY KEY (`id_notificacao`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
   CONSTRAINT `notificacoes_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `notificacoes` (
 
 LOCK TABLES `notificacoes` WRITE;
 /*!40000 ALTER TABLE `notificacoes` DISABLE KEYS */;
-INSERT INTO `notificacoes` VALUES (23,3,1,'1 Venda realizada Valor: R$91,90','2024-11-02','21:00:23',NULL),(25,3,1,'1 Venda realizada Valor: R$19,25','2024-11-09','20:26:54',NULL),(26,3,1,'1 Venda realizada Valor: R$3,29','2024-11-09','20:28:15',NULL),(27,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:28:40',NULL),(28,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:28:44',NULL),(29,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:29:47',NULL),(30,3,1,'1 Venda realizada Valor: R$24,00','2024-11-11','17:12:42',NULL),(31,3,1,'1 Venda realizada Valor: R$24,00','2024-11-11','17:15:15',NULL),(32,3,1,'1 Venda realizada Valor: R$11,27','2024-11-11','17:18:35',NULL),(33,1,1,'Perfil atualizado.','2024-11-17','01:51:02',11),(34,1,1,'Perfil atualizado.','2024-11-17','01:54:16',11),(35,1,1,'Perfil atualizado.','2024-11-17','02:12:29',11),(36,1,1,'Perfil atualizado.','2024-11-17','02:20:35',11),(37,1,1,'Perfil atualizado.','2024-11-17','02:20:47',11),(38,1,1,'Perfil atualizado.','2024-11-17','02:21:55',11);
+INSERT INTO `notificacoes` VALUES (23,3,1,'1 Venda realizada Valor: R$91,90','2024-11-02','21:00:23',NULL),(25,3,1,'1 Venda realizada Valor: R$19,25','2024-11-09','20:26:54',NULL),(26,3,1,'1 Venda realizada Valor: R$3,29','2024-11-09','20:28:15',NULL),(27,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:28:40',NULL),(28,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:28:44',NULL),(29,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:29:47',NULL),(30,3,1,'1 Venda realizada Valor: R$24,00','2024-11-11','17:12:42',NULL),(31,3,1,'1 Venda realizada Valor: R$24,00','2024-11-11','17:15:15',NULL),(32,3,1,'1 Venda realizada Valor: R$11,27','2024-11-11','17:18:35',NULL),(33,1,1,'Perfil atualizado.','2024-11-17','01:51:02',11),(34,1,1,'Perfil atualizado.','2024-11-17','01:54:16',11),(35,1,1,'Perfil atualizado.','2024-11-17','02:12:29',11),(36,1,1,'Perfil atualizado.','2024-11-17','02:20:35',11),(37,1,1,'Perfil atualizado.','2024-11-17','02:20:47',11),(38,1,1,'Perfil atualizado.','2024-11-17','02:21:55',11),(39,1,0,'Perfil atualizado.','2024-11-17','11:47:19',10),(40,1,1,'Perfil atualizado.','2024-11-17','11:47:19',11),(41,1,1,'Perfil atualizado.','2024-11-17','11:47:19',30),(42,1,0,'Perfil atualizado.','2024-11-17','11:47:19',31),(43,1,0,'Perfil atualizado.','2024-11-17','11:47:32',10),(44,1,1,'Perfil atualizado.','2024-11-17','11:47:32',11),(45,1,1,'Perfil atualizado.','2024-11-17','11:47:32',30),(46,1,0,'Perfil atualizado.','2024-11-17','11:47:32',31),(47,1,1,'Perfil atualizado.','2024-11-17','12:33:55',11),(48,1,1,'Perfil atualizado.','2024-11-17','12:54:09',30),(49,1,1,'Perfil atualizado.','2024-11-17','12:57:09',11),(50,1,1,'Perfil atualizado.','2024-11-17','12:58:01',30),(51,1,1,'Perfil atualizado.','2024-11-17','13:13:37',11),(52,1,1,'Perfil atualizado.','2024-11-17','13:16:21',11),(53,1,1,'Perfil atualizado.','2024-11-17','13:17:03',11),(54,1,1,'Perfil atualizado.','2024-11-17','13:26:16',11),(55,1,1,'Perfil atualizado.','2024-11-17','13:26:31',11),(56,1,1,'Perfil atualizado.','2024-11-17','14:33:15',11),(57,1,1,'Perfil atualizado.','2024-11-17','14:34:17',11);
 /*!40000 ALTER TABLE `notificacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,8 +200,9 @@ CREATE TABLE `usuarios` (
   `data_nascimento` date DEFAULT NULL,
   `adm` tinyint(4) DEFAULT '0',
   `whatsapp` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto` text COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +211,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (10,'teste','aninha@gmail.com','123','2007-10-01',0,NULL),(11,'Leozinh','leo@gmail.com','123','2007-10-01',1,NULL),(30,'Junin','junin@gmail.com','123','2009-11-04',1,''),(31,'Junin','junin2@gmail.com','09','2005-11-04',1,'');
+INSERT INTO `usuarios` VALUES (10,'teste','aninha@gmail.com','123','2007-10-01',0,'',''),(11,'Leozinh','leo@gmail.com','123','2007-10-01',1,'',''),(30,'Junin','junin@gmail.com','123','2009-11-04',1,'','https://res.cloudinary.com/dh4zkueea/image/upload/v1731858862/pica-pau_jsunw1.jpg'),(31,'Junin','junin2@gmail.com','09','2005-11-04',1,'','');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -266,4 +267,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-17  2:25:09
+-- Dump completed on 2024-11-17 15:07:29

@@ -69,7 +69,7 @@ public class Login extends javax.swing.JFrame {
                 buttonEntrarActionPerformed(evt);
             }
         });
-        panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 260, 50));
+        panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 260, 50));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -247,6 +247,8 @@ public class Login extends javax.swing.JFrame {
                GlobalAdmin.setNome(bean.getNome());
                GlobalAdmin.setSenha(bean.getSenha());
                GlobalAdmin.setEmail(bean.getEmail());
+               GlobalAdmin.setFoto(bean.getFoto());
+               
                
                java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {

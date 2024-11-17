@@ -5,8 +5,16 @@ package Globals;
 public class GlobalAdmin {
     
     private static int id_admin;
-    private static String nome, email, senha;
+    private static String nome, email, senha, foto;
 
+    public static String getFoto() {
+        return foto;
+    }
+
+    public static void setFoto(String foto) {
+        GlobalAdmin.foto = foto;
+    }
+    
     public static int getId_admin() {
         return id_admin;
     }

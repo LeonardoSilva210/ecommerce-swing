@@ -6,22 +6,29 @@ import java.sql.Date;
 public class Usuarios {
     
     private int id_usuario;
-    private String nome, email, senha, whatsapp;
+    private String nome, email, senha, whatsapp, foto;
     private Date data_nascimento;
     private int adm;
 
-    public Usuarios(int id_usuario, String nome, String email, String senha, String whatsapp, Date data_nascimento, int adm) {
+    public Usuarios(int id_usuario, String nome, String email, String senha, String whatsapp, String foto, Date data_nascimento, int adm) {
         this.id_usuario = id_usuario;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.whatsapp = whatsapp;
+        this.foto = foto;
         this.data_nascimento = data_nascimento;
         this.adm = adm;
     }
 
-    
+    public String getFoto() {
+        return foto;
+    }
 
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
     public int getAdm() {
         return adm;
     }

@@ -87,11 +87,11 @@ public class Inicio extends javax.swing.JFrame {
     private List<Usuarios> listaClientes = new ArrayList();
     private List<Compras> listaCompras = new ArrayList();
     private List<Reservas> listaReservas = new ArrayList();
-    private File arquivoSelecionado;
+    private File arquivoSelecionado, fotoSelecionada;
     private static final String CLOUD_NAME = "dh4zkueea";
     private static final String UPLOAD_PRESET = "ml_default";
     private boolean animacao = false;
-    private String caminhoImagem = null;
+    private String caminhoImagem = null, caminhoFoto = null;
     private float produtosTotal = 0, produtosDisponiveis = 0, produtosIndisponiveis = 0, calcPorcent = 0;
     private Dimension tamanhoOriginal;
     private Point localizacaoOriginal;
@@ -134,7 +134,8 @@ public class Inicio extends javax.swing.JFrame {
         txtImagemSelecionada = new javax.swing.JLabel();
         txtImagem = new javax.swing.JLabel();
         panelInformacoesPerfil = new javax.swing.JPanel();
-        imageAvatar1 = new com.raven.avatar.ImageAvatar();
+        btnRetiraImagemPerfil = new javax.swing.JLabel();
+        imagePerfil = new com.raven.avatar.ImageAvatar();
         inputNome = new javax.swing.JTextField();
         inputSenha = new javax.swing.JPasswordField();
         btnFechaInformacoesPerfil = new javax.swing.JPanel();
@@ -172,7 +173,7 @@ public class Inicio extends javax.swing.JFrame {
         txtImagemProduto = new javax.swing.JLabel();
         panelFundoPopProdutoSelecionado = new javax.swing.JPanel();
         panelPerfil = new telas.formatos.PanelBorder();
-        imageAvatar2 = new com.raven.avatar.ImageAvatar();
+        imagePerfil1 = new com.raven.avatar.ImageAvatar();
         txtBemVindo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panelButtons = new telas.formatos.PanelBorder();
@@ -205,7 +206,11 @@ public class Inicio extends javax.swing.JFrame {
         tabInicio = new javax.swing.JTabbedPane();
         panelInicio = new javax.swing.JPanel();
         popPorcentagemDisponiveis = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         popPorcentagemIndisponiveis = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
         grafInicio = new com.raven.chart.Chart();
         areaClickPorcentagemDisponiveis = new javax.swing.JPanel();
         areaClickPorcentagemIndisponiveis = new javax.swing.JPanel();
@@ -291,6 +296,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         inputDescricaoCategoriaEdit = new javax.swing.JTextField();
         btnSalvarEdicaoCategoria = new javax.swing.JButton();
+        jLabel53 = new javax.swing.JLabel();
         panelFundoPopCategoria = new javax.swing.JPanel();
         panelPopCategoria = new telas.formatos.PanelBorder();
         jButton2 = new javax.swing.JButton();
@@ -338,7 +344,7 @@ public class Inicio extends javax.swing.JFrame {
         setResizable(false);
 
         panelAcimaFrame.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 2, true));
-        panelAcimaFrame.setForeground(new java.awt.Color(204, 204, 204));
+        panelAcimaFrame.setForeground(new java.awt.Color(153, 153, 153));
         panelAcimaFrame.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelFundoAdicionarProduto.setBackground(new java.awt.Color(0, 0, 0, 100));
@@ -506,11 +512,38 @@ public class Inicio extends javax.swing.JFrame {
         });
         panelInformacoesPerfil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        imageAvatar1.setBackground(new java.awt.Color(255, 255, 255));
-        imageAvatar1.setForeground(new java.awt.Color(255, 255, 255));
-        imageAvatar1.setBorderSize(2);
-        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconPerfil.png"))); // NOI18N
-        panelInformacoesPerfil.add(imageAvatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 100, 100));
+        btnRetiraImagemPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lixo.png"))); // NOI18N
+        btnRetiraImagemPerfil.setEnabled(false);
+        btnRetiraImagemPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRetiraImagemPerfilMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRetiraImagemPerfilMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRetiraImagemPerfilMouseExited(evt);
+            }
+        });
+        panelInformacoesPerfil.add(btnRetiraImagemPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
+
+        imagePerfil.setBackground(new java.awt.Color(255, 255, 255));
+        imagePerfil.setForeground(new java.awt.Color(204, 204, 204));
+        imagePerfil.setBorderSize(2);
+        imagePerfil.setEnabled(false);
+        imagePerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconPerfil.png"))); // NOI18N
+        imagePerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imagePerfilMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                imagePerfilMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                imagePerfilMouseExited(evt);
+            }
+        });
+        panelInformacoesPerfil.add(imagePerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 100, 100));
 
         inputNome.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -580,6 +613,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel27.setText("Senha");
         panelInformacoesPerfil.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
+        checkEdicao.setForeground(new java.awt.Color(255, 255, 255));
         checkEdicao.setText("Edição");
         panelInformacoesPerfil.add(checkEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 150, 70, -1));
 
@@ -824,10 +858,10 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        imageAvatar2.setBackground(new java.awt.Color(255, 255, 255));
-        imageAvatar2.setForeground(new java.awt.Color(255, 255, 255));
-        imageAvatar2.setBorderSize(2);
-        imageAvatar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconPerfil.png"))); // NOI18N
+        imagePerfil1.setBackground(new java.awt.Color(255, 255, 255));
+        imagePerfil1.setForeground(new java.awt.Color(255, 255, 255));
+        imagePerfil1.setBorderSize(2);
+        imagePerfil1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconPerfil.png"))); // NOI18N
 
         txtBemVindo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtBemVindo.setForeground(new java.awt.Color(255, 255, 255));
@@ -843,7 +877,7 @@ public class Inicio extends javax.swing.JFrame {
             panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPerfilLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(imageAvatar2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imagePerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBemVindo)
@@ -854,7 +888,7 @@ public class Inicio extends javax.swing.JFrame {
             panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPerfilLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imageAvatar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imagePerfil1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(panelPerfilLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
@@ -1275,6 +1309,8 @@ public class Inicio extends javax.swing.JFrame {
         panelInicio.setBackground(new java.awt.Color(51, 51, 51));
         panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        popPorcentagemDisponiveis.setBackground(new java.awt.Color(255, 255, 255));
+        popPorcentagemDisponiveis.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         popPorcentagemDisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 popPorcentagemDisponiveisMouseEntered(evt);
@@ -1284,19 +1320,37 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane8.setBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane8.setBorder(null);
+
+        jTextPane1.setEditable(false);
+        jTextPane1.setBackground(new java.awt.Color(240, 240, 240));
+        jTextPane1.setBorder(null);
+        jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextPane1.setText("Porcentagem de produtos disponíveis para a venda");
+        jScrollPane8.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout popPorcentagemDisponiveisLayout = new javax.swing.GroupLayout(popPorcentagemDisponiveis);
         popPorcentagemDisponiveis.setLayout(popPorcentagemDisponiveisLayout);
         popPorcentagemDisponiveisLayout.setHorizontalGroup(
             popPorcentagemDisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGroup(popPorcentagemDisponiveisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addContainerGap())
         );
         popPorcentagemDisponiveisLayout.setVerticalGroup(
             popPorcentagemDisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, popPorcentagemDisponiveisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelInicio.add(popPorcentagemDisponiveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 220, 110));
 
+        popPorcentagemIndisponiveis.setBackground(new java.awt.Color(255, 255, 255));
+        popPorcentagemIndisponiveis.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         popPorcentagemIndisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 popPorcentagemIndisponiveisMouseEntered(evt);
@@ -1306,15 +1360,30 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane9.setBorder(null);
+
+        jTextPane2.setEditable(false);
+        jTextPane2.setBackground(new java.awt.Color(240, 240, 240));
+        jTextPane2.setBorder(null);
+        jTextPane2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextPane2.setText("Porcentagem de produtos indisponíveis para a venda");
+        jScrollPane9.setViewportView(jTextPane2);
+
         javax.swing.GroupLayout popPorcentagemIndisponiveisLayout = new javax.swing.GroupLayout(popPorcentagemIndisponiveis);
         popPorcentagemIndisponiveis.setLayout(popPorcentagemIndisponiveisLayout);
         popPorcentagemIndisponiveisLayout.setHorizontalGroup(
             popPorcentagemIndisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGroup(popPorcentagemIndisponiveisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addContainerGap())
         );
         popPorcentagemIndisponiveisLayout.setVerticalGroup(
             popPorcentagemIndisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, popPorcentagemIndisponiveisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelInicio.add(popPorcentagemIndisponiveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 220, 110));
@@ -2021,16 +2090,16 @@ public class Inicio extends javax.swing.JFrame {
                 inputNomeCategoriaEditKeyTyped(evt);
             }
         });
-        panelEditarCategoria.add(inputNomeCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 250, 40));
+        panelEditarCategoria.add(inputNomeCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 250, 40));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel45.setText("Nome categoria");
-        panelEditarCategoria.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        panelEditarCategoria.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel52.setText("Descrição Categoria");
-        panelEditarCategoria.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
-        panelEditarCategoria.add(inputDescricaoCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 250, 40));
+        panelEditarCategoria.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+        panelEditarCategoria.add(inputDescricaoCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 250, 40));
 
         btnSalvarEdicaoCategoria.setText("Salvar");
         btnSalvarEdicaoCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -2038,7 +2107,12 @@ public class Inicio extends javax.swing.JFrame {
                 btnSalvarEdicaoCategoriaActionPerformed(evt);
             }
         });
-        panelEditarCategoria.add(btnSalvarEdicaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 250, 40));
+        panelEditarCategoria.add(btnSalvarEdicaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 250, 40));
+
+        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel53.setText("Editar Categoria");
+        panelEditarCategoria.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 250, -1));
 
         javax.swing.GroupLayout panelEditarCategoriaFundoLayout = new javax.swing.GroupLayout(panelEditarCategoriaFundo);
         panelEditarCategoriaFundo.setLayout(panelEditarCategoriaFundoLayout);
@@ -2751,7 +2825,7 @@ public class Inicio extends javax.swing.JFrame {
             if (arquivoSelecionado != null) {
                 
                     try {
-                        enviarImagem(arquivoSelecionado);
+                        enviarImagem(arquivoSelecionado, 1);
                     } catch (JSONException ex) {
                         JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
                     } catch (IOException ex) {
@@ -2770,7 +2844,7 @@ public class Inicio extends javax.swing.JFrame {
             produto.setImagem(caminhoImagem);
             caminhoImagem = null;
 
-            int disponibilidade = 0;
+            int disponibilidade;
             
             if (radioDisponivel.isSelected()) {
                 
@@ -2797,7 +2871,7 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    private void enviarImagem(File imagem) throws IOException, JSONException {
+    private void enviarImagem(File imagem, int tipo) throws IOException, JSONException {
         
         String url = "https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/image/upload";
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
@@ -2835,7 +2909,7 @@ public class Inicio extends javax.swing.JFrame {
 
         int responseCode = connection.getResponseCode();
         
-        if (responseCode == HttpURLConnection.HTTP_OK) {
+        if (responseCode == HttpURLConnection.HTTP_OK && tipo == 1) {
             
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
@@ -2853,8 +2927,36 @@ public class Inicio extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Imagem salva com sucesso!");
 
+        } else if(responseCode == HttpURLConnection.HTTP_OK && tipo == 2){
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = reader.readLine()) != null) {
+                response.append(inputLine);
+            }
+            reader.close();
+
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            String imageUrl = jsonResponse.getString("secure_url");
+            
+            caminhoFoto = imageUrl;
+            
+            GlobalAdmin.setFoto(caminhoFoto);
+            
+            setaImagensPerfil();
+            
+            daoUsuario.alterarFoto(caminhoFoto, GlobalAdmin.getId_admin());
+            
+            caminhoFoto = null;
+            fotoSelecionada = null;
+            
+            JOptionPane.showMessageDialog(null, "Imagem salva com sucesso!");
+            
         } else {
+            
             JOptionPane.showMessageDialog(null, "Erro ao enviar a imagem. Código de resposta: " + responseCode);
+            
         }
     }
     
@@ -2862,7 +2964,7 @@ public class Inicio extends javax.swing.JFrame {
         
         ImageIcon icon = new CriaIcon().criaIcon(imageUrl);
         txtImagem.setIcon(icon);
-        
+  
     }
     
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
@@ -2905,13 +3007,33 @@ public class Inicio extends javax.swing.JFrame {
         String email = inputEmail.getText().trim();
         String senha = inputSenha.getText().trim();
         
+        if (fotoSelecionada != null) {
+                
+                    try {
+                        enviarImagem(fotoSelecionada, 2);
+                        
+                    } catch (JSONException ex) {
+                        
+                        JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
+                        
+                    } catch (IOException ex) {
+                        
+                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    
+        }
+        
         if (nome.equals(GlobalAdmin.getNome()) && email.equals(GlobalAdmin.getEmail()) && senha.equals(GlobalAdmin.getSenha())) {
             
-        JOptionPane.showMessageDialog(null, "Nenhuma alteração feita!");
-        return;
-    }
+            listarNotificacoes();
+            
+            JOptionPane.showMessageDialog(null, "Nenhuma campo alterado!");
 
-    if (!GlobalAdmin.getEmail().equals(email)) {
+        return;
+        
+        }
+
+        if (!GlobalAdmin.getEmail().equals(email)) {
         
         if (daoUsuario.validarEmailExistente(email)) {
             
@@ -2919,7 +3041,7 @@ public class Inicio extends javax.swing.JFrame {
             return;
             
         }
-    }
+        }
 
     if (!senha.equals(GlobalAdmin.getSenha())) {
         
@@ -2940,7 +3062,7 @@ public class Inicio extends javax.swing.JFrame {
     
     if (resposta == JOptionPane.YES_OPTION) {
         
-        Usuarios usuario = new Usuarios(0, nome, email, senha, null, null, 0);
+        Usuarios usuario = new Usuarios(0, nome, email, senha, null, null, null, 0);
         daoAdmin.atualizarPerfil(usuario);
 
         GlobalAdmin.setEmail(email);
@@ -2949,7 +3071,7 @@ public class Inicio extends javax.swing.JFrame {
 
         txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
         JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
-
+        
         listarNotificacoes();
         
     }
@@ -3736,6 +3858,96 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_inputMensagemFocusLost
 
+    private void imagePerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagePerfilMouseEntered
+        
+        if (imagePerfil.isEnabled()) {
+            
+            setCursor(Cursor.HAND_CURSOR);
+            
+        }
+        
+    }//GEN-LAST:event_imagePerfilMouseEntered
+
+    private void imagePerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagePerfilMouseExited
+        
+        setCursor(Cursor.DEFAULT_CURSOR);
+        
+    }//GEN-LAST:event_imagePerfilMouseExited
+
+    private void imagePerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagePerfilMouseClicked
+  
+        if (imagePerfil.isEnabled()) {
+            
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Selecione uma Imagem");
+            chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagens", "jpg", "png", "gif"));
+            int result = chooser.showOpenDialog(this);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                
+                fotoSelecionada = chooser.getSelectedFile();
+                
+                if (fotoSelecionada != null) {
+                    
+                try {
+
+                    ImageIcon imagemIcon = new ImageIcon(fotoSelecionada.getAbsolutePath());
+
+                    Image imagemRedimensionada = imagemIcon.getImage().getScaledInstance(imagePerfil.getWidth(), imagePerfil.getHeight(), Image.SCALE_SMOOTH);
+                    imagemIcon = new ImageIcon(imagemRedimensionada);
+
+                    imagePerfil.setIcon(imagemIcon);
+                    imagePerfil.revalidate();
+                    imagePerfil.repaint();
+                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+                }
+                
+            }
+            
+        }
+        
+    }//GEN-LAST:event_imagePerfilMouseClicked
+
+    private void btnRetiraImagemPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRetiraImagemPerfilMouseEntered
+        
+        if (btnRetiraImagemPerfil.isEnabled()) {
+            
+            setCursor(Cursor.HAND_CURSOR);
+            
+        }
+        
+    }//GEN-LAST:event_btnRetiraImagemPerfilMouseEntered
+
+    private void btnRetiraImagemPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRetiraImagemPerfilMouseExited
+        
+        setCursor(Cursor.DEFAULT_CURSOR);
+        
+    }//GEN-LAST:event_btnRetiraImagemPerfilMouseExited
+
+    private void btnRetiraImagemPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRetiraImagemPerfilMouseClicked
+        
+        if (btnRetiraImagemPerfil.isEnabled()) {
+            
+            int opcao = JOptionPane.showConfirmDialog(null, "Remover foto de perfil?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            
+            if (opcao == JOptionPane.YES_OPTION) {
+                
+                daoUsuario.alterarFoto("", GlobalAdmin.getId_admin());
+                GlobalAdmin.setFoto("");
+                btnRetiraImagemPerfil.setVisible(false);
+                setaImagensPerfil();
+                listarNotificacoes();
+                
+            }
+            
+        }
+        
+    }//GEN-LAST:event_btnRetiraImagemPerfilMouseClicked
+
     public static void main(String args[]) {
 
         try {
@@ -3887,7 +4099,6 @@ public class Inicio extends javax.swing.JFrame {
         progressInicio();
         radioSelecionado();
         radioUsuarioSelecionado();
-        
         radioSelecionadoCategoria();
         eventTable();
         eventCheck();
@@ -3925,6 +4136,16 @@ public class Inicio extends javax.swing.JFrame {
 
         }
         
+        if (GlobalAdmin.getFoto() != null && !GlobalAdmin.getFoto().equals("")) {
+            
+            setaImagensPerfil();
+            
+        } else {
+            
+            btnRetiraImagemPerfil.setVisible(false);
+            
+        }
+        
         GlobalWhats.setMensagem("Digite sua mensagem...");
 
     }
@@ -3941,7 +4162,7 @@ public class Inicio extends javax.swing.JFrame {
 
             case 2:
 
-                
+                verificaRadio();
                 
                 break;
 
@@ -3953,13 +4174,13 @@ public class Inicio extends javax.swing.JFrame {
                 
             case 4:
                 
-                
+                verificaComboReservas();
                 
                 break;
             
             case 5:
                 
-                listarClientes(1, null);
+                verificaRadioUsuarios();
                 
                 break;
             
@@ -5004,6 +5225,9 @@ public class Inicio extends javax.swing.JFrame {
                     inputEmail.setEnabled(true);
                     inputSenha.setEnabled(true);
                     buttonSalvarPerfil.setEnabled(true);
+                    imagePerfil.setForeground(new Color(255, 255, 255));
+                    imagePerfil.setEnabled(true);
+                    btnRetiraImagemPerfil.setEnabled(true);
                     
                 } else {
                     
@@ -5011,6 +5235,9 @@ public class Inicio extends javax.swing.JFrame {
                     inputEmail.setEnabled(false);
                     inputSenha.setEnabled(false);
                     buttonSalvarPerfil.setEnabled(false);
+                    imagePerfil.setForeground(new Color(204, 204, 204));
+                    imagePerfil.setEnabled(false);
+                    btnRetiraImagemPerfil.setEnabled(false);
                     
                 }
                 
@@ -5140,6 +5367,38 @@ public class Inicio extends javax.swing.JFrame {
         });
         
     }
+    
+    private void setaImagensPerfil() {
+        
+        String foto = GlobalAdmin.getFoto();
+        
+        ImageIcon imagemIcon = new ImageIcon(getClass().getResource("/imagens/iconPerfil.png"));
+        
+        if (foto != null && !foto.equals("")) {
+            
+            imagemIcon = new CriaIcon().criaIcon(foto);
+            btnRetiraImagemPerfil.setVisible(true);
+            btnRetiraImagemPerfil.setEnabled(true);
+    
+        }
+        
+        Image imagemRedimensionada = imagemIcon.getImage().getScaledInstance(imagePerfil.getWidth(), imagePerfil.getHeight(), Image.SCALE_SMOOTH);
+        imagemIcon = new ImageIcon(imagemRedimensionada);
+
+        imagePerfil.setIcon(imagemIcon);
+        imagePerfil.revalidate();
+        imagePerfil.repaint();
+            
+        Image imagemRedimensionada2 = imagemIcon.getImage().getScaledInstance(imagePerfil1.getWidth(), imagePerfil1.getHeight(), Image.SCALE_SMOOTH);
+        imagemIcon = new ImageIcon(imagemRedimensionada2);
+
+        imagePerfil1.setIcon(imagemIcon);
+        imagePerfil1.revalidate();
+        imagePerfil1.repaint();
+        
+        
+        
+    }
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -5162,6 +5421,7 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.swing.ButtonBadges btnNoti;
     private javax.swing.JPanel btnRelatorios;
     private javax.swing.JPanel btnReservas;
+    private javax.swing.JLabel btnRetiraImagemPerfil;
     private javax.swing.JButton btnSalvarEdicaoCategoria;
     private javax.swing.JButton buttonAddMensagem;
     private javax.swing.JButton buttonArquivar;
@@ -5200,8 +5460,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField edtValorProduto;
     private javax.swing.JFormattedTextField edtWhatsappADM;
     private com.raven.chart.Chart grafInicio;
-    private com.raven.avatar.ImageAvatar imageAvatar1;
-    private com.raven.avatar.ImageAvatar imageAvatar2;
+    private com.raven.avatar.ImageAvatar imagePerfil;
+    private com.raven.avatar.ImageAvatar imagePerfil1;
     private javax.swing.JTextArea inputDescricaoCategoria;
     private javax.swing.JTextField inputDescricaoCategoriaEdit;
     private javax.swing.JTextField inputDescricaoProduto;
@@ -5275,6 +5535,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -5288,6 +5549,10 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
     private telas.formatos.PanelBorder panelAcimaFrame;
     private javax.swing.JPanel panelAdicionarADM;
     private javax.swing.JPanel panelAdicionarProduto;

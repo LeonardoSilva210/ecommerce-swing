@@ -19,51 +19,6 @@ public class ItemNotificacao extends javax.swing.JPanel{
     public ItemNotificacao(Notificacoes noti) {
         initComponents();
 
-        this.addMouseListener(new MouseAdapter() {
-            
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            
-            switch(noti.getTipo()) {
-                
-                case 1:
-                    
-                    JOptionPane.showMessageDialog(null, noti.getNotificacao());
-                    
-                    break;
-                    
-                case 2:
-                    
-                    JOptionPane.showMessageDialog(null, noti.getNotificacao());
-                    
-                    break;
-                    
-                case 3:
-                    
-                    JOptionPane.showMessageDialog(null, noti.getNotificacao());
-                    
-                    break;
-                
-            }
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-                
-            setBorder(new LineBorder(Color.white, 1));
-            
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-               
-            setBorder(null);
-            
-        }
-        
-        });
-       
         switch(noti.getTipo()) {
             
             case 1:
@@ -99,6 +54,65 @@ public class ItemNotificacao extends javax.swing.JPanel{
         txtData.setText(dataBr);
         txtHorario.setText(String.valueOf(noti.getHorario()));
         imgIcon.setIcon(icon);
+        
+        if (noti.isVisto()) {
+            
+            panelPontoVisto.setVisible(false);
+            
+        }
+        
+        this.addMouseListener(new MouseAdapter() {
+            
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            
+            switch(noti.getTipo()) {
+                
+                case 1:
+                    
+                    JOptionPane.showMessageDialog(null, noti.getNotificacao() + "\n" + "Data: " + dataBr + "\n" + "Horário: " + noti.getHorario());
+                    
+                    break;
+                    
+                case 2:
+                    
+                    JOptionPane.showMessageDialog(null, noti.getNotificacao() + "\n" + "Data: " + dataBr + "\n" + "Horário: " + noti.getHorario());
+                    
+                    break;
+                    
+                case 3:
+                    
+                    String[] divide = noti.getNotificacao().split("Valor");
+                    
+                    JOptionPane.showMessageDialog(null, divide[0] + "\n" + "Valor" + divide[1] + "\n" + "Data: " + dataBr + "\n" + "Horário: " + noti.getHorario());
+                    
+                    break;
+                
+            }
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+                
+            setBorder(new LineBorder(Color.white, 1));
+            
+            if (!noti.isVisto()) {
+                
+                panelPontoVisto.setVisible(false);
+                
+            }
+            
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+               
+            setBorder(null);
+            
+        }
+        
+        });
 
     }
 
@@ -110,6 +124,7 @@ public class ItemNotificacao extends javax.swing.JPanel{
         imgIcon = new javax.swing.JLabel();
         txtData = new javax.swing.JLabel();
         txtHorario = new javax.swing.JLabel();
+        panelPontoVisto = new telas.formatos.PanelBorder();
 
         setPreferredSize(new java.awt.Dimension(235, 50));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -134,11 +149,27 @@ public class ItemNotificacao extends javax.swing.JPanel{
         txtHorario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtHorario.setText("22:10:10");
         add(txtHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 80, 20));
+
+        panelPontoVisto.setForeground(new java.awt.Color(0, 153, 255));
+
+        javax.swing.GroupLayout panelPontoVistoLayout = new javax.swing.GroupLayout(panelPontoVisto);
+        panelPontoVisto.setLayout(panelPontoVistoLayout);
+        panelPontoVistoLayout.setHorizontalGroup(
+            panelPontoVistoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+        panelPontoVistoLayout.setVerticalGroup(
+            panelPontoVistoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        add(panelPontoVisto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 20, 20));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imgIcon;
+    private telas.formatos.PanelBorder panelPontoVisto;
     private javax.swing.JLabel txtData;
     private javax.swing.JLabel txtHorario;
     private javax.swing.JLabel txtNotificacao;
