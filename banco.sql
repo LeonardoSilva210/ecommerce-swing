@@ -40,7 +40,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Refrigerantes','Bebidas Doces',1,2),(2,'Temperos','categoria de temperos',1,0),(3,'Teste','',1,0),(10,'iji','jijij',NULL,0),(11,'okok','okok',0,2),(12,'Sucos','Delicias das Frutas',0,1),(13,'Sucos2','okok',1,0);
+INSERT INTO `categorias` VALUES (1,'Refrigerantes','Bebidas Doces',1,3),(2,'Temperos','categoria de temperos',1,0),(3,'Teste','',1,0),(10,'iji','jijij',NULL,0),(11,'okok','okok',0,2),(12,'Sucos','Delicias das Frutas',0,1),(13,'Sucos2','okok',1,0);
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`id_produto`),
   KEY `fk_id_categoria` (`fk_id_categoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorias` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (23,'Coca-Cola 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(24,'Pepsi 350ml','Bebida Refrescante e Marcante',0,1,3.00,35,46.98,1,NULL),(25,'Fanta Laranja 350ml','Bebida Refrescante e Marcante',1,1,3.29,65,49.43,0,NULL),(26,'Guaraná Antarctica 350ml','Bebida Refrescante e Marcante',0,1,3.59,59,50,1,NULL),(27,'Sprite 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(28,'Suco de Laranja ','Bebida Refrescante e Marcante',1,12,3.99,59,50.28,0,NULL),(29,'Suco de Uva','Bebida Refrescante e Marcante',1,12,7.90,32,120,0,NULL),(30,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(31,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(32,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(33,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(34,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(35,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(36,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(37,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(38,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(39,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(40,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(41,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(42,'Salgas','Salgado',1,11,12.00,123,NULL,0,NULL),(43,'iojoij','oijoijoi',0,11,12.00,123,123,0,NULL),(44,'popopo','wawawaw',0,12,12.00,12,1213,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731442292/OIP_wloe7c.jpg'),(45,'ok','oko',1,1,9.00,909,90,0,NULL);
+INSERT INTO `produtos` VALUES (23,'Coca-Cola 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(24,'Pepsi 350ml','Bebida Refrescante e Marcante',0,1,3.00,35,46.98,1,NULL),(25,'Fanta Laranja 350ml','Bebida Refrescante e Marcante',1,1,3.29,65,49.43,0,NULL),(26,'Guaraná Antarctica 350ml','Bebida Refrescante e Marcante',0,1,3.59,59,50,1,NULL),(27,'Sprite 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(28,'Suco de Laranja ','Bebida Refrescante e Marcante',1,12,3.99,59,50.28,0,NULL),(29,'Suco de Uva','Bebida Refrescante e Marcante',1,12,7.90,32,120,0,NULL),(30,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(31,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731874282/download_qmaqea.jpg'),(32,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(33,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(34,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(35,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(36,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(37,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(38,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(39,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(40,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(41,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(42,'Salgas','Salgado',1,11,12.00,123,NULL,0,NULL),(43,'iojoij','oijoijoi',0,11,12.00,123,123,0,NULL),(44,'popopo','wawawaw',0,12,12.00,12,1213,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731442292/OIP_wloe7c.jpg'),(45,'ok','oko',1,1,9.00,909,90,0,NULL),(46,'Coca','coquinha',1,1,12.00,12,14,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731873602/download_pnvdr2.jpg');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -268,4 +268,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-17 16:25:05
+-- Dump completed on 2024-11-17 17:16:09

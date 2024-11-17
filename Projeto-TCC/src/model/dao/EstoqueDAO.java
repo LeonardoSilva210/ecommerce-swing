@@ -255,7 +255,7 @@ public class EstoqueDAO {
         try{
             
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement("UPDATE produtos set nome_produto = ?, descricao_produto = ?, valor = ?, valor_custo = ?, quantidade = ?, fk_id_categoria = ? WHERE id_produto = ?");
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE produtos set nome_produto = ?, descricao_produto = ?, valor = ?, valor_custo = ?, quantidade = ?, fk_id_categoria = ?, imagem = ? WHERE id_produto = ?");
             
             stmt.setString(1, estoque.getNome_produto());
             stmt.setString(2, estoque.getDescricao_produto());
@@ -263,7 +263,8 @@ public class EstoqueDAO {
             stmt.setFloat(4, estoque.getValor_custo());
             stmt.setInt(5, estoque.getQuantidade());
             stmt.setInt(6, estoque.getFk_id_categoria());
-            stmt.setInt(7, estoque.getId_produto());
+            stmt.setString(7, estoque.getImagem());
+            stmt.setInt(8, estoque.getId_produto());
             
             stmt.executeUpdate();
             

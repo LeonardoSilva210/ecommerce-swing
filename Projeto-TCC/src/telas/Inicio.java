@@ -8,12 +8,15 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -722,7 +725,7 @@ public class Inicio extends javax.swing.JFrame {
         panelPopProduto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNomeProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNomeProduto.setText("Produto");
+        txtNomeProduto.setText("Nome");
         panelPopProduto.add(txtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
 
         panelBtnClosePopProduto.setBackground(new java.awt.Color(204, 204, 204));
@@ -754,12 +757,12 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         panelPopProduto.add(panelBtnClosePopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
-        panelPopProduto.add(edtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 170, 30));
+        panelPopProduto.add(edtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 170, 40));
 
         txtNomeProduto1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto1.setText("Descrição");
         panelPopProduto.add(txtNomeProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, -1));
-        panelPopProduto.add(edtDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 170, 30));
+        panelPopProduto.add(edtDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 170, 40));
 
         txtNomeProduto2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto2.setText("Valor de venda");
@@ -770,7 +773,7 @@ public class Inicio extends javax.swing.JFrame {
                 edtValorProdutoKeyTyped(evt);
             }
         });
-        panelPopProduto.add(edtValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 170, 30));
+        panelPopProduto.add(edtValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 170, 40));
 
         txtNomeProduto3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto3.setText("Quantidade");
@@ -783,7 +786,7 @@ public class Inicio extends javax.swing.JFrame {
                 edtQuantidadeKeyTyped(evt);
             }
         });
-        panelPopProduto.add(edtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 50, 30));
+        panelPopProduto.add(edtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 50, 40));
 
         jButton1.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
         jButton1.setText("Salvar");
@@ -792,9 +795,9 @@ public class Inicio extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelPopProduto.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 130, 40));
+        panelPopProduto.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 270, 50));
 
-        panelPopProduto.add(comboCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 170, 30));
+        panelPopProduto.add(comboCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 170, 40));
 
         btnDiminuirQuantidade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnDiminuirQuantidade.setText("-");
@@ -803,7 +806,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnDiminuirQuantidadeActionPerformed(evt);
             }
         });
-        panelPopProduto.add(btnDiminuirQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 40, 30));
+        panelPopProduto.add(btnDiminuirQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 40, 40));
 
         btnAdicionarQuantidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnAdicionarQuantidade.setText("+");
@@ -812,7 +815,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnAdicionarQuantidadeActionPerformed(evt);
             }
         });
-        panelPopProduto.add(btnAdicionarQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 40, 30));
+        panelPopProduto.add(btnAdicionarQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 40, 40));
 
         txtNomeProduto4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto4.setText("Valor de custo");
@@ -823,8 +826,21 @@ public class Inicio extends javax.swing.JFrame {
                 edtValorCustoProdutoKeyTyped(evt);
             }
         });
-        panelPopProduto.add(edtValorCustoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 170, 30));
-        panelPopProduto.add(txtImagemProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 310, 200));
+        panelPopProduto.add(edtValorCustoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 170, 40));
+
+        txtImagemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto_sem_imagem.png"))); // NOI18N
+        txtImagemProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtImagemProdutoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtImagemProdutoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtImagemProdutoMouseExited(evt);
+            }
+        });
+        panelPopProduto.add(txtImagemProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 200, -1));
 
         panelAcimaFrame.add(panelPopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 970, 420));
 
@@ -1670,7 +1686,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(buttonIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelEstoqueLayout.setVerticalGroup(
             panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2717,6 +2733,18 @@ public class Inicio extends javax.swing.JFrame {
                 
                     EstoqueBean estoque = new EstoqueBean();
 
+                    if (arquivoSelecionado != null) {
+                        
+                        try{
+                            
+                            enviarImagem(arquivoSelecionado, 1);
+                            
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                        
+                    }
+
                     estoque.setId_produto(produtosAtual.getId_produto());
                     estoque.setNome_produto(edtNomeProduto.getText());
                     estoque.setDescricao_produto(edtDescricaoProduto.getText());
@@ -2724,9 +2752,11 @@ public class Inicio extends javax.swing.JFrame {
                     estoque.setValor_custo(Float.parseFloat(edtValorCustoProduto.getText()));
                     estoque.setQuantidade(Integer.parseInt(edtQuantidade.getText()));
                     estoque.setFk_id_categoria(listaCategorias.get(comboCategorias.getSelectedIndex()).getId_categoria());
+                    estoque.setImagem(caminhoImagem);
 
                     daoEstoque.atualizar(estoque);
 
+                    caminhoImagem = null;
                     JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
                 
                 }
@@ -2968,7 +2998,6 @@ public class Inicio extends javax.swing.JFrame {
             String imageUrl = jsonResponse.getString("secure_url");
             
             caminhoImagem = imageUrl;
-            mostrarImagem(imageUrl);
             
             JOptionPane.showMessageDialog(null, "Imagem salva com sucesso!");
 
@@ -3004,13 +3033,7 @@ public class Inicio extends javax.swing.JFrame {
             
         }
     }
-    
-    private void mostrarImagem(String imageUrl) {
-        
-        ImageIcon icon = new CriaIcon().criaIcon(imageUrl);
-        txtImagem.setIcon(icon);
-  
-    }
+
     
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
 
@@ -3285,10 +3308,16 @@ public class Inicio extends javax.swing.JFrame {
             
             String imagem = produtosAtual.getImagem();
             
-            if (imagem != null && !imagem.isEmpty() && !imagem.equals("null")) {
+            if (imagem != null && !imagem.equals("")) {
                 
                 txtImagemProduto.setIcon(new CriaIcon().criaIcon(imagem));
             
+            } else {
+                
+                ImageIcon imagemIcon = new ImageIcon(getClass().getResource("/imagens/produto_sem_imagem.png"));
+
+                txtImagemProduto.setIcon(imagemIcon);
+                
             }
 
             listaCategorias = daoCategoria.listar(1, null);
@@ -3771,7 +3800,26 @@ public class Inicio extends javax.swing.JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             arquivoSelecionado = chooser.getSelectedFile();
             txtImagemSelecionada.setText("Imagem selecionada: " + arquivoSelecionado.getName());
+            
+            if (arquivoSelecionado != null) {
+                    
+                try {
+
+                    ImageIcon imagemIcon = new ImageIcon(arquivoSelecionado.getAbsolutePath());
+
+                    Image imagemRedimensionada = imagemIcon.getImage().getScaledInstance(txtImagem.getWidth(), txtImagem.getHeight(), Image.SCALE_SMOOTH);
+                    imagemIcon = new ImageIcon(imagemRedimensionada);
+
+                    txtImagem.setIcon(imagemIcon);
+                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+            }
+            
         }
+
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -4032,6 +4080,50 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAtualizarEstoqueActionPerformed
 
+    private void txtImagemProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtImagemProdutoMouseEntered
+        
+        setCursor(Cursor.HAND_CURSOR);
+        
+    }//GEN-LAST:event_txtImagemProdutoMouseEntered
+
+    private void txtImagemProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtImagemProdutoMouseExited
+        
+        setCursor(Cursor.DEFAULT_CURSOR);
+        
+    }//GEN-LAST:event_txtImagemProdutoMouseExited
+
+    private void txtImagemProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtImagemProdutoMouseClicked
+        
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Selecione uma Imagem");
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagens", "jpg", "png", "gif"));
+        int result = chooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            
+            arquivoSelecionado = chooser.getSelectedFile();
+            
+            if (arquivoSelecionado != null) {
+                    
+                try {
+
+                    ImageIcon imagemIcon = new ImageIcon(arquivoSelecionado.getAbsolutePath());
+
+                    Image imagemRedimensionada = imagemIcon.getImage().getScaledInstance(txtImagemProduto.getWidth(), txtImagemProduto.getHeight(), Image.SCALE_SMOOTH);
+                    imagemIcon = new ImageIcon(imagemRedimensionada);
+
+                    txtImagemProduto.setIcon(imagemIcon);
+                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+            }
+            
+        }
+        
+    }//GEN-LAST:event_txtImagemProdutoMouseClicked
+
     public static void main(String args[]) {
 
         try {
@@ -4190,6 +4282,7 @@ public class Inicio extends javax.swing.JFrame {
         inserirMetodosComboReservas();
         verificaCheckSemWhatts();
         verificaRadioUsuarios();
+        verificaFuncaoTab();
         listarReservas(1, null);
         buttonEditarProduto.setVisible(false);
         panelEditarCategoriaFundo.setVisible(false);
@@ -5274,7 +5367,11 @@ public class Inicio extends javax.swing.JFrame {
         resetaCamposAdicionarProduto();
         btnAdicionarProduto.setVisible(true);
         inputPesquisarProduto.setVisible(true);
-        txtImagemProduto.setIcon(null);
+        txtImagemSelecionada.setText("Nenhuma imagem selecionada");
+        arquivoSelecionado = null;
+        radioDisponivel.setSelected(false);
+        radioIndisponivel.setSelected(false);
+        txtImagem.setIcon(null);
         
     }
     
@@ -5498,6 +5595,20 @@ public class Inicio extends javax.swing.JFrame {
         edtDataNascimentoADM.setText("");
         edtWhatsappADM.setText("");
         checkSemWhatts.setSelected(false);
+        
+    }
+    
+    private void verificaFuncaoTab() {
+        
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+                @Override
+                public boolean dispatchKeyEvent(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                        return true;
+                    }
+                    return false;
+                }
+            });
         
     }
         
