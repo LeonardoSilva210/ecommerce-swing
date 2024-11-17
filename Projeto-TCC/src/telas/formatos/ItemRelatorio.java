@@ -61,7 +61,11 @@ public class ItemRelatorio extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                JOptionPane.showMessageDialog(null, divideProduto, relatorio.getPessoa(), JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Nome: " + relatorio.getPessoa() + "\n"
+                + "Produtos: " + divideProduto +"\n"
+                + "Valor total: R$" + String.valueOf(relatorio.getValorTotal()).replace(".", ",") + "\n"
+                + "Obs: " + relatorio.getObs() + "\n",
+                "Relatório", JOptionPane.INFORMATION_MESSAGE);
                 
             }
   

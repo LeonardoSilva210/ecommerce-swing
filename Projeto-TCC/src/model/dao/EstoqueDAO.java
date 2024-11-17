@@ -106,6 +106,53 @@ public class EstoqueDAO {
                     stmt.setString(1, "%" + produto + "%");
                     
                     break;
+                
+                case 9:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
+                            + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.nome_produto = ?");
+                    
+                    stmt.setString(1, produto);
+                    
+                    break;
+                
+                case 10:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
+                            + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.disponivel = 1 AND"
+                            + " produtos.nome_produto = ?");
+                    
+                    stmt.setString(1, produto);
+                    
+                    break;
+                
+                case 11:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
+                            + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.disponivel = 0 AND"
+                            + " produtos.nome_produto = ?");
+                    
+                    stmt.setString(1, produto);
+                    
+                    break;
+                
+                case 12:
+                    
+                    stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
+                            + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1 AND"
+                            + " produtos.nome_produto = ?");
+                    
+                    stmt.setString(1, produto);
+                    
+                    break;
                     
             }
             

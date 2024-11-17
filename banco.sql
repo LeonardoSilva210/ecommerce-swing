@@ -40,7 +40,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Refrigerantes','Bebidas Doces',1,1),(2,'Temperos','categoria de temperos',1,0),(3,'Teste','',1,0),(10,'iji','jijij',NULL,0),(11,'okok','okok',0,2),(12,'Sucos','Delicias das Frutas',0,1),(13,'Sucos2','okok',1,0);
+INSERT INTO `categorias` VALUES (1,'Refrigerantes','Bebidas Doces',1,2),(2,'Temperos','categoria de temperos',1,0),(3,'Teste','',1,0),(10,'iji','jijij',NULL,0),(11,'okok','okok',0,2),(12,'Sucos','Delicias das Frutas',0,1),(13,'Sucos2','okok',1,0);
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `compras` (
   PRIMARY KEY (`id_compra`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
   CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,6 +73,7 @@ CREATE TABLE `compras` (
 
 LOCK TABLES `compras` WRITE;
 /*!40000 ALTER TABLE `compras` DISABLE KEYS */;
+INSERT INTO `compras` VALUES (1,'15:30:51','2024-11-17','Daqui a pouco passo ai',0,'C45','42,29',19.90,10);
 /*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -115,7 +116,7 @@ CREATE TABLE `notificacoes` (
   PRIMARY KEY (`id_notificacao`),
   KEY `fk_id_usuario` (`fk_id_usuario`),
   CONSTRAINT `notificacoes_ibfk_1` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +125,7 @@ CREATE TABLE `notificacoes` (
 
 LOCK TABLES `notificacoes` WRITE;
 /*!40000 ALTER TABLE `notificacoes` DISABLE KEYS */;
-INSERT INTO `notificacoes` VALUES (23,3,1,'1 Venda realizada Valor: R$91,90','2024-11-02','21:00:23',NULL),(25,3,1,'1 Venda realizada Valor: R$19,25','2024-11-09','20:26:54',NULL),(26,3,1,'1 Venda realizada Valor: R$3,29','2024-11-09','20:28:15',NULL),(27,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:28:40',NULL),(28,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:28:44',NULL),(29,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:29:47',NULL),(30,3,1,'1 Venda realizada Valor: R$24,00','2024-11-11','17:12:42',NULL),(31,3,1,'1 Venda realizada Valor: R$24,00','2024-11-11','17:15:15',NULL),(32,3,1,'1 Venda realizada Valor: R$11,27','2024-11-11','17:18:35',NULL),(33,1,1,'Perfil atualizado.','2024-11-17','01:51:02',11),(34,1,1,'Perfil atualizado.','2024-11-17','01:54:16',11),(35,1,1,'Perfil atualizado.','2024-11-17','02:12:29',11),(36,1,1,'Perfil atualizado.','2024-11-17','02:20:35',11),(37,1,1,'Perfil atualizado.','2024-11-17','02:20:47',11),(38,1,1,'Perfil atualizado.','2024-11-17','02:21:55',11),(39,1,0,'Perfil atualizado.','2024-11-17','11:47:19',10),(40,1,1,'Perfil atualizado.','2024-11-17','11:47:19',11),(41,1,1,'Perfil atualizado.','2024-11-17','11:47:19',30),(42,1,0,'Perfil atualizado.','2024-11-17','11:47:19',31),(43,1,0,'Perfil atualizado.','2024-11-17','11:47:32',10),(44,1,1,'Perfil atualizado.','2024-11-17','11:47:32',11),(45,1,1,'Perfil atualizado.','2024-11-17','11:47:32',30),(46,1,0,'Perfil atualizado.','2024-11-17','11:47:32',31),(47,1,1,'Perfil atualizado.','2024-11-17','12:33:55',11),(48,1,1,'Perfil atualizado.','2024-11-17','12:54:09',30),(49,1,1,'Perfil atualizado.','2024-11-17','12:57:09',11),(50,1,1,'Perfil atualizado.','2024-11-17','12:58:01',30),(51,1,1,'Perfil atualizado.','2024-11-17','13:13:37',11),(52,1,1,'Perfil atualizado.','2024-11-17','13:16:21',11),(53,1,1,'Perfil atualizado.','2024-11-17','13:17:03',11),(54,1,1,'Perfil atualizado.','2024-11-17','13:26:16',11),(55,1,1,'Perfil atualizado.','2024-11-17','13:26:31',11),(56,1,1,'Perfil atualizado.','2024-11-17','14:33:15',11),(57,1,1,'Perfil atualizado.','2024-11-17','14:34:17',11);
+INSERT INTO `notificacoes` VALUES (23,3,1,'1 Venda realizada Valor: R$91,90','2024-11-02','21:00:23',NULL),(25,3,1,'1 Venda realizada Valor: R$19,25','2024-11-09','20:26:54',NULL),(26,3,1,'1 Venda realizada Valor: R$3,29','2024-11-09','20:28:15',NULL),(27,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:28:40',NULL),(28,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:28:44',NULL),(29,3,1,'1 Venda realizada Valor: R$3,99','2024-11-09','20:29:47',NULL),(30,3,1,'1 Venda realizada Valor: R$24,00','2024-11-11','17:12:42',NULL),(31,3,1,'1 Venda realizada Valor: R$24,00','2024-11-11','17:15:15',NULL),(32,3,1,'1 Venda realizada Valor: R$11,27','2024-11-11','17:18:35',NULL),(33,1,1,'Perfil atualizado.','2024-11-17','01:51:02',11),(34,1,1,'Perfil atualizado.','2024-11-17','01:54:16',11),(35,1,1,'Perfil atualizado.','2024-11-17','02:12:29',11),(36,1,1,'Perfil atualizado.','2024-11-17','02:20:35',11),(37,1,1,'Perfil atualizado.','2024-11-17','02:20:47',11),(38,1,1,'Perfil atualizado.','2024-11-17','02:21:55',11),(39,1,0,'Perfil atualizado.','2024-11-17','11:47:19',10),(40,1,1,'Perfil atualizado.','2024-11-17','11:47:19',11),(41,1,1,'Perfil atualizado.','2024-11-17','11:47:19',30),(42,1,0,'Perfil atualizado.','2024-11-17','11:47:19',31),(43,1,0,'Perfil atualizado.','2024-11-17','11:47:32',10),(44,1,1,'Perfil atualizado.','2024-11-17','11:47:32',11),(45,1,1,'Perfil atualizado.','2024-11-17','11:47:32',30),(46,1,0,'Perfil atualizado.','2024-11-17','11:47:32',31),(47,1,1,'Perfil atualizado.','2024-11-17','12:33:55',11),(48,1,1,'Perfil atualizado.','2024-11-17','12:54:09',30),(49,1,1,'Perfil atualizado.','2024-11-17','12:57:09',11),(50,1,1,'Perfil atualizado.','2024-11-17','12:58:01',30),(51,1,1,'Perfil atualizado.','2024-11-17','13:13:37',11),(52,1,1,'Perfil atualizado.','2024-11-17','13:16:21',11),(53,1,1,'Perfil atualizado.','2024-11-17','13:17:03',11),(54,1,1,'Perfil atualizado.','2024-11-17','13:26:16',11),(55,1,1,'Perfil atualizado.','2024-11-17','13:26:31',11),(56,1,1,'Perfil atualizado.','2024-11-17','14:33:15',11),(57,1,1,'Perfil atualizado.','2024-11-17','14:34:17',11),(58,3,1,'1 Venda realizada Valor: R$19,90','2024-11-17','15:30:51',NULL);
 /*!40000 ALTER TABLE `notificacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +150,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`id_produto`),
   KEY `fk_id_categoria` (`fk_id_categoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorias` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +159,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (23,'Coca-Cola 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(24,'Pepsi 350ml','Bebida Refrescante e Marcante',0,1,3.00,35,46.98,1,NULL),(25,'Fanta Laranja 350ml','Bebida Refrescante e Marcante',1,1,3.29,65,49.43,0,NULL),(26,'Guaraná Antarctica 350ml','Bebida Refrescante e Marcante',0,1,3.59,59,50,1,NULL),(27,'Sprite 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(28,'Suco de Laranja ','Bebida Refrescante e Marcante',1,12,3.99,59,50.28,0,NULL),(29,'Suco de Uva','Bebida Refrescante e Marcante',1,12,7.90,32,120,0,NULL),(30,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(31,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(32,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(33,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(34,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(35,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(36,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(37,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(38,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(39,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(40,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(41,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(42,'Salgas','Salgado',1,11,12.00,123,NULL,0,NULL),(43,'iojoij','oijoijoi',0,11,12.00,123,123,0,NULL),(44,'popopo','wawawaw',0,12,12.00,12,1213,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731442292/OIP_wloe7c.jpg');
+INSERT INTO `produtos` VALUES (23,'Coca-Cola 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(24,'Pepsi 350ml','Bebida Refrescante e Marcante',0,1,3.00,35,46.98,1,NULL),(25,'Fanta Laranja 350ml','Bebida Refrescante e Marcante',1,1,3.29,65,49.43,0,NULL),(26,'Guaraná Antarctica 350ml','Bebida Refrescante e Marcante',0,1,3.59,59,50,1,NULL),(27,'Sprite 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(28,'Suco de Laranja ','Bebida Refrescante e Marcante',1,12,3.99,59,50.28,0,NULL),(29,'Suco de Uva','Bebida Refrescante e Marcante',1,12,7.90,32,120,0,NULL),(30,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(31,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(32,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(33,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(34,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(35,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(36,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(37,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(38,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(39,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(40,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(41,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(42,'Salgas','Salgado',1,11,12.00,123,NULL,0,NULL),(43,'iojoij','oijoijoi',0,11,12.00,123,123,0,NULL),(44,'popopo','wawawaw',0,12,12.00,12,1213,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731442292/OIP_wloe7c.jpg'),(45,'ok','oko',1,1,9.00,909,90,0,NULL);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -267,4 +268,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-17 15:07:29
+-- Dump completed on 2024-11-17 16:25:05

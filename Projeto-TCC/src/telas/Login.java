@@ -29,11 +29,11 @@ public class Login extends javax.swing.JFrame {
         panelLogin = new javax.swing.JPanel();
         inputSenha = new javax.swing.JPasswordField();
         buttonEntrar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         inputEmail = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         panelBorder1 = new telas.formatos.PanelBorder();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         panelMin = new javax.swing.JPanel();
         txtMin = new javax.swing.JLabel();
         panelClose = new javax.swing.JPanel();
@@ -71,16 +71,6 @@ public class Login extends javax.swing.JFrame {
         });
         panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 260, 50));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("E-mail");
-        panelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Senha");
-        panelLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
-
         inputEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputEmailKeyPressed(evt);
@@ -94,15 +84,33 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Login");
         panelLogin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 260, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Senha");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("E-mail");
+
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap(140, Short.MAX_VALUE)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(91, 91, 91))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jLabel1)
+                .addGap(77, 77, 77)
+                .addComponent(jLabel2)
+                .addContainerGap(216, Short.MAX_VALUE))
         );
 
         panelLogin.add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 280, 440));

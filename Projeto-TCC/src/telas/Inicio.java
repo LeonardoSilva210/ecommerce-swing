@@ -233,6 +233,8 @@ public class Inicio extends javax.swing.JFrame {
         buttonReativar = new javax.swing.JButton();
         buttonArquivar = new javax.swing.JButton();
         buttonEditarProduto = new javax.swing.JButton();
+        btnPesquisarEstoque = new javax.swing.JButton();
+        btnAtualizarEstoque = new javax.swing.JButton();
         panelRelatorios = new javax.swing.JPanel();
         scrollRelatorios = new javax.swing.JScrollPane();
         panelListRelatorios = new telas.formatos.PanelItem();
@@ -335,6 +337,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         checkSemWhatts = new javax.swing.JCheckBox();
         edtSenhaADM = new javax.swing.JPasswordField();
+        jButton8 = new javax.swing.JButton();
         panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -865,7 +868,7 @@ public class Inicio extends javax.swing.JFrame {
 
         txtBemVindo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtBemVindo.setForeground(new java.awt.Color(255, 255, 255));
-        txtBemVindo.setText("Bem vindo, User");
+        txtBemVindo.setText("Olá, User");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -882,7 +885,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBemVindo)
                     .addComponent(jLabel2))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         panelPerfilLayout.setVerticalGroup(
             panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1552,6 +1555,7 @@ public class Inicio extends javax.swing.JFrame {
         radio3.setForeground(new java.awt.Color(255, 255, 255));
         radio3.setText("Indisponíveis");
 
+        inputPesquisarProduto.setPreferredSize(new java.awt.Dimension(6, 43));
         inputPesquisarProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 inputPesquisarProdutoKeyTyped(evt);
@@ -1612,6 +1616,21 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        btnPesquisarEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconSearch.png"))); // NOI18N
+        btnPesquisarEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarEstoqueActionPerformed(evt);
+            }
+        });
+
+        btnAtualizarEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRefresh.png"))); // NOI18N
+        btnAtualizarEstoque.setPreferredSize(new java.awt.Dimension(67, 43));
+        btnAtualizarEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarEstoqueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelEstoqueLayout = new javax.swing.GroupLayout(panelEstoque);
         panelEstoque.setLayout(panelEstoqueLayout);
         panelEstoqueLayout.setHorizontalGroup(
@@ -1629,10 +1648,17 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(radio4))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEstoqueLayout.createSequentialGroup()
-                        .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputPesquisarProduto)
-                            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelEstoqueLayout.createSequentialGroup()
+                                .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addGap(31, 31, 31))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEstoqueLayout.createSequentialGroup()
+                                .addComponent(btnAtualizarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputPesquisarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(btnPesquisarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonArquivar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReativar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1644,7 +1670,7 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(buttonIndisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         panelEstoqueLayout.setVerticalGroup(
             panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1657,13 +1683,16 @@ public class Inicio extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(buttonIndisponivel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelEstoqueLayout.createSequentialGroup()
-                        .addComponent(jLabel28)
-                        .addGap(8, 8, 8)
-                        .addComponent(inputPesquisarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(buttonEditarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonReativar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonArquivar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelEstoqueLayout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonArquivar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAtualizarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputPesquisarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnPesquisarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1672,7 +1701,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(radio2)
                     .addComponent(radio3)
                     .addComponent(radio4))
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addGap(354, 354, 354))
         );
 
         tabInicio.addTab("tab2", panelEstoque);
@@ -2370,6 +2399,15 @@ public class Inicio extends javax.swing.JFrame {
         panelAdicionarADM.add(checkSemWhatts, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 110, 40));
         panelAdicionarADM.add(edtSenhaADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 220, 40));
 
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton8.setText("Limpar campos");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        panelAdicionarADM.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 130, 40));
+
         tabInicio.addTab("tab7", panelAdicionarADM);
 
         panelFundoTab.add(tabInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, -1));
@@ -2825,47 +2863,53 @@ public class Inicio extends javax.swing.JFrame {
             if (arquivoSelecionado != null) {
                 
                     try {
+                        
                         enviarImagem(arquivoSelecionado, 1);
-                    } catch (JSONException ex) {
-                        JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
-                    } catch (IOException ex) {
-                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                } else {
-                
-                    JOptionPane.showMessageDialog(null, "Por favor, selecione uma imagem.");
-                }
-            
-            produto.setNome_produto(nome);
-            produto.setDescricao_produto(descricao);
-            produto.setValor(Float.parseFloat(valor));
-            produto.setValor_custo(Float.parseFloat(valorCusto));
-            produto.setQuantidade(Integer.parseInt(quantidade));
-            produto.setImagem(caminhoImagem);
-            caminhoImagem = null;
+                        
+                        produto.setNome_produto(nome);
+                        produto.setDescricao_produto(descricao);
+                        produto.setValor(Float.parseFloat(valor));
+                        produto.setValor_custo(Float.parseFloat(valorCusto));
+                        produto.setQuantidade(Integer.parseInt(quantidade));
+                        produto.setImagem(caminhoImagem);
+                        caminhoImagem = null;
 
-            int disponibilidade;
+                        int disponibilidade;
             
-            if (radioDisponivel.isSelected()) {
+                        if (radioDisponivel.isSelected()) {
                 
-                disponibilidade = 1;
+                            disponibilidade = 1;
                 
+                        } else {
+                
+                            disponibilidade = 0;
+                
+                        }
+            
+                        produto.setDisponivel(disponibilidade);
+                        produto.setFk_id_categoria(listaCategorias.get(comboAdicionarProdutoCategoria.getSelectedIndex()).getId_categoria());
+
+                        daoProduto.cadastrar(produto);
+                        resetaCamposAdicionarProduto();
+            
+                        JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
+            
+                        txtImagem.setIcon(null);
+                        txtImagemSelecionada.setText("Nenhuma imagem selecionada");
+                        
+                    } catch (JSONException ex) {
+                        
+                        JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
+                        
+                    } catch (IOException ex) {
+                        
+                        Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                    }
             } else {
                 
-                disponibilidade = 0;
-                
+                JOptionPane.showMessageDialog(null, "Por favor, selecione uma imagem.");
             }
-            
-            produto.setDisponivel(disponibilidade);
-            produto.setFk_id_categoria(listaCategorias.get(comboAdicionarProdutoCategoria.getSelectedIndex()).getId_categoria());
-
-            daoProduto.cadastrar(produto);
-            resetaCamposAdicionarProduto();
-            
-            JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
-            
-            txtImagem.setIcon(null);
-            txtImagemSelecionada.setText("Nenhuma imagem selecionada");
  
         }
         
@@ -2894,6 +2938,7 @@ public class Inicio extends javax.swing.JFrame {
         while ((bytesRead = fileInputStream.read(buffer)) != -1) {
             
             outputStream.write(buffer, 0, bytesRead);
+            
         }
         
         outputStream.writeBytes("\r\n");
@@ -3699,12 +3744,7 @@ public class Inicio extends javax.swing.JFrame {
         
             daoAdmin.InserirAdministrador(usuario);
         
-            edtNomeADM.setText("");
-            edtEmailADM.setText("");
-            edtSenhaADM.setText("");
-            edtDataNascimentoADM.setText("");
-            edtWhatsappADM.setText("");
-            checkSemWhatts.setSelected(false);
+            resetarCamposAdicionarADM();
         
             JOptionPane.showMessageDialog(null, "ADM Adicionado com sucesso!");
             
@@ -3948,6 +3988,50 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRetiraImagemPerfilMouseClicked
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+
+        resetarCamposAdicionarADM();
+
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void btnPesquisarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarEstoqueActionPerformed
+        
+        String pesquisa = inputPesquisarProduto.getText().trim();
+        
+        if (radio1.isSelected()) {
+            
+            preencherTabela(9, pesquisa);
+            
+        }
+        
+        if (radio2.isSelected()) {
+            
+            preencherTabela(10, pesquisa);
+            
+        }
+        
+        if (radio3.isSelected()) {
+            
+            preencherTabela(11, pesquisa);
+            
+        }
+        
+        if (radio4.isSelected()) {
+            
+            preencherTabela(12, pesquisa);
+            
+        }
+        
+    }//GEN-LAST:event_btnPesquisarEstoqueActionPerformed
+
+    private void btnAtualizarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarEstoqueActionPerformed
+        
+        inputPesquisarProduto.setText("");
+        
+        verificaRadio();
+        
+    }//GEN-LAST:event_btnAtualizarEstoqueActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -4132,7 +4216,7 @@ public class Inicio extends javax.swing.JFrame {
 
         if (GlobalAdmin.getNome() != null) {
 
-            txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
+            txtBemVindo.setText("Olá, " + GlobalAdmin.getNome());
 
         }
         
@@ -4174,7 +4258,7 @@ public class Inicio extends javax.swing.JFrame {
                 
             case 4:
                 
-                verificaComboReservas();
+                listarReservas(1, null);
                 
                 break;
             
@@ -4458,66 +4542,72 @@ public class Inicio extends javax.swing.JFrame {
             case 1:
 
                 estoqueTabela = funcoesEstoque.ListarEstoque(1, null);
-                buttonDisponivel.setVisible(false);
-                buttonIndisponivel.setVisible(false);
                 
                 break;
 
             case 2:
 
                 estoqueTabela = funcoesEstoque.ListarEstoque(2, null);
-                buttonIndisponivel.setVisible(true);
-                buttonDisponivel.setVisible(false);
                 
                 break;
 
             case 3:
 
                 estoqueTabela = funcoesEstoque.ListarEstoque(3, null);
-                buttonIndisponivel.setVisible(false);
-                buttonDisponivel.setVisible(true);
                 
                 break;
                 
             case 4:
                 
                 estoqueTabela = funcoesEstoque.ListarEstoque(4, produto);
-                buttonDisponivel.setVisible(false);
-                buttonIndisponivel.setVisible(false);
                 
                 break;
                 
             case 5:
                 
                 estoqueTabela = funcoesEstoque.ListarEstoque(5, produto);
-                buttonIndisponivel.setVisible(true);
-                buttonDisponivel.setVisible(false);
                 
                 break;
                 
             case 6:
                 
                 estoqueTabela = funcoesEstoque.ListarEstoque(6, produto);
-                buttonIndisponivel.setVisible(false);
-                buttonDisponivel.setVisible(true);
                 
                 break;
                 
             case 7:
                 
                 estoqueTabela = funcoesEstoque.ListarEstoque(7, null);
-                buttonIndisponivel.setVisible(false);
-                buttonDisponivel.setVisible(false);
-                buttonArquivar.setVisible(false);
                 
                 break;
             
             case 8:
                 
                 estoqueTabela = funcoesEstoque.ListarEstoque(8, produto);
-                buttonIndisponivel.setVisible(false);
-                buttonDisponivel.setVisible(false);
-                buttonArquivar.setVisible(false);
+                
+                break;
+                
+            case 9:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(9, produto);
+                
+                break;
+                
+            case 10:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(10, produto);
+                
+                break;
+                
+            case 11:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(11, produto);
+                
+                break;
+                
+            case 12:
+                
+                estoqueTabela = funcoesEstoque.ListarEstoque(12, produto);
                 
                 break;
 
@@ -5281,7 +5371,7 @@ public class Inicio extends javax.swing.JFrame {
   
     }
     
-    private void listarReservas(int tipo, String produto) {
+    public void listarReservas(int tipo, String produto) {
         
         panelItemReservas.removeAll();
         
@@ -5289,7 +5379,7 @@ public class Inicio extends javax.swing.JFrame {
         
         for (int i = 0; i < listaReservas.size(); i++) {
   
-            panelItemReservas.add(new ItemReserva(listaReservas.get(i)));
+            panelItemReservas.add(new ItemReserva(listaReservas.get(i), this));
             
         }
         
@@ -5399,6 +5489,17 @@ public class Inicio extends javax.swing.JFrame {
         
         
     }
+    
+    private void resetarCamposAdicionarADM() {
+        
+        edtNomeADM.setText("");
+        edtEmailADM.setText("");
+        edtSenhaADM.setText("");
+        edtDataNascimentoADM.setText("");
+        edtWhatsappADM.setText("");
+        checkSemWhatts.setSelected(false);
+        
+    }
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -5408,6 +5509,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionarCategoria;
     private javax.swing.JButton btnAdicionarProduto;
     private javax.swing.JButton btnAdicionarQuantidade;
+    private javax.swing.JButton btnAtualizarEstoque;
     private javax.swing.JPanel btnCategorias;
     private javax.swing.JPanel btnClientes;
     private javax.swing.JLabel btnCloseNoti;
@@ -5419,6 +5521,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel btnInicio;
     private javax.swing.JPanel btnLogout;
     private com.raven.swing.ButtonBadges btnNoti;
+    private javax.swing.JButton btnPesquisarEstoque;
     private javax.swing.JPanel btnRelatorios;
     private javax.swing.JPanel btnReservas;
     private javax.swing.JLabel btnRetiraImagemPerfil;
@@ -5487,6 +5590,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

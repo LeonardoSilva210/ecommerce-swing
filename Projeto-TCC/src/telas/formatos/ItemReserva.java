@@ -9,19 +9,24 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import model.bean.Produtos;
 import model.bean.Reservas;
+import model.dao.ReservasDAO;
+import telas.Inicio;
 
 public class ItemReserva extends javax.swing.JPanel {
 
     private final Reservas reserva;
     private final String data, dataBr;
     private final String[] divideData;
+    private ReservasDAO daoReserva = new ReservasDAO();
     private List<Produtos> produtos = new ArrayList();
+    private Inicio inicio;
     String divideProduto;
     
-    public ItemReserva(Reservas reserva) {
+    public ItemReserva(Reservas reserva, Inicio inicio) {
         initComponents();
         
         this.reserva = reserva;
+        this.inicio = inicio;
 
         txtPessoa.setText(reserva.getPessoa());
         txtObs.setText(reserva.getObs());
@@ -69,13 +74,32 @@ public class ItemReserva extends javax.swing.JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                
-                JOptionPane.showMessageDialog(null, "Nome: " + reserva.getPessoa() + "\n"
-                        + "Produtos: " + divideProduto +"\n"
-                        + "Valor total: R$" + String.valueOf(reserva.getValor_total()).replace(".", ",") + "\n"
-                        + "Obs: " + reserva.getObs() + "\n"
-                        + "Cód: " + reserva.getCodigo()
-                        , "Reserva", JOptionPane.INFORMATION_MESSAGE);
+
+                String[] opcoes = {"Desativar", "Voltar"};
+
+                int opcao = JOptionPane.showOptionDialog(
+                null,                          
+                "Nome: " + reserva.getPessoa() + "\n"
+                + "Produtos: " + divideProduto +"\n"
+                + "Valor total: R$" + String.valueOf(reserva.getValor_total()).replace(".", ",") + "\n"
+                + "Obs: " + reserva.getObs() + "\n"
+                + "Cód: " + reserva.getCodigo(),   
+                "Reserva",            
+                JOptionPane.DEFAULT_OPTION,    
+                JOptionPane.INFORMATION_MESSAGE,
+                null,                          
+                opcoes,                       
+                opcoes[0]                     
+                );
+
+
+                if (opcao == 0) {
+            
+                    daoReserva.desativar(reserva.getId_compra());
+                    inicio.listarReservas(1, null);
+                    JOptionPane.showMessageDialog(null, "Reserva desativada!");
+            
+                }
                 
             }
 

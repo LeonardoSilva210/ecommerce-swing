@@ -115,4 +115,23 @@ public class ReservasDAO {
         return list;
     }
     
+    public void desativar(int id_compra) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE compras set ativo = 0 WHERE id_compra = ?");
+            stmt.setInt(1, id_compra);
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
 }
