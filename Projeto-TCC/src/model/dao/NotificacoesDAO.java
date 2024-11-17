@@ -1,7 +1,6 @@
 
 package model.dao;
 
-import Globals.GlobalAdmin;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.bean.Notificacoes;
-
 
 public class NotificacoesDAO {
     
@@ -24,7 +22,13 @@ public class NotificacoesDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conexao.prepareStatement("SELECT * FROM notificacoes ORDER BY id_notificacao DESC");
+            stmt = conexao.prepareStatement("SELECT * FROM notificacoes \n" +
+            "WHERE tipo = 3\n" +
+            "\n" +
+            "UNION ALL \n" +
+            "\n" +
+            "SELECT * FROM notificacoes WHERE tipo = 1 AND fk_id_usuario = ? ORDER BY id_notificacao DESC");
+            stmt.setInt(1, Globals.GlobalAdmin.getId_admin());
             
             rs = stmt.executeQuery();
             

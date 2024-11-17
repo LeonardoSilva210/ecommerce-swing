@@ -48,6 +48,26 @@ public class UsuariosDAO {
                     
                     break;
                 
+                case 4:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1");
+                    
+                    break;
+                    
+                case 5:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND nome LIKE ?");
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;
+                
+                case 6:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND nome = ?");
+                    stmt.setString(1, pesquisa);
+                    
+                    break;
+                
             }
             
             rs = stmt.executeQuery();
@@ -92,6 +112,35 @@ public class UsuariosDAO {
         }catch(SQLException e){
             e.printStackTrace();
         }
+        
+    }
+    
+    public boolean validarEmailExistente(String email) {
+        
+        boolean very = false;
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE email = ?");
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                
+                very = true;
+                
+            }
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return very;
         
     }
     

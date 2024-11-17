@@ -12,35 +12,46 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import model.bean.Usuarios;
 import model.dao.UsuariosDAO;
+import telas.Inicio;
 
 
 public class ItemCliente extends javax.swing.JPanel {
 
     private final Usuarios usuario;
     private String formata;
-   
+    private final Inicio inicio;
 
-    public ItemCliente(Usuarios usuario) {
+    public ItemCliente(Usuarios usuario, Inicio inicio) {
         initComponents();
         
         this.usuario = usuario;
+        this.inicio = inicio;
         
         txtNome.setText(usuario.getNome());
         txtEmail.setText(usuario.getEmail());
         
         String whatts = usuario.getWhatsapp();
+
+        if (whatts != null && !whatts.equals("")) {
             
-        String divide = "+" + whatts.substring(0, 2) + " ";
+            String divide = "+" + whatts.substring(0, 2) + " ";
 
-        String ddd = whatts.substring(2, 4) + " ";
+            String ddd = whatts.substring(2, 4) + " ";
         
-        String traco = whatts.substring(4, 8) + "-" + whatts.substring(8);
+            String traco = whatts.substring(4, 8) + "-" + whatts.substring(8);
         
-        String formatoFinal = divide + ddd + traco;
+            String formatoFinal = divide + ddd + traco;
 
-        formata = formatoFinal;
+            formata = formatoFinal;
         
-        txtWhatsApp.setText(formata);
+            txtWhatsApp.setText(formata);
+            
+        } else {
+            
+            txtWhatsApp.setText("Sem Whatsapp");
+            this.remove(btnEnviar);
+            
+        }
         
         this.addMouseListener(new MouseAdapter() {
             
@@ -161,9 +172,16 @@ public class ItemCliente extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-       UsuariosDAO daoUsuarios = new UsuariosDAO();
+       int opcao = JOptionPane.showConfirmDialog(null, "Confirmar exclusão: " + usuario.getNome(), "Confirmação", JOptionPane.YES_NO_OPTION);
        
-       daoUsuarios.deletar(usuario.getId_usuario());
+       if (opcao == JOptionPane.YES_OPTION) {
+           
+           UsuariosDAO daoUsuarios = new UsuariosDAO();
+       
+           daoUsuarios.deletar(usuario.getId_usuario());
+           inicio.listarClientes(1, null);
+           
+       }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

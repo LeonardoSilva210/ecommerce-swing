@@ -84,7 +84,7 @@ public class ItemRelatorio extends javax.swing.JPanel {
         setBackground(new java.awt.Color(51, 51, 51));
         setForeground(new java.awt.Color(102, 102, 102));
         setMinimumSize(new java.awt.Dimension(940, 40));
-        setPreferredSize(new java.awt.Dimension(960, 40));
+        setPreferredSize(new java.awt.Dimension(940, 40));
         setLayout(new java.awt.GridLayout(1, 0));
 
         txtPessoa.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N

@@ -3,9 +3,6 @@ package telas;
 
 import Globals.GlobalAdmin;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,20 +32,26 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         inputEmail = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        panelBorder1 = new telas.formatos.PanelBorder();
         panelMin = new javax.swing.JPanel();
         txtMin = new javax.swing.JLabel();
         panelClose = new javax.swing.JPanel();
         txtClose = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtLogo = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(74, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
         jPanel1.setPreferredSize(new java.awt.Dimension(1290, 607));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelLogin.setBackground(new java.awt.Color(51, 51, 51, 100));
+        panelLogin.setBackground(new java.awt.Color(102, 0, 0));
         panelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         inputSenha.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -56,36 +59,57 @@ public class Login extends javax.swing.JFrame {
                 inputSenhaKeyPressed(evt);
             }
         });
-        panelLogin.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 260, 40));
+        panelLogin.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 260, 40));
 
-        buttonEntrar.setText("Logar");
+        buttonEntrar.setBackground(new java.awt.Color(255, 255, 255));
+        buttonEntrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonEntrar.setText("Entrar");
         buttonEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEntrarActionPerformed(evt);
             }
         });
-        panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 260, 50));
+        panelLogin.add(buttonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 260, 50));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("E-mail");
-        panelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+        panelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha");
-        panelLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
+        panelLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
 
         inputEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputEmailKeyPressed(evt);
             }
         });
-        panelLogin.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 260, 40));
+        panelLogin.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 260, 40));
+
+        jLabel3.setFont(new java.awt.Font("Lucida Console", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Login");
+        panelLogin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 260, -1));
+
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
+
+        panelLogin.add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 280, 440));
 
         jPanel1.add(panelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 520, 440));
 
-        panelMin.setBackground(new java.awt.Color(0, 102, 102));
+        panelMin.setBackground(new java.awt.Color(74, 0, 0));
         panelMin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelMinMouseClicked(evt);
@@ -131,7 +155,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.add(panelMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, 40, 30));
 
-        panelClose.setBackground(new java.awt.Color(0, 102, 102));
+        panelClose.setBackground(new java.awt.Color(74, 0, 0));
         panelClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelCloseMouseClicked(evt);
@@ -147,7 +171,7 @@ public class Login extends javax.swing.JFrame {
         txtClose.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         txtClose.setForeground(new java.awt.Color(255, 255, 255));
         txtClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtClose.setText("X");
+        txtClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconCloseWhite.png"))); // NOI18N
         txtClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtCloseMouseClicked(evt);
@@ -175,19 +199,26 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 0, 40, 30));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconLogo.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        txtLogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtLogo.setForeground(new java.awt.Color(255, 255, 255));
+        txtLogo.setText("Império Beer");
+        jPanel1.add(txtLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backComidas2.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 610, 520));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1301, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -243,7 +274,7 @@ public class Login extends javax.swing.JFrame {
 
     private void txtMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMinMouseExited
 
-        panelMin.setBackground(new Color(0, 102, 102));
+        panelMin.setBackground(new Color(74, 0, 0));
         txtMin.setForeground(Color.white);
     }//GEN-LAST:event_txtMinMouseExited
 
@@ -271,7 +302,7 @@ public class Login extends javax.swing.JFrame {
 
     private void txtCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCloseMouseExited
 
-        panelClose.setBackground(new Color(0, 102, 102));
+        panelClose.setBackground(new Color(74, 0, 0));
     }//GEN-LAST:event_txtCloseMouseExited
 
     private void panelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCloseMouseClicked
@@ -348,11 +379,16 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField inputSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private telas.formatos.PanelBorder panelBorder1;
     private javax.swing.JPanel panelClose;
     private javax.swing.JPanel panelLogin;
     private javax.swing.JPanel panelMin;
     private javax.swing.JLabel txtClose;
+    private javax.swing.JLabel txtLogo;
     private javax.swing.JLabel txtMin;
     // End of variables declaration//GEN-END:variables
 }

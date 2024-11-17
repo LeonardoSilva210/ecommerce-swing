@@ -24,6 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -89,7 +90,7 @@ public class Inicio extends javax.swing.JFrame {
     private File arquivoSelecionado;
     private static final String CLOUD_NAME = "dh4zkueea";
     private static final String UPLOAD_PRESET = "ml_default";
-    private boolean animacao = false, nomeCategoriaDisponivelAdd = false, nomeCategoriaDisponivelEdt = false;
+    private boolean animacao = false;
     private String caminhoImagem = null;
     private float produtosTotal = 0, produtosDisponiveis = 0, produtosIndisponiveis = 0, calcPorcent = 0;
     private Dimension tamanhoOriginal;
@@ -107,6 +108,7 @@ public class Inicio extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         panelAcimaFrame = new telas.formatos.PanelBorder();
         panelFundoAdicionarProduto = new javax.swing.JPanel();
         panelAdicionarProduto = new javax.swing.JPanel();
@@ -278,6 +280,8 @@ public class Inicio extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         buttonAddMensagem = new javax.swing.JButton();
+        radioUsuario1 = new javax.swing.JRadioButton();
+        radioUsuario2 = new javax.swing.JRadioButton();
         panelCategorias = new javax.swing.JPanel();
         panelEditarCategoriaFundo = new javax.swing.JPanel();
         panelEditarCategoria = new javax.swing.JPanel();
@@ -287,7 +291,6 @@ public class Inicio extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         inputDescricaoCategoriaEdit = new javax.swing.JTextField();
         btnSalvarEdicaoCategoria = new javax.swing.JButton();
-        txtDisponibilidade = new javax.swing.JLabel();
         panelFundoPopCategoria = new javax.swing.JPanel();
         panelPopCategoria = new telas.formatos.PanelBorder();
         jButton2 = new javax.swing.JButton();
@@ -298,7 +301,6 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         inputDescricaoCategoria = new javax.swing.JTextArea();
         jLabel44 = new javax.swing.JLabel();
-        txtDisponibilidadeCategoriaAdd = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         panelListCategorias = new telas.formatos.PanelItem();
         jPanel3 = new javax.swing.JPanel();
@@ -320,12 +322,13 @@ public class Inicio extends javax.swing.JFrame {
         edtEmailADM = new javax.swing.JTextField();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
-        edtSenhaADM = new javax.swing.JTextField();
         jLabel50 = new javax.swing.JLabel();
         edtWhatsappADM = new javax.swing.JFormattedTextField();
         jLabel51 = new javax.swing.JLabel();
         edtDataNascimentoADM = new javax.swing.JFormattedTextField();
         jButton4 = new javax.swing.JButton();
+        checkSemWhatts = new javax.swing.JCheckBox();
+        edtSenhaADM = new javax.swing.JPasswordField();
         panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -334,9 +337,8 @@ public class Inicio extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        panelAcimaFrame.setBackground(new java.awt.Color(0, 0, 0));
         panelAcimaFrame.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 2, true));
-        panelAcimaFrame.setForeground(new java.awt.Color(0, 0, 0));
+        panelAcimaFrame.setForeground(new java.awt.Color(204, 204, 204));
         panelAcimaFrame.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelFundoAdicionarProduto.setBackground(new java.awt.Color(0, 0, 0, 100));
@@ -616,7 +618,7 @@ public class Inicio extends javax.swing.JFrame {
 
         btnCloseNoti.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 24)); // NOI18N
         btnCloseNoti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCloseNoti.setText("X");
+        btnCloseNoti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconClose.png"))); // NOI18N
         btnCloseNoti.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCloseNotiMouseClicked(evt);
@@ -639,7 +641,7 @@ public class Inicio extends javax.swing.JFrame {
         );
         panelFundoCloseNotiLayout.setVerticalGroup(
             panelFundoCloseNotiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCloseNoti, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(btnCloseNoti, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         panelNoti.add(panelFundoCloseNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
@@ -897,7 +899,7 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(txtInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        panelButtons.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 27, 290, 40));
+        panelButtons.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 290, 40));
 
         btnEstoque.setBackground(new java.awt.Color(51, 51, 51));
         btnEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1048,7 +1050,7 @@ public class Inicio extends javax.swing.JFrame {
 
         txtClientes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtClientes.setForeground(new java.awt.Color(255, 255, 255));
-        txtClientes.setText("Clientes");
+        txtClientes.setText("Usuários");
 
         javax.swing.GroupLayout btnClientesLayout = new javax.swing.GroupLayout(btnClientes);
         btnClientes.setLayout(btnClientesLayout);
@@ -1134,9 +1136,10 @@ public class Inicio extends javax.swing.JFrame {
 
         panelAcimaFrame.add(panelButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 420));
 
+        panelNav.setForeground(new java.awt.Color(74, 0, 0));
         panelNav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelLogo.setBackground(new java.awt.Color(51, 51, 51));
+        panelLogo.setBackground(new java.awt.Color(74, 0, 0));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -1166,7 +1169,7 @@ public class Inicio extends javax.swing.JFrame {
 
         panelNav.add(panelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 70, -1));
 
-        panelClose.setBackground(new java.awt.Color(51, 51, 51));
+        panelClose.setBackground(new java.awt.Color(74, 0, 0));
         panelClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelCloseMouseClicked(evt);
@@ -1182,7 +1185,7 @@ public class Inicio extends javax.swing.JFrame {
         txtClose.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         txtClose.setForeground(new java.awt.Color(255, 255, 255));
         txtClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtClose.setText("X");
+        txtClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconCloseWhite.png"))); // NOI18N
         txtClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtCloseMouseClicked(evt);
@@ -1210,7 +1213,7 @@ public class Inicio extends javax.swing.JFrame {
 
         panelNav.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 0, 40, 30));
 
-        panelMin.setBackground(new java.awt.Color(51, 51, 51));
+        panelMin.setBackground(new java.awt.Color(74, 0, 0));
         panelMin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelMinMouseClicked(evt);
@@ -1315,7 +1318,7 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         panelInicio.add(popPorcentagemIndisponiveis, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 220, 110));
-        panelInicio.add(grafInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 137, 1030, 320));
+        panelInicio.add(grafInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 137, 990, 320));
 
         areaClickPorcentagemDisponiveis.setOpaque(false);
         areaClickPorcentagemDisponiveis.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1689,7 +1692,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setText("Relatórios");
+        jLabel22.setText("Pesquisar Nome");
         panelRelatorios.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 12, 960, 20));
 
         tabInicio.addTab("tab3", panelRelatorios);
@@ -1811,6 +1814,9 @@ public class Inicio extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 inputMensagemFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputMensagemFocusLost(evt);
+            }
         });
         jScrollPane5.setViewportView(inputMensagem);
 
@@ -1920,12 +1926,12 @@ public class Inicio extends javax.swing.JFrame {
         txtPesquisaCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPesquisaCliente.setForeground(new java.awt.Color(255, 255, 255));
         txtPesquisaCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtPesquisaCliente.setText("Pesquisar Cliente");
-        panelClientes.add(txtPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 970, 20));
+        txtPesquisaCliente.setText("Pesquisar Nome");
+        panelClientes.add(txtPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 960, 20));
 
         jScrollPane4.setViewportView(panelListClientes);
 
-        panelClientes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 960, 300));
+        panelClientes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 960, 260));
 
         panelTitulosClientes.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -1946,7 +1952,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel37.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel37.setText("Ação");
+        jLabel37.setText("Ações");
         panelTitulosClientes.add(jLabel37);
 
         panelClientes.add(panelTitulosClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 960, 50));
@@ -1960,6 +1966,17 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelClientes.add(buttonAddMensagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 250, 40));
+
+        buttonGroup4.add(radioUsuario1);
+        radioUsuario1.setForeground(new java.awt.Color(255, 255, 255));
+        radioUsuario1.setSelected(true);
+        radioUsuario1.setText("Clientes");
+        panelClientes.add(radioUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
+
+        buttonGroup4.add(radioUsuario2);
+        radioUsuario2.setForeground(new java.awt.Color(255, 255, 255));
+        radioUsuario2.setText("ADMs");
+        panelClientes.add(radioUsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, -1, -1));
 
         javax.swing.GroupLayout panelTabClientesLayout = new javax.swing.GroupLayout(panelTabClientes);
         panelTabClientes.setLayout(panelTabClientesLayout);
@@ -2022,7 +2039,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelEditarCategoria.add(btnSalvarEdicaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 250, 40));
-        panelEditarCategoria.add(txtDisponibilidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 250, 20));
 
         javax.swing.GroupLayout panelEditarCategoriaFundoLayout = new javax.swing.GroupLayout(panelEditarCategoriaFundo);
         panelEditarCategoriaFundo.setLayout(panelEditarCategoriaFundoLayout);
@@ -2051,7 +2067,7 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         panelPopCategoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelPopCategoria.setForeground(new java.awt.Color(255, 255, 255));
+        panelPopCategoria.setForeground(new java.awt.Color(240, 240, 240));
         panelPopCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelPopCategoriaMouseClicked(evt);
@@ -2065,7 +2081,7 @@ public class Inicio extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        panelPopCategoria.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 30, 30));
+        panelPopCategoria.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 40, 30));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -2101,7 +2117,6 @@ public class Inicio extends javax.swing.JFrame {
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel44.setText("Nome");
         panelPopCategoria.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
-        panelPopCategoria.add(txtDisponibilidadeCategoriaAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 310, 20));
 
         javax.swing.GroupLayout panelFundoPopCategoriaLayout = new javax.swing.GroupLayout(panelFundoPopCategoria);
         panelFundoPopCategoria.setLayout(panelFundoPopCategoriaLayout);
@@ -2226,8 +2241,8 @@ public class Inicio extends javax.swing.JFrame {
         jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel47.setText("Nome");
         panelAdicionarADM.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 220, -1));
-        panelAdicionarADM.add(edtNomeADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 218, 32));
-        panelAdicionarADM.add(edtEmailADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 218, 32));
+        panelAdicionarADM.add(edtNomeADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 218, 40));
+        panelAdicionarADM.add(edtEmailADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 218, 40));
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel48.setForeground(new java.awt.Color(255, 255, 255));
@@ -2240,7 +2255,6 @@ public class Inicio extends javax.swing.JFrame {
         jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel49.setText("Senha");
         panelAdicionarADM.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 220, -1));
-        panelAdicionarADM.add(edtSenhaADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 218, 32));
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel50.setForeground(new java.awt.Color(255, 255, 255));
@@ -2253,20 +2267,20 @@ public class Inicio extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        panelAdicionarADM.add(edtWhatsappADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 218, 32));
+        panelAdicionarADM.add(edtWhatsappADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, 210, 40));
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(255, 255, 255));
         jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel51.setText("Whatsapp");
-        panelAdicionarADM.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 220, -1));
+        panelAdicionarADM.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 210, -1));
 
         try {
             edtDataNascimentoADM.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        panelAdicionarADM.add(edtDataNascimentoADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 218, 32));
+        panelAdicionarADM.add(edtDataNascimentoADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 218, 40));
 
         jButton4.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
         jButton4.setText("Salvar");
@@ -2275,7 +2289,12 @@ public class Inicio extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        panelAdicionarADM.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 220, 40));
+        panelAdicionarADM.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, 230, 40));
+
+        checkSemWhatts.setForeground(new java.awt.Color(255, 255, 255));
+        checkSemWhatts.setText("Sem Whatsapp");
+        panelAdicionarADM.add(checkSemWhatts, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 110, 40));
+        panelAdicionarADM.add(edtSenhaADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 220, 40));
 
         tabInicio.addTab("tab7", panelAdicionarADM);
 
@@ -2351,7 +2370,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void txtCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCloseMouseExited
 
-        panelClose.setBackground(new Color(51, 51, 51));
+        panelClose.setBackground(new Color(74, 0, 0));
 
     }//GEN-LAST:event_txtCloseMouseExited
 
@@ -2370,7 +2389,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void txtMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMinMouseExited
 
-        panelMin.setBackground(new Color(51, 51, 51));
+        panelMin.setBackground(new Color(74, 0, 0));
         txtMin.setForeground(Color.white);
 
     }//GEN-LAST:event_txtMinMouseExited
@@ -2485,24 +2504,30 @@ public class Inicio extends javax.swing.JFrame {
 
     private void btnLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseExited
 
-        btnLogout.setBackground(new Color(51, 51, 51));
+        btnLogout.setBorder(null);
 
     }//GEN-LAST:event_btnLogoutMouseExited
 
     private void btnLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseEntered
 
-        btnLogout.setBackground(new Color(204, 0, 0));
+        btnLogout.setBorder(new LineBorder(Color.white, 1));
 
     }//GEN-LAST:event_btnLogoutMouseEntered
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja sair de sua conta?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        
+        if (opcao == JOptionPane.YES_OPTION) {
+            
+            java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 dispose();
                 new Login().setVisible(true);
             }
-        });
+            });
+            
+        }
 
     }//GEN-LAST:event_btnLogoutMouseClicked
 
@@ -2881,78 +2906,53 @@ public class Inicio extends javax.swing.JFrame {
         String senha = inputSenha.getText().trim();
         
         if (nome.equals(GlobalAdmin.getNome()) && email.equals(GlobalAdmin.getEmail()) && senha.equals(GlobalAdmin.getSenha())) {
-  
-            JOptionPane.showMessageDialog(null, "Nenhuma alteração feita!");
             
-        } else {
- 
-                if (!senha.equals(GlobalAdmin.getSenha())) {
-                    
-                    String confirma;
-                    
-                    confirma = JOptionPane.showInputDialog("Confirme a senha atual");
-                    
-                    if (confirma == null) {
-                        
-                        inputNome.setText(GlobalAdmin.getNome());
-                        inputEmail.setText(GlobalAdmin.getEmail());
-                        inputSenha.setText(GlobalAdmin.getSenha());
-                        
-                    } else {
-                        
-                        if (confirma.equals(GlobalAdmin.getSenha())) {  
-                        
-                            int resposta = JOptionPane.showConfirmDialog(null, "Salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        JOptionPane.showMessageDialog(null, "Nenhuma alteração feita!");
+        return;
+    }
 
-                            if (resposta == JOptionPane.YES_OPTION) {
+    if (!GlobalAdmin.getEmail().equals(email)) {
+        
+        if (daoUsuario.validarEmailExistente(email)) {
             
-                                Usuarios usuario = new Usuarios(0, nome, email, senha, null, null, 0);
+            JOptionPane.showMessageDialog(null, "E-mail indisponível!");
+            return;
             
-                                daoAdmin.atualizarPerfil(usuario);
-            
-                                GlobalAdmin.setEmail(email);
-                                GlobalAdmin.setNome(nome);
-                                GlobalAdmin.setSenha(senha);
-            
-                                txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
-            
-                                JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
-            
-                                listarNotificacoes();
-                                
-                                }   
-                        
-                        } else {
-                        
-                            JOptionPane.showMessageDialog(null, "Senha incorreta!");
-                        
-                        }
-                        
-                    }
- 
-                } else {
-                    
-                    if(!nome.equals(GlobalAdmin.getNome()) || !email.equals(GlobalAdmin.getEmail())) {
-                        
-                        Usuarios usuario = new Usuarios(0, nome, email, GlobalAdmin.getSenha(), null, null, 0);
-            
-                        daoAdmin.atualizarPerfil(usuario);
-            
-                        GlobalAdmin.setEmail(email);
-                        GlobalAdmin.setNome(nome);
-                        GlobalAdmin.setSenha(senha);
+        }
+    }
 
-                        txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
+    if (!senha.equals(GlobalAdmin.getSenha())) {
+        
+        String confirma = JOptionPane.showInputDialog("Confirme a senha atual");
+
+        if (confirma == null || !confirma.equals(GlobalAdmin.getSenha())) {
             
-                        JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
-                        
-                        listarNotificacoes();
-                        
-                    }
-                    
-                }
+            JOptionPane.showMessageDialog(null, confirma == null ? "Alteração cancelada!" : "Senha incorreta!");
+            inputNome.setText(GlobalAdmin.getNome());
+            inputEmail.setText(GlobalAdmin.getEmail());
+            inputSenha.setText(GlobalAdmin.getSenha());
+            return;
             
-            }
+        }
+    }
+
+    int resposta = JOptionPane.showConfirmDialog(null, "Salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION);
+    
+    if (resposta == JOptionPane.YES_OPTION) {
+        
+        Usuarios usuario = new Usuarios(0, nome, email, senha, null, null, 0);
+        daoAdmin.atualizarPerfil(usuario);
+
+        GlobalAdmin.setEmail(email);
+        GlobalAdmin.setNome(nome);
+        GlobalAdmin.setSenha(senha);
+
+        txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
+        JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+
+        listarNotificacoes();
+        
+    }
         
     }//GEN-LAST:event_buttonSalvarPerfilActionPerformed
 
@@ -3256,7 +3256,15 @@ public class Inicio extends javax.swing.JFrame {
         
         String pesquisa = inputPesquisaCliente.getText().trim();
         
-        listarClientes(3, pesquisa);
+        if (radioUsuario1.isSelected()) {
+            
+            listarClientes(3, pesquisa);
+            
+        } else if (radioUsuario2.isSelected()){
+            
+            listarClientes(6, pesquisa);
+            
+        }
         
     }//GEN-LAST:event_buttonPesquisarClienteActionPerformed
 
@@ -3264,7 +3272,15 @@ public class Inicio extends javax.swing.JFrame {
         
         String pesquisa = inputPesquisaCliente.getText().trim();
    
-        listarClientes(2, pesquisa);
+        if (radioUsuario1.isSelected()) {
+            
+            listarClientes(2, pesquisa);
+            
+        } else if (radioUsuario2.isSelected()) {
+            
+            listarClientes(5, pesquisa);
+            
+        }
         
     }//GEN-LAST:event_inputPesquisaClienteKeyTyped
 
@@ -3272,7 +3288,7 @@ public class Inicio extends javax.swing.JFrame {
         
         inputPesquisaCliente.setText("");
         
-        listarClientes(1, null);
+        verificaRadioUsuarios();
         
     }//GEN-LAST:event_buttonAtualizarClientesActionPerformed
 
@@ -3445,21 +3461,20 @@ public class Inicio extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             
-        } else if (!nomeCategoriaDisponivelAdd){
+        } else if (daoCategoria.categoriaDisponivel(nome).getId_categoria() > 0){
+            
+            JOptionPane.showMessageDialog(null, "Nome indiponível!");
+            
+        } else {
             
             daoCategoria.adicionar(new Categorias(nome, descricao, false, 0));
         
             inputNomeCategoria.setText("");
             inputDescricaoCategoria.setText("");
-            txtDisponibilidadeCategoriaAdd.setText("");
             JOptionPane.showMessageDialog(null, "Categoria criada com sucesso!");
             inputPesquisaCategorias.setText("");
             
             listarCategorias(1, null);
-            
-        } else {
-            
-            JOptionPane.showMessageDialog(null, "Nome indiponível!");
             
         }
         
@@ -3499,11 +3514,29 @@ public class Inicio extends javax.swing.JFrame {
         
         Usuarios usuario = new Usuarios();
         
-        String nomeADM = edtNomeADM.getText();
-        String emailADM = edtEmailADM.getText();
-        String senhaADM = edtSenhaADM.getText();
+        String nomeADM = edtNomeADM.getText().trim();
+        String emailADM = edtEmailADM.getText().trim();
+        String senhaADM = edtSenhaADM.getText().trim();
+        String dataADM = edtDataNascimentoADM.getText().trim();
+        String whatsappADM = edtWhatsappADM.getText().trim();
         
-        String[] divide = edtDataNascimentoADM.getText().split("\\/");
+        if (nomeADM.isEmpty() || emailADM.isEmpty() || senhaADM.isEmpty() || dataADM.isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            
+        } else if (!checkSemWhatts.isSelected() && whatsappADM.length() < 14) {
+            
+            JOptionPane.showMessageDialog(null, "Número de whatsapp está faltando!");
+            
+        } else {
+            
+            if (daoUsuario.validarEmailExistente(emailADM)) {
+                
+                JOptionPane.showMessageDialog(null, "E-mail indisponível!");
+                
+            } else {
+                
+                String[] divide = edtDataNascimentoADM.getText().split("\\/");
         
         String dia = "";
         String mes = "";
@@ -3518,22 +3551,51 @@ public class Inicio extends javax.swing.JFrame {
         }
         
         String data = ano + "-" + mes + "-" + dia;
-        
-        Date dataNascimento = Date.valueOf(data);
+         
+        try{
+            
+            Date dataNascimento = Date.valueOf(data);
+            usuario.setData_nascimento(dataNascimento);
+            
+            String num = edtWhatsappADM.getText();
 
-        String num = edtWhatsappADM.getText();
-
-        String whatsap = num.replaceAll("[^0-9]", "");
+            String whatsapp = num.replaceAll("[^0-9]", "");
    
-        usuario.setAdm(1);
-        usuario.setData_nascimento(dataNascimento);
-        usuario.setEmail(emailADM);
-        usuario.setWhatsapp(whatsap);
-        usuario.setSenha(senhaADM);
-        usuario.setId_usuario(0);
-        usuario.setNome(nomeADM);
+            usuario.setAdm(1);
+            usuario.setEmail(emailADM);
+            
+            if (checkSemWhatts.isSelected()) {
+                
+                whatsapp = "";
+                
+            }
+            
+            usuario.setWhatsapp(whatsapp);
+            usuario.setSenha(senhaADM);
+            usuario.setId_usuario(0);
+            usuario.setNome(nomeADM);
         
-        daoAdmin.InserirAdministrador(usuario);
+            daoAdmin.InserirAdministrador(usuario);
+        
+            edtNomeADM.setText("");
+            edtEmailADM.setText("");
+            edtSenhaADM.setText("");
+            edtDataNascimentoADM.setText("");
+            edtWhatsappADM.setText("");
+            checkSemWhatts.setSelected(false);
+        
+            JOptionPane.showMessageDialog(null, "ADM Adicionado com sucesso!");
+            
+            
+        }catch(Exception e){
+            
+            JOptionPane.showMessageDialog(null, "Data inválida!");
+            
+        }
+                
+            }
+
+        }
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -3560,15 +3622,18 @@ public class Inicio extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             
-        } else if (!nomeCategoriaDisponivelEdt){
+        } else if (daoCategoria.categoriaDisponivel(novoNomeCategoria).getId_categoria() > 0){
+            
+            JOptionPane.showMessageDialog(null, "Nome indisponível!");
+ 
+        } else {
             
             daoCategoria.editar(novoNomeCategoria, novaDescricaoCategoria, categoriaAtual.getId_categoria());
             
             inputNomeCategoriaEdit.setText("");
             inputDescricaoCategoriaEdit.setText("");
-            txtDisponibilidade.setText("");
             JOptionPane.showMessageDialog(null, "Edição realizada com sucesso!");
- 
+            
         }
         
     }//GEN-LAST:event_btnSalvarEdicaoCategoriaActionPerformed
@@ -3582,19 +3647,11 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_panelPopCategoriaMouseClicked
 
     private void inputNomeCategoriaEditKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNomeCategoriaEditKeyTyped
-        
-        String nome = inputNomeCategoriaEdit.getText().trim();
-        
-        nomeCategoriaDisponivelEdt = disponibilidadeNomeCategoria(nome, "edicao");
-        
+       
     }//GEN-LAST:event_inputNomeCategoriaEditKeyTyped
 
     private void inputNomeCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNomeCategoriaKeyTyped
-        
-        String nome = inputNomeCategoria.getText().trim();
-
-        nomeCategoriaDisponivelAdd = disponibilidadeNomeCategoria(nome, "adicao");
-        
+    
     }//GEN-LAST:event_inputNomeCategoriaKeyTyped
 
     private void areaClickPorcentagemDisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemDisponiveisMouseEntered
@@ -3668,6 +3725,16 @@ public class Inicio extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_popPorcentagemDisponiveisMouseExited
+
+    private void inputMensagemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputMensagemFocusLost
+        
+        if (inputMensagem.getText().trim().equals("")) {
+            
+            inputMensagem.setText("Digite sua mensagem...");
+            
+        }
+        
+    }//GEN-LAST:event_inputMensagemFocusLost
 
     public static void main(String args[]) {
 
@@ -3819,11 +3886,15 @@ public class Inicio extends javax.swing.JFrame {
         listarNotificacoes();
         progressInicio();
         radioSelecionado();
+        radioUsuarioSelecionado();
+        
         radioSelecionadoCategoria();
         eventTable();
         eventCheck();
         verificaComboReservas();
         inserirMetodosComboReservas();
+        verificaCheckSemWhatts();
+        verificaRadioUsuarios();
         listarReservas(1, null);
         buttonEditarProduto.setVisible(false);
         panelEditarCategoriaFundo.setVisible(false);
@@ -4366,7 +4437,7 @@ public class Inicio extends javax.swing.JFrame {
 
     }
     
-    private void listarClientes(int tipo, String pesquisa) {
+    public void listarClientes(int tipo, String pesquisa) {
         
         panelListClientes.removeAll();
         
@@ -4389,12 +4460,34 @@ public class Inicio extends javax.swing.JFrame {
                 listaClientes = daoUsuario.listar(3, pesquisa);
                 
                 break;
+                
+            case 4:
+                
+                listaClientes = daoUsuario.listar(4, null);
+                
+                break;
+            
+            case 5:
+                
+                listaClientes = daoUsuario.listar(5, pesquisa);
+                
+                break;
+            
+            case 6:
+                
+                listaClientes = daoUsuario.listar(6, pesquisa);
+                
+                break;
             
         }
         
-        for (int i = 0; i < listaClientes.size(); i++) {
+        if (!listaClientes.isEmpty()) {
             
-            panelListClientes.add(new ItemCliente(listaClientes.get(i)));
+            for (int i = 0; i < listaClientes.size(); i++) {
+            
+                panelListClientes.add(new ItemCliente(listaClientes.get(i), this));
+            
+            }
             
         }
         
@@ -4663,6 +4756,48 @@ public class Inicio extends javax.swing.JFrame {
 
     }
     
+    private void verificaRadioUsuarios() {
+        
+        panelListClientes.removeAll();
+        
+        if (radioUsuario1.isSelected()) {
+            
+            listarClientes(1, null);
+            
+        } 
+        
+        if (radioUsuario2.isSelected()) {
+            
+            listarClientes(4, null);
+            
+        }
+        
+        panelListClientes.revalidate();
+        panelListClientes.repaint();
+        
+    }
+    
+    private void radioUsuarioSelecionado() {
+        
+        panelListClientes.removeAll();
+        
+        radioUsuario1.addActionListener(e -> {
+            
+            listarClientes(1, null);
+            
+        });
+        
+        radioUsuario2.addActionListener(e -> {
+            
+            listarClientes(4, null);
+            
+        });
+        
+        panelListClientes.revalidate();
+        panelListClientes.repaint();
+        
+    }
+    
     private void trocaVisibilidadeButtons(int escolha) {
         
         switch(escolha) {
@@ -4733,55 +4868,6 @@ public class Inicio extends javax.swing.JFrame {
             
         }
         
-    }
-    
-    private boolean disponibilidadeNomeCategoria(String nome, String tipo) {
-     
-        boolean disponivel = false;
-        
-        Categorias categoria = daoCategoria.categoriaDisponivel(nome);
-        
-        switch(tipo) {
-            
-            case "edicao":
-                
-                if (categoria.getId_categoria() > 0) {
-            
-                    txtDisponibilidade.setText("Nome indisponível!");
-                    txtDisponibilidade.setForeground(Color.red);
-                    disponivel = true;
-            
-                } else {
-            
-                    txtDisponibilidade.setText("Nome disponível.");
-                    txtDisponibilidade.setForeground(Color.green.darker());
-                    disponivel = false;
-            
-                }
-                
-            break;
-            
-            case "adicao":
-                
-                if (categoria.getId_categoria() > 0) {
-            
-                    txtDisponibilidadeCategoriaAdd.setText("Nome indisponível!");
-                    txtDisponibilidadeCategoriaAdd.setForeground(Color.red);
-                    disponivel = true;
-            
-                } else {
-            
-                    txtDisponibilidadeCategoriaAdd.setText("Nome disponível.");
-                    txtDisponibilidadeCategoriaAdd.setForeground(Color.green.darker());
-                    disponivel = false;
-            
-                }
-                
-            break;
-            
-        }
-        
-        return disponivel;
     }
     
     private void listaCategoriasPesquisa(String pesquisa) {
@@ -5036,6 +5122,24 @@ public class Inicio extends javax.swing.JFrame {
         categoriaAtual = null;
         
     }
+    
+    private void verificaCheckSemWhatts() {
+        
+        checkSemWhatts.addChangeListener(e -> {
+            
+            if (checkSemWhatts.isSelected()) {
+                
+                edtWhatsappADM.setEnabled(false);
+                
+            } else {
+                
+                edtWhatsappADM.setEnabled(true);
+                
+            }
+            
+        });
+        
+    }
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -5071,6 +5175,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private button.MyButton buttonIndisponivel;
     private javax.swing.JButton buttonPesquisarCategorias;
     private javax.swing.JButton buttonPesquisarCliente;
@@ -5080,6 +5185,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JButton buttonSalvarPerfil;
     private javax.swing.JCheckBox checkEdicao;
+    private javax.swing.JCheckBox checkSemWhatts;
     private javax.swing.JComboBox<String> comboAdicionarProdutoCategoria;
     private javax.swing.JComboBox<String> comboCategorias;
     private javax.swing.JComboBox<String> comboMetodoPesquisa;
@@ -5089,7 +5195,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField edtNomeADM;
     private javax.swing.JTextField edtNomeProduto;
     private javax.swing.JTextField edtQuantidade;
-    private javax.swing.JTextField edtSenhaADM;
+    private javax.swing.JPasswordField edtSenhaADM;
     private javax.swing.JTextField edtValorCustoProduto;
     private javax.swing.JTextField edtValorProduto;
     private javax.swing.JFormattedTextField edtWhatsappADM;
@@ -5236,6 +5342,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioCategoria3;
     private javax.swing.JRadioButton radioDisponivel;
     private javax.swing.JRadioButton radioIndisponivel;
+    private javax.swing.JRadioButton radioUsuario1;
+    private javax.swing.JRadioButton radioUsuario2;
     private javax.swing.JScrollPane scrollRelatorios;
     private javax.swing.JTabbedPane tabInicio;
     private tabledark.TableDark tblEstoque;
@@ -5244,8 +5352,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtCategorias;
     private javax.swing.JLabel txtClientes;
     private javax.swing.JLabel txtClose;
-    private javax.swing.JLabel txtDisponibilidade;
-    private javax.swing.JLabel txtDisponibilidadeCategoriaAdd;
     private javax.swing.JLabel txtEstoque;
     private javax.swing.JLabel txtImagem;
     private javax.swing.JLabel txtImagemProduto;
