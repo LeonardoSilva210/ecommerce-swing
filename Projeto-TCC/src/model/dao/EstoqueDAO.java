@@ -29,7 +29,7 @@ public class EstoqueDAO {
                     stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, "
                             + "produtos.disponivel, produtos.id_produto, produtos.quantidade,"
                             + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
-                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria WHERE produtos.arquivado = 0");
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria WHERE produtos.arquivado = 0 ORDER BY produtos.id_produto");
             
                     break;
                 
@@ -38,7 +38,7 @@ public class EstoqueDAO {
                     stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
-                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 1");
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 1 ORDER BY produtos.id_produto");
                     
                     break;
                     
@@ -46,7 +46,7 @@ public class EstoqueDAO {
                     
                     stmt = conexao.prepareStatement("select produtos.nome_produto as produto,produtos.descricao_produto, produtos.disponivel, produtos.arquivado, produtos.imagem, "
                             + "produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao, produtos.id_produto, produtos.quantidade "
-                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 0");
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 0 ORDER BY produtos.id_produto");
                     
                     break;
                     
@@ -56,7 +56,7 @@ public class EstoqueDAO {
                             + "produtos.disponivel, produtos.id_produto, produtos.quantidade,"
                             + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.nome_produto "
-                            + "LIKE ?");
+                            + "LIKE ? ORDER BY produtos.id_produto");
                     
                     stmt.setString(1, "%" + produto + "%");
                     
@@ -68,7 +68,7 @@ public class EstoqueDAO {
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 1 "
-                            + "AND produtos.nome_produto LIKE ?");
+                            + "AND produtos.nome_produto LIKE ? ORDER BY produtos.id_produto");
                     
                     stmt.setString(1, "%" + produto + "%");
                     
@@ -80,7 +80,7 @@ public class EstoqueDAO {
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 0 AND produtos.disponivel = 0 "
-                            + "AND produtos.nome_produto LIKE ?");
+                            + "AND produtos.nome_produto LIKE ? ORDER BY produtos.id_produto");
                     
                     stmt.setString(1, "%" + produto + "%");
                     
@@ -91,7 +91,7 @@ public class EstoqueDAO {
                     stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
-                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1");
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1 ORDER BY produtos.id_produto");
                     
                     break;
                     
@@ -101,7 +101,7 @@ public class EstoqueDAO {
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1 "
-                            + "AND produtos.nome_produto LIKE ?");
+                            + "AND produtos.nome_produto LIKE ? ORDER BY produtos.id_produto");
                     
                     stmt.setString(1, "%" + produto + "%");
                     
@@ -112,7 +112,7 @@ public class EstoqueDAO {
                     stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, " 
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
-                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.nome_produto = ?");
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.nome_produto = ? ORDER BY produtos.id_produto");
                     
                     stmt.setString(1, produto);
                     
@@ -124,7 +124,7 @@ public class EstoqueDAO {
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.disponivel = 1 AND"
-                            + " produtos.nome_produto = ?");
+                            + " produtos.nome_produto = ? ORDER BY produtos.id_produto");
                     
                     stmt.setString(1, produto);
                     
@@ -136,7 +136,7 @@ public class EstoqueDAO {
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.disponivel = 0 AND"
-                            + " produtos.nome_produto = ?");
+                            + " produtos.nome_produto = ? ORDER BY produtos.id_produto");
                     
                     stmt.setString(1, produto);
                     
@@ -148,7 +148,7 @@ public class EstoqueDAO {
                             + "produtos.descricao_produto, produtos.id_produto, produtos.quantidade,"
                             + "produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
                             + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria where produtos.arquivado = 1 AND"
-                            + " produtos.nome_produto = ?");
+                            + " produtos.nome_produto = ? ORDER BY produtos.id_produto");
                     
                     stmt.setString(1, produto);
                     

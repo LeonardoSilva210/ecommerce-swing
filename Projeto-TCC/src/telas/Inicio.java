@@ -3513,10 +3513,13 @@ public class Inicio extends javax.swing.JFrame {
     private void inputValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputValorKeyTyped
         
         char letra = evt.getKeyChar();
-
-        if (!Character.isDigit(letra) && letra != '.') {
+        String valor = inputValor.getText().trim();
+        
+        if (!Character.isDigit(letra) && letra != '.' || valor.length() > 5) {
             evt.consume(); 
         }
+        
+        
         
     }//GEN-LAST:event_inputValorKeyTyped
 
@@ -3524,7 +3527,9 @@ public class Inicio extends javax.swing.JFrame {
        
         char letra = evt.getKeyChar();
 
-        if (!Character.isDigit(letra) && letra != '.') {
+        String valor = inputValorCusto.getText().trim();
+        
+        if (!Character.isDigit(letra) && letra != '.' || valor.length() > 5) {
             evt.consume(); 
         }
         
@@ -3534,7 +3539,9 @@ public class Inicio extends javax.swing.JFrame {
         
         char letra = evt.getKeyChar();
 
-        if (!Character.isDigit(letra)) {
+        String valor = inputQuantidade.getText().trim();
+        
+        if (!Character.isDigit(letra) && letra != '.' || valor.length() > 3) {
             evt.consume(); 
         }
         
