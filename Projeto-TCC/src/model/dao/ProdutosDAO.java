@@ -18,14 +18,11 @@ public class ProdutosDAO {
         
         try{
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = null;
-            ResultSet rs = null; 
-            
-            stmt = conexao.prepareStatement("SELECT * FROM produtos");
-            
-            rs = stmt.executeQuery();
-            
+            PreparedStatement stmt = conexao.prepareStatement("SELECT * FROM produtos");
+            ResultSet rs = stmt.executeQuery();
+
             while(rs.next()){
+                
                 Produtos produtos = new Produtos();
                 
                 produtos.setId_produto(rs.getInt("id_produto"));

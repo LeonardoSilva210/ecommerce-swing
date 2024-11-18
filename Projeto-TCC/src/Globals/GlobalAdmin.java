@@ -5,7 +5,15 @@ package Globals;
 public class GlobalAdmin {
     
     private static int id_admin;
-    private static String nome, email, senha, foto;
+    private static String nome, email, senha, foto, whatsapp;
+
+    public static String getWhatsapp() {
+        return whatsapp;
+    }
+
+    public static void setWhatsapp(String whatsapp) {
+        GlobalAdmin.whatsapp = whatsapp;
+    }
 
     public static String getFoto() {
         return foto;

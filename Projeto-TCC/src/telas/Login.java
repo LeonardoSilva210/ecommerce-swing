@@ -245,7 +245,7 @@ public class Login extends javax.swing.JFrame {
            
            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
            
-       } else {
+       } else if(email.contains("@gmail.com")) {
            
            bean = dao.verificarLogin(email, senha);
            
@@ -256,7 +256,7 @@ public class Login extends javax.swing.JFrame {
                GlobalAdmin.setSenha(bean.getSenha());
                GlobalAdmin.setEmail(bean.getEmail());
                GlobalAdmin.setFoto(bean.getFoto());
-               
+               GlobalAdmin.setWhatsapp(bean.getWhatsapp());
                
                java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
@@ -266,6 +266,10 @@ public class Login extends javax.swing.JFrame {
                });
                
            }
+           
+       } else {
+           
+           JOptionPane.showMessageDialog(null, "@gmail.com está faltando!");
            
        }
  

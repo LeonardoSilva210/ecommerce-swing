@@ -33,12 +33,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Categorias;
@@ -98,6 +100,7 @@ public class Inicio extends javax.swing.JFrame {
     private float produtosTotal = 0, produtosDisponiveis = 0, produtosIndisponiveis = 0, calcPorcent = 0;
     private Dimension tamanhoOriginal;
     private Point localizacaoOriginal;
+    private Border bordaOriginal;
 
     public Inicio() {
         initComponents();
@@ -149,6 +152,9 @@ public class Inicio extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         checkEdicao = new javax.swing.JCheckBox();
+        jLabel54 = new javax.swing.JLabel();
+        inputWhatsapp = new javax.swing.JFormattedTextField();
+        checkWhatts = new javax.swing.JCheckBox();
         panelFundoPerfil = new javax.swing.JPanel();
         panelNoti = new javax.swing.JPanel();
         panelFundoCloseNoti = new javax.swing.JPanel();
@@ -341,6 +347,7 @@ public class Inicio extends javax.swing.JFrame {
         checkSemWhatts = new javax.swing.JCheckBox();
         edtSenhaADM = new javax.swing.JPasswordField();
         jButton8 = new javax.swing.JButton();
+        txtAvisoSenha = new javax.swing.JLabel();
         panelSubNav = new telas.formatos.PanelBorder();
         btnNoti = new com.raven.swing.ButtonBadges();
 
@@ -554,12 +561,12 @@ public class Inicio extends javax.swing.JFrame {
         inputNome.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputNome.setEnabled(false);
-        panelInformacoesPerfil.add(inputNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 270, 40));
+        panelInformacoesPerfil.add(inputNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 270, 40));
 
         inputSenha.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputSenha.setEnabled(false);
-        panelInformacoesPerfil.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 270, 40));
+        panelInformacoesPerfil.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 270, 40));
 
         btnFechaInformacoesPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -581,7 +588,7 @@ public class Inicio extends javax.swing.JFrame {
         btnFechaInformacoesPerfil.setLayout(btnFechaInformacoesPerfilLayout);
         btnFechaInformacoesPerfilLayout.setHorizontalGroup(
             btnFechaInformacoesPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         btnFechaInformacoesPerfilLayout.setVerticalGroup(
             btnFechaInformacoesPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -598,30 +605,51 @@ public class Inicio extends javax.swing.JFrame {
                 buttonSalvarPerfilActionPerformed(evt);
             }
         });
-        panelInformacoesPerfil.add(buttonSalvarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 270, 40));
+        panelInformacoesPerfil.add(buttonSalvarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 270, 40));
 
         inputEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputEmail.setEnabled(false);
-        panelInformacoesPerfil.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 270, 40));
+        panelInformacoesPerfil.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 270, 40));
 
         jLabel25.setFont(new java.awt.Font("Microsoft YaHei", 0, 16)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("E-mail");
-        panelInformacoesPerfil.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+        panelInformacoesPerfil.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         jLabel26.setFont(new java.awt.Font("Microsoft YaHei", 0, 16)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Nome");
-        panelInformacoesPerfil.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        panelInformacoesPerfil.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Microsoft YaHei", 0, 16)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Senha");
-        panelInformacoesPerfil.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        panelInformacoesPerfil.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
         checkEdicao.setForeground(new java.awt.Color(255, 255, 255));
         checkEdicao.setText("Edição");
         panelInformacoesPerfil.add(checkEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 150, 70, -1));
+
+        jLabel54.setFont(new java.awt.Font("Microsoft YaHei", 0, 16)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel54.setText("Whatsapp");
+        panelInformacoesPerfil.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+
+        try {
+            inputWhatsapp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("+## ## ####-#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        inputWhatsapp.setEnabled(false);
+        panelInformacoesPerfil.add(inputWhatsapp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 270, 40));
+
+        checkWhatts.setEnabled(false);
+        checkWhatts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkWhattsActionPerformed(evt);
+            }
+        });
+        panelInformacoesPerfil.add(checkWhatts, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, -1, -1));
 
         panelAcimaFrame.add(panelInformacoesPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 310, 550));
 
@@ -2413,6 +2441,22 @@ public class Inicio extends javax.swing.JFrame {
         checkSemWhatts.setForeground(new java.awt.Color(255, 255, 255));
         checkSemWhatts.setText("Sem Whatsapp");
         panelAdicionarADM.add(checkSemWhatts, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 110, 40));
+
+        edtSenhaADM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                edtSenhaADMFocusLost(evt);
+            }
+        });
+        edtSenhaADM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtSenhaADMActionPerformed(evt);
+            }
+        });
+        edtSenhaADM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtSenhaADMKeyTyped(evt);
+            }
+        });
         panelAdicionarADM.add(edtSenhaADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 220, 40));
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -2423,6 +2467,10 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelAdicionarADM.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 130, 40));
+
+        txtAvisoSenha.setForeground(new java.awt.Color(255, 255, 255));
+        txtAvisoSenha.setText("Mínimo de 6 caractéres");
+        panelAdicionarADM.add(txtAvisoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 220, -1));
 
         tabInicio.addTab("tab7", panelAdicionarADM);
 
@@ -3074,47 +3122,102 @@ public class Inicio extends javax.swing.JFrame {
         String nome = inputNome.getText().trim();
         String email = inputEmail.getText().trim();
         String senha = inputSenha.getText().trim();
+        String whatsapp = inputWhatsapp.getText().trim();
+        String whatsappNumeros = whatsapp.replaceAll("[^0-9]", "");
+
+    if (fotoSelecionada != null) {
         
-        if (fotoSelecionada != null) {
+        try {
+            
+            enviarImagem(fotoSelecionada, 2);
+            
+        } catch (JSONException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    if (nome.equals(GlobalAdmin.getNome()) && email.equals(GlobalAdmin.getEmail()) && senha.equals(GlobalAdmin.getSenha())) {
+
+        listarNotificacoes();
+
+        if (checkWhatts.isSelected()) {
+
+            if (whatsappNumeros.isEmpty()) {
                 
-                    try {
-                        enviarImagem(fotoSelecionada, 2);
-                        
-                    } catch (JSONException ex) {
-                        
-                        JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
-                        
-                    } catch (IOException ex) {
-                        
-                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                if (!GlobalAdmin.getWhatsapp().equals("")) {
                     
-        }
-        
-        if (nome.equals(GlobalAdmin.getNome()) && email.equals(GlobalAdmin.getEmail()) && senha.equals(GlobalAdmin.getSenha())) {
+                    inputWhatsapp.setText(GlobalAdmin.getWhatsapp());
+                    
+                    int opcao = JOptionPane.showConfirmDialog(null, "Whatsapp inválido, salvar sem número?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    
+                    if (opcao == JOptionPane.YES_OPTION) {
+                        
+                        Usuarios usuario = new Usuarios(0, null, null, null, "", null, null, 0);
+                        daoAdmin.atualizarPerfil(usuario, 2);
+                        GlobalAdmin.setWhatsapp(whatsappNumeros);
+                        inputWhatsapp.setText("");
+                        JOptionPane.showMessageDialog(null, "Whatsapp salvo sem número!");
+                        
+                    } else {
+                        
+                        inputWhatsapp.setText(GlobalAdmin.getWhatsapp());
+                        
+                        return;
+                        
+                    }
+                    
+                }
+                
+            } else if (!whatsappNumeros.equals(GlobalAdmin.getWhatsapp())) {  
+                
+                Usuarios usuario = new Usuarios(0, null, null, null, whatsappNumeros, null, null, 0);
+                daoAdmin.atualizarPerfil(usuario, 2);
+                GlobalAdmin.setWhatsapp(whatsappNumeros);
+                JOptionPane.showMessageDialog(null, "Whatsapp salvo!");
+                
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "Nenhum campo alterado!");
+                return;
+                
+            }
             
-            listarNotificacoes();
+        } else {
             
-            JOptionPane.showMessageDialog(null, "Nenhuma campo alterado!");
-
-        return;
-        
+            JOptionPane.showMessageDialog(null, "Nenhum campo alterado!");
+            return;
+            
         }
+    }
 
-        if (!GlobalAdmin.getEmail().equals(email)) {
+    if (!GlobalAdmin.getEmail().equals(email)) {
         
         if (daoUsuario.validarEmailExistente(email)) {
             
             JOptionPane.showMessageDialog(null, "E-mail indisponível!");
             return;
             
+        } else {
+            
+            if (!email.contains("@gmail.com")) {
+                
+                JOptionPane.showMessageDialog(null, "E-mail não possui @gmail.com");
+                return;
+                
+            }
+
         }
-        }
+    }
 
     if (!senha.equals(GlobalAdmin.getSenha())) {
         
         String confirma = JOptionPane.showInputDialog("Confirme a senha atual");
-
+        
         if (confirma == null || !confirma.equals(GlobalAdmin.getSenha())) {
             
             JOptionPane.showMessageDialog(null, confirma == null ? "Alteração cancelada!" : "Senha incorreta!");
@@ -3126,21 +3229,36 @@ public class Inicio extends javax.swing.JFrame {
         }
     }
 
-    int resposta = JOptionPane.showConfirmDialog(null, "Salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION);
+    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+        
+        JOptionPane.showMessageDialog(null, "Nome/E-mail/Senha não podem estar vazios!");
+        return;
+        
+    }
+
+    if (GlobalAdmin.getNome().equals(nome) && GlobalAdmin.getEmail().equals(email) && GlobalAdmin.getSenha().equals(senha) && GlobalAdmin.getWhatsapp().equals(whatsappNumeros)) {
+        
+        JOptionPane.showMessageDialog(null, "Nenhum campo alterado!");
+        
+    } else {
+        
+        int resposta = JOptionPane.showConfirmDialog(null, "Salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION);
     
     if (resposta == JOptionPane.YES_OPTION) {
-        
-        Usuarios usuario = new Usuarios(0, nome, email, senha, null, null, null, 0);
-        daoAdmin.atualizarPerfil(usuario);
+
+        Usuarios usuario = new Usuarios(0, nome, email, senha, whatsappNumeros, null, null, 0);
+        daoAdmin.atualizarPerfil(usuario, 1);
 
         GlobalAdmin.setEmail(email);
         GlobalAdmin.setNome(nome);
         GlobalAdmin.setSenha(senha);
+        GlobalAdmin.setWhatsapp(whatsappNumeros);
 
         txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
         JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
-        
+
         listarNotificacoes();
+    }
         
     }
         
@@ -3724,29 +3842,33 @@ public class Inicio extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Número de whatsapp está faltando!");
             
+        } else if(senhaADM.length() <= 5) {
+            
+            JOptionPane.showMessageDialog(null, "Mínimo 6 caractérs no campo senha!");
+
         } else {
             
             if (daoUsuario.validarEmailExistente(emailADM)) {
                 
                 JOptionPane.showMessageDialog(null, "E-mail indisponível!");
                 
-            } else {
+            } else if (emailADM.contains("@gmail.com")){
                 
                 String[] divide = edtDataNascimentoADM.getText().split("\\/");
         
-        String dia = "";
-        String mes = "";
-        String ano = "";
+                String dia = "";
+                String mes = "";
+                String ano = "";
         
-        if (divide.length > 0) {
+                if (divide.length > 0) {
             
-            dia = divide[0];
-            mes = divide[1];
-            ano = divide[2];
+                    dia = divide[0];
+                    mes = divide[1];
+                    ano = divide[2];
             
-        }
+                }
         
-        String data = ano + "-" + mes + "-" + dia;
+                String data = ano + "-" + mes + "-" + dia;
          
         try{
             
@@ -3784,8 +3906,12 @@ public class Inicio extends javax.swing.JFrame {
             
         }
                 
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "@gmail.com está faltando no campo E-mail!");
+                
             }
-
+            
         }
         
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -4124,6 +4250,40 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtImagemProdutoMouseClicked
 
+    private void edtSenhaADMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtSenhaADMKeyTyped
+        
+        String senha = edtSenhaADM.getText().trim();
+        
+        if (senha.length() < 5) {
+            
+            edtSenhaADM.setBorder(new LineBorder(Color.red, 1));
+            txtAvisoSenha.setVisible(true);
+            
+            
+        } else {
+            
+            edtSenhaADM.setBorder(bordaOriginal);
+            txtAvisoSenha.setVisible(false);
+            
+        }
+        
+    }//GEN-LAST:event_edtSenhaADMKeyTyped
+
+    private void edtSenhaADMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtSenhaADMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtSenhaADMActionPerformed
+
+    private void edtSenhaADMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtSenhaADMFocusLost
+        
+        edtSenhaADM.setBorder(bordaOriginal);
+        txtAvisoSenha.setVisible(false);
+        
+    }//GEN-LAST:event_edtSenhaADMFocusLost
+
+    private void checkWhattsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkWhattsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkWhattsActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -4283,9 +4443,11 @@ public class Inicio extends javax.swing.JFrame {
         verificaCheckSemWhatts();
         verificaRadioUsuarios();
         verificaFuncaoTab();
+        checkWhats();
         listarReservas(1, null);
         buttonEditarProduto.setVisible(false);
         panelEditarCategoriaFundo.setVisible(false);
+        txtAvisoSenha.setVisible(false);
         panelNoti.setVisible(false);
         panelFundoNoti.setVisible(false);
         radio1.setSelected(true);
@@ -4307,6 +4469,8 @@ public class Inicio extends javax.swing.JFrame {
         tamanhoOriginal = frame.getSize();
         localizacaoOriginal = frame.getLocation();
 
+        bordaOriginal = edtSenhaADM.getBorder();
+        
         if (GlobalAdmin.getNome() != null) {
 
             txtBemVindo.setText("Olá, " + GlobalAdmin.getNome());
@@ -5345,6 +5509,7 @@ public class Inicio extends javax.swing.JFrame {
         inputNome.setText(GlobalAdmin.getNome());
         inputEmail.setText(GlobalAdmin.getEmail());
         inputSenha.setText(GlobalAdmin.getSenha());
+        inputWhatsapp.setText(GlobalAdmin.getWhatsapp());
         
     }
     
@@ -5415,22 +5580,54 @@ public class Inicio extends javax.swing.JFrame {
                     imagePerfil.setForeground(new Color(255, 255, 255));
                     imagePerfil.setEnabled(true);
                     btnRetiraImagemPerfil.setEnabled(true);
+                    checkWhatts.setEnabled(true);
+                    
+                    if (checkWhatts.isSelected()) {
+                        
+                        inputWhatsapp.setEnabled(true);
+                        
+                    }
                     
                 } else {
                     
                     inputNome.setEnabled(false);
                     inputEmail.setEnabled(false);
                     inputSenha.setEnabled(false);
+                    inputWhatsapp.setEnabled(false);
                     buttonSalvarPerfil.setEnabled(false);
                     imagePerfil.setForeground(new Color(204, 204, 204));
                     imagePerfil.setEnabled(false);
                     btnRetiraImagemPerfil.setEnabled(false);
+                    checkWhatts.setEnabled(false);
+                    checkWhatts.setEnabled(false);
                     
                 }
                 
             }
         });
  
+    }
+    
+    private void checkWhats() {
+        
+        checkWhatts.addActionListener(e -> {
+            
+            if (checkWhatts.isSelected()) {
+                
+                if (checkEdicao.isSelected()) {
+                        
+                        inputWhatsapp.setEnabled(true);
+                        
+                    }
+                
+            } else {
+                
+                inputWhatsapp.setEnabled(false);
+                
+            }
+            
+        });
+        
     }
     
     private void inserirMetodosComboReservas() {
@@ -5660,6 +5857,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton buttonSalvarPerfil;
     private javax.swing.JCheckBox checkEdicao;
     private javax.swing.JCheckBox checkSemWhatts;
+    private javax.swing.JCheckBox checkWhatts;
     private javax.swing.JComboBox<String> comboAdicionarProdutoCategoria;
     private javax.swing.JComboBox<String> comboCategorias;
     private javax.swing.JComboBox<String> comboMetodoPesquisa;
@@ -5694,6 +5892,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPasswordField inputSenha;
     private javax.swing.JTextField inputValor;
     private javax.swing.JTextField inputValorCusto;
+    private javax.swing.JFormattedTextField inputWhatsapp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -5751,6 +5950,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -5828,6 +6028,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabInicio;
     private tabledark.TableDark tblEstoque;
     private javax.swing.JLabel txtAdicionarADM;
+    private javax.swing.JLabel txtAvisoSenha;
     private javax.swing.JLabel txtBemVindo;
     private javax.swing.JLabel txtCategorias;
     private javax.swing.JLabel txtClientes;

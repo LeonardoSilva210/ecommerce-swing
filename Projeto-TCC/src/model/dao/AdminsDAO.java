@@ -62,6 +62,7 @@ public class AdminsDAO {
                     bean.setSenha(rs.getString("senha"));
                     bean.setAdm(rs.getInt("adm"));
                     bean.setFoto(rs.getString("foto"));
+                    bean.setWhatsapp(rs.getString("whatsapp"));
 
                 } else {
                     
@@ -81,18 +82,37 @@ public class AdminsDAO {
         
     }
     
-    public void atualizarPerfil(Usuarios usuario) {
+    public void atualizarPerfil(Usuarios usuario, int tipo) {
         
         try{
             
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement("UPDATE usuarios set nome = ?, email = ?, senha = ? WHERE id_usuario = ?");
+            PreparedStatement stmt = null;
             
-            stmt.setString(1, usuario.getNome());
-            stmt.setString(2, usuario.getEmail());
-            stmt.setString(3, usuario.getSenha());
-            stmt.setInt(4, GlobalAdmin.getId_admin());
-            
+            switch(tipo) {
+                
+                case 1:
+                    
+                    stmt = conexao.prepareStatement("UPDATE usuarios set nome = ?, email = ?, senha = ?, whatsapp = ? WHERE id_usuario = ?");
+                    
+                    stmt.setString(1, usuario.getNome());
+                    stmt.setString(2, usuario.getEmail());
+                    stmt.setString(3, usuario.getSenha());
+                    stmt.setString(4, usuario.getWhatsapp());
+                    stmt.setInt(5, GlobalAdmin.getId_admin());
+                    
+                    break;
+                    
+                case 2:
+                    
+                    stmt = conexao.prepareStatement("UPDATE usuarios set whatsapp = ? WHERE id_usuario = ?");
+                    stmt.setString(1, usuario.getWhatsapp());
+                    stmt.setInt(2, GlobalAdmin.getId_admin());
+                    
+                    break;
+                
+            }
+ 
             stmt.executeUpdate();
             
             stmt.close();

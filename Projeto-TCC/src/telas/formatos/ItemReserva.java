@@ -75,7 +75,7 @@ public class ItemReserva extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                String[] opcoes = {"Desativar", "Voltar"};
+                String[] opcoes = {"Finalizar reserva", "Voltar"};
 
                 int opcao = JOptionPane.showOptionDialog(
                 null,                          
@@ -97,7 +97,7 @@ public class ItemReserva extends javax.swing.JPanel {
             
                     daoReserva.desativar(reserva.getId_compra());
                     inicio.listarReservas(1, null);
-                    JOptionPane.showMessageDialog(null, "Reserva desativada!");
+                    JOptionPane.showMessageDialog(null, "Reserva finalizada!");
             
                 }
                 
