@@ -658,6 +658,7 @@
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="+## ## ####-#####" subtype="-1" type="5"/>
                 </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Constraints>
@@ -1148,10 +1149,13 @@
                       <Component id="imagePerfil1" min="-2" pref="78" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtBemVindo" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="136" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="txtBemVindo" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="112" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1677,6 +1681,9 @@
                       <Image iconType="3" name="/imagens/iconLogo.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1799,6 +1806,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Imp&#xe9;rio Beer"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtLogoMouseClicked"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="70" y="12" width="110" height="30"/>
@@ -1923,9 +1933,10 @@
                                   <Border info="null"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="14" style="0"/>
+                                  <Font name="Lucida Sans Typewriter" size="16" style="0"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Porcentagem de produtos dispon&#xed;veis para a venda"/>
+                                <Property name="text" type="java.lang.String" value="% de produtos dispon&#xed;veis para a venda"/>
+                                <Property name="toolTipText" type="java.lang.String" value=""/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -1996,9 +2007,10 @@
                                   <Border info="null"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="14" style="0"/>
+                                  <Font name="Lucida Sans Typewriter" size="16" style="0"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Porcentagem de produtos indispon&#xed;veis para a venda"/>
+                                <Property name="text" type="java.lang.String" value="% de produtos indispon&#xed;veis para a venda"/>
+                                <Property name="toolTipText" type="java.lang.String" value=""/>
                               </Properties>
                             </Component>
                           </SubComponents>

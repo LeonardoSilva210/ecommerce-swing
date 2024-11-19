@@ -23,11 +23,11 @@ public class NotificacoesDAO {
             ResultSet rs = null;
             
             stmt = conexao.prepareStatement("SELECT * FROM notificacoes \n" +
-            "WHERE tipo = 3\n" +
+            "WHERE tipo = 3 \n" +
             "\n" +
             "UNION ALL \n" +
             "\n" +
-            "SELECT * FROM notificacoes WHERE tipo = 1 AND fk_id_usuario = ? ORDER BY id_notificacao DESC");
+            "SELECT * FROM notificacoes WHERE tipo = 1 AND fk_id_usuario = ? ORDER BY id_notificacao DESC LIMIT 10");
             stmt.setInt(1, Globals.GlobalAdmin.getId_admin());
             
             rs = stmt.executeQuery();
@@ -58,26 +58,17 @@ public class NotificacoesDAO {
         return list;
     }
     
-    public void atualizar(List<Notificacoes> list) {
+    public void atualizar(Notificacoes notificacao) {
         
         try{
             
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt;
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE notificacoes set visto = 1 WHERE id_notificacao = ?");
             
-            for (int i = 0; i < list.size(); i++) {
-                
-               if (!list.get(i).isVisto()) {
-                   
-                   stmt = conexao.prepareStatement("UPDATE notificacoes set visto = true WHERE id_notificacao = ?"); 
-                   stmt.setInt(1, list.get(i).getId_notificacao());
-                   stmt.executeUpdate();
-                   stmt.close();
-                   
-               }
+            stmt.setInt(1, notificacao.getId_notificacao());
             
-            }
-
+            stmt.executeUpdate();
+            stmt.close();
             conexao.close();
             
         }catch(SQLException e){

@@ -3,11 +3,15 @@ package telas;
 
 import Globals.GlobalAdmin;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
+import java.net.URI;
+import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.bean.Usuarios;
 import model.dao.AdminsDAO;
+import redirecionamentos.Redirecionamento;
 
 
 public class Login extends javax.swing.JFrame {
@@ -208,11 +212,21 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 0, 40, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconLogo.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         txtLogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtLogo.setForeground(new java.awt.Color(255, 255, 255));
         txtLogo.setText("Império Beer");
+        txtLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtLogoMouseClicked(evt);
+            }
+        });
         jPanel1.add(txtLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 110, 30));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backComidas2.png"))); // NOI18N
@@ -351,9 +365,23 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_inputSenhaKeyPressed
 
+    private void txtLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLogoMouseClicked
+        
+        new Redirecionamento().abreSite();
+        
+    }//GEN-LAST:event_txtLogoMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        
+        new Redirecionamento().abreSite();
+        
+    }//GEN-LAST:event_jLabel4MouseClicked
+
     private void inicia() {
         
     }
+    
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

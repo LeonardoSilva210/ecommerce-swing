@@ -62,6 +62,7 @@ import model.dao.ReservasDAO;
 import model.dao.UsuariosDAO;
 import org.json.JSONException;
 import org.json.JSONObject;
+import redirecionamentos.Redirecionamento;
 import telas.formatos.ItemCategoria;
 import telas.formatos.ItemCliente;
 import telas.formatos.ItemNotificacao;
@@ -640,6 +641,7 @@ public class Inicio extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        inputWhatsapp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputWhatsapp.setEnabled(false);
         panelInformacoesPerfil.add(inputWhatsapp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 270, 40));
 
@@ -927,9 +929,11 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(imagePerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBemVindo)
-                    .addComponent(jLabel2))
-                .addContainerGap(112, Short.MAX_VALUE))
+                    .addGroup(panelPerfilLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 136, Short.MAX_VALUE))
+                    .addComponent(txtBemVindo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelPerfilLayout.setVerticalGroup(
             panelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1227,6 +1231,11 @@ public class Inicio extends javax.swing.JFrame {
         jLabel3.setText("|");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconLogo.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLogoLayout = new javax.swing.GroupLayout(panelLogo);
         panelLogo.setLayout(panelLogoLayout);
@@ -1343,6 +1352,11 @@ public class Inicio extends javax.swing.JFrame {
         txtLogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtLogo.setForeground(new java.awt.Color(255, 255, 255));
         txtLogo.setText("Império Beer");
+        txtLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtLogoMouseClicked(evt);
+            }
+        });
         panelNav.add(txtLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 12, 110, 30));
 
         panelAcimaFrame.add(panelNav, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 50));
@@ -1373,8 +1387,9 @@ public class Inicio extends javax.swing.JFrame {
         jTextPane1.setEditable(false);
         jTextPane1.setBackground(new java.awt.Color(240, 240, 240));
         jTextPane1.setBorder(null);
-        jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextPane1.setText("Porcentagem de produtos disponíveis para a venda");
+        jTextPane1.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16)); // NOI18N
+        jTextPane1.setText("% de produtos disponíveis para a venda");
+        jTextPane1.setToolTipText("");
         jScrollPane8.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout popPorcentagemDisponiveisLayout = new javax.swing.GroupLayout(popPorcentagemDisponiveis);
@@ -1412,8 +1427,9 @@ public class Inicio extends javax.swing.JFrame {
         jTextPane2.setEditable(false);
         jTextPane2.setBackground(new java.awt.Color(240, 240, 240));
         jTextPane2.setBorder(null);
-        jTextPane2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextPane2.setText("Porcentagem de produtos indisponíveis para a venda");
+        jTextPane2.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16)); // NOI18N
+        jTextPane2.setText("% de produtos indisponíveis para a venda");
+        jTextPane2.setToolTipText("");
         jScrollPane9.setViewportView(jTextPane2);
 
         javax.swing.GroupLayout popPorcentagemIndisponiveisLayout = new javax.swing.GroupLayout(popPorcentagemIndisponiveis);
@@ -2587,6 +2603,7 @@ public class Inicio extends javax.swing.JFrame {
         if (!animacao) {
 
             animacoesPanel(4, panelNoti, panelFundoNoti, true);
+            verificaNotiVisto();
 
         }
 
@@ -2596,8 +2613,9 @@ public class Inicio extends javax.swing.JFrame {
 
         panelNoti.setVisible(true);
         panelFundoNoti.setVisible(true);
-        btnNoti.setBadges(0);
-        daoNotificacao.atualizar(listaNotificacoes);
+
+        verificaNotiVisto();
+        
         animacoesPanel(3, panelNoti, panelFundoNoti, false);
 
     }//GEN-LAST:event_btnNotiMouseClicked
@@ -2963,7 +2981,7 @@ public class Inicio extends javax.swing.JFrame {
                             disponibilidade = 0;
                 
                         }
-            
+                        
                         produto.setDisponivel(disponibilidade);
                         produto.setFk_id_categoria(listaCategorias.get(comboAdicionarProdutoCategoria.getSelectedIndex()).getId_categoria());
 
@@ -4290,6 +4308,18 @@ public class Inicio extends javax.swing.JFrame {
     private void checkWhattsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkWhattsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_checkWhattsActionPerformed
+
+    private void txtLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLogoMouseClicked
+        
+        new Redirecionamento().abreSite();
+        
+    }//GEN-LAST:event_txtLogoMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        
+        new Redirecionamento().abreSite();
+        
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     public static void main(String args[]) {
 
@@ -5815,7 +5845,26 @@ public class Inicio extends javax.swing.JFrame {
             });
         
     }
+    
+    private void verificaNotiVisto() {
         
+        listarNotificacoes();
+        
+        int cont = 0;
+        
+        for (int i = 0; i < listaNotificacoes.size(); i++) {
+            
+            if (!listaNotificacoes.get(i).isVisto()) {
+                
+                cont++;
+                
+            }
+            
+        }
+        
+        btnNoti.setBadges(cont);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel areaClickPorcentagemDisponiveis;

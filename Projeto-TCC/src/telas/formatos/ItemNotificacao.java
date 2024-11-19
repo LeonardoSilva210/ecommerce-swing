@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import model.bean.Notificacoes;
+import model.dao.NotificacoesDAO;
 
 
 public class ItemNotificacao extends javax.swing.JPanel{
@@ -15,6 +16,7 @@ public class ItemNotificacao extends javax.swing.JPanel{
     private ImageIcon icon;
     private String data, dataBr;
     private String[] divideData;
+    private NotificacoesDAO daoNotificacao = new NotificacoesDAO();
 
     public ItemNotificacao(Notificacoes noti) {
         initComponents();
@@ -89,19 +91,20 @@ public class ItemNotificacao extends javax.swing.JPanel{
                     break;
                 
             }
-
+            
+            if (!noti.isVisto()) {
+                
+                panelPontoVisto.setVisible(false);
+                daoNotificacao.atualizar(noti);
+                
+            }
+ 
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
                 
             setBorder(new LineBorder(Color.white, 1));
-            
-            if (!noti.isVisto()) {
-                
-                panelPontoVisto.setVisible(false);
-                
-            }
             
         }
 
