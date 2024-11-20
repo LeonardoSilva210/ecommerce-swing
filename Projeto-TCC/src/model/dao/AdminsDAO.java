@@ -40,14 +40,16 @@ public class AdminsDAO {
     }
     
     public Usuarios verificarLogin(String email, String senha){
+        
         Usuarios bean = new Usuarios();
         
         try{
+            
                 Connection conexao = Conexao.conectar();
                 PreparedStatement stmt = null;
                 ResultSet rs = null;
                 
-                stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ? AND adm = true");
+                stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ? AND adm = true AND arquivado = 0");
                 
                 stmt.setString(1, email);
                 stmt.setString(2, senha);
