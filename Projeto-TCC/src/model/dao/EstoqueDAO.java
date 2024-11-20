@@ -190,6 +190,49 @@ public class EstoqueDAO {
         
     }
     
+    public EstoqueBean buscarProduto(int id) {
+        
+        EstoqueBean estoque = new EstoqueBean();
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("select produtos.nome_produto as produto, produtos.arquivado, produtos.imagem, "
+                            + "produtos.disponivel, produtos.id_produto, produtos.quantidade,"
+                            + "produtos.descricao_produto, produtos.disponivel, produtos.fk_id_categoria, produtos.valor, produtos.valor_custo, categorias.nome as categoria, categorias.descricao "
+                            + "from produtos inner join categorias on produtos.fk_id_categoria = categorias.id_categoria WHERE produtos.id_produto = ?");
+            
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                
+                estoque.setNome_produto(rs.getString("produto"));
+                estoque.setDescricao_produto(rs.getString("descricao_produto"));
+                estoque.setValor(rs.getFloat("valor"));
+                estoque.setValor_custo(rs.getFloat("valor_custo"));
+                estoque.setNome_categoria(rs.getString("categoria"));
+                estoque.setFk_id_categoria(rs.getInt("fk_id_categoria"));
+                estoque.setQuantidade(rs.getInt("quantidade"));
+                estoque.setDisponivel(rs.getInt("disponivel"));
+                estoque.setId_produto(rs.getInt("id_produto"));
+                estoque.setArquivado(rs.getInt("arquivado"));
+                estoque.setImagem(rs.getString("imagem"));
+                
+            }
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return estoque;
+        
+    }
+    
     public void produtoDisponível(EstoqueBean estoque, boolean verif){
         
         try {

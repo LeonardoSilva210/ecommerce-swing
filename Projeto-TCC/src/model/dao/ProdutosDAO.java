@@ -100,6 +100,7 @@ public class ProdutosDAO {
                 produto.setQuantidade(rs.getInt("quantidade"));
                 produto.setValor_custo(rs.getFloat("valor_custo"));
                 produto.setArquivado(rs.getInt("arquivado"));
+                produto.setImagem(rs.getString("imagem"));
                 
             }
             

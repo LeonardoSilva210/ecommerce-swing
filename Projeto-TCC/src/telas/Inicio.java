@@ -48,6 +48,7 @@ import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import model.bean.Categorias;
 import model.bean.Compras;
 import model.bean.EstoqueBean;
@@ -1581,23 +1582,23 @@ public class Inicio extends javax.swing.JFrame {
         tblEstoque.setBackground(new java.awt.Color(204, 204, 204));
         tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome do Produto", "Descrição Produto", "Valor", "Valor de Custo", "Categoria", "Quantidade"
+                "Nome do Produto", "Descrição Produto", "Valor", "Valor de Custo", "Categoria", "Quantidade", "ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1619,6 +1620,8 @@ public class Inicio extends javax.swing.JFrame {
             tblEstoque.getColumnModel().getColumn(3).setResizable(false);
             tblEstoque.getColumnModel().getColumn(4).setResizable(false);
             tblEstoque.getColumnModel().getColumn(5).setResizable(false);
+            tblEstoque.getColumnModel().getColumn(6).setResizable(false);
+            tblEstoque.getColumnModel().getColumn(6).setPreferredWidth(0);
         }
 
         btnAdicionarProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -3187,6 +3190,8 @@ public class Inicio extends javax.swing.JFrame {
 
                             daoProduto.cadastrar(produto);
                             resetaCamposAdicionarProduto();
+                            radioDisponivel.setSelected(false);
+                            radioIndisponivel.setSelected(false);
 
                             JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
 
@@ -5241,37 +5246,46 @@ public class Inicio extends javax.swing.JFrame {
                 valor,
                 valorCusto,
                 objEstoque.getNome_categoria(),
-                objEstoque.getQuantidade()
+                objEstoque.getQuantidade(),
+                objEstoque.getId_produto()
 
             };
 
             tableModel.addRow(rowData);
         }
+        
+        TableColumn colunaOculta = tblEstoque.getColumnModel().getColumn(6);
+        colunaOculta.setMinWidth(0);
+        colunaOculta.setMaxWidth(0);
+        colunaOculta.setWidth(0);
+        
     }
 
     private void tabelaLinhaSelecionada(int linha) {
 
         if (linha != -1) {
 
-            produtosAtual.setId_produto(estoqueTabela.get(linha).getId_produto());
-            produtosAtual.setNome_produto(estoqueTabela.get(linha).getNome_produto());
-            produtosAtual.setDescricao_produto(estoqueTabela.get(linha).getDescricao_produto());
-            produtosAtual.setNome_categoria(estoqueTabela.get(linha).getNome_categoria());
-            produtosAtual.setDescricao_categoria(estoqueTabela.get(linha).getDescricao_categoria());
-            produtosAtual.setQuantidade(estoqueTabela.get(linha).getQuantidade());
+            EstoqueBean objEstoque = daoEstoque.buscarProduto(Integer.parseInt(tblEstoque.getValueAt(linha, 6).toString()));
             
-            String valor = String.valueOf(estoqueTabela.get(linha).getValor()).replace(",", ".");
+            produtosAtual.setId_produto(objEstoque.getId_produto());
+            produtosAtual.setNome_produto(objEstoque.getNome_produto());
+            produtosAtual.setDescricao_produto(objEstoque.getDescricao_produto());
+            produtosAtual.setNome_categoria(objEstoque.getNome_categoria());
+            produtosAtual.setDescricao_categoria(objEstoque.getDescricao_categoria());
+            produtosAtual.setQuantidade(objEstoque.getQuantidade());
+            
+            String valor = String.valueOf(objEstoque.getValor()).replace(",", ".");
             float valorFloat = Float.parseFloat(valor);
             
-            String valorCusto = String.valueOf(estoqueTabela.get(linha).getValor_custo()).replace(",", ".");
+            String valorCusto = String.valueOf(objEstoque.getValor_custo()).replace(",", ".");
             float valorCustoFloat = Float.parseFloat(valorCusto);
             
             produtosAtual.setValor(valorFloat);
             produtosAtual.setValor_custo(valorCustoFloat);
             
-            produtosAtual.setDisponivel(estoqueTabela.get(linha).getDisponivel());
-            produtosAtual.setFk_id_categoria(estoqueTabela.get(linha).getFk_id_categoria());
-            produtosAtual.setImagem(estoqueTabela.get(linha).getImagem());
+            produtosAtual.setDisponivel(objEstoque.getDisponivel());
+            produtosAtual.setFk_id_categoria(objEstoque.getFk_id_categoria());
+            produtosAtual.setImagem(objEstoque.getImagem());
 
             trocaVisibilidadeButtons(2);
 
