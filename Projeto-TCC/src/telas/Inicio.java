@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -39,6 +42,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -181,6 +186,7 @@ public class Inicio extends javax.swing.JFrame {
         txtNomeProduto4 = new javax.swing.JLabel();
         edtValorCustoProduto = new javax.swing.JTextField();
         txtImagemProduto = new javax.swing.JLabel();
+        txtNomeProduto5 = new javax.swing.JLabel();
         panelFundoPopProdutoSelecionado = new javax.swing.JPanel();
         panelPerfil = new telas.formatos.PanelBorder();
         imagePerfil1 = new com.raven.avatar.ImageAvatar();
@@ -206,7 +212,7 @@ public class Inicio extends javax.swing.JFrame {
         panelNav = new telas.formatos.PanelBorder();
         panelLogo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        imgLogo = new javax.swing.JLabel();
         panelClose = new javax.swing.JPanel();
         txtClose = new javax.swing.JLabel();
         panelMin = new javax.swing.JPanel();
@@ -299,16 +305,19 @@ public class Inicio extends javax.swing.JFrame {
         buttonAddMensagem = new javax.swing.JButton();
         radioUsuario1 = new javax.swing.JRadioButton();
         radioUsuario2 = new javax.swing.JRadioButton();
+        radioUsuario3 = new javax.swing.JRadioButton();
+        comboListaClientesArquivados = new javax.swing.JComboBox<>();
         panelCategorias = new javax.swing.JPanel();
         panelEditarCategoriaFundo = new javax.swing.JPanel();
-        panelEditarCategoria = new javax.swing.JPanel();
+        panelEditarCategoria = new telas.formatos.PanelBorder();
         jButton3 = new javax.swing.JButton();
-        inputNomeCategoriaEdit = new javax.swing.JTextField();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
-        inputDescricaoCategoriaEdit = new javax.swing.JTextField();
-        btnSalvarEdicaoCategoria = new javax.swing.JButton();
         jLabel53 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        inputNomeCategoriaEdit = new javax.swing.JTextField();
+        jLabel52 = new javax.swing.JLabel();
+        btnSalvarEdicaoCategoria = new javax.swing.JButton();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        inputDescricaoCategoriaEdit = new javax.swing.JTextArea();
         panelFundoPopCategoria = new javax.swing.JPanel();
         panelPopCategoria = new telas.formatos.PanelBorder();
         jButton2 = new javax.swing.JButton();
@@ -324,6 +333,7 @@ public class Inicio extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         buttonAtualizarCategorias = new javax.swing.JButton();
@@ -383,7 +393,19 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelAdicionarProduto.add(inputValorCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 169, 34));
+
+        inputNomeProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputNomeProdutoKeyTyped(evt);
+            }
+        });
         panelAdicionarProduto.add(inputNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 169, 34));
+
+        inputDescricaoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputDescricaoProdutoKeyTyped(evt);
+            }
+        });
         panelAdicionarProduto.add(inputDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 169, 34));
 
         inputValor.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -562,11 +584,21 @@ public class Inicio extends javax.swing.JFrame {
         inputNome.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputNome.setEnabled(false);
+        inputNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputNomeKeyTyped(evt);
+            }
+        });
         panelInformacoesPerfil.add(inputNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 270, 40));
 
         inputSenha.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 12)); // NOI18N
         inputSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputSenha.setEnabled(false);
+        inputSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputSenhaKeyTyped(evt);
+            }
+        });
         panelInformacoesPerfil.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 270, 40));
 
         btnFechaInformacoesPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -610,6 +642,11 @@ public class Inicio extends javax.swing.JFrame {
 
         inputEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inputEmail.setEnabled(false);
+        inputEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputEmailKeyTyped(evt);
+            }
+        });
         panelInformacoesPerfil.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 270, 40));
 
         jLabel25.setFont(new java.awt.Font("Microsoft YaHei", 0, 16)); // NOI18N
@@ -756,7 +793,7 @@ public class Inicio extends javax.swing.JFrame {
 
         txtNomeProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto.setText("Nome");
-        panelPopProduto.add(txtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
+        panelPopProduto.add(txtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
         panelBtnClosePopProduto.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -783,31 +820,43 @@ public class Inicio extends javax.swing.JFrame {
         );
         panelBtnClosePopProdutoLayout.setVerticalGroup(
             panelBtnClosePopProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnClosePopProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnClosePopProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         panelPopProduto.add(panelBtnClosePopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
-        panelPopProduto.add(edtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 170, 40));
+
+        edtNomeProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtNomeProdutoKeyTyped(evt);
+            }
+        });
+        panelPopProduto.add(edtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 210, 40));
 
         txtNomeProduto1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNomeProduto1.setText("Descrição");
-        panelPopProduto.add(txtNomeProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, -1));
-        panelPopProduto.add(edtDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 170, 40));
+        txtNomeProduto1.setText("Categoria");
+        panelPopProduto.add(txtNomeProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
+
+        edtDescricaoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtDescricaoProdutoKeyTyped(evt);
+            }
+        });
+        panelPopProduto.add(edtDescricaoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 210, 40));
 
         txtNomeProduto2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNomeProduto2.setText("Valor de venda");
-        panelPopProduto.add(txtNomeProduto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
+        txtNomeProduto2.setText("Valor");
+        panelPopProduto.add(txtNomeProduto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
 
         edtValorProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 edtValorProdutoKeyTyped(evt);
             }
         });
-        panelPopProduto.add(edtValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 170, 40));
+        panelPopProduto.add(edtValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 220, 40));
 
         txtNomeProduto3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto3.setText("Quantidade");
-        panelPopProduto.add(txtNomeProduto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
+        panelPopProduto.add(txtNomeProduto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
 
         edtQuantidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         edtQuantidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -816,7 +865,7 @@ public class Inicio extends javax.swing.JFrame {
                 edtQuantidadeKeyTyped(evt);
             }
         });
-        panelPopProduto.add(edtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 50, 40));
+        panelPopProduto.add(edtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 140, 40));
 
         jButton1.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
         jButton1.setText("Salvar");
@@ -825,9 +874,9 @@ public class Inicio extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelPopProduto.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 270, 50));
+        panelPopProduto.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 340, 50));
 
-        panelPopProduto.add(comboCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 170, 40));
+        panelPopProduto.add(comboCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 210, 40));
 
         btnDiminuirQuantidade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnDiminuirQuantidade.setText("-");
@@ -836,7 +885,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnDiminuirQuantidadeActionPerformed(evt);
             }
         });
-        panelPopProduto.add(btnDiminuirQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 40, 40));
+        panelPopProduto.add(btnDiminuirQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 40, 40));
 
         btnAdicionarQuantidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnAdicionarQuantidade.setText("+");
@@ -845,18 +894,18 @@ public class Inicio extends javax.swing.JFrame {
                 btnAdicionarQuantidadeActionPerformed(evt);
             }
         });
-        panelPopProduto.add(btnAdicionarQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 40, 40));
+        panelPopProduto.add(btnAdicionarQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 40, 40));
 
         txtNomeProduto4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNomeProduto4.setText("Valor de custo");
-        panelPopProduto.add(txtNomeProduto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
+        panelPopProduto.add(txtNomeProduto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, -1, -1));
 
         edtValorCustoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 edtValorCustoProdutoKeyTyped(evt);
             }
         });
-        panelPopProduto.add(edtValorCustoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 170, 40));
+        panelPopProduto.add(edtValorCustoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 220, 40));
 
         txtImagemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto_sem_imagem.png"))); // NOI18N
         txtImagemProduto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -871,6 +920,10 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelPopProduto.add(txtImagemProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 200, -1));
+
+        txtNomeProduto5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNomeProduto5.setText("Descrição");
+        panelPopProduto.add(txtNomeProduto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, -1));
 
         panelAcimaFrame.add(panelPopProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 970, 420));
 
@@ -1230,10 +1283,10 @@ public class Inicio extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("|");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconLogo.png"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconLogo.png"))); // NOI18N
+        imgLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                imgLogoMouseClicked(evt);
             }
         });
 
@@ -1243,7 +1296,7 @@ public class Inicio extends javax.swing.JFrame {
             panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLogoLayout.createSequentialGroup()
                 .addGap(0, 19, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(imgLogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3))
         );
@@ -1252,7 +1305,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelLogoLayout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addGroup(panelLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+                    .addComponent(imgLogo)
                     .addComponent(jLabel3))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -1524,6 +1577,7 @@ public class Inicio extends javax.swing.JFrame {
 
         panelEstoque.setBackground(new java.awt.Color(51, 51, 51));
 
+        tblEstoque.setAutoCreateRowSorter(true);
         tblEstoque.setBackground(new java.awt.Color(204, 204, 204));
         tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1550,6 +1604,7 @@ public class Inicio extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblEstoque.setToolTipText("");
         tblEstoque.getTableHeader().setReorderingAllowed(false);
         tblEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -1576,6 +1631,9 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         buttonIndisponivel.setText("Tornar Indisponível");
+        buttonIndisponivel.setBorderColor(new java.awt.Color(211, 77, 92));
+        buttonIndisponivel.setColorClick(new java.awt.Color(211, 77, 92));
+        buttonIndisponivel.setColorOver(new java.awt.Color(211, 77, 92));
         buttonIndisponivel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         buttonIndisponivel.setPreferredSize(new java.awt.Dimension(170, 50));
         buttonIndisponivel.addActionListener(new java.awt.event.ActionListener() {
@@ -1585,6 +1643,8 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         buttonDisponivel.setText("Tornar Disponível");
+        buttonDisponivel.setColorClick(new java.awt.Color(51, 226, 75));
+        buttonDisponivel.setColorOver(new java.awt.Color(51, 226, 75));
         buttonDisponivel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         buttonDisponivel.setPreferredSize(new java.awt.Dimension(170, 50));
         buttonDisponivel.addActionListener(new java.awt.event.ActionListener() {
@@ -1845,7 +1905,7 @@ public class Inicio extends javax.swing.JFrame {
                 inputPesquisaRelatoriosKeyTyped(evt);
             }
         });
-        panelRelatorios.add(inputPesquisaRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 910, 40));
+        panelRelatorios.add(inputPesquisaRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 870, 40));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
@@ -1920,7 +1980,7 @@ public class Inicio extends javax.swing.JFrame {
                 inputPesquisaReservaKeyTyped(evt);
             }
         });
-        panelReservas.add(inputPesquisaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 760, 40));
+        panelReservas.add(inputPesquisaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 720, 40));
 
         txtPesquisaReservas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPesquisaReservas.setForeground(new java.awt.Color(255, 255, 255));
@@ -2063,7 +2123,7 @@ public class Inicio extends javax.swing.JFrame {
                 buttonPesquisarClienteActionPerformed(evt);
             }
         });
-        panelClientes.add(buttonPesquisarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 40, 40));
+        panelClientes.add(buttonPesquisarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 40, 40));
 
         inputPesquisaCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         inputPesquisaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2071,7 +2131,7 @@ public class Inicio extends javax.swing.JFrame {
                 inputPesquisaClienteKeyTyped(evt);
             }
         });
-        panelClientes.add(inputPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 650, 40));
+        panelClientes.add(inputPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 530, 40));
 
         buttonAtualizarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconRefresh.png"))); // NOI18N
         buttonAtualizarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -2123,7 +2183,7 @@ public class Inicio extends javax.swing.JFrame {
                 buttonAddMensagemActionPerformed(evt);
             }
         });
-        panelClientes.add(buttonAddMensagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 250, 40));
+        panelClientes.add(buttonAddMensagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 200, 40));
 
         buttonGroup4.add(radioUsuario1);
         radioUsuario1.setForeground(new java.awt.Color(255, 255, 255));
@@ -2135,6 +2195,13 @@ public class Inicio extends javax.swing.JFrame {
         radioUsuario2.setForeground(new java.awt.Color(255, 255, 255));
         radioUsuario2.setText("ADMs");
         panelClientes.add(radioUsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, -1, -1));
+
+        buttonGroup4.add(radioUsuario3);
+        radioUsuario3.setForeground(new java.awt.Color(255, 255, 255));
+        radioUsuario3.setText("Contas Desativadas");
+        panelClientes.add(radioUsuario3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, -1, -1));
+
+        panelClientes.add(comboListaClientesArquivados, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 39, 120, 41));
 
         javax.swing.GroupLayout panelTabClientesLayout = new javax.swing.GroupLayout(panelTabClientes);
         panelTabClientes.setLayout(panelTabClientesLayout);
@@ -2159,6 +2226,8 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        panelEditarCategoria.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        panelEditarCategoria.setForeground(new java.awt.Color(240, 240, 240));
         panelEditarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelEditarCategoriaMouseClicked(evt);
@@ -2172,52 +2241,66 @@ public class Inicio extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        panelEditarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 0, 40, 30));
+        panelEditarCategoria.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 40, 30));
+
+        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel53.setText("Editar Categoria");
+        panelEditarCategoria.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 570, 30));
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel45.setText("Nome");
+        panelEditarCategoria.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
         inputNomeCategoriaEdit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 inputNomeCategoriaEditKeyTyped(evt);
             }
         });
-        panelEditarCategoria.add(inputNomeCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 250, 40));
-
-        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel45.setText("Nome categoria");
-        panelEditarCategoria.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+        panelEditarCategoria.add(inputNomeCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 570, 40));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel52.setText("Descrição Categoria");
-        panelEditarCategoria.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
-        panelEditarCategoria.add(inputDescricaoCategoriaEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 250, 40));
+        jLabel52.setText("Descrição");
+        panelEditarCategoria.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 60, 20));
 
+        btnSalvarEdicaoCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSalvarEdicaoCategoria.setText("Salvar");
         btnSalvarEdicaoCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarEdicaoCategoriaActionPerformed(evt);
             }
         });
-        panelEditarCategoria.add(btnSalvarEdicaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 250, 40));
+        panelEditarCategoria.add(btnSalvarEdicaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 570, 50));
 
-        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel53.setText("Editar Categoria");
-        panelEditarCategoria.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 250, -1));
+        jScrollPane10.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        inputDescricaoCategoriaEdit.setColumns(20);
+        inputDescricaoCategoriaEdit.setLineWrap(true);
+        inputDescricaoCategoriaEdit.setRows(5);
+        inputDescricaoCategoriaEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputDescricaoCategoriaEditKeyTyped(evt);
+            }
+        });
+        jScrollPane10.setViewportView(inputDescricaoCategoriaEdit);
+
+        panelEditarCategoria.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 570, 100));
 
         javax.swing.GroupLayout panelEditarCategoriaFundoLayout = new javax.swing.GroupLayout(panelEditarCategoriaFundo);
         panelEditarCategoriaFundo.setLayout(panelEditarCategoriaFundoLayout);
         panelEditarCategoriaFundoLayout.setHorizontalGroup(
             panelEditarCategoriaFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEditarCategoriaFundoLayout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(panelEditarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153)
+                .addComponent(panelEditarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelEditarCategoriaFundoLayout.setVerticalGroup(
             panelEditarCategoriaFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEditarCategoriaFundoLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(panelEditarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(panelEditarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(408, Short.MAX_VALUE))
         );
 
         panelCategorias.add(panelEditarCategoriaFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1040, 850));
@@ -2246,10 +2329,10 @@ public class Inicio extends javax.swing.JFrame {
         });
         panelPopCategoria.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 40, 30));
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("Adicionar Categoria");
-        panelPopCategoria.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 640, -1));
+        panelPopCategoria.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 560, 30));
 
         btnCriarCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCriarCategoria.setText("Adicionar");
@@ -2258,28 +2341,36 @@ public class Inicio extends javax.swing.JFrame {
                 btnCriarCategoriaActionPerformed(evt);
             }
         });
-        panelPopCategoria.add(btnCriarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 310, 50));
+        panelPopCategoria.add(btnCriarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 560, 50));
 
         inputNomeCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 inputNomeCategoriaKeyTyped(evt);
             }
         });
-        panelPopCategoria.add(inputNomeCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 310, 40));
+        panelPopCategoria.add(inputNomeCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 560, 40));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel43.setText("Descrição");
-        panelPopCategoria.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
+        panelPopCategoria.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+
+        jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         inputDescricaoCategoria.setColumns(20);
+        inputDescricaoCategoria.setLineWrap(true);
         inputDescricaoCategoria.setRows(5);
+        inputDescricaoCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputDescricaoCategoriaKeyTyped(evt);
+            }
+        });
         jScrollPane7.setViewportView(inputDescricaoCategoria);
 
-        panelPopCategoria.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 310, 100));
+        panelPopCategoria.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 560, 100));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel44.setText("Nome");
-        panelPopCategoria.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
+        panelPopCategoria.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
 
         javax.swing.GroupLayout panelFundoPopCategoriaLayout = new javax.swing.GroupLayout(panelFundoPopCategoria);
         panelFundoPopCategoria.setLayout(panelFundoPopCategoriaLayout);
@@ -2316,6 +2407,11 @@ public class Inicio extends javax.swing.JFrame {
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel40.setText("Descrição");
         jPanel3.add(jLabel40);
+
+        jLabel55.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel55.setText("Quantidade Produtos");
+        jPanel3.add(jLabel55);
 
         jLabel41.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -2361,7 +2457,7 @@ public class Inicio extends javax.swing.JFrame {
                 inputPesquisaCategoriasKeyTyped(evt);
             }
         });
-        panelCategorias.add(inputPesquisaCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 650, 40));
+        panelCategorias.add(inputPesquisaCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 610, 40));
 
         btnAdicionarCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAdicionarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconAdd.png"))); // NOI18N
@@ -2404,7 +2500,19 @@ public class Inicio extends javax.swing.JFrame {
         jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel47.setText("Nome");
         panelAdicionarADM.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 220, -1));
+
+        edtNomeADM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtNomeADMKeyTyped(evt);
+            }
+        });
         panelAdicionarADM.add(edtNomeADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 218, 40));
+
+        edtEmailADM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtEmailADMKeyTyped(evt);
+            }
+        });
         panelAdicionarADM.add(edtEmailADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 218, 40));
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -2615,7 +2723,7 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoNoti.setVisible(true);
 
         verificaNotiVisto();
-        
+
         animacoesPanel(3, panelNoti, panelFundoNoti, false);
 
     }//GEN-LAST:event_btnNotiMouseClicked
@@ -2654,17 +2762,17 @@ public class Inicio extends javax.swing.JFrame {
         if (produtosAtual.getId_produto() > 0) {
 
             int escolha = JOptionPane.showConfirmDialog(null, "Disponibilizar produto: " + produtosAtual.getNome_produto(), "Confirmação", JOptionPane.YES_NO_OPTION);
-            
+
             if (escolha == JOptionPane.YES_OPTION) {
-                
+
                 daoEstoque.produtoDisponível(produtosAtual, true);
                 preencherTabela(3, null);
                 resetaProdutoAtual();
-                
+
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_buttonDisponivelActionPerformed
 
     private void buttonIndisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIndisponivelActionPerformed
@@ -2672,16 +2780,16 @@ public class Inicio extends javax.swing.JFrame {
         if (produtosAtual.getId_produto() > 0) {
 
             int escolha = JOptionPane.showConfirmDialog(null, "Indisponibilizar produto: " + produtosAtual.getNome_produto(), "Confirmação", JOptionPane.YES_NO_OPTION);
-            
-            if(escolha == JOptionPane.YES_OPTION) {
-                
+
+            if (escolha == JOptionPane.YES_OPTION) {
+
                 daoEstoque.produtoDisponível(produtosAtual, false);
                 preencherTabela(2, null);
-                
+
             }
-            
-        }     
-        
+
+        }
+
     }//GEN-LAST:event_buttonIndisponivelActionPerformed
 
     private void btnCloseNotiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseNotiMouseEntered
@@ -2711,16 +2819,16 @@ public class Inicio extends javax.swing.JFrame {
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
 
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja sair de sua conta?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        
+
         if (opcao == JOptionPane.YES_OPTION) {
-            
+
             java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                dispose();
-                new Login().setVisible(true);
-            }
+                public void run() {
+                    dispose();
+                    new Login().setVisible(true);
+                }
             });
-            
+
         }
 
     }//GEN-LAST:event_btnLogoutMouseClicked
@@ -2785,56 +2893,137 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if (edtNomeProduto.getText().trim().isEmpty() || edtDescricaoProduto.getText().trim().isEmpty()) {
+        String nomeProdutoOriginal = produtosAtual.getNome_produto();
+        String descricaoProdutoOriginal = produtosAtual.getDescricao_produto();
+        String caminho = produtosAtual.getImagem();
+        float valorProdutoOriginal = produtosAtual.getValor();
+        float valorCustoProdutoOriginal = produtosAtual.getValor_custo();
+        int quantidadeProdutoOriginal = produtosAtual.getQuantidade();
+        int categoriaProdutoOriginal = produtosAtual.getFk_id_categoria();
+
+        boolean alterado = false;
+
+        if (!edtNomeProduto.getText().trim().equals(nomeProdutoOriginal)) {
             
-            JOptionPane.showMessageDialog(null, "Campos Nome/Descrição, não podem estar vazio!");
+            alterado = true;
             
-        } else {
+        }
+        
+        if (!edtDescricaoProduto.getText().trim().equals(descricaoProdutoOriginal)) {
             
-            if (Integer.parseInt(edtQuantidade.getText()) >= 0) {
+            alterado = true;
             
-                int escolha = JOptionPane.showConfirmDialog(null, "Confirmar edição?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        }
+        
+        if (categoriaProdutoOriginal != listaCategorias.get(comboCategorias.getSelectedIndex()).getId_categoria()) {
             
-                if (escolha == JOptionPane.YES_OPTION) {
+            alterado = true;
+            
+        }
+        
+        if (arquivoSelecionado != null) {
+            
+            alterado = true;
+            
+        }
+        
+        try {
+            
+            float valorFloat = Float.parseFloat(edtValorProduto.getText().trim().replace(",", "."));
+            
+            if (valorFloat != valorProdutoOriginal) {
                 
-                    EstoqueBean estoque = new EstoqueBean();
-
-                    if (arquivoSelecionado != null) {
-                        
-                        try{
-                            
-                            enviarImagem(arquivoSelecionado, 1);
-                            
-                        }catch(IOException e){
-                            e.printStackTrace();
-                        }
-                        
-                    }
-
-                    estoque.setId_produto(produtosAtual.getId_produto());
-                    estoque.setNome_produto(edtNomeProduto.getText());
-                    estoque.setDescricao_produto(edtDescricaoProduto.getText());
-                    estoque.setValor(Float.parseFloat(edtValorProduto.getText()));
-                    estoque.setValor_custo(Float.parseFloat(edtValorCustoProduto.getText()));
-                    estoque.setQuantidade(Integer.parseInt(edtQuantidade.getText()));
-                    estoque.setFk_id_categoria(listaCategorias.get(comboCategorias.getSelectedIndex()).getId_categoria());
-                    estoque.setImagem(caminhoImagem);
-
-                    daoEstoque.atualizar(estoque);
-
-                    caminhoImagem = null;
-                    JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+                alterado = true;
                 
-                }
-            
-            } else {
-            
-                JOptionPane.showMessageDialog(null, "Quantidade não permitida!");
-            
             }
+            
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(null, "Valor do produto inválido!");
+            
+            return;
+        }
+
+        try {
+            
+            float valorCustoFloat = Float.parseFloat(edtValorCustoProduto.getText().trim().replace(",", "."));
+            
+            if (valorCustoFloat != valorCustoProdutoOriginal) {
+                
+                alterado = true;
+                
+            }
+            
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(null, "Valor de custo inválido!");
+            return;
             
         }
 
+        try {
+            
+            int quantidade = Integer.parseInt(edtQuantidade.getText());
+            if (quantidade != quantidadeProdutoOriginal) {
+                
+                alterado = true;
+                
+            }
+            
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(null, "Quantidade inválida!");
+            return;
+            
+        }
+
+        if (alterado) {
+
+            int escolha = JOptionPane.showConfirmDialog(null, "Confirmar edição?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            
+            if (escolha == JOptionPane.YES_OPTION) {
+                
+                EstoqueBean estoque = new EstoqueBean();
+
+                if (arquivoSelecionado != null) {
+                    
+                    try {
+                        
+                        enviarImagem(arquivoSelecionado, 1);
+                        
+                    } catch (IOException e) {
+                        
+                        e.printStackTrace();
+                        
+                    }
+                } else {
+                    
+                    caminhoImagem = caminho;
+                    
+                }
+
+                estoque.setId_produto(produtosAtual.getId_produto());
+                estoque.setNome_produto(edtNomeProduto.getText());
+                estoque.setDescricao_produto(edtDescricaoProduto.getText());
+                estoque.setValor(Float.parseFloat(edtValorProduto.getText().trim().replace(",", ".")));
+                estoque.setValor_custo(Float.parseFloat(edtValorCustoProduto.getText().trim().replace(",", ".")));
+                estoque.setQuantidade(Integer.parseInt(edtQuantidade.getText()));
+                estoque.setFk_id_categoria(listaCategorias.get(comboCategorias.getSelectedIndex()).getId_categoria());
+                estoque.setImagem(caminhoImagem);
+
+                daoEstoque.atualizar(estoque);
+
+                caminhoImagem = null;
+
+                JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+            }
+            
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Nenhuma alteração foi feita.");
+            
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void panelPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPerfilMouseEntered
@@ -2881,146 +3070,158 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_panelInformacoesPerfilMouseClicked
 
     private void btnInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseEntered
-        
+
         btnInicio.setBorder(new LineBorder(Color.white, 1));
-        
+
     }//GEN-LAST:event_btnInicioMouseEntered
 
     private void btnInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseExited
-        
+
         btnInicio.setBorder(null);
-        
+
     }//GEN-LAST:event_btnInicioMouseExited
 
     private void btnEstoqueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstoqueMouseEntered
-        
+
         btnEstoque.setBorder(new LineBorder(Color.white, 1));
-        
+
     }//GEN-LAST:event_btnEstoqueMouseEntered
 
     private void btnEstoqueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstoqueMouseExited
-        
+
         btnEstoque.setBorder(null);
-        
+
     }//GEN-LAST:event_btnEstoqueMouseExited
 
     private void btnRelatoriosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatoriosMouseEntered
-        
+
         btnRelatorios.setBorder(new LineBorder(Color.white, 1));
-        
+
     }//GEN-LAST:event_btnRelatoriosMouseEntered
 
     private void btnRelatoriosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRelatoriosMouseExited
-        
+
         btnRelatorios.setBorder(null);
-        
+
     }//GEN-LAST:event_btnRelatoriosMouseExited
 
     private void btnFechaInformacoesPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFechaInformacoesPerfilMouseClicked
-        
+
         if (!animacao) {
 
             animacoesPanel(2, panelInformacoesPerfil, panelFundoPerfil, true);
 
         }
-        
+
     }//GEN-LAST:event_btnFechaInformacoesPerfilMouseClicked
 
     private void btnFechaInformacoesPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFechaInformacoesPerfilMouseEntered
-        
+
         btnFechaInformacoesPerfil.setBackground(Color.white);
         btnFechaInformacoesPerfil.setBorder(new LineBorder(Color.black, 1));
-        
+
     }//GEN-LAST:event_btnFechaInformacoesPerfilMouseEntered
 
     private void btnFechaInformacoesPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFechaInformacoesPerfilMouseExited
-        
+
         btnFechaInformacoesPerfil.setBackground(new Color(240, 240, 240));
         btnFechaInformacoesPerfil.setBorder(null);
-        
+
     }//GEN-LAST:event_btnFechaInformacoesPerfilMouseExited
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        
+
         String nome = inputNomeProduto.getText().trim();
         String descricao = inputDescricaoProduto.getText().trim();
-        String valor = inputValor.getText().trim();
+        String valor = inputValor.getText().trim().replace(",", ".");
         String quantidade = inputQuantidade.getText().trim();
-        String valorCusto = inputValorCusto.getText().trim();
-        
+        String valorCusto = inputValorCusto.getText().trim().replace(",", ".");
+
         if (nome.isEmpty() || descricao.isEmpty() || valor.isEmpty() || quantidade.isEmpty() || valorCusto.isEmpty() || !radioDisponivel.isSelected() && !radioIndisponivel.isSelected()) {
-            
+
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            
+
         } else {
-            
+
             if (comboAdicionarProdutoCategoria.getSelectedIndex() == -1) {
-                
+
                 JOptionPane.showMessageDialog(null, "Selecione uma categoria!");
-                
-            } else {
-                
-                Produtos produto = new Produtos();
-        
-            if (arquivoSelecionado != null) {
-                
-                    try {
-                        
-                        enviarImagem(arquivoSelecionado, 1);
-                        
-                        produto.setNome_produto(nome);
-                        produto.setDescricao_produto(descricao);
-                        produto.setValor(Float.parseFloat(valor));
-                        produto.setValor_custo(Float.parseFloat(valorCusto));
-                        produto.setQuantidade(Integer.parseInt(quantidade));
-                        produto.setImagem(caminhoImagem);
-                        caminhoImagem = null;
 
-                        int disponibilidade;
-            
-                        if (radioDisponivel.isSelected()) {
-                
-                            disponibilidade = 1;
-                
-                        } else {
-                
-                            disponibilidade = 0;
-                
+            } else {
+
+                try {
+
+                    float valorFloat = Float.parseFloat(valor);
+                    float valorCustoFloat = Float.parseFloat(valorCusto);
+
+                    Produtos produto = new Produtos();
+
+                    if (arquivoSelecionado != null) {
+
+                        try {
+
+                            enviarImagem(arquivoSelecionado, 1);
+
+                            produto.setNome_produto(nome);
+                            produto.setDescricao_produto(descricao);
+                            produto.setValor(valorFloat);
+                            produto.setValor_custo(valorCustoFloat);
+                            produto.setQuantidade(Integer.parseInt(quantidade));
+                            produto.setImagem(caminhoImagem);
+                            caminhoImagem = null;
+
+                            int disponibilidade;
+
+                            if (radioDisponivel.isSelected()) {
+
+                                disponibilidade = 1;
+
+                            } else {
+
+                                disponibilidade = 0;
+
+                            }
+
+                            produto.setDisponivel(disponibilidade);
+                            produto.setFk_id_categoria(listaCategorias.get(comboAdicionarProdutoCategoria.getSelectedIndex()).getId_categoria());
+
+                            daoProduto.cadastrar(produto);
+                            resetaCamposAdicionarProduto();
+
+                            JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
+
+                            txtImagem.setIcon(null);
+                            txtImagemSelecionada.setText("Nenhuma imagem selecionada");
+
+                        } catch (JSONException ex) {
+
+                            JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
+
+                        } catch (IOException ex) {
+
+                            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+
                         }
-                        
-                        produto.setDisponivel(disponibilidade);
-                        produto.setFk_id_categoria(listaCategorias.get(comboAdicionarProdutoCategoria.getSelectedIndex()).getId_categoria());
+                    } else {
 
-                        daoProduto.cadastrar(produto);
-                        resetaCamposAdicionarProduto();
-            
-                        JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
-            
-                        txtImagem.setIcon(null);
-                        txtImagemSelecionada.setText("Nenhuma imagem selecionada");
-                        
-                    } catch (JSONException ex) {
-                        
-                        JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
-                        
-                    } catch (IOException ex) {
-                        
-                        Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-                    
+                        JOptionPane.showMessageDialog(null, "Por favor, selecione uma imagem.");
+
                     }
-            } else {
-                
-                JOptionPane.showMessageDialog(null, "Por favor, selecione uma imagem.");
+
+                } catch (NumberFormatException e) {
+
+                    JOptionPane.showMessageDialog(null, "Valor(es) inválidos!");
+
+                }
+
             }
-                
-            }
- 
+
         }
-        
+
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void enviarImagem(File imagem, int tipo) throws IOException, JSONException {
-        
+
         String url = "https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/image/upload";
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestMethod("POST");
@@ -3038,13 +3239,13 @@ public class Inicio extends javax.swing.JFrame {
         FileInputStream fileInputStream = new FileInputStream(imagem);
         byte[] buffer = new byte[4096];
         int bytesRead;
-        
+
         while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-            
+
             outputStream.write(buffer, 0, bytesRead);
-            
+
         }
-        
+
         outputStream.writeBytes("\r\n");
 
         outputStream.writeBytes("--" + boundary + "\r\n");
@@ -3057,9 +3258,9 @@ public class Inicio extends javax.swing.JFrame {
         outputStream.close();
 
         int responseCode = connection.getResponseCode();
-        
+
         if (responseCode == HttpURLConnection.HTTP_OK && tipo == 1) {
-            
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
@@ -3070,13 +3271,14 @@ public class Inicio extends javax.swing.JFrame {
 
             JSONObject jsonResponse = new JSONObject(response.toString());
             String imageUrl = jsonResponse.getString("secure_url");
-            
+
             caminhoImagem = imageUrl;
-            
+
+            arquivoSelecionado = null;
             JOptionPane.showMessageDialog(null, "Imagem salva com sucesso!");
 
-        } else if(responseCode == HttpURLConnection.HTTP_OK && tipo == 2){
-            
+        } else if (responseCode == HttpURLConnection.HTTP_OK && tipo == 2) {
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
@@ -3087,56 +3289,56 @@ public class Inicio extends javax.swing.JFrame {
 
             JSONObject jsonResponse = new JSONObject(response.toString());
             String imageUrl = jsonResponse.getString("secure_url");
-            
+
             caminhoFoto = imageUrl;
-            
+
             GlobalAdmin.setFoto(caminhoFoto);
-            
+
             setaImagensPerfil();
-            
+
             daoUsuario.alterarFoto(caminhoFoto, GlobalAdmin.getId_admin());
-            
+
             caminhoFoto = null;
             fotoSelecionada = null;
-            
+
             JOptionPane.showMessageDialog(null, "Imagem salva com sucesso!");
-            
+
         } else {
-            
+
             JOptionPane.showMessageDialog(null, "Erro ao enviar a imagem. Código de resposta: " + responseCode);
-            
+
         }
     }
 
-    
+
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
 
         abrePopAdicionarProduto();
-        
+
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
     private void panelFundoAdicionarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFundoAdicionarProdutoMouseClicked
-        
+
         fechaPopAdicionarProduto();
-        
+
     }//GEN-LAST:event_panelFundoAdicionarProdutoMouseClicked
 
     private void buttonClosePanelAdicionarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonClosePanelAdicionarProdutoMouseClicked
-        
+
         fechaPopAdicionarProduto();
-        
+
     }//GEN-LAST:event_buttonClosePanelAdicionarProdutoMouseClicked
 
     private void buttonClosePanelAdicionarProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonClosePanelAdicionarProdutoMouseEntered
-        
+
         buttonClosePanelAdicionarProduto.setBackground(new Color(240, 240, 240));
-        
+
     }//GEN-LAST:event_buttonClosePanelAdicionarProdutoMouseEntered
 
     private void buttonClosePanelAdicionarProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonClosePanelAdicionarProdutoMouseExited
-        
-        buttonClosePanelAdicionarProduto.setBackground(new Color(102,102,102));
-        
+
+        buttonClosePanelAdicionarProduto.setBackground(new Color(102, 102, 102));
+
     }//GEN-LAST:event_buttonClosePanelAdicionarProdutoMouseExited
 
     private void panelAdicionarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAdicionarProdutoMouseClicked
@@ -3144,324 +3346,328 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_panelAdicionarProdutoMouseClicked
 
     private void buttonSalvarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarPerfilActionPerformed
-        
+
         String nome = inputNome.getText().trim();
         String email = inputEmail.getText().trim();
         String senha = inputSenha.getText().trim();
         String whatsapp = inputWhatsapp.getText().trim();
         String whatsappNumeros = whatsapp.replaceAll("[^0-9]", "");
 
-    if (fotoSelecionada != null) {
-        
-        try {
-            
-            enviarImagem(fotoSelecionada, 2);
-            
-        } catch (JSONException ex) {
-            
-            JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        if (fotoSelecionada != null) {
+
+            try {
+
+                enviarImagem(fotoSelecionada, 2);
+
+            } catch (JSONException ex) {
+
+                JOptionPane.showMessageDialog(null, "Erro ao enviar imagem: " + ex.getMessage());
+
+            } catch (IOException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
-        
-    }
 
-    if (nome.equals(GlobalAdmin.getNome()) && email.equals(GlobalAdmin.getEmail()) && senha.equals(GlobalAdmin.getSenha())) {
+        if (nome.equals(GlobalAdmin.getNome()) && email.equals(GlobalAdmin.getEmail()) && senha.equals(GlobalAdmin.getSenha())) {
 
-        listarNotificacoes();
+            listarNotificacoes();
 
-        if (checkWhatts.isSelected()) {
+            if (checkWhatts.isSelected()) {
 
-            if (whatsappNumeros.isEmpty()) {
-                
-                if (!GlobalAdmin.getWhatsapp().equals("")) {
-                    
-                    inputWhatsapp.setText(GlobalAdmin.getWhatsapp());
-                    
-                    int opcao = JOptionPane.showConfirmDialog(null, "Whatsapp inválido, salvar sem número?", "Confirmação", JOptionPane.YES_NO_OPTION);
-                    
-                    if (opcao == JOptionPane.YES_OPTION) {
-                        
-                        Usuarios usuario = new Usuarios(0, null, null, null, "", null, null, 0);
-                        daoAdmin.atualizarPerfil(usuario, 2);
-                        GlobalAdmin.setWhatsapp(whatsappNumeros);
-                        inputWhatsapp.setText("");
-                        JOptionPane.showMessageDialog(null, "Whatsapp salvo sem número!");
-                        
-                    } else {
-                        
+                if (whatsappNumeros.isEmpty()) {
+
+                    if (!GlobalAdmin.getWhatsapp().equals("")) {
+
                         inputWhatsapp.setText(GlobalAdmin.getWhatsapp());
-                        
-                        return;
-                        
+
+                        int opcao = JOptionPane.showConfirmDialog(null, "Whatsapp inválido, salvar sem número?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+                        if (opcao == JOptionPane.YES_OPTION) {
+
+                            Usuarios usuario = new Usuarios(0, null, null, null, "", null, null, 0, 0);
+                            daoAdmin.atualizarPerfil(usuario, 2);
+                            GlobalAdmin.setWhatsapp(whatsappNumeros);
+                            inputWhatsapp.setText("");
+                            JOptionPane.showMessageDialog(null, "Whatsapp salvo sem número!");
+
+                        } else {
+
+                            inputWhatsapp.setText(GlobalAdmin.getWhatsapp());
+
+                            return;
+
+                        }
+
                     }
-                    
+
+                } else if (!whatsappNumeros.equals(GlobalAdmin.getWhatsapp())) {
+
+                    Usuarios usuario = new Usuarios(0, null, null, null, whatsappNumeros, null, null, 0, 0);
+                    daoAdmin.atualizarPerfil(usuario, 2);
+                    GlobalAdmin.setWhatsapp(whatsappNumeros);
+                    JOptionPane.showMessageDialog(null, "Whatsapp salvo!");
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Nenhum campo alterado!");
+                    return;
+
                 }
-                
-            } else if (!whatsappNumeros.equals(GlobalAdmin.getWhatsapp())) {  
-                
-                Usuarios usuario = new Usuarios(0, null, null, null, whatsappNumeros, null, null, 0);
-                daoAdmin.atualizarPerfil(usuario, 2);
-                GlobalAdmin.setWhatsapp(whatsappNumeros);
-                JOptionPane.showMessageDialog(null, "Whatsapp salvo!");
-                
+
             } else {
-                
+
                 JOptionPane.showMessageDialog(null, "Nenhum campo alterado!");
                 return;
-                
-            }
-            
-        } else {
-            
-            JOptionPane.showMessageDialog(null, "Nenhum campo alterado!");
-            return;
-            
-        }
-    }
 
-    if (!GlobalAdmin.getEmail().equals(email)) {
-        
-        if (daoUsuario.validarEmailExistente(email)) {
-            
-            JOptionPane.showMessageDialog(null, "E-mail indisponível!");
-            return;
-            
-        } else {
-            
-            if (!email.contains("@gmail.com")) {
-                
-                JOptionPane.showMessageDialog(null, "E-mail não possui @gmail.com");
+            }
+        }
+
+        if (!GlobalAdmin.getEmail().equals(email)) {
+
+            if (daoUsuario.validarEmailExistente(email)) {
+
+                JOptionPane.showMessageDialog(null, "E-mail indisponível!");
                 return;
-                
+
+            } else {
+
+                if (!email.contains("@gmail.com")) {
+
+                    JOptionPane.showMessageDialog(null, "E-mail não possui @gmail.com");
+                    return;
+
+                }
+
+            }
+        }
+
+        if (!senha.equals(GlobalAdmin.getSenha())) {
+
+            String confirma = JOptionPane.showInputDialog("Confirme a senha atual");
+
+            if (confirma == null || !confirma.equals(GlobalAdmin.getSenha())) {
+
+                JOptionPane.showMessageDialog(null, confirma == null ? "Alteração cancelada!" : "Senha incorreta!");
+                inputNome.setText(GlobalAdmin.getNome());
+                inputEmail.setText(GlobalAdmin.getEmail());
+                inputSenha.setText(GlobalAdmin.getSenha());
+                return;
+
+            }
+        }
+
+        if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Nome/E-mail/Senha não podem estar vazios!");
+            return;
+
+        }
+
+        if (GlobalAdmin.getNome().equals(nome) && GlobalAdmin.getEmail().equals(email) && GlobalAdmin.getSenha().equals(senha) && GlobalAdmin.getWhatsapp().equals(whatsappNumeros)) {
+
+            JOptionPane.showMessageDialog(null, "Nenhum campo alterado!");
+
+        } else {
+
+            int resposta = JOptionPane.showConfirmDialog(null, "Salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+            if (resposta == JOptionPane.YES_OPTION) {
+
+                Usuarios usuario = new Usuarios(0, nome, email, senha, whatsappNumeros, null, null, 0, 0);
+                daoAdmin.atualizarPerfil(usuario, 1);
+
+                GlobalAdmin.setEmail(email);
+                GlobalAdmin.setNome(nome);
+                GlobalAdmin.setSenha(senha);
+                GlobalAdmin.setWhatsapp(whatsappNumeros);
+
+                txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
+                JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+
+                listarNotificacoes();
             }
 
         }
-    }
 
-    if (!senha.equals(GlobalAdmin.getSenha())) {
-        
-        String confirma = JOptionPane.showInputDialog("Confirme a senha atual");
-        
-        if (confirma == null || !confirma.equals(GlobalAdmin.getSenha())) {
-            
-            JOptionPane.showMessageDialog(null, confirma == null ? "Alteração cancelada!" : "Senha incorreta!");
-            inputNome.setText(GlobalAdmin.getNome());
-            inputEmail.setText(GlobalAdmin.getEmail());
-            inputSenha.setText(GlobalAdmin.getSenha());
-            return;
-            
-        }
-    }
-
-    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-        
-        JOptionPane.showMessageDialog(null, "Nome/E-mail/Senha não podem estar vazios!");
-        return;
-        
-    }
-
-    if (GlobalAdmin.getNome().equals(nome) && GlobalAdmin.getEmail().equals(email) && GlobalAdmin.getSenha().equals(senha) && GlobalAdmin.getWhatsapp().equals(whatsappNumeros)) {
-        
-        JOptionPane.showMessageDialog(null, "Nenhum campo alterado!");
-        
-    } else {
-        
-        int resposta = JOptionPane.showConfirmDialog(null, "Salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION);
-    
-    if (resposta == JOptionPane.YES_OPTION) {
-
-        Usuarios usuario = new Usuarios(0, nome, email, senha, whatsappNumeros, null, null, 0);
-        daoAdmin.atualizarPerfil(usuario, 1);
-
-        GlobalAdmin.setEmail(email);
-        GlobalAdmin.setNome(nome);
-        GlobalAdmin.setSenha(senha);
-        GlobalAdmin.setWhatsapp(whatsappNumeros);
-
-        txtBemVindo.setText("Bem vindo, " + GlobalAdmin.getNome());
-        JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
-
-        listarNotificacoes();
-    }
-        
-    }
-        
     }//GEN-LAST:event_buttonSalvarPerfilActionPerformed
 
     private void edtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtQuantidadeKeyTyped
 
         char letra = evt.getKeyChar();
-        
+
         if (!Character.isDigit(letra)) {
             evt.consume();
         }
-        
+
         String quantidadeTexto = edtQuantidade.getText().trim();
 
         if (quantidadeTexto == null || quantidadeTexto.isEmpty()) {
-            
+
             edtQuantidade.setText("0");
-            
+
         }
 
 
     }//GEN-LAST:event_edtQuantidadeKeyTyped
 
     private void edtValorCustoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtValorCustoProdutoKeyTyped
-        
-        char letra = evt.getKeyChar();
 
-        if (!Character.isDigit(letra) && letra != '.') {
-            evt.consume(); 
-        }
-        
         String quantidadeTexto = edtValorCustoProduto.getText().trim();
 
-        if (quantidadeTexto == null || quantidadeTexto.isEmpty()) {
-            
-            edtValorCustoProduto.setText("0");
-            
+        char letra = evt.getKeyChar();
+
+        if (!Character.isDigit(letra) && letra != ',' || quantidadeTexto.length() > 5) {
+            evt.consume();
         }
-        
+
+        if (quantidadeTexto == null || quantidadeTexto.isEmpty()) {
+
+            edtValorCustoProduto.setText("0");
+
+        }
+
     }//GEN-LAST:event_edtValorCustoProdutoKeyTyped
 
     private void edtValorProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtValorProdutoKeyTyped
-        
-        char letra = evt.getKeyChar();
 
-        if (!Character.isDigit(letra) && letra != '.') {
-            evt.consume(); 
+        char letra = evt.getKeyChar();
+        String valor = edtValorProduto.getText().trim();
+
+        if (!Character.isDigit(letra) && letra != ',' || valor.length() > 5) {
+            evt.consume();
         }
-        
+
         String quantidadeTexto = edtValorProduto.getText().trim();
 
         if (quantidadeTexto == null || quantidadeTexto.isEmpty()) {
-            
+
             edtValorProduto.setText("0");
-            
+
         }
-        
+
     }//GEN-LAST:event_edtValorProdutoKeyTyped
 
     private void inputPesquisarProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisarProdutoKeyTyped
-        
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
         String produto = inputPesquisarProduto.getText().trim();
-        
+
         if (radio1.isSelected()) {
-            
+
             preencherTabela(4, produto);
-            
+
         }
-        
+
         if (radio2.isSelected()) {
-            
+
             preencherTabela(5, produto);
-            
+
         }
-        
+
         if (radio3.isSelected()) {
-            
+
             preencherTabela(6, produto);
-            
+
         }
-        
+
         if (radio4.isSelected()) {
-            
+
             preencherTabela(8, produto);
-            
+
         }
-        
+
     }//GEN-LAST:event_inputPesquisarProdutoKeyTyped
 
     private void btnReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseClicked
-        
+
         trocaTab(4);
-        
+
     }//GEN-LAST:event_btnReservasMouseClicked
 
     private void btnReservasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseEntered
-        
+
         btnReservas.setBorder(new LineBorder(Color.white, 1));
-        
+
     }//GEN-LAST:event_btnReservasMouseEntered
 
     private void btnReservasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservasMouseExited
-        
+
         btnReservas.setBorder(null);
-        
+
     }//GEN-LAST:event_btnReservasMouseExited
 
     private void buttonReativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReativarActionPerformed
-        
+
         int escolha = JOptionPane.showConfirmDialog(null, "Reativar produto: " + produtosAtual.getNome_produto(), "Confirmação", JOptionPane.YES_NO_OPTION);
-        
+
         if (escolha == JOptionPane.YES_OPTION) {
-            
+
             daoEstoque.reativarProduto(produtosAtual);
             verificaRadio();
             resetaProdutoAtual();
-            
+
         }
-        
+
     }//GEN-LAST:event_buttonReativarActionPerformed
 
     private void buttonReativarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonReativarMouseEntered
-        
+
         buttonReativar.setBackground(new Color(51, 204, 0));
-        
+
     }//GEN-LAST:event_buttonReativarMouseEntered
 
     private void buttonReativarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonReativarMouseExited
-        
+
         buttonReativar.setBackground(new Color(240, 240, 240));
-        
+
     }//GEN-LAST:event_buttonReativarMouseExited
 
     private void buttonArquivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonArquivarActionPerformed
-        
+
         int escolha = JOptionPane.showConfirmDialog(null, "Arquivar este produto: " + produtosAtual.getNome_produto(), "Confirmação", JOptionPane.YES_NO_OPTION);
 
         if (escolha == JOptionPane.YES_OPTION) {
-            
+
             daoEstoque.arquivarProduto(produtosAtual);
             verificaRadio();
             resetaProdutoAtual();
-            
+
         }
-        
+
     }//GEN-LAST:event_buttonArquivarActionPerformed
 
     private void buttonEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarProdutoActionPerformed
-        
+
         if (produtosAtual.getId_produto() > 0) {
 
             buttonEditarProduto.setVisible(false);
             buttonArquivar.setVisible(false);
             buttonReativar.setVisible(false);
             inputPesquisarProduto.setVisible(false);
+
             panelFundoPopProdutoSelecionado.setVisible(true);
             panelPopProduto.setVisible(true);
 
             edtNomeProduto.setText(produtosAtual.getNome_produto());
             edtDescricaoProduto.setText(produtosAtual.getDescricao_produto());
             edtQuantidade.setText(String.valueOf(produtosAtual.getQuantidade()));
-            edtValorProduto.setText(String.valueOf(produtosAtual.getValor()));
-            edtValorCustoProduto.setText(String.valueOf(produtosAtual.getValor_custo()));
-            
+            edtValorProduto.setText(String.valueOf(produtosAtual.getValor()).replace(".", ","));
+            edtValorCustoProduto.setText(String.valueOf(produtosAtual.getValor_custo()).replace(".", ","));
+
             String imagem = produtosAtual.getImagem();
-            
+
             if (imagem != null && !imagem.equals("")) {
-                
+
                 txtImagemProduto.setIcon(new CriaIcon().criaIcon(imagem));
-            
+
             } else {
-                
+
                 ImageIcon imagemIcon = new ImageIcon(getClass().getResource("/imagens/produto_sem_imagem.png"));
 
                 txtImagemProduto.setIcon(imagemIcon);
-                
+
             }
 
             listaCategorias = daoCategoria.listar(1, null);
@@ -3481,37 +3687,39 @@ public class Inicio extends javax.swing.JFrame {
             }
 
         }
-        
+
     }//GEN-LAST:event_buttonEditarProdutoActionPerformed
 
     private void buttonArquivarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonArquivarMouseEntered
-        
-        buttonArquivar.setBackground(new Color(255, 0, 0));
-        
+
+        buttonArquivar.setBackground(new Color(211, 77, 92));
+
     }//GEN-LAST:event_buttonArquivarMouseEntered
 
     private void buttonArquivarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonArquivarMouseExited
-        
+
         buttonArquivar.setBackground(new Color(240, 240, 240));
-        
+
     }//GEN-LAST:event_buttonArquivarMouseExited
 
     private void buttonEditarProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEditarProdutoMouseEntered
-        
-        buttonEditarProduto.setBackground(new Color(255, 153, 0));
-        
+
+        buttonEditarProduto.setBackground(new Color(204, 153, 0));
+
     }//GEN-LAST:event_buttonEditarProdutoMouseEntered
 
     private void buttonEditarProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEditarProdutoMouseExited
-        
+
         buttonEditarProduto.setBackground(new Color(240, 240, 240));
-        
+
     }//GEN-LAST:event_buttonEditarProdutoMouseExited
 
     private void inputPesquisaReservaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaReservaKeyTyped
-      
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
         pesquisaReserva();
-        
+
     }//GEN-LAST:event_inputPesquisaReservaKeyTyped
 
     private void buttonPesquisarReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarReservaMouseEntered
@@ -3523,66 +3731,63 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPesquisarReservaMouseExited
 
     private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
-        
-        
+
         inputPesquisaReserva.setText("");
         listarReservas(1, null);
-        
+
     }//GEN-LAST:event_buttonAtualizarActionPerformed
 
     private void buttonPesquisarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarReservaActionPerformed
-        
+
         pesquisaReserva();
-        
+
     }//GEN-LAST:event_buttonPesquisarReservaActionPerformed
 
     private void inputValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputValorKeyTyped
-        
+
         char letra = evt.getKeyChar();
         String valor = inputValor.getText().trim();
-        
-        if (!Character.isDigit(letra) && letra != '.' || valor.length() > 5) {
-            evt.consume(); 
+
+        if (!Character.isDigit(letra) && letra != ',' || valor.length() > 5) {
+            evt.consume();
         }
-        
-        
-        
+
     }//GEN-LAST:event_inputValorKeyTyped
 
     private void inputValorCustoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputValorCustoKeyTyped
-       
+
         char letra = evt.getKeyChar();
 
         String valor = inputValorCusto.getText().trim();
-        
-        if (!Character.isDigit(letra) && letra != '.' || valor.length() > 5) {
-            evt.consume(); 
+
+        if (!Character.isDigit(letra) && letra != ',' || valor.length() > 5) {
+            evt.consume();
         }
-        
+
     }//GEN-LAST:event_inputValorCustoKeyTyped
 
     private void inputQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputQuantidadeKeyTyped
-        
+
         char letra = evt.getKeyChar();
 
         String valor = inputQuantidade.getText().trim();
-        
-        if (!Character.isDigit(letra) && letra != '.' || valor.length() > 3) {
-            evt.consume(); 
+
+        if (!Character.isDigit(letra) || valor.length() > 3) {
+            evt.consume();
         }
-        
+
     }//GEN-LAST:event_inputQuantidadeKeyTyped
 
     private void btnClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseClicked
 
         trocaTab(5);
-        
+
     }//GEN-LAST:event_btnClientesMouseClicked
 
     private void btnClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseEntered
 
         btnClientes.setBorder(new LineBorder(Color.white, 1));
-  
+
     }//GEN-LAST:event_btnClientesMouseEntered
 
     private void btnClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientesMouseExited
@@ -3600,136 +3805,140 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPesquisarClienteMouseExited
 
     private void buttonPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarClienteActionPerformed
-        
+
         String pesquisa = inputPesquisaCliente.getText().trim();
-        
+
         if (radioUsuario1.isSelected()) {
-            
+
             listarClientes(3, pesquisa);
-            
-        } else if (radioUsuario2.isSelected()){
-            
+
+        } else if (radioUsuario2.isSelected()) {
+
             listarClientes(6, pesquisa);
-            
+
         }
-        
+
     }//GEN-LAST:event_buttonPesquisarClienteActionPerformed
 
     private void inputPesquisaClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaClienteKeyTyped
-        
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
         String pesquisa = inputPesquisaCliente.getText().trim();
-   
+
         if (radioUsuario1.isSelected()) {
-            
+
             listarClientes(2, pesquisa);
-            
+
         } else if (radioUsuario2.isSelected()) {
-            
+
             listarClientes(5, pesquisa);
-            
+
         }
-        
+
     }//GEN-LAST:event_inputPesquisaClienteKeyTyped
 
     private void buttonAtualizarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarClientesActionPerformed
-        
+
         inputPesquisaCliente.setText("");
-        
+
         verificaRadioUsuarios();
-        
+
     }//GEN-LAST:event_buttonAtualizarClientesActionPerformed
 
     private void buttonAddMensagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddMensagemActionPerformed
-        
+
         panelFundoPopCliente.setVisible(true);
         panelPopCliente.setVisible(true);
-        
+
     }//GEN-LAST:event_buttonAddMensagemActionPerformed
 
     private void inputMensagemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputMensagemFocusGained
-        
+
         if (inputMensagem.getText().trim().equals("Digite sua mensagem...")) {
-            
+
             inputMensagem.setText("");
-            
+
         }
-        
+
     }//GEN-LAST:event_inputMensagemFocusGained
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+
         if (inputMensagem.getText().trim().equals("")) {
-            
+
             inputMensagem.setBorder(new LineBorder(Color.red, 1));
-            
+
         } else {
 
             GlobalWhats.setMensagem(inputMensagem.getText().trim());
             JOptionPane.showMessageDialog(null, "Mensagem salva!");
-            
+
             panelFundoPopCliente.setVisible(false);
             panelPopCliente.setVisible(false);
-            
+
         }
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
         panelFundoPopCliente.setVisible(false);
         panelPopCliente.setVisible(false);
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void panelFundoPopClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFundoPopClienteMouseClicked
-        
+
         panelFundoPopCliente.setVisible(false);
         panelPopCliente.setVisible(false);
-        
+
     }//GEN-LAST:event_panelFundoPopClienteMouseClicked
 
     private void panelPopClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPopClienteMouseClicked
 
         if (!inputMensagem.getText().trim().equals("")) {
-            
+
             inputMensagem.setBorder(null);
-            
+
         }
-        
+
     }//GEN-LAST:event_panelPopClienteMouseClicked
 
     private void btnCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoriasMouseClicked
-        
+
         trocaTab(6);
-        
+
     }//GEN-LAST:event_btnCategoriasMouseClicked
 
     private void btnCategoriasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoriasMouseEntered
-        
+
         btnCategorias.setBorder(new LineBorder(Color.white, 1));
-        
+
     }//GEN-LAST:event_btnCategoriasMouseEntered
 
     private void btnCategoriasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoriasMouseExited
-        
+
         btnCategorias.setBorder(null);
-        
+
     }//GEN-LAST:event_btnCategoriasMouseExited
 
     private void buttonAtualizarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarCategoriasActionPerformed
-        
+
         inputPesquisaCategorias.setText("");
-        
+
         verificaRadioCategoria();
-        
+
     }//GEN-LAST:event_buttonAtualizarCategoriasActionPerformed
 
     private void inputPesquisaCategoriasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaCategoriasKeyTyped
-       
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
         String pesquisa = inputPesquisaCategorias.getText().trim();
-        
+
         listaCategoriasPesquisa(pesquisa);
-        
+
     }//GEN-LAST:event_inputPesquisaCategoriasKeyTyped
 
     private void buttonPesquisarCategoriasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarCategoriasMouseEntered
@@ -3741,27 +3950,29 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPesquisarCategoriasMouseExited
 
     private void buttonPesquisarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarCategoriasActionPerformed
-        
+
         String pesquisa = inputPesquisaCategorias.getText().trim();
-        
+
         listaCategoriasPesquisa(pesquisa);
-        
+
     }//GEN-LAST:event_buttonPesquisarCategoriasActionPerformed
 
     private void buttonAtualizarRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarRelatoriosActionPerformed
-        
+
         inputPesquisaRelatorios.setText("");
-        
+
         listarRelatorios(1, null);
-        
+
     }//GEN-LAST:event_buttonAtualizarRelatoriosActionPerformed
 
     private void inputPesquisaRelatoriosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPesquisaRelatoriosKeyTyped
-        
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
         String pesquisa = inputPesquisaRelatorios.getText().trim();
-        
+
         listarRelatorios(2, pesquisa);
-        
+
     }//GEN-LAST:event_inputPesquisaRelatoriosKeyTyped
 
     private void buttonPesquisarReserva1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPesquisarReserva1MouseEntered
@@ -3773,184 +3984,182 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPesquisarReserva1MouseExited
 
     private void buttonPesquisarReserva1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPesquisarReserva1ActionPerformed
-        
-        
-        
+
+
     }//GEN-LAST:event_buttonPesquisarReserva1ActionPerformed
 
     private void btnAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarCategoriaActionPerformed
-        
+
         panelFundoPopCategoria.setVisible(true);
         panelPopCategoria.setVisible(true);
-        
+
     }//GEN-LAST:event_btnAdicionarCategoriaActionPerformed
 
     private void panelFundoPopCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFundoPopCategoriaMouseClicked
-        
+
         panelFundoPopCategoria.setVisible(false);
         panelPopCategoria.setVisible(false);
-        
+
     }//GEN-LAST:event_panelFundoPopCategoriaMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
         panelFundoPopCategoria.setVisible(false);
         panelPopCategoria.setVisible(false);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnCriarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarCategoriaActionPerformed
-        
+
         String nome = inputNomeCategoria.getText().trim();
         String descricao = inputDescricaoCategoria.getText().trim();
-        
+
         if (nome.isEmpty() || descricao.isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            
-        } else if (daoCategoria.categoriaDisponivel(nome).getId_categoria() > 0){
-            
+
+        } else if (daoCategoria.categoriaDisponivel(nome).getId_categoria() > 0) {
+
             JOptionPane.showMessageDialog(null, "Nome indiponível!");
-            
+
         } else {
-            
-            daoCategoria.adicionar(new Categorias(nome, descricao, false, 0));
-        
+
+            daoCategoria.adicionar(new Categorias(nome, descricao, false, 0, 0));
+
             inputNomeCategoria.setText("");
             inputDescricaoCategoria.setText("");
             JOptionPane.showMessageDialog(null, "Categoria criada com sucesso!");
             inputPesquisaCategorias.setText("");
-            
+
             listarCategorias(1, null);
-            
+
         }
-        
+
     }//GEN-LAST:event_btnCriarCategoriaActionPerformed
 
     private void btnAdicionarADMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarADMMouseClicked
-        
+
         trocaTab(7);
-        
+
     }//GEN-LAST:event_btnAdicionarADMMouseClicked
 
     private void btnAdicionarADMMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarADMMouseEntered
-        
+
         btnAdicionarADM.setBorder(new LineBorder(Color.white, 1));
-        
+
     }//GEN-LAST:event_btnAdicionarADMMouseEntered
 
     private void btnAdicionarADMMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarADMMouseExited
-        
+
         btnAdicionarADM.setBorder(null);
-        
+
     }//GEN-LAST:event_btnAdicionarADMMouseExited
 
     private void panelEditarCategoriaFundoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEditarCategoriaFundoMouseClicked
-      
+
         fecharPanelEditarCategoria();
-        
+
     }//GEN-LAST:event_panelEditarCategoriaFundoMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+
         fecharPanelEditarCategoria();
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+
         Usuarios usuario = new Usuarios();
-        
+
         String nomeADM = edtNomeADM.getText().trim();
         String emailADM = edtEmailADM.getText().trim();
         String senhaADM = edtSenhaADM.getText().trim();
         String dataADM = edtDataNascimentoADM.getText().trim();
         String whatsappADM = edtWhatsappADM.getText().trim();
-        
+
         if (nomeADM.isEmpty() || emailADM.isEmpty() || senhaADM.isEmpty() || dataADM.isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            
+
         } else if (!checkSemWhatts.isSelected() && whatsappADM.length() < 14) {
-            
+
             JOptionPane.showMessageDialog(null, "Número de whatsapp está faltando!");
-            
-        } else if(senhaADM.length() <= 5) {
-            
+
+        } else if (senhaADM.length() <= 5) {
+
             JOptionPane.showMessageDialog(null, "Mínimo 6 caractérs no campo senha!");
 
         } else {
-            
+
             if (daoUsuario.validarEmailExistente(emailADM)) {
-                
+
                 JOptionPane.showMessageDialog(null, "E-mail indisponível!");
-                
-            } else if (emailADM.contains("@gmail.com")){
-                
+
+            } else if (emailADM.contains("@gmail.com")) {
+
                 String[] divide = edtDataNascimentoADM.getText().split("\\/");
-        
+
                 String dia = "";
                 String mes = "";
                 String ano = "";
-        
+
                 if (divide.length > 0) {
-            
+
                     dia = divide[0];
                     mes = divide[1];
                     ano = divide[2];
-            
-                }
-        
-                String data = ano + "-" + mes + "-" + dia;
-         
-        try{
-            
-            Date dataNascimento = Date.valueOf(data);
-            usuario.setData_nascimento(dataNascimento);
-            
-            String num = edtWhatsappADM.getText();
 
-            String whatsapp = num.replaceAll("[^0-9]", "");
-   
-            usuario.setAdm(1);
-            usuario.setEmail(emailADM);
-            
-            if (checkSemWhatts.isSelected()) {
-                
-                whatsapp = "";
-                
-            }
-            
-            usuario.setWhatsapp(whatsapp);
-            usuario.setSenha(senhaADM);
-            usuario.setId_usuario(0);
-            usuario.setNome(nomeADM);
-        
-            daoAdmin.InserirAdministrador(usuario);
-        
-            resetarCamposAdicionarADM();
-        
-            JOptionPane.showMessageDialog(null, "ADM Adicionado com sucesso!");
-            
-            
-        }catch(Exception e){
-            
-            JOptionPane.showMessageDialog(null, "Data inválida!");
-            
-        }
-                
+                }
+
+                String data = ano + "-" + mes + "-" + dia;
+
+                try {
+
+                    Date dataNascimento = Date.valueOf(data);
+                    usuario.setData_nascimento(dataNascimento);
+
+                    String num = edtWhatsappADM.getText();
+
+                    String whatsapp = num.replaceAll("[^0-9]", "");
+
+                    usuario.setAdm(1);
+                    usuario.setEmail(emailADM);
+
+                    if (checkSemWhatts.isSelected()) {
+
+                        whatsapp = "";
+
+                    }
+
+                    usuario.setWhatsapp(whatsapp);
+                    usuario.setSenha(senhaADM);
+                    usuario.setId_usuario(0);
+                    usuario.setNome(nomeADM);
+
+                    daoAdmin.InserirAdministrador(usuario);
+
+                    resetarCamposAdicionarADM();
+
+                    JOptionPane.showMessageDialog(null, "ADM Adicionado com sucesso!");
+
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(null, "Data inválida!");
+
+                }
+
             } else {
-                
+
                 JOptionPane.showMessageDialog(null, "@gmail.com está faltando no campo E-mail!");
-                
+
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        
+
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Selecione uma Imagem");
         chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagens", "jpg", "png", "gif"));
@@ -3959,9 +4168,9 @@ public class Inicio extends javax.swing.JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             arquivoSelecionado = chooser.getSelectedFile();
             txtImagemSelecionada.setText("Imagem selecionada: " + arquivoSelecionado.getName());
-            
+
             if (arquivoSelecionado != null) {
-                    
+
                 try {
 
                     ImageIcon imagemIcon = new ImageIcon(arquivoSelecionado.getAbsolutePath());
@@ -3970,229 +4179,229 @@ public class Inicio extends javax.swing.JFrame {
                     imagemIcon = new ImageIcon(imagemRedimensionada);
 
                     txtImagem.setIcon(imagemIcon);
-                
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+
             }
-            
+
         }
 
-        
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnSalvarEdicaoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarEdicaoCategoriaActionPerformed
-        
+
         String novoNomeCategoria = inputNomeCategoriaEdit.getText().trim();
         String novaDescricaoCategoria = inputDescricaoCategoriaEdit.getText().trim();
-        
+
         if (novoNomeCategoria.isEmpty() || novaDescricaoCategoria.isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            
-        } else if (daoCategoria.categoriaDisponivel(novoNomeCategoria).getId_categoria() > 0){
-            
+
+        } else if (daoCategoria.categoriaDisponivel(novoNomeCategoria).getId_categoria() > 0) {
+
             JOptionPane.showMessageDialog(null, "Nome indisponível!");
- 
+
         } else {
-            
+
             daoCategoria.editar(novoNomeCategoria, novaDescricaoCategoria, categoriaAtual.getId_categoria());
-            
+
             inputNomeCategoriaEdit.setText("");
             inputDescricaoCategoriaEdit.setText("");
             JOptionPane.showMessageDialog(null, "Edição realizada com sucesso!");
-            
-        }
-        
-    }//GEN-LAST:event_btnSalvarEdicaoCategoriaActionPerformed
 
-    private void panelEditarCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEditarCategoriaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelEditarCategoriaMouseClicked
+        }
+
+    }//GEN-LAST:event_btnSalvarEdicaoCategoriaActionPerformed
 
     private void panelPopCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPopCategoriaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_panelPopCategoriaMouseClicked
 
     private void inputNomeCategoriaEditKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNomeCategoriaEditKeyTyped
-       
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
     }//GEN-LAST:event_inputNomeCategoriaEditKeyTyped
 
     private void inputNomeCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNomeCategoriaKeyTyped
-    
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
     }//GEN-LAST:event_inputNomeCategoriaKeyTyped
 
     private void areaClickPorcentagemDisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemDisponiveisMouseEntered
-        
+
         popPorcentagemDisponiveis.setVisible(true);
-        
+
     }//GEN-LAST:event_areaClickPorcentagemDisponiveisMouseEntered
 
     private void areaClickPorcentagemDisponiveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemDisponiveisMouseExited
-        
+
         if (popPorcentagemDisponiveis.isVisible()) {
-            
+
             popPorcentagemDisponiveis.setVisible(false);
-            
+
         }
-        
+
     }//GEN-LAST:event_areaClickPorcentagemDisponiveisMouseExited
 
     private void areaClickPorcentagemIndisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemIndisponiveisMouseEntered
-        
+
         popPorcentagemIndisponiveis.setVisible(true);
-        
+
     }//GEN-LAST:event_areaClickPorcentagemIndisponiveisMouseEntered
 
     private void areaClickPorcentagemIndisponiveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaClickPorcentagemIndisponiveisMouseExited
-        
+
         if (popPorcentagemIndisponiveis.isVisible()) {
-            
+
             popPorcentagemIndisponiveis.setVisible(false);
-            
+
         }
-        
+
     }//GEN-LAST:event_areaClickPorcentagemIndisponiveisMouseExited
 
     private void popPorcentagemDisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popPorcentagemDisponiveisMouseEntered
-        
+
         if (popPorcentagemDisponiveis.isVisible()) {
-            
+
             popPorcentagemDisponiveis.setVisible(true);
-            
+
         }
-        
+
     }//GEN-LAST:event_popPorcentagemDisponiveisMouseEntered
 
     private void popPorcentagemIndisponiveisMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popPorcentagemIndisponiveisMouseEntered
-        
+
         if (popPorcentagemIndisponiveis.isVisible()) {
-            
+
             popPorcentagemIndisponiveis.setVisible(true);
-            
+
         }
-        
+
     }//GEN-LAST:event_popPorcentagemIndisponiveisMouseEntered
 
     private void popPorcentagemIndisponiveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popPorcentagemIndisponiveisMouseExited
-        
+
         if (popPorcentagemIndisponiveis.isVisible()) {
-            
+
             popPorcentagemIndisponiveis.setVisible(false);
-            
+
         }
-        
+
     }//GEN-LAST:event_popPorcentagemIndisponiveisMouseExited
 
     private void popPorcentagemDisponiveisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popPorcentagemDisponiveisMouseExited
-        
+
         if (popPorcentagemDisponiveis.isVisible()) {
-            
+
             popPorcentagemDisponiveis.setVisible(false);
-            
+
         }
-        
+
     }//GEN-LAST:event_popPorcentagemDisponiveisMouseExited
 
     private void inputMensagemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputMensagemFocusLost
-        
+
         if (inputMensagem.getText().trim().equals("")) {
-            
+
             inputMensagem.setText("Digite sua mensagem...");
-            
+
         }
-        
+
     }//GEN-LAST:event_inputMensagemFocusLost
 
     private void imagePerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagePerfilMouseEntered
-        
+
         if (imagePerfil.isEnabled()) {
-            
+
             setCursor(Cursor.HAND_CURSOR);
-            
+
         }
-        
+
     }//GEN-LAST:event_imagePerfilMouseEntered
 
     private void imagePerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagePerfilMouseExited
-        
+
         setCursor(Cursor.DEFAULT_CURSOR);
-        
+
     }//GEN-LAST:event_imagePerfilMouseExited
 
     private void imagePerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagePerfilMouseClicked
-  
+
         if (imagePerfil.isEnabled()) {
-            
+
             JFileChooser chooser = new JFileChooser();
             chooser.setDialogTitle("Selecione uma Imagem");
             chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagens", "jpg", "png", "gif"));
             int result = chooser.showOpenDialog(this);
 
             if (result == JFileChooser.APPROVE_OPTION) {
-                
+
                 fotoSelecionada = chooser.getSelectedFile();
-                
+
                 if (fotoSelecionada != null) {
-                    
-                try {
 
-                    ImageIcon imagemIcon = new ImageIcon(fotoSelecionada.getAbsolutePath());
+                    try {
 
-                    Image imagemRedimensionada = imagemIcon.getImage().getScaledInstance(imagePerfil.getWidth(), imagePerfil.getHeight(), Image.SCALE_SMOOTH);
-                    imagemIcon = new ImageIcon(imagemRedimensionada);
+                        ImageIcon imagemIcon = new ImageIcon(fotoSelecionada.getAbsolutePath());
 
-                    imagePerfil.setIcon(imagemIcon);
-                    imagePerfil.revalidate();
-                    imagePerfil.repaint();
-                
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        Image imagemRedimensionada = imagemIcon.getImage().getScaledInstance(imagePerfil.getWidth(), imagePerfil.getHeight(), Image.SCALE_SMOOTH);
+                        imagemIcon = new ImageIcon(imagemRedimensionada);
+
+                        imagePerfil.setIcon(imagemIcon);
+                        imagePerfil.revalidate();
+                        imagePerfil.repaint();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
-                
-                }
-                
+
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_imagePerfilMouseClicked
 
     private void btnRetiraImagemPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRetiraImagemPerfilMouseEntered
-        
+
         if (btnRetiraImagemPerfil.isEnabled()) {
-            
+
             setCursor(Cursor.HAND_CURSOR);
-            
+
         }
-        
+
     }//GEN-LAST:event_btnRetiraImagemPerfilMouseEntered
 
     private void btnRetiraImagemPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRetiraImagemPerfilMouseExited
-        
+
         setCursor(Cursor.DEFAULT_CURSOR);
-        
+
     }//GEN-LAST:event_btnRetiraImagemPerfilMouseExited
 
     private void btnRetiraImagemPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRetiraImagemPerfilMouseClicked
-        
+
         if (btnRetiraImagemPerfil.isEnabled()) {
-            
+
             int opcao = JOptionPane.showConfirmDialog(null, "Remover foto de perfil?", "Confirmação", JOptionPane.YES_NO_OPTION);
-            
+
             if (opcao == JOptionPane.YES_OPTION) {
-                
+
                 daoUsuario.alterarFoto("", GlobalAdmin.getId_admin());
                 GlobalAdmin.setFoto("");
                 btnRetiraImagemPerfil.setVisible(false);
                 setaImagensPerfil();
                 listarNotificacoes();
-                
+
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_btnRetiraImagemPerfilMouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -4202,68 +4411,76 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void btnPesquisarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarEstoqueActionPerformed
-        
+
         String pesquisa = inputPesquisarProduto.getText().trim();
-        
-        if (radio1.isSelected()) {
-            
-            preencherTabela(9, pesquisa);
-            
+
+        if (pesquisa.equals("")) {
+
+            verificaRadio();
+
+        } else {
+
+            if (radio1.isSelected()) {
+
+                preencherTabela(9, pesquisa);
+
+            }
+
+            if (radio2.isSelected()) {
+
+                preencherTabela(10, pesquisa);
+
+            }
+
+            if (radio3.isSelected()) {
+
+                preencherTabela(11, pesquisa);
+
+            }
+
+            if (radio4.isSelected()) {
+
+                preencherTabela(12, pesquisa);
+
+            }
+
         }
-        
-        if (radio2.isSelected()) {
-            
-            preencherTabela(10, pesquisa);
-            
-        }
-        
-        if (radio3.isSelected()) {
-            
-            preencherTabela(11, pesquisa);
-            
-        }
-        
-        if (radio4.isSelected()) {
-            
-            preencherTabela(12, pesquisa);
-            
-        }
-        
+
     }//GEN-LAST:event_btnPesquisarEstoqueActionPerformed
 
     private void btnAtualizarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarEstoqueActionPerformed
-        
+
         inputPesquisarProduto.setText("");
-        
+
         verificaRadio();
-        
+
     }//GEN-LAST:event_btnAtualizarEstoqueActionPerformed
 
     private void txtImagemProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtImagemProdutoMouseEntered
-        
+
         setCursor(Cursor.HAND_CURSOR);
-        
+
     }//GEN-LAST:event_txtImagemProdutoMouseEntered
 
     private void txtImagemProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtImagemProdutoMouseExited
-        
+
         setCursor(Cursor.DEFAULT_CURSOR);
-        
+
     }//GEN-LAST:event_txtImagemProdutoMouseExited
 
     private void txtImagemProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtImagemProdutoMouseClicked
-        
+
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Selecione uma Imagem");
         chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagens", "jpg", "png", "gif"));
         int result = chooser.showOpenDialog(this);
 
         if (result == JFileChooser.APPROVE_OPTION) {
-            
+
             arquivoSelecionado = chooser.getSelectedFile();
-            
+
             if (arquivoSelecionado != null) {
-                    
+
                 try {
 
                     ImageIcon imagemIcon = new ImageIcon(arquivoSelecionado.getAbsolutePath());
@@ -4272,34 +4489,35 @@ public class Inicio extends javax.swing.JFrame {
                     imagemIcon = new ImageIcon(imagemRedimensionada);
 
                     txtImagemProduto.setIcon(imagemIcon);
-                
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_txtImagemProdutoMouseClicked
 
     private void edtSenhaADMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtSenhaADMKeyTyped
-        
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
         String senha = edtSenhaADM.getText().trim();
-        
+
         if (senha.length() < 5) {
-            
+
             edtSenhaADM.setBorder(new LineBorder(Color.red, 1));
             txtAvisoSenha.setVisible(true);
-            
-            
+
         } else {
-            
+
             edtSenhaADM.setBorder(bordaOriginal);
             txtAvisoSenha.setVisible(false);
-            
+
         }
-        
+
     }//GEN-LAST:event_edtSenhaADMKeyTyped
 
     private void edtSenhaADMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtSenhaADMActionPerformed
@@ -4307,10 +4525,10 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_edtSenhaADMActionPerformed
 
     private void edtSenhaADMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtSenhaADMFocusLost
-        
+
         edtSenhaADM.setBorder(bordaOriginal);
         txtAvisoSenha.setVisible(false);
-        
+
     }//GEN-LAST:event_edtSenhaADMFocusLost
 
     private void checkWhattsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkWhattsActionPerformed
@@ -4318,16 +4536,106 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_checkWhattsActionPerformed
 
     private void txtLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLogoMouseClicked
-        
+
         new Redirecionamento().abreSite();
-        
+
     }//GEN-LAST:event_txtLogoMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        
+    private void imgLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLogoMouseClicked
+
         new Redirecionamento().abreSite();
-        
-    }//GEN-LAST:event_jLabel4MouseClicked
+
+    }//GEN-LAST:event_imgLogoMouseClicked
+
+    private void panelEditarCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEditarCategoriaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelEditarCategoriaMouseClicked
+
+    private void inputDescricaoCategoriaEditKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputDescricaoCategoriaEditKeyTyped
+
+        detectaLenghtSubPrincipal((JTextArea) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_inputDescricaoCategoriaEditKeyTyped
+
+    private void inputDescricaoCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputDescricaoCategoriaKeyTyped
+
+        detectaLenghtSubPrincipal((JTextArea) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_inputDescricaoCategoriaKeyTyped
+
+    private void edtNomeADMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtNomeADMKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_edtNomeADMKeyTyped
+
+    private void edtEmailADMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtEmailADMKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_edtEmailADMKeyTyped
+
+    private void inputNomeProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNomeProdutoKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_inputNomeProdutoKeyTyped
+
+    private void inputDescricaoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputDescricaoProdutoKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_inputDescricaoProdutoKeyTyped
+
+    private void inputNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNomeKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_inputNomeKeyTyped
+
+    private void inputEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputEmailKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_inputEmailKeyTyped
+
+    private void inputSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSenhaKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_inputSenhaKeyTyped
+
+    private void edtNomeProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtNomeProdutoKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_edtNomeProdutoKeyTyped
+
+    private void edtDescricaoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtDescricaoProdutoKeyTyped
+
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+
+    }//GEN-LAST:event_edtDescricaoProdutoKeyTyped
+
+    private void detectaLenghtPricipal(JTextField text, KeyEvent evt) {
+
+        String valor = text.getText().trim();
+
+        if (valor.length() > 100) {
+            evt.consume();
+        }
+
+    }
+
+    private void detectaLenghtSubPrincipal(JTextArea text, KeyEvent evt) {
+
+        String valor = text.getText().trim();
+
+        if (valor.length() > 150) {
+            evt.consume();
+        }
+
+    }
 
     public static void main(String args[]) {
 
@@ -4403,7 +4711,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnAdicionarADM.setBackground(new Color(51, 51, 51));
 
                 break;
-            
+
             case 4:
 
                 tabInicio.setSelectedIndex(3);
@@ -4418,7 +4726,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnAdicionarADM.setBackground(new Color(51, 51, 51));
 
                 break;
-            
+
             case 5:
 
                 tabInicio.setSelectedIndex(4);
@@ -4433,7 +4741,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnAdicionarADM.setBackground(new Color(51, 51, 51));
 
                 break;
-            
+
             case 6:
 
                 tabInicio.setSelectedIndex(5);
@@ -4448,7 +4756,7 @@ public class Inicio extends javax.swing.JFrame {
                 btnCategorias.setBackground(new Color(102, 102, 102));
 
                 break;
-            
+
             case 7:
 
                 tabInicio.setSelectedIndex(6);
@@ -4469,7 +4777,7 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     private void inicia() {
-        
+
         animationLogo();
         atualizaGraficoInicio(1);
         preencherTabela(1, null);
@@ -4483,16 +4791,20 @@ public class Inicio extends javax.swing.JFrame {
         radioSelecionadoCategoria();
         eventTable();
         eventCheck();
+        verificaItemTabelaHover();
         verificaComboReservas();
         inserirMetodosComboReservas();
         verificaCheckSemWhatts();
         verificaRadioUsuarios();
+        verificaComboListagemUsuarios();
         verificaFuncaoTab();
         checkWhats();
+        inserirTiposListagemComboUsuarios();
         listarReservas(1, null);
         buttonEditarProduto.setVisible(false);
         panelEditarCategoriaFundo.setVisible(false);
         txtAvisoSenha.setVisible(false);
+        comboListaClientesArquivados.setVisible(false);
         panelNoti.setVisible(false);
         panelFundoNoti.setVisible(false);
         radio1.setSelected(true);
@@ -4514,24 +4826,27 @@ public class Inicio extends javax.swing.JFrame {
         tamanhoOriginal = frame.getSize();
         localizacaoOriginal = frame.getLocation();
 
-        bordaOriginal = edtSenhaADM.getBorder();
+        txtLogo.setToolTipText("Ir para o site");
+        imgLogo.setToolTipText("Ir para o site");
         
+        bordaOriginal = edtSenhaADM.getBorder();
+
         if (GlobalAdmin.getNome() != null) {
 
             txtBemVindo.setText("Olá, " + GlobalAdmin.getNome());
 
         }
-        
+
         if (GlobalAdmin.getFoto() != null && !GlobalAdmin.getFoto().equals("")) {
-            
+
             setaImagensPerfil();
-            
+
         } else {
-            
+
             btnRetiraImagemPerfil.setVisible(false);
-            
+
         }
-        
+
         GlobalWhats.setMensagem("Digite sua mensagem...");
 
     }
@@ -4541,7 +4856,7 @@ public class Inicio extends javax.swing.JFrame {
         switch (tela) {
 
             case 1:
-                
+
                 progressInicio();
 
                 break;
@@ -4549,35 +4864,35 @@ public class Inicio extends javax.swing.JFrame {
             case 2:
 
                 verificaRadio();
-                
+
                 break;
 
             case 3:
 
                 listarRelatorios(1, null);
-                
+
                 break;
-                
+
             case 4:
-                
+
                 listarReservas(1, null);
-                
+
                 break;
-            
+
             case 5:
-                
+
                 verificaRadioUsuarios();
-                
+
                 break;
-            
+
             case 6:
-                
+
                 verificaRadioCategoria();
-                
+
                 break;
 
         }
-        
+
         listarNotificacoes();
 
     }
@@ -4591,7 +4906,7 @@ public class Inicio extends javax.swing.JFrame {
                 grafInicio.clear();
 
                 grafInicio.addLegend("Quantidade vendida", Color.blue, Color.blue);
-                
+
                 int[] valores = daoCompra.comprasMes();
 
                 grafInicio.addData(new ModelChart("Janeiro", new double[]{valores[0], 0, 50, 50}));
@@ -4608,7 +4923,7 @@ public class Inicio extends javax.swing.JFrame {
                 grafInicio.addData(new ModelChart("Dezembro", new double[]{valores[11], 0, 100, 190}));
 
                 grafInicio.start();
-                
+
                 break;
 
         }
@@ -4844,83 +5159,87 @@ public class Inicio extends javax.swing.JFrame {
             case 1:
 
                 estoqueTabela = funcoesEstoque.ListarEstoque(1, null);
-                
+
                 break;
 
             case 2:
 
                 estoqueTabela = funcoesEstoque.ListarEstoque(2, null);
-                
+
                 break;
 
             case 3:
 
                 estoqueTabela = funcoesEstoque.ListarEstoque(3, null);
-                
+
                 break;
-                
+
             case 4:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(4, produto);
-                
+
                 break;
-                
+
             case 5:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(5, produto);
-                
+
                 break;
-                
+
             case 6:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(6, produto);
-                
+
                 break;
-                
+
             case 7:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(7, null);
-                
+
                 break;
-            
+
             case 8:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(8, produto);
-                
+
                 break;
-                
+
             case 9:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(9, produto);
-                
+
                 break;
-                
+
             case 10:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(10, produto);
-                
+
                 break;
-                
+
             case 11:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(11, produto);
-                
+
                 break;
-                
+
             case 12:
-                
+
                 estoqueTabela = funcoesEstoque.ListarEstoque(12, produto);
-                
+
                 break;
 
         }
 
         for (EstoqueBean objEstoque : estoqueTabela) {
+            
+            String valor = String.valueOf(objEstoque.getValor()).replace(".", ",");
+            String valorCusto = String.valueOf(objEstoque.getValor_custo()).replace(".", ",");
+            
             Object[] rowData = {
                 objEstoque.getNome_produto(),
                 objEstoque.getDescricao_produto(),
-                objEstoque.getValor(),
-                objEstoque.getValor_custo(),
+                valor,
+                valorCusto,
                 objEstoque.getNome_categoria(),
                 objEstoque.getQuantidade()
 
@@ -4940,58 +5259,54 @@ public class Inicio extends javax.swing.JFrame {
             produtosAtual.setNome_categoria(estoqueTabela.get(linha).getNome_categoria());
             produtosAtual.setDescricao_categoria(estoqueTabela.get(linha).getDescricao_categoria());
             produtosAtual.setQuantidade(estoqueTabela.get(linha).getQuantidade());
-            produtosAtual.setValor(estoqueTabela.get(linha).getValor());
+            
+            String valor = String.valueOf(estoqueTabela.get(linha).getValor()).replace(",", ".");
+            float valorFloat = Float.parseFloat(valor);
+            
+            String valorCusto = String.valueOf(estoqueTabela.get(linha).getValor_custo()).replace(",", ".");
+            float valorCustoFloat = Float.parseFloat(valorCusto);
+            
+            produtosAtual.setValor(valorFloat);
+            produtosAtual.setValor_custo(valorCustoFloat);
+            
             produtosAtual.setDisponivel(estoqueTabela.get(linha).getDisponivel());
             produtosAtual.setFk_id_categoria(estoqueTabela.get(linha).getFk_id_categoria());
-            produtosAtual.setValor_custo(estoqueTabela.get(linha).getValor_custo());
             produtosAtual.setImagem(estoqueTabela.get(linha).getImagem());
 
             trocaVisibilidadeButtons(2);
-            
+
             if (radio1.isSelected()) {
-                
+
                 buttonDisponivel.setVisible(false);
                 buttonIndisponivel.setVisible(false);
                 buttonReativar.setVisible(false);
-                
+
             }
-            
+
             if (radio2.isSelected()) {
-                
+
                 buttonDisponivel.setVisible(false);
                 buttonReativar.setVisible(false);
-                
+
             }
-            
+
             if (radio3.isSelected()) {
-                
+
                 buttonIndisponivel.setVisible(false);
                 buttonReativar.setVisible(false);
-                
+
             }
-            
+
             if (radio4.isSelected()) {
-                
+
                 buttonDisponivel.setVisible(false);
                 buttonIndisponivel.setVisible(false);
                 buttonArquivar.setVisible(false);
-                
+
             }
 
         }
 
-    }
-
-    private void redimensiona(boolean verifica) {
-
-        if (verifica) {
-            
-            panelNav.setBounds(0, 0, frame.getWidth(), panelNav.getHeight());
-            panelNav.revalidate();
-            panelNav.repaint();
-            
-        }
-        
     }
 
     private void listarNotificacoes() {
@@ -5022,21 +5337,21 @@ public class Inicio extends javax.swing.JFrame {
     private void listarRelatorios(int tipo, String pesquisa) {
 
         panelListRelatorios.removeAll();
-        
-        switch(tipo) {
-            
+
+        switch (tipo) {
+
             case 1:
-                
+
                 listaRelatorios = daoRelatorio.listar(1, null);
-                
+
                 break;
-                
+
             case 2:
-                
+
                 listaRelatorios = daoRelatorio.listar(2, pesquisa);
-                
+
                 break;
-            
+
         }
 
         for (int i = 0; i < listaRelatorios.size(); i++) {
@@ -5044,124 +5359,142 @@ public class Inicio extends javax.swing.JFrame {
             panelListRelatorios.add(new ItemRelatorio(listaRelatorios.get(i)));
 
         }
-        
+
         panelListRelatorios.revalidate();
         panelListRelatorios.repaint();
 
     }
-    
-    public void listarClientes(int tipo, String pesquisa) {
-        
+
+    private void listarClientes(int tipo, String pesquisa) {
+
         panelListClientes.removeAll();
-        
-        switch(tipo) {
-            
+
+        switch (tipo) {
+
             case 1:
-                
+
                 listaClientes = daoUsuario.listar(1, null);
-                
+
                 break;
-                
+
             case 2:
-                
+
                 listaClientes = daoUsuario.listar(2, pesquisa);
-                
+
                 break;
-            
+
             case 3:
-                
+
                 listaClientes = daoUsuario.listar(3, pesquisa);
-                
+
                 break;
-                
+
             case 4:
-                
+
                 listaClientes = daoUsuario.listar(4, null);
-                
+
                 break;
-            
+
             case 5:
-                
+
                 listaClientes = daoUsuario.listar(5, pesquisa);
-                
+
                 break;
-            
+
             case 6:
-                
+
                 listaClientes = daoUsuario.listar(6, pesquisa);
-                
+
                 break;
-            
-        }
-        
-        if (!listaClientes.isEmpty()) {
-            
-            for (int i = 0; i < listaClientes.size(); i++) {
-            
-                panelListClientes.add(new ItemCliente(listaClientes.get(i), this));
-            
-            }
-            
-        }
-        
-        panelClientes.revalidate();
-        panelClientes.repaint();
-        
-    }
-    
-    public void listarCategorias(int tipo, String pesquisa) {
-        
-        panelListCategorias.removeAll();
-        
-        switch(tipo) {
-            
-            case 1:
-                
-                listaCategorias2 = daoCategoria.listar(1, null);
-                
+
+            case 7:
+
+                listaClientes = daoUsuario.listar(7, null);
+
                 break;
-            
-            case 2:
-                
-                listaCategorias2 = daoCategoria.listar(2, pesquisa);
-                
+
+            case 8:
+
+                listaClientes = daoUsuario.listar(8, null);
+
                 break;
-            
-            case 3:
-                
-                listaCategorias2 = daoCategoria.listar(3, null);
-                
-                break;
-            
-            case 4:
-                
-                listaCategorias2 = daoCategoria.listar(4, null);
-                
-                break;
-            
-            case 5:
-                
-                listaCategorias2 = daoCategoria.listar(5, pesquisa);
-                
-                break;
-            
-            case 6:
-                
-                listaCategorias2 = daoCategoria.listar(6, pesquisa);
-                
+
+            case 9:
+
+                listaClientes = daoUsuario.listar(9, null);
+
                 break;
 
         }
-        
-        for (int i = 0; i < listaCategorias2.size(); i++) {
-            
-            panelListCategorias.add(new ItemCategoria(listaCategorias2.get(i), this));
-            
+
+        if (!listaClientes.isEmpty()) {
+
+            for (int i = 0; i < listaClientes.size(); i++) {
+
+                panelListClientes.add(new ItemCliente(listaClientes.get(i), this));
+
+            }
+
         }
-        
+
+        panelClientes.revalidate();
+        panelClientes.repaint();
+
+    }
+
+    public void listarCategorias(int tipo, String pesquisa) {
+
+        panelListCategorias.removeAll();
+
+        switch (tipo) {
+
+            case 1:
+
+                listaCategorias2 = daoCategoria.listar(1, null);
+
+                break;
+
+            case 2:
+
+                listaCategorias2 = daoCategoria.listar(2, pesquisa);
+
+                break;
+
+            case 3:
+
+                listaCategorias2 = daoCategoria.listar(3, null);
+
+                break;
+
+            case 4:
+
+                listaCategorias2 = daoCategoria.listar(4, null);
+
+                break;
+
+            case 5:
+
+                listaCategorias2 = daoCategoria.listar(5, pesquisa);
+
+                break;
+
+            case 6:
+
+                listaCategorias2 = daoCategoria.listar(6, pesquisa);
+
+                break;
+
+        }
+
+        for (int i = 0; i < listaCategorias2.size(); i++) {
+
+            panelListCategorias.add(new ItemCategoria(listaCategorias2.get(i), this));
+
+        }
+
         panelCategorias.revalidate();
         panelCategorias.repaint();
-        
+
     }
 
     private void progressInicio() {
@@ -5284,6 +5617,7 @@ public class Inicio extends javax.swing.JFrame {
         panelFundoPopProdutoSelecionado.setVisible(false);
         buttonEditarProduto.setVisible(false);
         inputPesquisarProduto.setVisible(true);
+        arquivoSelecionado = null;
         resetaProdutoAtual();
         verificaRadio();
 
@@ -5302,7 +5636,7 @@ public class Inicio extends javax.swing.JFrame {
         produtosAtual.setQuantidade(0);
         produtosAtual.setImagem(null);
         txtImagemProduto.setIcon(null);
-        
+
         trocaVisibilidadeButtons(1);
 
     }
@@ -5329,12 +5663,12 @@ public class Inicio extends javax.swing.JFrame {
             trocaVisibilidadeButtons(1);
 
         });
-        
+
         radio4.addActionListener(e -> {
-            
+
             preencherTabela(7, null);
             trocaVisibilidadeButtons(1);
-            
+
         });
 
     }
@@ -5358,151 +5692,166 @@ public class Inicio extends javax.swing.JFrame {
             preencherTabela(3, null);
 
         }
-        
+
         if (radio4.isSelected()) {
-            
+
             preencherTabela(7, null);
-            
+
         }
-        
+
         resetaProdutoAtual();
 
     }
-    
-    private void verificaRadioUsuarios() {
-        
+
+    public void verificaRadioUsuarios() {
+
         panelListClientes.removeAll();
-        
+
         if (radioUsuario1.isSelected()) {
-            
+
             listarClientes(1, null);
-            
-        } 
-        
-        if (radioUsuario2.isSelected()) {
-            
-            listarClientes(4, null);
-            
+
         }
-        
-        panelListClientes.revalidate();
-        panelListClientes.repaint();
-        
-    }
-    
-    private void radioUsuarioSelecionado() {
-        
-        panelListClientes.removeAll();
-        
-        radioUsuario1.addActionListener(e -> {
-            
-            listarClientes(1, null);
-            
-        });
-        
-        radioUsuario2.addActionListener(e -> {
-            
+
+        if (radioUsuario2.isSelected()) {
+
             listarClientes(4, null);
-            
-        });
-        
+
+        }
+
+        if (radioUsuario3.isSelected()) {
+
+            listaComboUsuarios();
+
+        }
+
         panelListClientes.revalidate();
         panelListClientes.repaint();
-        
+
     }
-    
+
+    private void radioUsuarioSelecionado() {
+
+        panelListClientes.removeAll();
+
+        radioUsuario1.addActionListener(e -> {
+
+            comboListaClientesArquivados.setVisible(false);
+            listarClientes(1, null);
+
+        });
+
+        radioUsuario2.addActionListener(e -> {
+
+            comboListaClientesArquivados.setVisible(false);
+            listarClientes(4, null);
+
+        });
+
+        radioUsuario3.addActionListener(e -> {
+
+            comboListaClientesArquivados.setVisible(true);
+            listaComboUsuarios();
+
+        });
+
+        panelListClientes.revalidate();
+        panelListClientes.repaint();
+
+    }
+
     private void trocaVisibilidadeButtons(int escolha) {
-        
-        switch(escolha) {
-            
+
+        switch (escolha) {
+
             case 1:
-                
+
                 buttonEditarProduto.setVisible(false);
                 buttonArquivar.setVisible(false);
                 buttonIndisponivel.setVisible(false);
                 buttonDisponivel.setVisible(false);
                 buttonReativar.setVisible(false);
-                
+
                 break;
-               
+
             case 2:
-                
+
                 buttonEditarProduto.setVisible(true);
                 buttonArquivar.setVisible(true);
                 buttonIndisponivel.setVisible(true);
                 buttonDisponivel.setVisible(true);
                 buttonReativar.setVisible(true);
-                
+
                 break;
-            
+
         }
-        
+
     }
-    
+
     private void radioSelecionadoCategoria() {
-        
+
         radioCategoria1.addActionListener(e -> {
-            
+
             listarCategorias(1, null);
-            
+
         });
-        
+
         radioCategoria2.addActionListener(e -> {
-            
+
             listarCategorias(4, null);
-            
+
         });
-        
+
         radioCategoria3.addActionListener(e -> {
-            
+
             listarCategorias(3, null);
-            
+
         });
-        
+
     }
-    
+
     public void verificaRadioCategoria() {
-        
+
         if (radioCategoria1.isSelected()) {
-            
+
             listarCategorias(1, null);
-            
-        } 
-        
+
+        }
+
         if (radioCategoria2.isSelected()) {
-            
+
             listarCategorias(4, null);
-            
+
         }
-        
+
         if (radioCategoria3.isSelected()) {
-            
+
             listarCategorias(3, null);
-            
+
         }
-        
+
     }
-    
+
     private void listaCategoriasPesquisa(String pesquisa) {
-        
+
         if (radioCategoria1.isSelected()) {
-            
+
             listarCategorias(2, pesquisa);
-            
+
         }
-        
+
         if (radioCategoria2.isSelected()) {
-            
+
             listarCategorias(5, pesquisa);
-            
+
         }
-        
+
         if (radioCategoria3.isSelected()) {
-            
+
             listarCategorias(6, pesquisa);
-            
+
         }
-        
+
     }
 
     private void alteraQuantidade(int metodo) {
@@ -5534,7 +5883,7 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     private void eventTable() {
-        
+
         tblEstoque.getSelectionModel().addListSelectionListener(e -> {
 
             if (!e.getValueIsAdjusting()) {
@@ -5546,32 +5895,32 @@ public class Inicio extends javax.swing.JFrame {
             }
 
         });
-        
+
     }
-    
+
     private void preenchePerfil() {
-        
+
         inputNome.setText(GlobalAdmin.getNome());
         inputEmail.setText(GlobalAdmin.getEmail());
         inputSenha.setText(GlobalAdmin.getSenha());
         inputWhatsapp.setText(GlobalAdmin.getWhatsapp());
-        
+
     }
-    
+
     private void resetaCamposAdicionarProduto() {
-        
+
         inputNomeProduto.setText("");
         inputDescricaoProduto.setText("");
         inputValor.setText("");
         inputQuantidade.setText("");
-        inputValorCusto.setText(""); 
+        inputValorCusto.setText("");
         radioDisponivel.setSelected(false);
         radioIndisponivel.setSelected(false);
-        
+
     }
-    
+
     private void fechaPopAdicionarProduto() {
-        
+
         panelFundoAdicionarProduto.setVisible(false);
         panelAdicionarProduto.setVisible(false);
         resetaCamposAdicionarProduto();
@@ -5582,44 +5931,44 @@ public class Inicio extends javax.swing.JFrame {
         radioDisponivel.setSelected(false);
         radioIndisponivel.setSelected(false);
         txtImagem.setIcon(null);
-        
+
         verificaRadio();
-        
+
     }
-    
+
     private void listaComboCategoriasAdicionarProduto() {
-        
-       comboAdicionarProdutoCategoria.removeAllItems();
-        
-       listaCategorias = daoCategoria.listar(1, null);
-       
-       for (int i = 0; i < listaCategorias.size(); i++) {
-           
-           comboAdicionarProdutoCategoria.addItem(listaCategorias.get(i).getNome());
-           
-       }
-        
+
+        comboAdicionarProdutoCategoria.removeAllItems();
+
+        listaCategorias = daoCategoria.listar(1, null);
+
+        for (int i = 0; i < listaCategorias.size(); i++) {
+
+            comboAdicionarProdutoCategoria.addItem(listaCategorias.get(i).getNome());
+
+        }
+
     }
-    
+
     private void abrePopAdicionarProduto() {
-        
+
         panelFundoAdicionarProduto.setVisible(true);
         panelAdicionarProduto.setVisible(true);
         listaComboCategoriasAdicionarProduto();
         btnAdicionarProduto.setVisible(false);
         inputPesquisarProduto.setVisible(false);
-        
+
     }
-    
+
     private void eventCheck() {
-        
+
         checkEdicao.addItemListener(new ItemListener() {
-            
+
             @Override
             public void itemStateChanged(ItemEvent e) {
-                
+
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    
+
                     inputNome.setEnabled(true);
                     inputEmail.setEnabled(true);
                     inputSenha.setEnabled(true);
@@ -5628,15 +5977,15 @@ public class Inicio extends javax.swing.JFrame {
                     imagePerfil.setEnabled(true);
                     btnRetiraImagemPerfil.setEnabled(true);
                     checkWhatts.setEnabled(true);
-                    
+
                     if (checkWhatts.isSelected()) {
-                        
+
                         inputWhatsapp.setEnabled(true);
-                        
+
                     }
-                    
+
                 } else {
-                    
+
                     inputNome.setEnabled(false);
                     inputEmail.setEnabled(false);
                     inputSenha.setEnabled(false);
@@ -5647,233 +5996,317 @@ public class Inicio extends javax.swing.JFrame {
                     btnRetiraImagemPerfil.setEnabled(false);
                     checkWhatts.setEnabled(false);
                     checkWhatts.setEnabled(false);
-                    
+
                 }
-                
+
             }
         });
- 
+
     }
-    
+
     private void checkWhats() {
-        
+
         checkWhatts.addActionListener(e -> {
-            
+
             if (checkWhatts.isSelected()) {
-                
+
                 if (checkEdicao.isSelected()) {
-                        
-                        inputWhatsapp.setEnabled(true);
-                        
-                    }
-                
+
+                    inputWhatsapp.setEnabled(true);
+
+                }
+
             } else {
-                
+
                 inputWhatsapp.setEnabled(false);
-                
+
             }
-            
+
         });
-        
+
     }
-    
+
     private void inserirMetodosComboReservas() {
-        
+
         comboMetodoPesquisa.addItem("Código de reserva");
         comboMetodoPesquisa.addItem("Nome da pessoa");
-        
+
     }
-    
+
+    private void inserirTiposListagemComboUsuarios() {
+
+        comboListaClientesArquivados.addItem("Todos");
+        comboListaClientesArquivados.addItem("Clientes");
+        comboListaClientesArquivados.addItem("ADMs");
+
+    }
+
     private void verificaComboReservas() {
-        
+
         comboMetodoPesquisa.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                switch(comboMetodoPesquisa.getSelectedIndex()) {
-                    
+
+                switch (comboMetodoPesquisa.getSelectedIndex()) {
+
                     case 0:
-                        
+
                         txtPesquisaReservas.setText("Pesquisar código");
-                        
+
                         break;
-                        
+
                     case 1:
-                        
+
                         txtPesquisaReservas.setText("Pesquisar nome");
-                        
+
                         break;
-                    
+
                 }
-                
+
             }
         });
-  
+
     }
-    
-    public void listarReservas(int tipo, String produto) {
-        
-        panelItemReservas.removeAll();
-        
-        listaReservas = daoReserva.listar(tipo, produto);
-        
-        for (int i = 0; i < listaReservas.size(); i++) {
-  
-            panelItemReservas.add(new ItemReserva(listaReservas.get(i), this));
-            
+
+    private void verificaComboListagemUsuarios() {
+
+        comboListaClientesArquivados.addActionListener(e -> {
+
+            switch (comboListaClientesArquivados.getSelectedIndex()) {
+
+                case 0:
+
+                    listarClientes(7, null);
+
+                    break;
+
+                case 1:
+
+                    listarClientes(8, null);
+
+                    break;
+
+                case 2:
+
+                    listarClientes(9, null);
+
+                    break;
+
+            }
+
+        });
+
+    }
+
+    private void listaComboUsuarios() {
+
+        switch (comboListaClientesArquivados.getSelectedIndex()) {
+
+            case 0:
+
+                listarClientes(7, null);
+
+                break;
+
+            case 1:
+
+                listarClientes(8, null);
+
+                break;
+
+            case 2:
+
+                listarClientes(9, null);
+
+                break;
+
         }
-        
+
+    }
+
+    public void listarReservas(int tipo, String produto) {
+
+        panelItemReservas.removeAll();
+
+        listaReservas = daoReserva.listar(tipo, produto);
+
+        for (int i = 0; i < listaReservas.size(); i++) {
+
+            panelItemReservas.add(new ItemReserva(listaReservas.get(i), this));
+
+        }
+
         panelItemReservas.revalidate();
         panelItemReservas.repaint();
-        
+
     }
-    
+
     private void pesquisaReserva() {
-        
+
         String produto = inputPesquisaReserva.getText().trim();
-        
+
         int tipo = 0;
-        
-        switch(comboMetodoPesquisa.getSelectedIndex()) {
-            
+
+        switch (comboMetodoPesquisa.getSelectedIndex()) {
+
             case 0:
-                
+
                 tipo = 2;
-                
+
                 break;
-                
+
             case 1:
-                
+
                 tipo = 3;
-                
+
                 break;
-            
+
         }
-        
+
         if (produto.isEmpty()) {
-            
+
             tipo = 1;
             produto = null;
-            
+
         }
-        
+
         listarReservas(tipo, produto);
-        
+
     }
-    
+
     public void visibilidadePanelEditarCategoria(Categorias categoria) {
-        
+
         panelEditarCategoriaFundo.setVisible(true);
-        
+
         inputNomeCategoriaEdit.setText(categoria.getNome());
         inputDescricaoCategoriaEdit.setText(categoria.getDescricao());
- 
+
         categoriaAtual = categoria;
-        
+
     }
-    
+
     private void fecharPanelEditarCategoria() {
-        
+
         panelEditarCategoriaFundo.setVisible(false);
-        
+
         categoriaAtual = null;
-        
+
     }
-    
+
     private void verificaCheckSemWhatts() {
-        
+
         checkSemWhatts.addChangeListener(e -> {
-            
+
             if (checkSemWhatts.isSelected()) {
-                
+
                 edtWhatsappADM.setEnabled(false);
-                
+
             } else {
-                
+
                 edtWhatsappADM.setEnabled(true);
-                
+
             }
-            
+
         });
-        
+
     }
-    
+
     private void setaImagensPerfil() {
-        
+
         String foto = GlobalAdmin.getFoto();
-        
+
         ImageIcon imagemIcon = new ImageIcon(getClass().getResource("/imagens/iconPerfil.png"));
-        
+
         if (foto != null && !foto.equals("")) {
-            
+
             imagemIcon = new CriaIcon().criaIcon(foto);
             btnRetiraImagemPerfil.setVisible(true);
             btnRetiraImagemPerfil.setEnabled(true);
-    
+
         }
-        
+
         Image imagemRedimensionada = imagemIcon.getImage().getScaledInstance(imagePerfil.getWidth(), imagePerfil.getHeight(), Image.SCALE_SMOOTH);
         imagemIcon = new ImageIcon(imagemRedimensionada);
 
         imagePerfil.setIcon(imagemIcon);
         imagePerfil.revalidate();
         imagePerfil.repaint();
-            
+
         Image imagemRedimensionada2 = imagemIcon.getImage().getScaledInstance(imagePerfil1.getWidth(), imagePerfil1.getHeight(), Image.SCALE_SMOOTH);
         imagemIcon = new ImageIcon(imagemRedimensionada2);
 
         imagePerfil1.setIcon(imagemIcon);
         imagePerfil1.revalidate();
         imagePerfil1.repaint();
-        
-        
-        
+
     }
-    
+
     private void resetarCamposAdicionarADM() {
-        
+
         edtNomeADM.setText("");
         edtEmailADM.setText("");
         edtSenhaADM.setText("");
         edtDataNascimentoADM.setText("");
         edtWhatsappADM.setText("");
         checkSemWhatts.setSelected(false);
-        
+
     }
-    
+
     private void verificaFuncaoTab() {
-        
-            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-                @Override
-                public boolean dispatchKeyEvent(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_TAB) {
-                        return true;
-                    }
-                    return false;
+
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    return true;
                 }
-            });
-        
-    }
-    
-    private void verificaNotiVisto() {
-        
-        listarNotificacoes();
-        
-        int cont = 0;
-        
-        for (int i = 0; i < listaNotificacoes.size(); i++) {
-            
-            if (!listaNotificacoes.get(i).isVisto()) {
-                
-                cont++;
-                
+                return false;
             }
-            
+        });
+
+    }
+
+    private void verificaNotiVisto() {
+
+        listarNotificacoes();
+
+        int cont = 0;
+
+        for (int i = 0; i < listaNotificacoes.size(); i++) {
+
+            if (!listaNotificacoes.get(i).isVisto()) {
+
+                cont++;
+
+            }
+
         }
-        
+
         btnNoti.setBadges(cont);
-        
+
+    }
+
+    private void verificaItemTabelaHover() {
+
+        tblEstoque.addMouseMotionListener(new MouseMotionAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                int linha = tblEstoque.rowAtPoint(e.getPoint());
+                int coluna = tblEstoque.columnAtPoint(e.getPoint());
+
+                if (linha >= 0 && coluna >= 0) {
+
+                    String informacao = tblEstoque.getValueAt(linha, coluna).toString();
+                    tblEstoque.setToolTipText(informacao);
+
+                }
+
+            }
+        });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -5926,6 +6359,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkWhatts;
     private javax.swing.JComboBox<String> comboAdicionarProdutoCategoria;
     private javax.swing.JComboBox<String> comboCategorias;
+    private javax.swing.JComboBox<String> comboListaClientesArquivados;
     private javax.swing.JComboBox<String> comboMetodoPesquisa;
     private javax.swing.JFormattedTextField edtDataNascimentoADM;
     private javax.swing.JTextField edtDescricaoProduto;
@@ -5940,8 +6374,9 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.chart.Chart grafInicio;
     private com.raven.avatar.ImageAvatar imagePerfil;
     private com.raven.avatar.ImageAvatar imagePerfil1;
+    private javax.swing.JLabel imgLogo;
     private javax.swing.JTextArea inputDescricaoCategoria;
-    private javax.swing.JTextField inputDescricaoCategoriaEdit;
+    private javax.swing.JTextArea inputDescricaoCategoriaEdit;
     private javax.swing.JTextField inputDescricaoProduto;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JTextArea inputMensagem;
@@ -6000,7 +6435,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -6017,6 +6451,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -6024,6 +6459,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabele0;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -6042,7 +6478,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelCategorias;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelClose;
-    private javax.swing.JPanel panelEditarCategoria;
+    private telas.formatos.PanelBorder panelEditarCategoria;
     private javax.swing.JPanel panelEditarCategoriaFundo;
     private javax.swing.JPanel panelEstoque;
     private javax.swing.JPanel panelFundoAdicionarProduto;
@@ -6090,6 +6526,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioIndisponivel;
     private javax.swing.JRadioButton radioUsuario1;
     private javax.swing.JRadioButton radioUsuario2;
+    private javax.swing.JRadioButton radioUsuario3;
     private javax.swing.JScrollPane scrollRelatorios;
     private javax.swing.JTabbedPane tabInicio;
     private tabledark.TableDark tblEstoque;
@@ -6112,6 +6549,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtNomeProduto2;
     private javax.swing.JLabel txtNomeProduto3;
     private javax.swing.JLabel txtNomeProduto4;
+    private javax.swing.JLabel txtNomeProduto5;
     private javax.swing.JLabel txtPesquisaCliente;
     private javax.swing.JLabel txtPesquisaReservas;
     private javax.swing.JLabel txtRelatorios;

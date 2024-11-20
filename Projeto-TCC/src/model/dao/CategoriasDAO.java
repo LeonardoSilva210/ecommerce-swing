@@ -76,6 +76,7 @@ public class CategoriasDAO {
                 categoria.setNome(rs.getString("nome"));
                 categoria.setDescricao(rs.getString("descricao"));
                 categoria.setArquivado(rs.getBoolean("arquivado"));
+                categoria.setQuantidade_produtos(rs.getInt("quantidade_produtos"));
                 
                 lista.add(categoria);
                 

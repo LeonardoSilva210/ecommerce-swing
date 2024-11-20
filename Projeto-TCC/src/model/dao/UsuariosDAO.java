@@ -28,14 +28,14 @@ public class UsuariosDAO {
                 
                 case 1:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ?");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ? AND arquivado = 0");
                     stmt.setString(1, "");
                     
                     break;
                     
                 case 2:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ? AND nome LIKE ?");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ?  AND arquivado = 0 AND nome LIKE ?");
                     stmt.setString(1, "");
                     stmt.setString(2, "%" + pesquisa + "%");
                     
@@ -43,7 +43,7 @@ public class UsuariosDAO {
                 
                 case 3:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ? AND nome = ?");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ?  AND arquivado = 0 AND nome = ?");
                     stmt.setString(1, "");
                     stmt.setString(2, pesquisa);
                     
@@ -51,23 +51,41 @@ public class UsuariosDAO {
                 
                 case 4:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND arquivado = 0");
                     
                     break;
                     
                 case 5:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND nome LIKE ?");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND arquivado = 0 AND nome LIKE ?");
                     stmt.setString(1, "%" + pesquisa + "%");
                     
                     break;
                 
                 case 6:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND nome = ?");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND arquivado = 0 AND nome = ?");
                     stmt.setString(1, pesquisa);
                     
                     break;
+                    
+                case 7:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE arquivado = 1");
+                    
+                    break;    
+                
+                case 8:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE arquivado = 1 AND adm = 0");
+                    
+                    break;    
+                
+                case 9:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE arquivado = 1 AND adm = 1");
+                    
+                    break;    
                 
             }
             
@@ -84,6 +102,7 @@ public class UsuariosDAO {
                     usuario.setEmail(rs.getString("email"));
                     usuario.setWhatsapp(rs.getString("whatsapp"));
                     usuario.setFoto(rs.getString("foto"));
+                    usuario.setArquivado(rs.getInt("arquivado"));
                 
                     list.add(usuario);
                     
@@ -102,12 +121,31 @@ public class UsuariosDAO {
         return list;
     }
     
-    public void deletar(int id_usuario) {
+    public void desativar(int id_usuario) {
         
         try{
             
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement("DELETE FROM usuarios WHERE id_usuario = ?");
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE usuarios SET arquivado = 1 WHERE id_usuario = ?");
+            stmt.setInt(1, id_usuario);
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void reativar(int id_usuario) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE usuarios SET arquivado = 0 WHERE id_usuario = ?");
             stmt.setInt(1, id_usuario);
             
             stmt.executeUpdate();

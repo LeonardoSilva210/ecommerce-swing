@@ -41,6 +41,18 @@ public class ItemCliente extends javax.swing.JPanel {
             
         }
         
+        if (usuario.getArquivado() == 1) {
+            
+            this.remove(btnDesativar);
+            this.add(btnReativar);
+            
+        } else {
+            
+            this.remove(btnReativar);
+            this.add(btnDesativar);
+            
+        }
+        
         String whatts = usuario.getWhatsapp();
 
         if (whatts != null && !whatts.equals("")) {
@@ -106,6 +118,23 @@ public class ItemCliente extends javax.swing.JPanel {
             
         });
         
+        btnReativar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+                btnReativar.setBackground(new Color(250, 250, 250));
+                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                
+                btnReativar.setBackground(new Color(51, 226, 75));
+                
+            }
+            
+        });
+        
     }
 
 
@@ -121,14 +150,15 @@ public class ItemCliente extends javax.swing.JPanel {
         txtEmail = new javax.swing.JLabel();
         txtWhatsApp = new javax.swing.JLabel();
         btnEnviar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnDesativar = new javax.swing.JButton();
+        btnReativar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setPreferredSize(new java.awt.Dimension(920, 40));
         setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -170,15 +200,25 @@ public class ItemCliente extends javax.swing.JPanel {
         });
         add(btnEnviar);
 
-        jButton1.setBackground(new java.awt.Color(211, 77, 92));
-        jButton1.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
-        jButton1.setText("Deletar Conta");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDesativar.setBackground(new java.awt.Color(211, 77, 92));
+        btnDesativar.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
+        btnDesativar.setText("Desativar Conta");
+        btnDesativar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDesativarActionPerformed(evt);
             }
         });
-        add(jButton1);
+        add(btnDesativar);
+
+        btnReativar.setBackground(new java.awt.Color(51, 226, 75));
+        btnReativar.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
+        btnReativar.setText("Reativar Conta");
+        btnReativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReativarActionPerformed(evt);
+            }
+        });
+        add(btnReativar);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
@@ -199,26 +239,42 @@ public class ItemCliente extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnEnviarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesativarActionPerformed
         
-       int opcao = JOptionPane.showConfirmDialog(null, "Confirmar exclusão: " + usuario.getNome(), "Confirmação", JOptionPane.YES_NO_OPTION);
+       int opcao = JOptionPane.showConfirmDialog(null, "Desativar esta conta: " + usuario.getNome(), "Confirmação", JOptionPane.YES_NO_OPTION);
        
        if (opcao == JOptionPane.YES_OPTION) {
            
            UsuariosDAO daoUsuarios = new UsuariosDAO();
        
-           daoUsuarios.deletar(usuario.getId_usuario());
-           inicio.listarClientes(1, null);
+           daoUsuarios.desativar(usuario.getId_usuario());
+           inicio.verificaRadioUsuarios();
            
        }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnDesativarActionPerformed
+
+    private void btnReativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReativarActionPerformed
+        
+        int opcao = JOptionPane.showConfirmDialog(null, "Reativar esta conta: " + usuario.getNome(), "Confirmação", JOptionPane.YES_NO_OPTION);
+       
+       if (opcao == JOptionPane.YES_OPTION) {
+           
+           UsuariosDAO daoUsuarios = new UsuariosDAO();
+       
+           daoUsuarios.reativar(usuario.getId_usuario());
+           inicio.verificaRadioUsuarios();
+           
+       }
+        
+    }//GEN-LAST:event_btnReativarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDesativar;
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnReativar;
     private com.raven.avatar.ImageAvatar imgPerfilUsuario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel txtEmail;

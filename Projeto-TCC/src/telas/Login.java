@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import model.bean.Usuarios;
 import model.dao.AdminsDAO;
 import redirecionamentos.Redirecionamento;
@@ -42,7 +43,7 @@ public class Login extends javax.swing.JFrame {
         txtMin = new javax.swing.JLabel();
         panelClose = new javax.swing.JPanel();
         txtClose = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        imgLogo = new javax.swing.JLabel();
         txtLogo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -62,6 +63,9 @@ public class Login extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputSenhaKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputSenhaKeyTyped(evt);
+            }
         });
         panelLogin.add(inputSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 260, 40));
 
@@ -78,6 +82,9 @@ public class Login extends javax.swing.JFrame {
         inputEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputEmailKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputEmailKeyTyped(evt);
             }
         });
         panelLogin.add(inputEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 260, 40));
@@ -211,13 +218,13 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.add(panelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 0, 40, 30));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconLogo.png"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        imgLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconLogo.png"))); // NOI18N
+        imgLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                imgLogoMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel1.add(imgLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         txtLogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtLogo.setForeground(new java.awt.Color(255, 255, 255));
@@ -371,17 +378,41 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtLogoMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void imgLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLogoMouseClicked
         
         new Redirecionamento().abreSite();
         
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_imgLogoMouseClicked
 
-    private void inicia() {
+    private void inputEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputEmailKeyTyped
+        
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+        
+    }//GEN-LAST:event_inputEmailKeyTyped
+
+    private void inputSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSenhaKeyTyped
+        
+        detectaLenghtPricipal((JTextField) evt.getComponent(), evt);
+        
+    }//GEN-LAST:event_inputSenhaKeyTyped
+
+    private void detectaLenghtPricipal(JTextField text, KeyEvent evt) {
+        
+        String valor = text.getText().trim();
+        
+        if (valor.length() > 100) {
+            evt.consume();
+        }
         
     }
     
-    
+    private void inicia() {
+        
+        txtLogo.setToolTipText("Ir para o site");
+        imgLogo.setToolTipText("Ir para o site");
+        
+    }
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -417,12 +448,12 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEntrar;
+    private javax.swing.JLabel imgLogo;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private telas.formatos.PanelBorder panelBorder1;

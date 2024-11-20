@@ -36,7 +36,7 @@ public class RelatoriosDAO {
                     "compras.id_compra, compras.produtos,\n" +
                     "compras.fk_id_usuario \n" +
                     "from compras\n" +
-                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario\n" +
+                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario WHERE usuarios.arquivado = 0\n" +
                     "GROUP BY compras.id_compra "
                     + "ORDER BY data DESC, horario DESC");
                     
@@ -51,7 +51,7 @@ public class RelatoriosDAO {
                     "compras.id_compra, compras.produtos,\n" +
                     "compras.fk_id_usuario \n" +
                     "from compras\n" +
-                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario WHERE usuarios.nome LIKE ?\n" +
+                    "inner join usuarios on compras.fk_id_usuario = usuarios.id_usuario WHERE usuarios.arquivado = 0 AND usuarios.nome LIKE ?\n" +
                     "GROUP BY compras.id_compra "
                     + "ORDER BY data DESC, horario DESC");
                     

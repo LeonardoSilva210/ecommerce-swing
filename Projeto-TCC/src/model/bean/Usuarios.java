@@ -8,9 +8,9 @@ public class Usuarios {
     private int id_usuario;
     private String nome, email, senha, whatsapp, foto;
     private Date data_nascimento;
-    private int adm;
+    private int adm, arquivado;
 
-    public Usuarios(int id_usuario, String nome, String email, String senha, String whatsapp, String foto, Date data_nascimento, int adm) {
+    public Usuarios(int id_usuario, String nome, String email, String senha, String whatsapp, String foto, Date data_nascimento, int adm, int arquivado) {
         this.id_usuario = id_usuario;
         this.nome = nome;
         this.email = email;
@@ -19,7 +19,21 @@ public class Usuarios {
         this.foto = foto;
         this.data_nascimento = data_nascimento;
         this.adm = adm;
+        this.arquivado = arquivado;
     }
+
+    public Usuarios() {
+    }
+
+    public int getArquivado() {
+        return arquivado;
+    }
+
+    public void setArquivado(int arquivado) {
+        this.arquivado = arquivado;
+    }
+    
+    
 
     public String getFoto() {
         return foto;
@@ -35,9 +49,6 @@ public class Usuarios {
 
     public void setAdm(int adm) {
         this.adm = adm;
-    }
-    
-    public Usuarios() {
     }
 
     public int getId_usuario() {

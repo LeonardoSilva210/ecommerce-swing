@@ -62,6 +62,7 @@ public class ItemCategoria extends javax.swing.JPanel {
         
         txtNome.setText(categoria.getNome());
         txtDescricao.setText(categoria.getDescricao());
+        txtQuantidade.setText(String.valueOf(categoria.getQuantidade_produtos()));
         
     }
 
@@ -72,6 +73,7 @@ public class ItemCategoria extends javax.swing.JPanel {
 
         txtNome = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JLabel();
         panelAcoes = new javax.swing.JPanel();
         btnEditar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
@@ -93,6 +95,12 @@ public class ItemCategoria extends javax.swing.JPanel {
         txtDescricao.setText("Descrição");
         add(txtDescricao);
 
+        txtQuantidade.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
+        txtQuantidade.setForeground(new java.awt.Color(255, 255, 255));
+        txtQuantidade.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtQuantidade.setText("Quantidade Produtos");
+        add(txtQuantidade);
+
         panelAcoes.setBackground(new java.awt.Color(51, 51, 51));
         panelAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -106,7 +114,7 @@ public class ItemCategoria extends javax.swing.JPanel {
         });
         panelAcoes.add(btnEditar);
 
-        btnDeletar.setBackground(new java.awt.Color(212, 48, 61));
+        btnDeletar.setBackground(new java.awt.Color(211, 77, 92));
         btnDeletar.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
         btnDeletar.setText("Arquivar");
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +155,8 @@ public class ItemCategoria extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         
-        inicio.visibilidadePanelEditarCategoria(categoria);
+        btnEditar.setFocusable(false);
+        inicio.visibilidadePanelEditarCategoria(categoria);  
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -175,5 +184,6 @@ public class ItemCategoria extends javax.swing.JPanel {
     private javax.swing.JPanel panelAcoes;
     private javax.swing.JLabel txtDescricao;
     private javax.swing.JLabel txtNome;
+    private javax.swing.JLabel txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }
