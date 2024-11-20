@@ -2954,7 +2954,13 @@ public class Inicio extends javax.swing.JFrame {
             
         } else {
             
-            Produtos produto = new Produtos();
+            if (comboAdicionarProdutoCategoria.getSelectedIndex() == -1) {
+                
+                JOptionPane.showMessageDialog(null, "Selecione uma categoria!");
+                
+            } else {
+                
+                Produtos produto = new Produtos();
         
             if (arquivoSelecionado != null) {
                 
@@ -3005,6 +3011,8 @@ public class Inicio extends javax.swing.JFrame {
             } else {
                 
                 JOptionPane.showMessageDialog(null, "Por favor, selecione uma imagem.");
+            }
+                
             }
  
         }
@@ -5574,6 +5582,8 @@ public class Inicio extends javax.swing.JFrame {
         radioDisponivel.setSelected(false);
         radioIndisponivel.setSelected(false);
         txtImagem.setIcon(null);
+        
+        verificaRadio();
         
     }
     

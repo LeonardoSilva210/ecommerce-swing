@@ -1,15 +1,15 @@
 CREATE DATABASE  IF NOT EXISTS `tcc` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 USE `tcc`;
--- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tcc
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.24-MariaDB
+-- Server version	5.5.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,15 +23,15 @@ USE `tcc`;
 
 DROP TABLE IF EXISTS `categorias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
   `descricao` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `arquivado` tinyint(1) DEFAULT 0,
-  `quantidade_produtos` int(11) DEFAULT 0,
+  `arquivado` tinyint(1) DEFAULT '0',
+  `quantidade_produtos` int(11) DEFAULT '0',
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Refrigerantes','Bebidas Doces',1,3),(2,'Temperos','categoria de temperos',1,0),(3,'Teste','',1,0),(10,'iji','jijij',NULL,1),(11,'okok','okok',0,2),(12,'Sucos','Delicias das Frutas',1,1),(13,'Sucos2','okok',1,0),(14,'alcólicos','bebidas alcólicas',1,1),(15,'Pocoio','brinquedos',0,0);
+INSERT INTO `categorias` VALUES (16,'Doces','Doces.',0,3),(17,'Bebidas','Bebidas.',0,3),(18,'Salgados','Salgados.',0,2);
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,12 +50,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `compras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `compras` (
   `id_compra` int(11) NOT NULL AUTO_INCREMENT,
   `horario` time NOT NULL,
   `data` date NOT NULL,
-  `obs` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `obs` text CHARACTER SET utf8mb4,
   `ativo` tinyint(1) NOT NULL,
   `codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `produtos` mediumtext CHARACTER SET utf8mb4 NOT NULL,
@@ -104,7 +104,7 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `notificacoes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notificacoes` (
   `id_notificacao` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` int(3) NOT NULL,
@@ -135,22 +135,22 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `produtos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `produtos` (
   `id_produto` int(11) NOT NULL AUTO_INCREMENT,
   `nome_produto` varchar(45) CHARACTER SET utf8mb4 NOT NULL,
   `descricao_produto` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
-  `disponivel` tinyint(1) NOT NULL DEFAULT 0,
+  `disponivel` tinyint(1) NOT NULL DEFAULT '0',
   `fk_id_categoria` int(11) DEFAULT NULL,
   `valor` float(10,2) NOT NULL,
   `quantidade` int(11) NOT NULL,
   `valor_custo` float(10,2) DEFAULT NULL,
-  `arquivado` tinyint(1) NOT NULL DEFAULT 0,
-  `imagem` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `arquivado` tinyint(1) NOT NULL DEFAULT '0',
+  `imagem` text COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id_produto`),
   KEY `fk_id_categoria` (`fk_id_categoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categorias` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (23,'Coca-Cola 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(24,'Pepsi 350ml','Bebida Refrescante e Marcante',0,1,3.00,35,46.98,1,NULL),(25,'Fanta Laranja 350ml','Bebida Refrescante e Marcante',1,1,3.29,65,49.43,0,NULL),(26,'Guaraná Antarctica 350ml','Bebida Refrescante e Marcante',0,1,3.59,59,50.00,1,NULL),(27,'Sprite 350ml','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(28,'Suco de Laranja ','Bebida Refrescante e Marcante',1,12,3.99,59,50.28,0,NULL),(29,'Suco de Uva','Bebida Refrescante e Marcante',1,12,7.90,32,120.00,0,NULL),(30,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(31,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731874282/download_qmaqea.jpg'),(32,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(33,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(34,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(35,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(36,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(37,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(38,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(39,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(40,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(41,'Sprite ','Bebida Refrescante e Marcante',1,1,3.99,59,50.28,0,NULL),(42,'Salgas','Salgado',1,11,12.00,123,NULL,0,NULL),(43,'iojoij','oijoijoi',0,11,12.00,123,123.00,0,NULL),(44,'popopo','wawawaw',0,12,12.00,12,1213.00,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731442292/OIP_wloe7c.jpg'),(45,'ok','oko',1,1,9.00,909,90.00,0,NULL),(46,'Coca','coquinha',1,1,12.00,12,14.00,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1731873602/download_pnvdr2.jpg'),(47,'Cerveja OPA Bier','Cerveja Pilsen OPA Bier duplo malte',1,14,17.00,50,9.00,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732038230/opa_bier_m7dpnr.webp'),(48,'oko','kok',0,10,909.00,90,9090.00,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732039188/opa_bier_nqwdfp.webp');
+INSERT INTO `produtos` VALUES (49,'Kit Kat','Nestlé Kit Kat',1,16,2.40,35,2.00,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732076510/imgKitKat_wpjjhu.jpg'),(50,'Oreo','Biscoito oreo - 1 Uni',1,16,6.29,110,5.50,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732076743/imgOreo_egbqzd.jpg'),(51,'Bis','Bis chocolate - Caixinha',1,16,10.20,40,9.58,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732076903/imgBis_kwvdju.jpg'),(52,'Água mineral','Água mineral - Garrafa 500ml',1,17,6.25,200,5.33,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732077026/imgAguaMineral_bynhme.jpg'),(53,'Coca-Cola','Refrigerante Coca-Cola',1,17,9.20,31,8.53,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732077241/imgCocaCola_oquzjy.jpg'),(54,'Sprite','Refrigerante Sprite 500ml',1,17,7.30,24,6.50,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732077296/imgSprite_iqhw8i.jpg'),(55,'Pão de queijo','Pão de queijo.',1,18,1.00,100,0.80,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732077424/ukk2rctrtm6l0msjnoxj.jpg'),(56,'Coxinha de Frango','Coxinha de frango.',1,18,2.50,23,2.00,0,'https://res.cloudinary.com/dh4zkueea/image/upload/v1732077476/imgCoxinha_fh0bkx.jpg');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -192,16 +192,16 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `senha` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `data_nascimento` date DEFAULT NULL,
-  `adm` tinyint(4) DEFAULT 0,
+  `adm` tinyint(4) DEFAULT '0',
   `whatsapp` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `foto` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto` text COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -268,4 +268,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-19 15:38:48
+-- Dump completed on 2024-11-20  3:14:47
