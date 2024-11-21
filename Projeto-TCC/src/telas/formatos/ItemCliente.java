@@ -68,6 +68,7 @@ public class ItemCliente extends javax.swing.JPanel {
             formata = formatoFinal;
         
             txtWhatsApp.setText(formata);
+            this.add(btnEnviar);
             
         } else {
             
@@ -256,7 +257,7 @@ public class ItemCliente extends javax.swing.JPanel {
 
     private void btnReativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReativarActionPerformed
         
-        int opcao = JOptionPane.showConfirmDialog(null, "Reativar esta conta: " + usuario.getNome(), "Confirmação", JOptionPane.YES_NO_OPTION);
+       int opcao = JOptionPane.showConfirmDialog(null, "Reativar esta conta: " + usuario.getNome(), "Confirmação", JOptionPane.YES_NO_OPTION);
        
        if (opcao == JOptionPane.YES_OPTION) {
            

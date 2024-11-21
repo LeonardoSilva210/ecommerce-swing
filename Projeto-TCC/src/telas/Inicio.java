@@ -3821,6 +3821,30 @@ public class Inicio extends javax.swing.JFrame {
 
             listarClientes(6, pesquisa);
 
+        } else if (radioUsuario3.isSelected()) {
+            
+            switch(comboListaClientesArquivados.getSelectedIndex()) {
+                
+                case 0:
+                    
+                    listarClientes(13, pesquisa);
+                    
+                    break;
+                
+                case 1:
+                    
+                    listarClientes(14, pesquisa);
+                    
+                    break;
+                
+                case 2:
+                    
+                    listarClientes(15, pesquisa);
+                    
+                    break;
+                
+            }
+            
         }
 
     }//GEN-LAST:event_buttonPesquisarClienteActionPerformed
@@ -3839,6 +3863,30 @@ public class Inicio extends javax.swing.JFrame {
 
             listarClientes(5, pesquisa);
 
+        } else if (radioUsuario3.isSelected()) {
+            
+            switch(comboListaClientesArquivados.getSelectedIndex()) {
+                
+                case 0:
+                    
+                    listarClientes(10, pesquisa);
+                    
+                    break;
+                
+                case 1:
+                    
+                    listarClientes(11, pesquisa);
+                    
+                    break;
+                
+                case 2:
+                    
+                    listarClientes(12, pesquisa);
+                    
+                    break;
+                
+            }
+            
         }
 
     }//GEN-LAST:event_inputPesquisaClienteKeyTyped
@@ -5437,6 +5485,42 @@ public class Inicio extends javax.swing.JFrame {
 
                 listaClientes = daoUsuario.listar(9, null);
 
+                break;
+                
+            case 10:
+                
+                listaClientes = daoUsuario.listar(10, pesquisa);
+                
+                break;
+            
+            case 11:
+                
+                listaClientes = daoUsuario.listar(11, pesquisa);
+                
+                break;
+            
+            case 12:
+                
+                listaClientes = daoUsuario.listar(12, pesquisa);
+                
+                break;
+            
+            case 13:
+                
+                listaClientes = daoUsuario.listar(13, pesquisa);
+                
+                break;
+                
+            case 14:
+                
+                listaClientes = daoUsuario.listar(14, pesquisa);
+                
+                break;
+                
+            case 15:
+                
+                listaClientes = daoUsuario.listar(15, pesquisa);
+                
                 break;
 
         }

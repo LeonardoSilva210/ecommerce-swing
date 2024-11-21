@@ -28,24 +28,21 @@ public class UsuariosDAO {
                 
                 case 1:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ? AND arquivado = 0");
-                    stmt.setString(1, "");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE arquivado = 0 AND adm = 0");
                     
                     break;
                     
                 case 2:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ?  AND arquivado = 0 AND nome LIKE ?");
-                    stmt.setString(1, "");
-                    stmt.setString(2, "%" + pesquisa + "%");
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE arquivado = 0 AND adm = 0 AND nome LIKE ?");
+                    stmt.setString(1, "%" + pesquisa + "%");
                     
                     break;
                 
                 case 3:
                     
-                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE whatsapp != ?  AND arquivado = 0 AND nome = ?");
-                    stmt.setString(1, "");
-                    stmt.setString(2, pesquisa);
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE arquivado = 0 AND adm = 0 AND nome = ?");
+                    stmt.setString(1, pesquisa);
                     
                     break;
                 
@@ -84,6 +81,48 @@ public class UsuariosDAO {
                 case 9:
                     
                     stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE arquivado = 1 AND adm = 1");
+                    
+                    break;    
+                
+                case 10:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE arquivado = 1 AND nome LIKE ?");
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;    
+                
+                case 11:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 0 AND arquivado = 1 AND nome LIKE ?");
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;    
+                
+                case 12:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND arquivado = 1 AND nome LIKE ?");
+                    stmt.setString(1, "%" + pesquisa + "%");
+                    
+                    break;    
+                
+                case 13:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND arquivado = 1 AND nome = ?");
+                    stmt.setString(1, pesquisa);
+                    
+                    break;    
+                
+                case 14:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND arquivado = 1 AND nome = ?");
+                    stmt.setString(1, pesquisa);
+                    
+                    break;    
+                
+                case 15:
+                    
+                    stmt = conexao.prepareStatement("SELECT * FROM usuarios WHERE adm = 1 AND arquivado = 1 AND nome = ?");
+                    stmt.setString(1, pesquisa);
                     
                     break;    
                 
