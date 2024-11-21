@@ -162,6 +162,8 @@ public class Inicio extends javax.swing.JFrame {
         jLabel54 = new javax.swing.JLabel();
         inputWhatsapp = new javax.swing.JFormattedTextField();
         checkWhatts = new javax.swing.JCheckBox();
+        txtDesativar = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
         panelFundoPerfil = new javax.swing.JPanel();
         panelNoti = new javax.swing.JPanel();
         panelFundoCloseNoti = new javax.swing.JPanel();
@@ -690,6 +692,25 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelInformacoesPerfil.add(checkWhatts, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, -1, -1));
+
+        txtDesativar.setForeground(new java.awt.Color(204, 204, 204));
+        txtDesativar.setText(" desativar conta");
+        txtDesativar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDesativarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtDesativarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtDesativarMouseExited(evt);
+            }
+        });
+        panelInformacoesPerfil.add(txtDesativar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, 20));
+
+        jLabel56.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel56.setText("_____________");
+        panelInformacoesPerfil.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 110, 30));
 
         panelAcimaFrame.add(panelInformacoesPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 310, 550));
 
@@ -4670,6 +4691,64 @@ public class Inicio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_edtDescricaoProdutoKeyTyped
 
+    private void txtDesativarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDesativarMouseClicked
+        
+        if (checkEdicao.isSelected()) {
+            
+            int opcao = JOptionPane.showConfirmDialog(null, "Tem certeza que quer desativar sua conta?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        
+        if (opcao == JOptionPane.YES_OPTION) {
+            
+            String senha = JOptionPane.showInputDialog("Confirme sua senha:");
+            
+            if (senha.equals(GlobalAdmin.getSenha())) {
+                
+                daoUsuario.desativar(GlobalAdmin.getId_admin());
+                
+                JOptionPane.showMessageDialog(null, "Conta desativada com sucesso!");
+                
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    dispose();
+                    new Login().setVisible(true);
+                }
+                });
+                
+                
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+                
+            }
+            
+            }
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_txtDesativarMouseClicked
+
+    private void txtDesativarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDesativarMouseEntered
+        
+        if (checkEdicao.isSelected()) {
+            
+            setCursor(Cursor.HAND_CURSOR);
+            
+        }
+  
+    }//GEN-LAST:event_txtDesativarMouseEntered
+
+    private void txtDesativarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDesativarMouseExited
+        
+        if (checkEdicao.isSelected()) {
+            
+            setCursor(Cursor.DEFAULT_CURSOR);
+            
+        }
+  
+    }//GEN-LAST:event_txtDesativarMouseExited
+
     private void detectaLenghtPricipal(JTextField text, KeyEvent evt) {
 
         String valor = text.getText().trim();
@@ -6075,6 +6154,7 @@ public class Inicio extends javax.swing.JFrame {
                     imagePerfil.setEnabled(true);
                     btnRetiraImagemPerfil.setEnabled(true);
                     checkWhatts.setEnabled(true);
+                    txtDesativar.setForeground(new Color(250, 250, 250));
 
                     if (checkWhatts.isSelected()) {
 
@@ -6094,6 +6174,7 @@ public class Inicio extends javax.swing.JFrame {
                     btnRetiraImagemPerfil.setEnabled(false);
                     checkWhatts.setEnabled(false);
                     checkWhatts.setEnabled(false);
+                    txtDesativar.setForeground(new Color(204, 204, 204));
 
                 }
 
@@ -6550,6 +6631,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -6634,6 +6716,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel txtCategorias;
     private javax.swing.JLabel txtClientes;
     private javax.swing.JLabel txtClose;
+    private javax.swing.JLabel txtDesativar;
     private javax.swing.JLabel txtEstoque;
     private javax.swing.JLabel txtImagem;
     private javax.swing.JLabel txtImagemProduto;
