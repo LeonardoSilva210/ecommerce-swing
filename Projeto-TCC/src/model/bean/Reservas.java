@@ -7,10 +7,9 @@ import java.util.List;
 
 public class Reservas {
     
-    private int id_compra, fk_id_usuario,fk_id_carrinho,ativo;
+    private int id_compra, fk_id_usuario,fk_id_carrinho,ativo, quantidade_total;
     private String pessoa, obs, codigo;
     private List<Produtos> produtos;
-    private List<Integer> quantidades;
     private float valor_total;
     private Date data;
     private Time horario;
@@ -18,16 +17,16 @@ public class Reservas {
     public Reservas() {
     }
 
-    public Reservas(int id_compra, int fk_id_usuario, int fk_id_carrinho, int ativo, String pessoa, String obs, String codigo, List<Produtos> produtos, List<Integer> quantidades, float valor_total, Date data, Time horario) {
+    public Reservas(int id_compra, int fk_id_usuario, int fk_id_carrinho, int ativo, int quantidade_total, String pessoa, String obs, String codigo, List<Produtos> produtos, float valor_total, Date data, Time horario) {
         this.id_compra = id_compra;
         this.fk_id_usuario = fk_id_usuario;
         this.fk_id_carrinho = fk_id_carrinho;
         this.ativo = ativo;
+        this.quantidade_total = quantidade_total;
         this.pessoa = pessoa;
         this.obs = obs;
         this.codigo = codigo;
         this.produtos = produtos;
-        this.quantidades = quantidades;
         this.valor_total = valor_total;
         this.data = data;
         this.horario = horario;
@@ -98,13 +97,13 @@ public class Reservas {
     public void setProdutos(List<Produtos> produtos) {
         this.produtos = produtos;
     }
-    
-    public List<Integer> getQuantidades() {
-        return quantidades;
+
+    public int getQuantidade_total() {
+        return quantidade_total;
     }
 
-    public void setQuantidades(List<Integer> quantidades) {
-        this.quantidades = quantidades;
+    public void setQuantidade_total(int quantidade_total) {
+        this.quantidade_total = quantidade_total;
     }
 
     public float getValor_total() {

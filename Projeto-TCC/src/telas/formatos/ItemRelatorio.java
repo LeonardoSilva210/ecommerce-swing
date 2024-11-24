@@ -15,6 +15,7 @@ public class ItemRelatorio extends javax.swing.JPanel {
     String divideProduto = "";
     private final String data, dataBr;
     private final String[] divideData;
+    String produtosComQuantidade = "";
     
     public ItemRelatorio(Relatorios relatorio) {
         initComponents();
@@ -24,6 +25,7 @@ public class ItemRelatorio extends javax.swing.JPanel {
         for (int i = 0; i < produtos.size(); i++) {
             
             divideProduto = divideProduto + produtos.get(i).getNome_produto() + ",";
+            produtosComQuantidade = produtosComQuantidade + produtos.get(i).getNome_produto() + ": " + produtos.get(i).getQuantidade() + "\n";
            
         }
         
@@ -36,7 +38,7 @@ public class ItemRelatorio extends javax.swing.JPanel {
         dataBr = divideData[2] + "/" + divideData[1] + "/"+ divideData[0];
         
         txtData.setText(dataBr);
-        txtQuantidade.setText(String.valueOf(produtos.size()));
+        txtQuantidade.setText(String.valueOf(relatorio.getQuantidade()));
         txtValorTotal.setText("R$ " + String.valueOf(relatorio.getValorTotal()).replace(".", ","));
         txtPessoa.setText(String.valueOf(relatorio.getPessoa()));
 
@@ -61,11 +63,10 @@ public class ItemRelatorio extends javax.swing.JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
-                JOptionPane.showMessageDialog(null, "Nome: " + relatorio.getPessoa() + "\n"
-                + "Produtos: " + divideProduto +"\n"
+                JOptionPane.showMessageDialog(null, "Produtos: " + "\n" + produtosComQuantidade
                 + "Valor total: R$" + String.valueOf(relatorio.getValorTotal()).replace(".", ",") + "\n"
                 + "Obs: " + relatorio.getObs() + "\n",
-                "Relatório", JOptionPane.INFORMATION_MESSAGE);
+                "Relatório: " + relatorio.getPessoa(), JOptionPane.INFORMATION_MESSAGE);
                 
             }
   

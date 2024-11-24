@@ -19,6 +19,7 @@ public class ItemReserva extends javax.swing.JPanel {
     private final String[] divideData;
     private ReservasDAO daoReserva = new ReservasDAO();
     private List<Produtos> produtos = new ArrayList();
+    String produtosComQuantidade = "";
     private Inicio inicio;
     String divideProduto;
     
@@ -39,18 +40,19 @@ public class ItemReserva extends javax.swing.JPanel {
         txtHorario.setText(String.valueOf(reserva.getHorario()));
         
         produtos = reserva.getProdutos();
-        
-        int quantidade = produtos.size();
+
+        int quantidade = reserva.getQuantidade_total();
         
         txtQuantidade.setText(String.valueOf(quantidade));
         
         txtValor.setText("R$ " + String.valueOf(reserva.getValor_total()).replace(".", ","));
     
         divideProduto = "";
-        
+
         for (int i = 0; i < produtos.size(); i++) {
             
             divideProduto = divideProduto + produtos.get(i).getNome_produto() + ",";
+            produtosComQuantidade = produtosComQuantidade + produtos.get(i).getNome_produto() + ": " + produtos.get(i).getQuantidade() + "\n";
             
         }
         
@@ -78,13 +80,11 @@ public class ItemReserva extends javax.swing.JPanel {
                 String[] opcoes = {"Finalizar reserva", "Voltar"};
 
                 int opcao = JOptionPane.showOptionDialog(
-                null,                          
-                "Nome: " + reserva.getPessoa() + "\n"
-                + "Produtos: " + divideProduto +"\n"
+                null, "Produtos: " + "\n" + produtosComQuantidade
                 + "Valor total: R$" + String.valueOf(reserva.getValor_total()).replace(".", ",") + "\n"
                 + "Obs: " + reserva.getObs() + "\n"
                 + "Cód: " + reserva.getCodigo(),   
-                "Reserva",            
+                "Reserva: " + reserva.getPessoa(),            
                 JOptionPane.DEFAULT_OPTION,    
                 JOptionPane.INFORMATION_MESSAGE,
                 null,                          

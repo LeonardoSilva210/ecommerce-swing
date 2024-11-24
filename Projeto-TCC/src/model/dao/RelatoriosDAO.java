@@ -29,7 +29,7 @@ public class RelatoriosDAO {
                 
                 case 1:
                     
-                    stmt = conexao.prepareStatement("select compras.horario AS Horario,\n" +
+                    stmt = conexao.prepareStatement("select compras.horario AS Horario, compras.quantidades, \n" +
                     "compras.data AS Data,\n" +
                     "compras.valor_total, compras.obs,\n" +
                     "usuarios.nome AS Pessoa,\n" +
@@ -44,7 +44,7 @@ public class RelatoriosDAO {
                     
                 case 2:
                     
-                    stmt = conexao.prepareStatement("select compras.horario AS Horario,\n" +
+                    stmt = conexao.prepareStatement("select compras.horario AS Horario, compras.quantidades, \n" +
                     "compras.data AS Data,\n" +
                     "compras.valor_total, compras.obs,\n" +
                     "usuarios.nome AS Pessoa,\n" +
@@ -75,6 +75,21 @@ public class RelatoriosDAO {
                 rela.setPessoa(rs.getString("pessoa"));
                 rela.setValorTotal(rs.getFloat("valor_total"));
                 
+                String quantidades = rs.getString("quantidades");
+                String[] divideQuantidades = quantidades.split("\\,");
+                List<Integer> listQuantidades = new ArrayList();
+                int totalQuantidades = 0;
+                
+                for (int j = 0; j < divideQuantidades.length; j++) {
+                    
+                    listQuantidades.add(Integer.parseInt(divideQuantidades[j]));
+                    totalQuantidades = totalQuantidades + Integer.parseInt(divideQuantidades[j]);
+                    
+                    
+                }
+                
+                rela.setQuantidade(totalQuantidades);
+                
                 String produtos = rs.getString("produtos");
                 
                 List<Produtos> listaProdutos = new ArrayList();
@@ -85,6 +100,7 @@ public class RelatoriosDAO {
                 for (int i = 0; i < divideProdutos.length; i++){
                     
                     produto = daoProduto.buscarProduto(Integer.parseInt(divideProdutos[i]));
+                    produto.setQuantidade(listQuantidades.get(i));
                     listaProdutos.add(produto);
                     
                 }

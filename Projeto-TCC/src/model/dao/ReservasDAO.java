@@ -28,7 +28,7 @@ public class ReservasDAO {
                 
                 case 1:
 
-                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, \n" +
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, compras.quantidades, \n" +
                     "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
                     "usuarios.nome \n" +
                     "from compras\n" +
@@ -40,7 +40,7 @@ public class ReservasDAO {
                 
                 case 2:
 
-                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, \n" +
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, compras.quantidades, \n" +
                     "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
                     "usuarios.nome \n" +
                     "from compras \n" +
@@ -54,7 +54,7 @@ public class ReservasDAO {
                 
                 case 3:
 
-                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, \n" +
+                    stmt = conexao.prepareStatement("select compras.id_compra, compras.valor_total, compras.fk_id_usuario, compras.quantidades, \n" +
                     "compras.ativo, compras.obs, compras.produtos, compras.codigo, compras.data, compras.horario, \n" +
                     "usuarios.nome \n" +
                     "from compras \n" +
@@ -84,6 +84,22 @@ public class ReservasDAO {
                 reserva.setFk_id_usuario(rs.getInt("fk_id_usuario"));
                 reserva.setValor_total(rs.getFloat("valor_total"));
                 
+                String quantidades = rs.getString("quantidades");
+                String[] divideQuantidades = quantidades.split("\\,");
+                
+                List<Integer> listQuantidades = new ArrayList();
+                
+                int totalQuantidades = 0;
+                
+                for (int j = 0; j < divideQuantidades.length; j++) {
+                    
+                    listQuantidades.add(Integer.parseInt(divideQuantidades[j]));
+                    totalQuantidades = totalQuantidades + Integer.parseInt(divideQuantidades[j]);
+                    
+                }
+
+                reserva.setQuantidade_total(totalQuantidades);
+
                 String produtos = rs.getString("produtos");
                 
                 String[] divideProdutos = produtos.split("\\,");
@@ -94,6 +110,7 @@ public class ReservasDAO {
                 for (int i = 0; i < divideProdutos.length; i++) {
 
                     produto = daoProduto.buscarProduto(Integer.parseInt(divideProdutos[i]));
+                    produto.setQuantidade(listQuantidades.get(i));
                     listProduto.add(produto);
                     
                 }

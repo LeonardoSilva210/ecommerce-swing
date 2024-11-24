@@ -2735,7 +2735,6 @@ public class Inicio extends javax.swing.JFrame {
         if (!animacao) {
 
             animacoesPanel(4, panelNoti, panelFundoNoti, true);
-            verificaNotiVisto();
 
         }
 
@@ -2757,6 +2756,7 @@ public class Inicio extends javax.swing.JFrame {
         if (!animacao) {
 
             animacoesPanel(4, panelNoti, panelFundoNoti, true);
+            verificaNotiVisto();
 
         }
 
