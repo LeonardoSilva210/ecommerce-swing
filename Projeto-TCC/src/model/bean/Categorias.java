@@ -5,20 +5,33 @@ package model.bean;
 public class Categorias {
     
     private String nome, descricao;
-    private boolean arquivado;
+    private boolean arquivado, promocao;
     private int id_categoria, quantidade_produtos;
 
-    public Categorias(String nome, String descricao, boolean arquivado, int id_categoria, int quantidade_produtos) {
+    public Categorias(String nome, String descricao, boolean arquivado, boolean promocao, int id_categoria, int quantidade_produtos) {
         this.nome = nome;
         this.descricao = descricao;
         this.arquivado = arquivado;
+        this.promocao = promocao;
         this.id_categoria = id_categoria;
         this.quantidade_produtos = quantidade_produtos;
     }
 
+    
+
     public Categorias() {
     }
 
+    public boolean isPromocao() {
+        return promocao;
+    }
+
+    public void setPromocao(boolean promocao) {
+        this.promocao = promocao;
+    }
+
+    
+    
     public int getQuantidade_produtos() {
         return quantidade_produtos;
     }

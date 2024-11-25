@@ -21,6 +21,17 @@ public class ItemCategoria extends javax.swing.JPanel {
         this.inicio = ini;
         this.categoria = categoria;
         
+        if (categoria.isPromocao()) {
+            
+            imgPromocao.setVisible(true);
+            imgPromocao.setToolTipText("Categoria com promoção");
+            
+        } else {
+            
+            imgPromocao.setVisible(false);
+            
+        }
+        
         this.addMouseListener(new MouseAdapter() {
             
             @Override
@@ -71,7 +82,10 @@ public class ItemCategoria extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         txtNome = new javax.swing.JLabel();
+        imgPromocao = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JLabel();
         panelAcoes = new javax.swing.JPanel();
@@ -83,11 +97,24 @@ public class ItemCategoria extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(920, 40));
         setLayout(new java.awt.GridLayout(1, 0));
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         txtNome.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtNome.setForeground(new java.awt.Color(255, 255, 255));
         txtNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtNome.setText("Nome");
-        add(txtNome);
+        jPanel2.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 230, 44));
+
+        imgPromocao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconPromocao.png"))); // NOI18N
+        jPanel2.add(imgPromocao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -7, 40, 50));
+
+        jPanel1.add(jPanel2);
+
+        add(jPanel1);
 
         txtDescricao.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 15)); // NOI18N
         txtDescricao.setForeground(new java.awt.Color(255, 255, 255));
@@ -181,6 +208,9 @@ public class ItemCategoria extends javax.swing.JPanel {
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnReativar;
+    private javax.swing.JLabel imgPromocao;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel panelAcoes;
     private javax.swing.JLabel txtDescricao;
     private javax.swing.JLabel txtNome;

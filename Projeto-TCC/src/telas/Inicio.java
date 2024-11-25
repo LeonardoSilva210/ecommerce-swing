@@ -331,6 +331,7 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         inputDescricaoCategoria = new javax.swing.JTextArea();
         jLabel44 = new javax.swing.JLabel();
+        checkPromocaoCategoria = new javax.swing.JCheckBox();
         jScrollPane6 = new javax.swing.JScrollPane();
         panelListCategorias = new telas.formatos.PanelItem();
         jPanel3 = new javax.swing.JPanel();
@@ -2376,7 +2377,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel43.setText("Descrição");
-        panelPopCategoria.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+        panelPopCategoria.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
         jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -2390,11 +2391,15 @@ public class Inicio extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(inputDescricaoCategoria);
 
-        panelPopCategoria.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 560, 100));
+        panelPopCategoria.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 560, 70));
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel44.setText("Nome");
         panelPopCategoria.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+
+        checkPromocaoCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        checkPromocaoCategoria.setText("Promoção");
+        panelPopCategoria.add(checkPromocaoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
         javax.swing.GroupLayout panelFundoPopCategoriaLayout = new javax.swing.GroupLayout(panelFundoPopCategoria);
         panelFundoPopCategoria.setLayout(panelFundoPopCategoriaLayout);
@@ -4098,10 +4103,19 @@ public class Inicio extends javax.swing.JFrame {
 
         } else {
 
-            daoCategoria.adicionar(new Categorias(nome, descricao, false, 0, 0));
+            boolean promocao = false;
+            
+            if (checkPromocaoCategoria.isSelected()) {
+                
+                promocao = true;
+                
+            }
+            
+            daoCategoria.adicionar(new Categorias(nome, descricao, false, promocao, 0, 0));
 
             inputNomeCategoria.setText("");
             inputDescricaoCategoria.setText("");
+            checkPromocaoCategoria.setSelected(false);
             JOptionPane.showMessageDialog(null, "Categoria criada com sucesso!");
             inputPesquisaCategorias.setText("");
 
@@ -6534,6 +6548,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton buttonSalvar;
     private javax.swing.JButton buttonSalvarPerfil;
     private javax.swing.JCheckBox checkEdicao;
+    private javax.swing.JCheckBox checkPromocaoCategoria;
     private javax.swing.JCheckBox checkSemWhatts;
     private javax.swing.JCheckBox checkWhatts;
     private javax.swing.JComboBox<String> comboAdicionarProdutoCategoria;

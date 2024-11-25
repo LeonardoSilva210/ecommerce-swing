@@ -77,6 +77,7 @@ public class CategoriasDAO {
                 categoria.setDescricao(rs.getString("descricao"));
                 categoria.setArquivado(rs.getBoolean("arquivado"));
                 categoria.setQuantidade_produtos(rs.getInt("quantidade_produtos"));
+                categoria.setPromocao(rs.getBoolean("promocao"));
                 
                 lista.add(categoria);
                 
@@ -111,6 +112,7 @@ public class CategoriasDAO {
                 categoria.setNome(rs.getString("nome"));
                 categoria.setDescricao(rs.getString("descricao"));
                 categoria.setArquivado(rs.getBoolean("arquivado"));
+                categoria.setPromocao(rs.getBoolean("promocao"));
                 
             }
             
@@ -130,10 +132,11 @@ public class CategoriasDAO {
         try{
             
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO categorias(nome,descricao) VALUES(?,?)");
+            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO categorias(nome,descricao,promocao) VALUES(?,?,?)");
             
             stmt.setString(1, categoria.getNome());
             stmt.setString(2, categoria.getDescricao());
+            stmt.setBoolean(3, categoria.isPromocao());
             
             stmt.execute();
             
