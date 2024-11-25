@@ -108,6 +108,7 @@ public class Inicio extends javax.swing.JFrame {
     private Dimension tamanhoOriginal;
     private Point localizacaoOriginal;
     private Border bordaOriginal;
+    private Categorias categoriaAtualEditar;
 
     public Inicio() {
         initComponents();
@@ -321,6 +322,7 @@ public class Inicio extends javax.swing.JFrame {
         btnSalvarEdicaoCategoria = new javax.swing.JButton();
         jScrollPane10 = new javax.swing.JScrollPane();
         inputDescricaoCategoriaEdit = new javax.swing.JTextArea();
+        checkPromocaoEditar = new javax.swing.JCheckBox();
         panelFundoPopCategoria = new javax.swing.JPanel();
         panelPopCategoria = new telas.formatos.PanelBorder();
         jButton2 = new javax.swing.JButton();
@@ -2309,7 +2311,11 @@ public class Inicio extends javax.swing.JFrame {
         });
         jScrollPane10.setViewportView(inputDescricaoCategoriaEdit);
 
-        panelEditarCategoria.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 570, 100));
+        panelEditarCategoria.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 570, 80));
+
+        checkPromocaoEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        checkPromocaoEditar.setText("Promoção");
+        panelEditarCategoria.add(checkPromocaoEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
         javax.swing.GroupLayout panelEditarCategoriaFundoLayout = new javax.swing.GroupLayout(panelEditarCategoriaFundo);
         panelEditarCategoriaFundo.setLayout(panelEditarCategoriaFundoLayout);
@@ -2740,6 +2746,7 @@ public class Inicio extends javax.swing.JFrame {
         if (!animacao) {
 
             animacoesPanel(4, panelNoti, panelFundoNoti, true);
+            verificaNotiVisto();
 
         }
 
@@ -4169,7 +4176,7 @@ public class Inicio extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
 
-        } else if (!checkSemWhatts.isSelected() && whatsappADM.length() < 14) {
+        } else if (!checkSemWhatts.isSelected() && whatsappADM.length() < 13) {
 
             JOptionPane.showMessageDialog(null, "Número de whatsapp está faltando!");
 
@@ -4283,23 +4290,36 @@ public class Inicio extends javax.swing.JFrame {
 
         String novoNomeCategoria = inputNomeCategoriaEdit.getText().trim();
         String novaDescricaoCategoria = inputDescricaoCategoriaEdit.getText().trim();
+        boolean promocao = checkPromocaoEditar.isSelected();
 
         if (novoNomeCategoria.isEmpty() || novaDescricaoCategoria.isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
 
-        } else if (daoCategoria.categoriaDisponivel(novoNomeCategoria).getId_categoria() > 0) {
+        } else if (daoCategoria.categoriaDisponivel(novoNomeCategoria).getId_categoria() > 0 && !novoNomeCategoria.equals(categoriaAtualEditar.getNome())) {
 
             JOptionPane.showMessageDialog(null, "Nome indisponível!");
 
+        } else if (novoNomeCategoria.equals(categoriaAtualEditar.getNome()) && novaDescricaoCategoria.equals(categoriaAtualEditar.getDescricao()) && promocao == categoriaAtualEditar.isPromocao()){
+
+            JOptionPane.showMessageDialog(null, "Nenhuma alteração feita!");
+            
         } else {
+            
+            int opcao = JOptionPane.showConfirmDialog(null, "Salvar alterações?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            
+            if (opcao == JOptionPane.YES_OPTION) {
 
-            daoCategoria.editar(novoNomeCategoria, novaDescricaoCategoria, categoriaAtual.getId_categoria());
+                daoCategoria.editar(novoNomeCategoria, novaDescricaoCategoria, categoriaAtual.getId_categoria(), promocao);
 
-            inputNomeCategoriaEdit.setText("");
-            inputDescricaoCategoriaEdit.setText("");
-            JOptionPane.showMessageDialog(null, "Edição realizada com sucesso!");
-
+                inputNomeCategoriaEdit.setText("");
+                inputDescricaoCategoriaEdit.setText("");
+                checkPromocaoEditar.setSelected(false);
+                verificaRadioCategoria();
+                JOptionPane.showMessageDialog(null, "Edição realizada com sucesso!");
+                
+            }
+            
         }
 
     }//GEN-LAST:event_btnSalvarEdicaoCategoriaActionPerformed
@@ -6371,9 +6391,21 @@ public class Inicio extends javax.swing.JFrame {
     public void visibilidadePanelEditarCategoria(Categorias categoria) {
 
         panelEditarCategoriaFundo.setVisible(true);
-
+        
+        categoriaAtualEditar = categoria;
+        
         inputNomeCategoriaEdit.setText(categoria.getNome());
         inputDescricaoCategoriaEdit.setText(categoria.getDescricao());
+        
+        if (categoria.isPromocao()) {
+            
+            checkPromocaoEditar.setSelected(true);
+            
+        } else {
+            
+            checkPromocaoEditar.setSelected(false);
+            
+        }
 
         categoriaAtual = categoria;
 
@@ -6549,6 +6581,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton buttonSalvarPerfil;
     private javax.swing.JCheckBox checkEdicao;
     private javax.swing.JCheckBox checkPromocaoCategoria;
+    private javax.swing.JCheckBox checkPromocaoEditar;
     private javax.swing.JCheckBox checkSemWhatts;
     private javax.swing.JCheckBox checkWhatts;
     private javax.swing.JComboBox<String> comboAdicionarProdutoCategoria;

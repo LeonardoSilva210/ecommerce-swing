@@ -187,16 +187,17 @@ public class CategoriasDAO {
         
     }
     
-    public void editar(String nome, String descricao, int id) {
+    public void editar(String nome, String descricao, int id, boolean promocao) {
         
         try{
             
             Connection conexao = Conexao.conectar();
-            PreparedStatement stmt = conexao.prepareStatement("UPDATE categorias set nome = ?, descricao = ? WHERE id_categoria = ?");
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE categorias set nome = ?, descricao = ?, promocao = ? WHERE id_categoria = ?");
             
             stmt.setString(1, nome);
             stmt.setString(2, descricao);
-            stmt.setInt(3, id);
+            stmt.setBoolean(3, promocao);
+            stmt.setInt(4, id);
             
             stmt.executeUpdate();
             
