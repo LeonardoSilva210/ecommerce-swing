@@ -77,7 +77,7 @@ public class NotificacoesDAO {
         
     }
     
-    public void inserirNotiBaixoEstoque() {
+    public void inserirNotiBaixoEstoque(int porcentagem) {
         
         try{
             
@@ -87,7 +87,7 @@ public class NotificacoesDAO {
             
             stmt.setInt(1, 2);
             stmt.setInt(2, 0);
-            stmt.setString(3, "Baixa disponibilidade de produtos para venda!");
+            stmt.setString(3, "Baixa disponibilidade de produtos para venda!" + "\n" + porcentagem + "%" + " do estoque disponível.");
             
             stmt.executeUpdate();
             

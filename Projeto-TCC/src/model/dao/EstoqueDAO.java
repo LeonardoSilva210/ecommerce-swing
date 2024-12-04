@@ -241,12 +241,13 @@ public class EstoqueDAO {
             PreparedStatement stmt = null;
             
             stmt = conexao.prepareStatement("UPDATE produtos SET disponivel = "+verif+" where id_produto = ?");
-                stmt.setInt(1, estoque.getId_produto());
+            stmt.setInt(1, estoque.getId_produto());
             
-                stmt.executeUpdate();
+            stmt.executeUpdate();
                 
             stmt.close();
             conexao.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -273,7 +274,7 @@ public class EstoqueDAO {
             
             if (valor <= 20) {
                 
-                daoNotificacao.inserirNotiBaixoEstoque();
+                daoNotificacao.inserirNotiBaixoEstoque(valor);
                 
             }
 
