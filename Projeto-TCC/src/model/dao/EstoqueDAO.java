@@ -13,6 +13,7 @@ import model.bean.EstoqueBean;
 
 public class EstoqueDAO {
     
+    NotificacoesDAO daoNotificacao = new NotificacoesDAO();
     
     public List<EstoqueBean> ListarEstoque(int table, String produto){
         List<EstoqueBean> conjEstoque = new ArrayList();
@@ -257,6 +258,7 @@ public class EstoqueDAO {
     public void arquivarProduto(EstoqueBean estoque){
         
         try {
+            
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             
@@ -265,14 +267,66 @@ public class EstoqueDAO {
                 
             stmt.executeUpdate();
             
+            String porcentagem = String.valueOf(verificarPorcentagem());
+
+            int valor = Integer.parseInt(porcentagem.split("\\.")[0]);
+            
+            if (valor <= 20) {
+                
+                daoNotificacao.inserirNotiBaixoEstoque();
+                
+            }
+
             stmt.close();
             conexao.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
     }
     
+    public float verificarPorcentagem(){
+        
+        float porcentagem = 0;
+        
+        try {
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("SELECT * FROM produtos");
+            ResultSet rs = stmt.executeQuery();
+            
+            int contTotal = 0;
+            int contArquivado = 0;
+            
+            while (rs.next()) {
+                
+                contTotal++;
+                
+                boolean arquivado = rs.getBoolean("arquivado");
+                
+                if (!arquivado) {
+                    
+                    contArquivado++;
+                    
+                }
+                
+            }
+            
+            porcentagem = ((float) contArquivado / contTotal) * 100 + 1;
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return porcentagem;
+        
+    }
+
     public void reativarProduto(EstoqueBean estoque) {
         
         try{

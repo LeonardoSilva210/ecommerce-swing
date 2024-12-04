@@ -3671,6 +3671,7 @@ public class Inicio extends javax.swing.JFrame {
             daoEstoque.arquivarProduto(produtosAtual);
             verificaRadio();
             resetaProdutoAtual();
+            listarNotificacoes();
 
         }
 

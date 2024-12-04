@@ -23,7 +23,7 @@ public class NotificacoesDAO {
             ResultSet rs = null;
             
             stmt = conexao.prepareStatement("SELECT * FROM notificacoes \n" +
-            "WHERE tipo = 3 \n" +
+            "WHERE tipo != 1 \n" +
             "\n" +
             "UNION ALL \n" +
             "\n" +
@@ -68,6 +68,29 @@ public class NotificacoesDAO {
             stmt.setInt(1, notificacao.getId_notificacao());
             
             stmt.executeUpdate();
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void inserirNotiBaixoEstoque() {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO notificacoes (tipo,visto,notificacao,data,horario) "
+                    + "VALUES (?,?,?,NOW(),NOW())");
+            
+            stmt.setInt(1, 2);
+            stmt.setInt(2, 0);
+            stmt.setString(3, "Baixa disponibilidade de produtos para venda!");
+            
+            stmt.executeUpdate();
+            
             stmt.close();
             conexao.close();
             
