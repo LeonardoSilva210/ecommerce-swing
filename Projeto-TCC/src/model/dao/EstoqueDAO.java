@@ -268,6 +268,7 @@ public class EstoqueDAO {
                 
             stmt.executeUpdate();
             
+            alteraQuantidadeProdutosCategoria(estoque.getFk_id_categoria(), 1);
             String porcentagem = String.valueOf(verificarPorcentagem());
 
             int valor = Integer.parseInt(porcentagem.split("\\.")[0]);
@@ -282,6 +283,60 @@ public class EstoqueDAO {
             conexao.close();
             
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void alteraQuantidadeProdutosCategoria(int id_categoria, int tipo) {
+        
+        try{
+            
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("SELECT * FROM categorias WHERE id_categoria = ?");
+            stmt.setInt(1, id_categoria);
+            ResultSet rs = stmt.executeQuery();
+            
+            int quantidadeProduto = 0;
+            
+            if (rs.next()) {
+                
+                quantidadeProduto = rs.getInt("quantidade_produtos");
+   
+            }
+            
+            rs.close();
+            
+            switch(tipo) {
+                
+                case 1:
+                    
+                    if (quantidadeProduto > 0) {
+                    
+                        quantidadeProduto--;
+                    
+                    }
+                    
+                    break;
+                
+                case 2:
+                    
+                    quantidadeProduto++;
+
+                    break;
+                
+            }
+            
+            stmt = conexao.prepareStatement("UPDATE categorias set quantidade_produtos = ? WHERE id_categoria = ?");
+            stmt.setInt(1, quantidadeProduto);
+            stmt.setInt(2, id_categoria);
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+            
+        }catch(SQLException e){
             e.printStackTrace();
         }
         
@@ -338,6 +393,7 @@ public class EstoqueDAO {
             stmt.setInt(1, estoque.getId_produto());
             
             stmt.executeUpdate();
+            alteraQuantidadeProdutosCategoria(estoque.getFk_id_categoria(), 2);
             
             stmt.close();
             conexao.close();
